@@ -52,17 +52,17 @@ public class PracticeGamePanel extends JPanel{
 
 		JButton btnResetGame = new JButton("Reset Game");
 		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, height/50));
-		btnResetGame.setBounds(409, 14, 3*height/20, width/64);
+		btnResetGame.setBounds(23*height/45, 17*width/640, 3*height/20, width/64);
 		add(btnResetGame);
 
-		JLabel lblRoomm = new JLabel("Practice Game");
+		JLabel lblRoomm = new JLabel("Practice");
 		lblRoomm.setFont(new Font("Arial", Font.BOLD, height/30));
-		lblRoomm.setBounds(173, 11, 180, 20);
+		lblRoomm.setBounds(height/4, 17*width/640, 7*height/45, width/64);
 		add(lblRoomm);
 
-		JLabel lblYourNameAnna = new JLabel("Your Name: Practice Player");
+		JLabel lblYourNameAnna = new JLabel("Your Name: Practicer");
 		lblYourNameAnna.setFont(new Font("Tahoma", Font.PLAIN, height/60));
-		lblYourNameAnna.setBounds(368, 89, 171, 14);
+		lblYourNameAnna.setBounds(83*height/180, 7*width/100, height/6, 7*width/640);
 		add(lblYourNameAnna);
 
 		JLabel lblScore = new JLabel("Total Score: 0.");
