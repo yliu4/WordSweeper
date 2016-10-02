@@ -9,6 +9,10 @@ public class Game {
 	Player currentPlayer = null;
 	String gameId = null;
 	
+	public Game(){
+		
+	}
+	
 	public Game(Player player) {
 		this.currentPlayer = player;
 	}

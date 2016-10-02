@@ -27,6 +27,7 @@ public class Application extends JFrame {
 	/** GUI application maintains reference to Model for ease of navigation. */
 	public Model model;
 	MenuPanel menuPanel;
+	PracticeGamePanel practiceGamePanel;
 
 	ServerAccess serverAccess;
 	
@@ -45,6 +46,7 @@ public class Application extends JFrame {
 		setBounds(100, 100, 25*height/36, 5*width/16);
 		
 		menuPanel = new MenuPanel(model, this);
+		practiceGamePanel = new PracticeGamePanel(model, this);
 		add(menuPanel);
 	}
 
@@ -60,5 +62,14 @@ public class Application extends JFrame {
 	
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
+	}
+	
+	public PracticeGamePanel getPracticeGamePanel(){
+		return practiceGamePanel;
+	}
+	
+	public void setPraticeGamePanel(PracticeGamePanel practiceGamePanel){
+		remove(menuPanel);
+		add(practiceGamePanel);
 	}
 }

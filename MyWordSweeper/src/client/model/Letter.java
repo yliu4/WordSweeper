@@ -1,13 +1,14 @@
 package client.model;
 
+import java.util.Hashtable;
+
 public class Letter {
 	String character = null; //Since we have 'Qu'
 	boolean isMultiplier = false;
 	int points = 0;
 	
-	public Letter(char character, int points) {
-		if (character == 'Q') this.character = new String("Qu");
-		else this.character = String.valueOf(character);
+	public Letter(String character, int points) {
+		this.character = character;
 		this.points = points;
 	}
 	
