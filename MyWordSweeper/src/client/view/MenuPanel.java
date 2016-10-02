@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import client.controller.*;
 import client.model.*;
+import javax.swing.GroupLayout.Alignment;
 
 public class MenuPanel extends JPanel {
 	Model model;
@@ -15,6 +16,16 @@ public class MenuPanel extends JPanel {
 	public MenuPanel (Model model, Application application) {
 		this.model = model;
 		this.application = application;
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 450, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 300, Short.MAX_VALUE)
+		);
+		setLayout(groupLayout);
 //		this.repaint();
 	}
 	
