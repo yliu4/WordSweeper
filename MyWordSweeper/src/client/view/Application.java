@@ -68,8 +68,18 @@ public class Application extends JFrame {
 		return practiceGamePanel;
 	}
 	
-	public void setPraticeGamePanel(PracticeGamePanel practiceGamePanel){
+	public void gotoPraticeGamePanel(){
+		menuPanel.setVisible(false);
 		remove(menuPanel);
+		practiceGamePanel.setVisible(true);
 		add(practiceGamePanel);
+	}
+	
+	public void gotoMainMenu()
+	{
+		practiceGamePanel.setVisible(false);
+		remove(practiceGamePanel);
+		menuPanel.setVisible(true);
+		add(menuPanel);
 	}
 }
