@@ -24,11 +24,16 @@ public class PracticeGameController extends MouseAdapter {
 
 	@Override
 	public void mouseClicked(MouseEvent me) {
-		Location nomulti = new Location(10, 10);
 		this.game = new Game();
-		game.setBoard(this.generatecells(), nomulti);
-		application.getPracticeGamePanel().setGame(game);
+		resetGame();
+		application.setPracticeGameController(this);
 		application.gotoPraticeGamePanel();
+	}
+	
+	public void resetGame()
+	{
+		Location nomulti = new Location(10, 10);
+		this.game.setBoard(this.generatecells(), nomulti);
 	}
 
 	public ArrayList<Cell> generatecells() {
@@ -37,7 +42,7 @@ public class PracticeGameController extends MouseAdapter {
 				"I", "J", "K", "L", "M", "N", "O", "p", "Qu", "R", "S", "T",
 				"U", "V", "W", "X", "Y", "Z" };
 		int l = alp.length;
-		Random r = new Random();
+		Random r = new Random(System.currentTimeMillis());
 		for (int y = 1; y <= 4; y++) {
 			for (int x = 1; x <= 4; x++) {
 				String s = alp[r.nextInt(l)];
@@ -49,4 +54,8 @@ public class PracticeGameController extends MouseAdapter {
 		return cells;
 	}
 
+	public Game getGame()
+	{
+		return this.game;
+	}
 }

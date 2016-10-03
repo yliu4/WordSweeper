@@ -1,19 +1,21 @@
 package client.view;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.*;
 
 import javax.swing.*;
 
-
 import client.controller.*;
 import client.model.*;
+
 import javax.swing.GroupLayout.Alignment;
 
 public class PracticeGamePanel extends JPanel{
 	Model model;
 	Application application;
 	Game game;
+	BoardPanel boardPanel;
 	
 	public PracticeGamePanel (Model model, Application application) {
 		this.model = model;
@@ -34,8 +36,11 @@ public class PracticeGamePanel extends JPanel{
 	public void setGame(Game game) {
 		this.game = game;
 	}
-
-
+	
+	public void repaintBoard()
+	{
+		boardPanel.repaint();
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -57,7 +62,10 @@ public class PracticeGamePanel extends JPanel{
 		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, height/50));
 		btnResetGame.setBounds(23*height/45, 17*width/640, 3*height/20, width/64);
 		add(btnResetGame);
-
+		ResetGameInPracticeController resetGameController 
+			= new ResetGameInPracticeController(model, application);
+        btnResetGame.addMouseListener(resetGameController);
+        
 		JLabel lblRoomm = new JLabel("Practice");
 		lblRoomm.setFont(new Font("Arial", Font.BOLD, height/30));
 		lblRoomm.setBounds(height/4, 17*width/640, 7*height/45, width/64);
@@ -84,7 +92,8 @@ public class PracticeGamePanel extends JPanel{
 		add(lblScore_1);
 		
 		ArrayList<Cell> cells = this.game.getBoard().getCells();
-		BoardPanel myBoard = new BoardPanel(cells);
-		add(myBoard);
+		this.boardPanel = new BoardPanel(cells);
+		add(boardPanel);
+		
 	}
 }
