@@ -45,10 +45,13 @@ public class PracticeGamePanel extends JPanel{
 		int height = d.height;
 		int width = d.width;
 
-		JButton btnNewButton = new JButton("Return");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, height/50));
-		btnNewButton.setBounds(height/180, width/320, height/9, width/64);
-		add(btnNewButton);
+		JButton btnReturnButton = new JButton("Return");
+		btnReturnButton.setFont(new Font("Tahoma", Font.PLAIN, height/50));
+		btnReturnButton.setBounds(height/180, width/320, height/9, width/64);
+		add(btnReturnButton);
+		ReturnMenuPanelController returnMenuController 
+			= new ReturnMenuPanelController(model, application);
+		btnReturnButton.addMouseListener(returnMenuController);
 
 		JButton btnResetGame = new JButton("Reset Game");
 		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, height/50));
