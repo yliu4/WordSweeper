@@ -35,7 +35,6 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	public void mouseReleased(MouseEvent me) {
 		int deltaX = me.getX() - this.x;
 		int deltaY = me.getY() - this.y;
-		//model.setFilledBoard(this.x, this.y, 0, 0);
-		//panel.repaint();
+		model.setFilledBoard(this.x, this.y, 0, 0);
 	}
 }

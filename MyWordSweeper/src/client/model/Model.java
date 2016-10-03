@@ -16,7 +16,8 @@ public class Model {
 		if(width != 0 && height != 0) {
 			this.location = new Location(0,0);
 			this.location.setPanelLocation(x, y, width, height);
-		}
+		} else
+			this.location = null;
 	}
 	
 	public Location getFilledBoard() {

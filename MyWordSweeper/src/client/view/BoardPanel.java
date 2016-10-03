@@ -10,11 +10,12 @@ import client.controller.*;
 import client.model.*;
 
 import javax.swing.GroupLayout.Alignment;
+import java.util.HashSet;
 
 public class BoardPanel extends JPanel{
 	ArrayList<Cell> cells;
 	Model model;
-	
+	HashSet<Integer> set = new HashSet<>();
 	public BoardPanel(Model model, ArrayList<Cell> cells) {
 		this.cells = cells;
 		this.model = model;
@@ -33,9 +34,7 @@ public class BoardPanel extends JPanel{
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		int width = d.width;
-		
-		g.setColor(Color.white);
-		g.fillRect(0, 0, 13*height/45, 13*width/80-1);
+
 		g.setColor(Color.black);
 		g.setFont(new Font("Tahoma", Font.BOLD, 7*height/360));
 		g.drawLine(0, 0, 13*height/45, 0);
@@ -102,32 +101,27 @@ public class BoardPanel extends JPanel{
 
 		Location location = this.model.getFilledBoard();
 		if(location != null) {
-			
 			int x = location.CoordinateX;
 			int y = location.CoordinateY;
-			int cellWidth = location.width;
-			int cellHeight = location.height;
-			/*
-			int start = -1;
+			int dragWidth = location.width;
+			int dragHeight = location.height;
+			
 			for(int i = 0; i < 16; i++) {
 				Location cellLoc = this.cells.get(i).getLocation();
 				if(x >= cellLoc.CoordinateX && x <= cellLoc.CoordinateX+cellLoc.width &&
-				   y >= cellLoc.CoordinateY && y <= cellLoc.CoordinateY+cellLoc.height) {
-					g.setColor(Color.pink);
-					g.fillRect(cellLoc.CoordinateX, cellLoc.CoordinateY, cellLoc.width, cellLoc.height);
-					start = i;
-					System.out.println(start);
-				}
+				   y >= cellLoc.CoordinateY && y <= cellLoc.CoordinateY+cellLoc.height)
+					set.add(i);
 				
-				if(x+cellWidth >= cellLoc.CoordinateX && x <= cellLoc.CoordinateX+cellLoc.width &&
-				   y+cellHeight >= cellLoc.CoordinateY && y <= cellLoc.CoordinateY+cellLoc.height){
-					g.setColor(Color.pink);
-					g.fillRect(cellLoc.CoordinateX, cellLoc.CoordinateY, cellLoc.width, cellLoc.height);
-				}
-			}*/
-			g.setColor(Color.pink);
-			g.drawLine(x, y, x+cellWidth, y+cellHeight);
-			
+				if(x+dragWidth >= cellLoc.CoordinateX && x+dragWidth <= cellLoc.CoordinateX+cellLoc.width &&
+				   y+dragHeight >= cellLoc.CoordinateY && y+dragHeight <= cellLoc.CoordinateY+cellLoc.height)
+					set.add(i);
+			} 
+
+			for(Integer num : set) {
+				Location cell = this.cells.get(num).getLocation();
+				g.setColor(Color.pink);
+				g.fillRect(cell.CoordinateX, cell.CoordinateY, cell.width, cell.height);
+			}
 			
 			g.setColor(Color.black);
 			g.drawString(s0, 11*height/360, 3*width/128);
@@ -146,6 +140,7 @@ public class BoardPanel extends JPanel{
 			g.drawString(s13, 37*height/360, 93*width/640);
 			g.drawString(s14, 7*height/40, 93*width/640);
 			g.drawString(s15, 89*height/360, 93*width/640);
-		}
+		} else
+			set.clear();
 	}
 }
