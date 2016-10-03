@@ -79,9 +79,9 @@ public class PracticeGamePanel extends JPanel{
 		lblScore_1.setFont(new Font("Arial", Font.BOLD, height/60));
 		lblScore_1.setBounds(height/36, 7*width/80, 53*height/180, 9*width/640);
 		add(lblScore_1);
-		
+
 		ArrayList<Cell> cells = this.game.getBoard().getCells();
-		BoardPanel myBoard = new BoardPanel(cells);
+		BoardPanel myBoard = new BoardPanel(model, cells);
 		add(myBoard);
 	}
 }

@@ -12,7 +12,7 @@ public class PracticeGameController extends MouseAdapter{
 	Model        model;
 	Application    application;
 	Game game;
-	
+
 	public PracticeGameController(Model m, Application app) {
 		this.model = m;
 		this.application = app;
@@ -28,13 +28,14 @@ public class PracticeGameController extends MouseAdapter{
 		application.getMenuPanel().setVisible(false);
 		application.setPraticeGamePanel(practiceGamePanel);
 	}
+	
 	public ArrayList<Cell> generatecells (){
 		ArrayList<Cell> cells = new ArrayList<Cell>(16);
-		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "p", "Qu","R","S","T","U","V","W","X","Y","Z"};
+		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "P", "Qu","R","S","T","U","V","W","X","Y","Z"};
 		int l = alp.length;
 		Random r = new Random();
-		for (int y = 1;y<=4;y++){
-			for(int x = 1;x<=4;x++){
+		for (int y = 1; y <= 4; y++){
+			for(int x = 1; x <= 4;x++){
 				String s = alp[r.nextInt(l)];
 				Letter le = new Letter(s,0);
 				Cell ce = new Cell(x,y,le);
@@ -43,6 +44,4 @@ public class PracticeGameController extends MouseAdapter{
 		}
 		return cells;
 	}
-	
-	
 }
