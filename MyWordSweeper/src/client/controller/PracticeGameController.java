@@ -37,7 +37,7 @@ public class PracticeGameController extends MouseAdapter {
 	}
 
 	public ArrayList<Cell> generatecells() {
-		ArrayList<Cell> cells = new ArrayList<Cell>(16);
+		ArrayList<Cell> cells = new ArrayList<Cell>(16);  
 		String[] alp = new String[] { "A", "B", "C", "D", "E", "F", "G", "H",
 				"I", "J", "K", "L", "M", "N", "O", "p", "Qu", "R", "S", "T",
 				"U", "V", "W", "X", "Y", "Z" };
