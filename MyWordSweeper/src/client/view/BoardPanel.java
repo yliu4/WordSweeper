@@ -108,10 +108,11 @@ public class BoardPanel extends JPanel{
 			
 			for(int i = 0; i < 16; i++) {
 				Location cellLoc = this.cells.get(i).getLocation();
+				/*
 				if(x >= cellLoc.CoordinateX && x <= cellLoc.CoordinateX+cellLoc.width &&
 				   y >= cellLoc.CoordinateY && y <= cellLoc.CoordinateY+cellLoc.height)
 					set.add(i);
-				
+				*/
 				if(x+dragWidth >= cellLoc.CoordinateX && x+dragWidth <= cellLoc.CoordinateX+cellLoc.width &&
 				   y+dragHeight >= cellLoc.CoordinateY && y+dragHeight <= cellLoc.CoordinateY+cellLoc.height)
 					set.add(i);
@@ -119,7 +120,7 @@ public class BoardPanel extends JPanel{
 
 			for(Integer num : set) {
 				Location cell = this.cells.get(num).getLocation();
-				g.setColor(Color.pink);
+				g.setColor(Color.blue);
 				g.fillRect(cell.CoordinateX, cell.CoordinateY, cell.width, cell.height);
 			}
 			
@@ -140,7 +141,31 @@ public class BoardPanel extends JPanel{
 			g.drawString(s13, 37*height/360, 93*width/640);
 			g.drawString(s14, 7*height/40, 93*width/640);
 			g.drawString(s15, 89*height/360, 93*width/640);
-		} else
+		} else {
+			for(Integer num : set) {
+				Location cell = this.cells.get(num).getLocation();
+				g.setColor(Color.blue);
+				g.fillRect(cell.CoordinateX, cell.CoordinateY, cell.width, cell.height);
+			}
+			
+			g.setColor(Color.black);
+			g.drawString(s0, 11*height/360, 3*width/128);
+			g.drawString(s1, 37*height/360, 3*width/128);
+			g.drawString(s2, 7*height/40, 3*width/128);
+			g.drawString(s3, 89*height/360, 3*width/128);
+			g.drawString(s4, 11*height/360, 41*width/640);
+			g.drawString(s5, 37*height/360, 41*width/640);
+			g.drawString(s6, 7*height/40, 41*width/640);
+			g.drawString(s7, 89*height/360, 41*width/640);
+			g.drawString(s8, 11*height/360, 67*width/640);
+			g.drawString(s9, 37*height/360, 67*width/640);
+			g.drawString(s10, 7*height/40, 67*width/640);
+			g.drawString(s11, 89*height/360, 67*width/640);
+			g.drawString(s12, 11*height/360, 93*width/640);
+			g.drawString(s13, 37*height/360, 93*width/640);
+			g.drawString(s14, 7*height/40, 93*width/640);
+			g.drawString(s15, 89*height/360, 93*width/640);
 			set.clear();
+		}
 	}
 }

@@ -13,11 +13,12 @@ public class Model {
 	}
 	
 	public void setFilledBoard(int x, int y, int width, int height) {
-		if(width != 0 && height != 0) {
+		if(x == -1 && y == -1) {
+			this.location = null;
+		} else {
 			this.location = new Location(0,0);
 			this.location.setPanelLocation(x, y, width, height);
-		} else
-			this.location = null;
+		}	
 	}
 	
 	public Location getFilledBoard() {
