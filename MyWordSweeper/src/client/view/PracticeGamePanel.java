@@ -1,19 +1,21 @@
 package client.view;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.*;
 
 import javax.swing.*;
 
-
 import client.controller.*;
 import client.model.*;
+
 import javax.swing.GroupLayout.Alignment;
 
 public class PracticeGamePanel extends JPanel{
 	Model model;
 	Application application;
 	Game game;
+	BoardPanel boardPanel = null;
 	
 	public PracticeGamePanel (Model model, Application application) {
 		this.model = model;
@@ -35,8 +37,6 @@ public class PracticeGamePanel extends JPanel{
 		this.game = game;
 	}
 
-
-
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -45,24 +45,31 @@ public class PracticeGamePanel extends JPanel{
 		int height = d.height;
 		int width = d.width;
 
-		JButton btnNewButton = new JButton("Return");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, height/50));
-		btnNewButton.setBounds(height/180, width/320, height/9, width/64);
-		add(btnNewButton);
+		JButton btnReturnButton = new JButton("Return");
+		btnReturnButton.setFont(new Font("Tahoma", Font.PLAIN, height/50));
+		btnReturnButton.setBounds(height/180, width/320, height/9, width/64);
+		add(btnReturnButton);
+		
+		ReturnMenuPanelController returnMenuController 
+			= new ReturnMenuPanelController(model, application);
+		btnReturnButton.addMouseListener(returnMenuController);
 
 		JButton btnResetGame = new JButton("Reset Game");
 		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, height/50));
-		btnResetGame.setBounds(409, 14, 3*height/20, width/64);
+		btnResetGame.setBounds(23*height/45, 17*width/640, 3*height/20, width/64);
 		add(btnResetGame);
-
-		JLabel lblRoomm = new JLabel("Practice Game");
+		ResetGameInPracticeController resetGameController 
+			= new ResetGameInPracticeController(model, application);
+        btnResetGame.addMouseListener(resetGameController);
+        
+		JLabel lblRoomm = new JLabel("Practice");
 		lblRoomm.setFont(new Font("Arial", Font.BOLD, height/30));
-		lblRoomm.setBounds(173, 11, 180, 20);
+		lblRoomm.setBounds(height/4, 17*width/640, 7*height/45, width/64);
 		add(lblRoomm);
 
-		JLabel lblYourNameAnna = new JLabel("Your Name: Practice Player");
+		JLabel lblYourNameAnna = new JLabel("Your Name: Practicer");
 		lblYourNameAnna.setFont(new Font("Tahoma", Font.PLAIN, height/60));
-		lblYourNameAnna.setBounds(368, 89, 171, 14);
+		lblYourNameAnna.setBounds(83*height/180, 7*width/100, height/6, 7*width/640);
 		add(lblYourNameAnna);
 
 		JLabel lblScore = new JLabel("Total Score: 0.");
@@ -81,7 +88,15 @@ public class PracticeGamePanel extends JPanel{
 		add(lblScore_1);
 		
 		ArrayList<Cell> cells = this.game.getBoard().getCells();
-		BoardPanel myBoard = new BoardPanel(cells);
-		add(myBoard);
+		if (this.boardPanel == null)
+		{
+			this.boardPanel = new BoardPanel(cells);
+			add(boardPanel);
+		}
+		else
+		{
+			this.boardPanel.updateCells(cells);
+			this.boardPanel.repaint();
+		}
 	}
 }

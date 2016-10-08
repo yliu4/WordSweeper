@@ -1,25 +1,14 @@
 package client.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JScrollPane;
 
 import client.ServerAccess;
-import client.controller.CreateGameController;
-import client.controller.JoinGameController;
+import client.controller.PracticeGameController;
+import client.model.Game;
 import client.model.Model;
-
-import javax.swing.JLabel;
 
 
 public class Application extends JFrame {
@@ -28,6 +17,7 @@ public class Application extends JFrame {
 	public Model model;
 	MenuPanel menuPanel;
 	PracticeGamePanel practiceGamePanel;
+	PracticeGameController practiceGameController;
 
 	ServerAccess serverAccess;
 	
@@ -68,8 +58,32 @@ public class Application extends JFrame {
 		return practiceGamePanel;
 	}
 	
-	public void setPraticeGamePanel(PracticeGamePanel practiceGamePanel){
+	//go to practice game panel
+	public void gotoPraticeGamePanel(){
+		menuPanel.setVisible(false);
 		remove(menuPanel);
+		practiceGamePanel.setVisible(true);
 		add(practiceGamePanel);
+	}
+	
+	// go to main menu
+	public void gotoMainMenu()
+	{
+		practiceGamePanel.setVisible(false);
+		remove(practiceGamePanel);
+		menuPanel.setVisible(true);
+		add(menuPanel);
+	}
+	
+	public void setPracticeGameController(PracticeGameController practiceController)
+	{
+		this.practiceGamePanel.setGame(practiceController.getGame());
+		this.practiceGameController = practiceController;
+	}
+	
+	// reset the game
+	public void resetGame()
+	{
+		this.practiceGameController.resetGame();
 	}
 }
