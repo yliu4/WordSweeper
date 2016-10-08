@@ -21,6 +21,11 @@ public class BoardPanel extends JPanel{
 		int width = d.width;
 		setBounds(height/36, 17*width/160, 13*height/45, 13*width/80);
 	}
+	
+	public void updateCells(ArrayList<Cell> cells)
+	{
+		this.cells = cells;
+	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

@@ -15,7 +15,7 @@ public class PracticeGamePanel extends JPanel{
 	Model model;
 	Application application;
 	Game game;
-	BoardPanel boardPanel;
+	BoardPanel boardPanel = null;
 	
 	public PracticeGamePanel (Model model, Application application) {
 		this.model = model;
@@ -36,11 +36,6 @@ public class PracticeGamePanel extends JPanel{
 	public void setGame(Game game) {
 		this.game = game;
 	}
-	
-	public void repaintBoard()
-	{
-		boardPanel.repaint();
-	}
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -54,6 +49,7 @@ public class PracticeGamePanel extends JPanel{
 		btnReturnButton.setFont(new Font("Tahoma", Font.PLAIN, height/50));
 		btnReturnButton.setBounds(height/180, width/320, height/9, width/64);
 		add(btnReturnButton);
+		
 		ReturnMenuPanelController returnMenuController 
 			= new ReturnMenuPanelController(model, application);
 		btnReturnButton.addMouseListener(returnMenuController);
@@ -92,8 +88,15 @@ public class PracticeGamePanel extends JPanel{
 		add(lblScore_1);
 		
 		ArrayList<Cell> cells = this.game.getBoard().getCells();
-		this.boardPanel = new BoardPanel(cells);
-		add(boardPanel);
-		
+		if (this.boardPanel == null)
+		{
+			this.boardPanel = new BoardPanel(cells);
+			add(boardPanel);
+		}
+		else
+		{
+			this.boardPanel.updateCells(cells);
+			this.boardPanel.repaint();
+		}
 	}
 }
