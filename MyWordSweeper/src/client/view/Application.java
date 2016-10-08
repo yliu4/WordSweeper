@@ -85,6 +85,5 @@ public class Application extends JFrame {
 	public void resetGame()
 	{
 		this.practiceGameController.resetGame();
-		this.practiceGamePanel.repaintBoard();
 	}
 }
