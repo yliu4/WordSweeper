@@ -1,13 +1,19 @@
 package client.view;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 
-import javax.swing.*;
-
-import client.controller.*;
-import client.model.*;
+import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import client.controller.PracticeGameController;
+import client.model.Model;
 
 public class MenuPanel extends JPanel {
 	Model model;

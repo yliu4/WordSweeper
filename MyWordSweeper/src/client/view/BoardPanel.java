@@ -28,6 +28,11 @@ public class BoardPanel extends JPanel{
 		this.addMouseListener(control);
 		this.addMouseMotionListener(control);
 	}
+	
+	public void updateCells(ArrayList<Cell> cells)
+	{
+		this.cells = cells;
+	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
