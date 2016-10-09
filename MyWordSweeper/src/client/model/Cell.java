@@ -14,6 +14,10 @@ public class Cell {
 		return this.location;
 	}
 	
+	public void setCoordinateLocation(int x, int y, int width, int height) {
+		this.location.setPanelLocation(x, y, width, height);
+	}
+	
 	public Letter getLetter() {
 		return this.letter;
 	}
