@@ -5,8 +5,15 @@ public class Location {
 	int column;
 	
 	public Location(int row, int column) {
-		// should we varify the location?
 		this.row = row;
 		this.column = column;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public int getColumn() {
+		return column;
 	}
 }

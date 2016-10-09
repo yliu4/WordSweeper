@@ -17,9 +17,9 @@ public class Game {
 		this.currentPlayer = player;
 	}
 	
-	public int calculate(Word word) {
+	public long calculate(Word word) {
+		//yaoxie
 		return 0;
-		// i don't know what to do with this
 	}
 	
 	public Player getManagingPlayer() {
@@ -35,11 +35,9 @@ public class Game {
 	}
 
 	public void setBoard(ArrayList<Cell> cells, Location bonus) {
-		// Should we pass String or Board?
-		// the location of bonus is relative location in 4*4 board
 		this.board = new Board(cells);
-		if (bonus.column >= 0 && bonus.column <= 4
-				&& bonus.row <= 4 && bonus.row >= 0) {
+		if (bonus.column >= 0 && bonus.column <= 3
+				&& bonus.row <= 3 && bonus.row >= 0) {
 			this.board.getCells().get(bonus.row*4+bonus.column).getLetter().setMultiplier();
 		}
 	}
