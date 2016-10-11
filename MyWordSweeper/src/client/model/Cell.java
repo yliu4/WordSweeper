@@ -4,10 +4,9 @@ public class Cell {
 	Location location = null;
 	Letter letter = null;
 	
-	public Cell(int row, int column, Letter letter) {
-		this.location = new Location(row, column);
+	public Cell(Location location, Letter letter) {
+		this.location = location;
 		this.letter = letter; 
-		// i think we should have Letter as a parameter
 	}
 	
 	public Location getLocation() {

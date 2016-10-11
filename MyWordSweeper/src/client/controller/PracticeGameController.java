@@ -40,12 +40,13 @@ public class PracticeGameController extends MouseAdapter {
 		ArrayList<Cell> cells = new ArrayList<Cell>(16);
 		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "P", "Qu","R","S","T","U","V","W","X","Y","Z"};
 		int l = alp.length;
-		Random r = new Random();
-		for (int y = 1; y <= 4; y++){
-			for(int x = 1; x <= 4;x++){
+		Random r = new Random(System.currentTimeMillis());
+		for (int y = 0; y <= 3; y++) {
+			for (int x = 0; x <= 3; x++) {
 				String s = alp[r.nextInt(l)];
-				Letter le = new Letter(s, 0);
-				Cell ce = new Cell(x, y, le);
+				Letter le = new Letter(s);
+				Location lo = new Location(x, y);
+				Cell ce = new Cell(lo, le);
 				cells.add(ce);
 			}
 		}

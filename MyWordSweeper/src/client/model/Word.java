@@ -14,4 +14,12 @@ public class Word {
 		}
 		this.word = sb.toString();
 	}
+
+	public ArrayList<Cell> getCells() {
+		return cells;
+	}
+
+	public String getWord() {
+		return word;
+	}
 }
