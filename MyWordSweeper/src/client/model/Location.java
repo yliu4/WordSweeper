@@ -9,7 +9,6 @@ public class Location {
 	public int height;
 
 	public Location(int row, int column) {
-		// should we verify the location?
 		this.row = row;
 		this.column = column;
 		this.CoordinateX = 0;
@@ -21,5 +20,21 @@ public class Location {
 		this.CoordinateY = y;
 		this.width = width;
 		this.height = height;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
+
+	@Override
+	public boolean equals(Object arg0) {
+		Location lo = (Location) arg0;
+		
+		return (this.getColumn()==lo.getColumn())&&
+				(this.getRow()==lo.getRow());
 	}
 }
