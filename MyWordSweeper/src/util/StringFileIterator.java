@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * Return an Iterator<String> for the strings in a File.
+ * Return an Iterator&lt;String&gt; for the strings in a File.
  * 
  * Useful to populate a Hashtable with initial values.
  * 
