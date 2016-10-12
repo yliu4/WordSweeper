@@ -1,5 +1,12 @@
 package client.model;
 
+/**
+ * The <code>Player</code> class represents the information of a player,
+ * 
+ * including his/her name, score and original position in the global board
+ * 
+ * @author Team Pisces
+ */
 public class Player {
 	String name = null;
 	long score = 0; 

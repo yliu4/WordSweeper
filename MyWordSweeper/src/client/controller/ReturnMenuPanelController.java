@@ -6,6 +6,11 @@ import java.awt.event.MouseEvent;
 import client.model.Model;
 import client.view.Application;
 
+/**
+ * Controller for Return button in practice panel
+ * 
+ * @author Team Pisces
+ */
 public class ReturnMenuPanelController extends MouseAdapter {
 	Model model;
 	Application application;

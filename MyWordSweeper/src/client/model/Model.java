@@ -1,5 +1,10 @@
 package client.model;
 
+/**
+ * The <code>Model</code> class is the top-level class for all entity classes.
+ * 
+ * @author Team Pisces 
+ */
 public class Model {
 	Game game = null;
 	Location location = null;
