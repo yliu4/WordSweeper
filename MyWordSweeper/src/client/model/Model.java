@@ -1,5 +1,12 @@
 package client.model;
 
+/**
+ * Model describes the complete information of a game session
+ * Including the game information and the subset of the board 
+ * assigned to the player
+ * @author team Pisces
+ *
+ */
 public class Model {
 	Game game = null;
 	Location location = null;

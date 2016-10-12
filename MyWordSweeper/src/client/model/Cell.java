@@ -1,5 +1,12 @@
 package client.model;
 
+/**
+ * Each Cell has location and letter, we can use
+ * the row, column, width and height parameters 
+ * to set the location
+ * @author team pisces
+ *
+ */
 public class Cell {
 	Location location = null;
 	Letter letter = null;

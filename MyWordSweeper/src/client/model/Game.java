@@ -2,6 +2,15 @@ package client.model;
 
 import java.util.*;
 
+/**
+ * The game contains the board and a list of players which includes
+ * managing player and other participating players
+ * Aside from getter and setters, the class also handles score calculation
+ * given a word, and verification that if players' board assignments
+ * do not overlap
+ * @author team Pisces
+ *
+ */
 public class Game {
 	Board board = null;
 	ArrayList<Player> players = new ArrayList<Player>();
