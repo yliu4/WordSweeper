@@ -6,6 +6,11 @@ import java.awt.event.*;
 import client.model.Model;
 import client.view.BoardPanel;
 
+/**
+ * The board controller is used to record the mouse motion on the board.
+ * @author team Pisces
+ *
+ */
 public class BoardController extends MouseAdapter implements MouseMotionListener{
 	Model model;
 	BoardPanel panel;
@@ -33,8 +38,6 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 
 	@Override
 	public void mouseReleased(MouseEvent me) {
-		//int deltaX = me.getX() - this.x;
-		//int deltaY = me.getY() - this.y;
 		model.setFilledBoard(-1, -1, 0, 0);
 		panel.repaint();
 	}
