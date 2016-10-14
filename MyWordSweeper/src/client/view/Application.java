@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 
 import client.ServerAccess;
 import client.controller.PracticeGameController;
-import client.model.Game;
 import client.model.Model;
 
 
@@ -84,6 +83,6 @@ public class Application extends JFrame {
 	// reset the game
 	public void resetGame()
 	{
-		this.practiceGameController.resetGame();
+		this.practiceGameController.generateNewBoard();
 	}
 }

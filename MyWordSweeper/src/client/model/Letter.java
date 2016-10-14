@@ -1,5 +1,10 @@
 package client.model;
 
+/**
+ * The letter class contains its score and multiplier.
+ * @author team Pisces
+ *
+ */
 public class Letter {
 	String character = null; 
 	boolean isMultiplier = false;

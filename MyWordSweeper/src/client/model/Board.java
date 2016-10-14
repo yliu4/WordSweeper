@@ -2,6 +2,11 @@ package client.model;
 
 import java.util.*;
 
+/**
+ * The board contains 16 cells. User can get and set cells
+ * @author team Pisces
+ *
+ */
 public class Board {
 	ArrayList<Cell> cells = new ArrayList<Cell>(16);
 	

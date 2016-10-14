@@ -12,6 +12,11 @@ import client.model.Location;
 import client.model.Model;
 import client.view.Application;
 
+/**
+ * Controller for practice game mode
+ * 
+ * @author Team Pisces
+ */
 public class PracticeGameController extends MouseAdapter {
 	Model model;
 	Application application;
@@ -22,25 +27,37 @@ public class PracticeGameController extends MouseAdapter {
 		this.application = app;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent me) {
 		this.game = new Game();
-		resetGame();
+		generateNewBoard();
 		application.setPracticeGameController(this);
 		application.gotoPraticeGamePanel();
 	}
 	
-	public void resetGame()
+	/**
+	 * Generate a new <code>Board</code> for practice game.
+	 * 
+	 * The location of bonus is set to be outside the range of a <code>Board</code>
+	 */
+	public void generateNewBoard()
 	{
+		/** The location of bonus is set to be outside the range of a <code>Board</code> */
 		Location nomulti = new Location(10, 10);
 		this.game.setBoard(this.generatecells(), nomulti);
 	}
-
-	public ArrayList<Cell> generatecells() {
-		ArrayList<Cell> cells = new ArrayList<Cell>(16);  
-		String[] alp = new String[] { "A", "B", "C", "D", "E", "F", "G", "H",
-				"I", "J", "K", "L", "M", "N", "O", "p", "Qu", "R", "S", "T",
-				"U", "V", "W", "X", "Y", "Z" };
+	
+	/**
+	 * Randomly generate 16 <code>Cells</code> for the <code>Board</code>
+	 * 
+	 * @return A List of <code>Cells</code>
+	 */
+	public ArrayList<Cell> generatecells (){
+		ArrayList<Cell> cells = new ArrayList<Cell>(16);
+		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "P", "Qu","R","S","T","U","V","W","X","Y","Z"};
 		int l = alp.length;
 		Random r = new Random(System.currentTimeMillis());
 		for (int y = 0; y <= 3; y++) {
