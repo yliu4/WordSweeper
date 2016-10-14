@@ -113,11 +113,6 @@ public class BoardPanel extends JPanel{
 			
 			for(int i = 0; i < 16; i++) {
 				Location cellLoc = this.cells.get(i).getLocation();
-				/*
-				if(x >= cellLoc.CoordinateX && x <= cellLoc.CoordinateX+cellLoc.width &&
-				   y >= cellLoc.CoordinateY && y <= cellLoc.CoordinateY+cellLoc.height)
-					set.add(i);
-				*/
 				if(x+dragWidth >= cellLoc.CoordinateX && x+dragWidth <= cellLoc.CoordinateX+cellLoc.width &&
 				   y+dragHeight >= cellLoc.CoordinateY && y+dragHeight <= cellLoc.CoordinateY+cellLoc.height)
 					set.add(i);
