@@ -26,23 +26,39 @@ public class Game {
 		this.currentPlayer = player;
 	}
 	
+	// Give a Word as parameter, calculate its score. 
 	public long calculate(Word word) {
-		int score = 0;
-		ArrayList<Cell> cells = word.getCells();
+		double score = 0;
+		long total = 0;
+		boolean hasMulti = false;
+		int length = 0;
+		int m = 1;
+		HashMap<Location, Integer> overlapcheck = overlapCheck();
+		ArrayList<Cell> cells = word.getCells(); 
 		Iterator<Cell> i = cells.iterator();
 		while (i.hasNext()){
 			Cell c = (Cell)i.next();
 			if (c.getLetter().isMultiplier()){
-				score *=10;
+				hasMulti = true;
 			}
-			else{
-				score += c.getLetter().getPoint();
+			if (c.getLetter().equals("Qu")){
+				length++;
 			}
+			length++;
+			m = overlapcheck.get(c.getLocation());
+			score += c.getLetter().getPoint()*Math.pow(2, m);
 		}
-		return score;
+		score = Math.pow(2, length)*10*score;
+		if (hasMulti){
+			score *=10;
+		}
+		total = (long)score;
+		return total;
 	}
 	
-	public HashMap<Location, Integer> overlapCheck(){
+	// return a hashmap contain all locations that on the current player's board as the key, 
+	//and how many players has the corresponding locations on their local board (as the value).
+	private HashMap<Location, Integer> overlapCheck(){
 		HashMap<Location, Integer> positioncheck = new HashMap<Location, Integer>();
 		Iterator<Player> i = players.iterator();
 		int startx = this.currentPlayer.getOriginPosition().getColumn();
