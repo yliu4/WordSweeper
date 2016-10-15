@@ -15,6 +15,12 @@ import javax.swing.SwingConstants;
 import client.controller.PracticeGameController;
 import client.model.Model;
 
+/**
+ * The <code>MenuPanel</code> class represents the main menu of the game.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class MenuPanel extends JPanel {
 	Model model;
 	Application application;

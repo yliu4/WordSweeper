@@ -1,8 +1,11 @@
 package client.model;
 
 /**
- * The letter class contains its score and multiplier.
- * @author team Pisces
+ * The <code>Letter</code> class contains its score and a flag to identify
+ * 
+ * whether this letter is the special multiplier or not.
+ * 
+ * @author Team Pisces
  *
  */
 public class Letter {

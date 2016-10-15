@@ -10,6 +10,14 @@ import client.controller.PracticeGameController;
 import client.model.Model;
 
 
+/**
+ * <code>Application</code> is the top-level boundary class that has access to
+ * 
+ * all other boundary classes.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class Application extends JFrame {
 
 	/** GUI application maintains reference to Model for ease of navigation. */
@@ -22,6 +30,8 @@ public class Application extends JFrame {
 	
 	/**
 	 * Create the frame.
+	 * 
+	 * @param model
 	 */
 	public Application(Model model) {
 		super("WordSweeper");
@@ -57,7 +67,9 @@ public class Application extends JFrame {
 		return practiceGamePanel;
 	}
 	
-	//go to practice game panel
+	/**
+	 * Go to practice game panel
+	 */
 	public void gotoPraticeGamePanel(){
 		menuPanel.setVisible(false);
 		remove(menuPanel);
@@ -65,7 +77,9 @@ public class Application extends JFrame {
 		add(practiceGamePanel);
 	}
 	
-	// go to main menu
+	/**
+	 * Go to main menu.
+	 */
 	public void gotoMainMenu()
 	{
 		practiceGamePanel.setVisible(false);
@@ -80,7 +94,9 @@ public class Application extends JFrame {
 		this.practiceGameController = practiceController;
 	}
 	
-	// reset the game
+	/**
+	 * Reset the game.
+	 */
 	public void resetGame()
 	{
 		this.practiceGameController.generateNewBoard();

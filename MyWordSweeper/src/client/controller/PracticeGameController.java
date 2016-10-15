@@ -13,9 +13,10 @@ import client.model.Model;
 import client.view.Application;
 
 /**
- * Controller for practice game mode
+ * Controller for creating practice game.
  * 
  * @author Team Pisces
+ * 
  */
 public class PracticeGameController extends MouseAdapter {
 	Model model;

@@ -8,6 +8,7 @@ import java.util.*;
  * and a <code>String</code> represents the content of those <code>Cells</code>.
  * 
  * @author Team Pisces
+ * 
  */
 public class Word {
 	ArrayList<Cell> cells = null;

@@ -3,12 +3,13 @@ package client.model;
 import java.util.*;
 
 /**
- * The game contains the board and a list of players which includes
- * managing player and other participating players
- * Aside from getter and setters, the class also handles score calculation
- * given a word, and verification that if players' board assignments
- * do not overlap
- * @author team Pisces
+ * The <code>Game</code> contains a <code>Board</code> and a list of 
+ * 
+ * <code>Player</code>s which includes the managing player and other 
+ * 
+ * participating players.
+ * 
+ * @author Team Pisces
  *
  */
 public class Game {
@@ -26,7 +27,12 @@ public class Game {
 		this.currentPlayer = player;
 	}
 	
-	// Give a Word as parameter, calculate its score. 
+	/**
+	 * Handles the score calculation of a given <code>Word</code>.
+	 * 
+	 * @param word The <code>Word</code> selected.
+	 * @return The score of that <code>Word</code>.
+	 */
 	public long calculate(Word word) {
 		double score = 0;
 		long total = 0;
@@ -56,8 +62,12 @@ public class Game {
 		return total;
 	}
 	
-	// return a hashmap contain all locations that on the current player's board as the key, 
-	//and how many players has the corresponding locations on their local board (as the value).
+	/**
+	 * 
+	 * @return A <code>HashMap&lt;Location, Integer&gt;</code> where the key is
+	 * the <code>Location</code> of a <code>Cell</code> on the <code>Board</code>, 
+	 * and the value is the number of overlapped <code>Player</code>s on that <code>Cell</code>.
+	 */
 	private HashMap<Location, Integer> overlapCheck(){
 		HashMap<Location, Integer> positioncheck = new HashMap<Location, Integer>();
 		Iterator<Player> i = players.iterator();
@@ -100,6 +110,14 @@ public class Game {
 		return board;
 	}
 
+	/**
+	 * Set the <code>Board</code> with a list of <code>Cell</code>s and the 
+	 * 
+	 * <code>Location</code> of the special multiplier.
+	 * 
+	 * @param cells 16 <code>Cell</code>s on this <code>Board</code>.
+	 * @param bonus <code>Location</code> of the special multiplier.
+	 */
 	public void setBoard(ArrayList<Cell> cells, Location bonus) {
 		this.board = new Board(cells);
 		if (bonus.column >= 0 && bonus.column <= 3

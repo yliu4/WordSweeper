@@ -1,9 +1,9 @@
 package client.model;
 
 /**
- * The location contains the positional information of a panel
- * A panel is a subsection of the board assigned to a user
- * @author team Pisces
+ * The <code>Location</code> contains the positional information of a <code>Board</code>.
+ * 
+ * @author Team Pisces
  *
  */
 public class Location {
