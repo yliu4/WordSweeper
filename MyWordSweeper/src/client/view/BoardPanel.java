@@ -12,10 +12,19 @@ import client.model.*;
 import javax.swing.GroupLayout.Alignment;
 import java.util.HashSet;
 
+/**
+ * The <code>BoardPanel</code> class represents the 4*4 board that is assigned
+ * 
+ * to a player when he/she enters a game.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class BoardPanel extends JPanel{
 	ArrayList<Cell> cells;
 	Model model;
-	HashSet<Integer> set = new HashSet<>();
+	HashSet<Integer> set = new HashSet<Integer>();
+	
 	public BoardPanel(Model model, ArrayList<Cell> cells) {
 		this.cells = cells;
 		this.model = model;
@@ -113,11 +122,6 @@ public class BoardPanel extends JPanel{
 			
 			for(int i = 0; i < 16; i++) {
 				Location cellLoc = this.cells.get(i).getLocation();
-				/*
-				if(x >= cellLoc.CoordinateX && x <= cellLoc.CoordinateX+cellLoc.width &&
-				   y >= cellLoc.CoordinateY && y <= cellLoc.CoordinateY+cellLoc.height)
-					set.add(i);
-				*/
 				if(x+dragWidth >= cellLoc.CoordinateX && x+dragWidth <= cellLoc.CoordinateX+cellLoc.width &&
 				   y+dragHeight >= cellLoc.CoordinateY && y+dragHeight <= cellLoc.CoordinateY+cellLoc.height)
 					set.add(i);

@@ -1,22 +1,27 @@
 package client.model;
 
-import java.util.Hashtable;
-
+/**
+ * The <code>Letter</code> class contains its score and a flag to identify
+ * 
+ * whether this letter is the special multiplier or not.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class Letter {
-	String character = null; //Since we have 'Qu'
+	String character = null; 
 	boolean isMultiplier = false;
-	int points = 0;
+	final int points = 0; // revise later
 	
-	public Letter(String character, int points) {
+	public Letter(String character) {
 		this.character = character;
-		this.points = points;
 	}
 	
 	public String getCharacter() {
 		return this.character;
 	}
 	
-	public int GetPoint() {
+	public int getPoint() {
 		return this.points;
 	}
 	

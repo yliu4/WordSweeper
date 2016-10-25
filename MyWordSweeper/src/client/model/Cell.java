@@ -1,19 +1,34 @@
 package client.model;
 
+/**
+ * Each <code>Cell</code> has <code>Location</code> and <code>Letter</code>.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class Cell {
 	Location location = null;
 	Letter letter = null;
 	
-	public Cell(int row, int column, Letter letter) {
-		this.location = new Location(row, column);
+	public Cell(Location location, Letter letter) {
+		this.location = location;
 		this.letter = letter; 
-		// i think we should have Letter as a parameter
 	}
 	
 	public Location getLocation() {
 		return this.location;
 	}
 	
+	/**
+	 * Use the row, column, width and height parameters to set the 
+	 * 
+	 * <code>Location</code> of the <code>Board</code>.
+	 * 
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
 	public void setCoordinateLocation(int x, int y, int width, int height) {
 		this.location.setPanelLocation(x, y, width, height);
 	}
