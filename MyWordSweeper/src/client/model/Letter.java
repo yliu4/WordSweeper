@@ -32,4 +32,12 @@ public class Letter {
 	public void setMultiplier() {
 		this.isMultiplier = true;
 	}
+	
+	public boolean equals(Object obj) {
+		Letter letter = (Letter) obj;
+		
+		return (character.equals(letter.getCharacter()) && 
+				(points == letter.getPoint()) &&
+				(isMultiplier == letter.isMultiplier()));
+	}
 }
