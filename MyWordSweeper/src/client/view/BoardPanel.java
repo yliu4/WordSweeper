@@ -15,7 +15,7 @@ import java.util.HashSet;
 public class BoardPanel extends JPanel{
 	ArrayList<Cell> cells;
 	Model model;
-	HashSet<Integer> set = new HashSet<>();
+	HashSet<Integer> set = new HashSet<Integer>();
 	public BoardPanel(Model model, ArrayList<Cell> cells) {
 		this.cells = cells;
 		this.model = model;
