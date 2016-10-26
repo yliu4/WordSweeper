@@ -1,5 +1,7 @@
 package client.model;
 
+import java.util.HashMap;
+
 /**
  * The <code>Letter</code> class contains its score and a flag to identify
  * 
@@ -11,10 +13,12 @@ package client.model;
 public class Letter {
 	String character = null; 
 	boolean isMultiplier = false;
-	final int points = 0; // revise later
+	final int points; // revise later
+	final Scoremap SMap = new Scoremap(); 
 	
 	public Letter(String character) {
 		this.character = character;
+		this.points = SMap.findLetterScore(character);
 	}
 	
 	public String getCharacter() {
