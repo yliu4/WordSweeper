@@ -40,4 +40,11 @@ public class Cell {
 	public void setLetter(Letter letter) {
 		this.letter = letter;
 	}
+	
+	public boolean equals(Object obj) {
+		Cell cell = (Cell) obj;
+		
+		return (location.equals(cell.getLocation()) && 
+				letter.equals(cell.getLetter()));
+	}
 }
