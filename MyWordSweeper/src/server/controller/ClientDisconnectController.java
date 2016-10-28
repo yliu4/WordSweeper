@@ -1,5 +1,4 @@
 package server.controller;
-
 import server.ClientState;
 
 /**
@@ -9,6 +8,6 @@ import server.ClientState;
 public class ClientDisconnectController {
 
 	public void process(ClientState state) {
-		System.out.println("Client disconnected for client:" + state.id());
+		System.out.println ("Client disconnected for client:" + state.id());
 	}
 }

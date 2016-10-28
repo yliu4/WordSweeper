@@ -27,9 +27,7 @@ public class PracticeGameController extends MouseAdapter {
 		this.application = app;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
 	 */
 	@Override
@@ -39,32 +37,27 @@ public class PracticeGameController extends MouseAdapter {
 		application.setPracticeGameController(this);
 		application.gotoPraticeGamePanel();
 	}
-
+	
 	/**
 	 * Generate a new <code>Board</code> for practice game.
 	 * 
-	 * The location of bonus is set to be outside the range of a
-	 * <code>Board</code>
+	 * The location of bonus is set to be outside the range of a <code>Board</code>
 	 */
-	public void generateNewBoard() {
-		/**
-		 * The location of bonus is set to be outside the range of a
-		 * <code>Board</code>
-		 */
+	public void generateNewBoard()
+	{
+		/** The location of bonus is set to be outside the range of a <code>Board</code> */
 		Location nomulti = new Location(10, 10);
 		this.game.setBoard(this.generatecells(), nomulti);
 	}
-
+	
 	/**
 	 * Randomly generate 16 <code>Cells</code> for the <code>Board</code>
 	 * 
 	 * @return A List of <code>Cells</code>
 	 */
-	public ArrayList<Cell> generatecells() {
+	public ArrayList<Cell> generatecells (){
 		ArrayList<Cell> cells = new ArrayList<Cell>(16);
-		String[] alp = new String[] { "A", "B", "C", "D", "E", "F", "G", "H",
-				"I", "J", "K", "L", "M", "N", "O", "P", "Qu", "R", "S", "T",
-				"U", "V", "W", "X", "Y", "Z" };
+		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "P", "Qu","R","S","T","U","V","W","X","Y","Z"};
 		int l = alp.length;
 		Random r = new Random(System.currentTimeMillis());
 		for (int y = 0; y <= 3; y++) {
@@ -79,7 +72,8 @@ public class PracticeGameController extends MouseAdapter {
 		return cells;
 	}
 
-	public Game getGame() {
+	public Game getGame()
+	{
 		return this.game;
 	}
 }
