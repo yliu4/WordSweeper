@@ -1,4 +1,4 @@
-package util;
+package client.model;
 
 import java.util.HashMap;
 
@@ -32,10 +32,10 @@ public class Scoremap {
 		SMap.put("X", 7);
 		SMap.put("Qu", 11);
 		SMap.put("Z", 8);
-	}
-
-	public int findLetterScore(String c) {
+	} 
+	
+	public int findLetterScore (String c){
 		return SMap.get(c);
 	}
-
+	
 }
