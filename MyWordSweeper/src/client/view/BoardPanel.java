@@ -24,6 +24,8 @@ public class BoardPanel extends JPanel{
 	ArrayList<Cell> cells;
 	Model model;
 	HashSet<Integer> set = new HashSet<Integer>();
+	int prev;
+	boolean stop = false;
 
 	public BoardPanel(Model model, ArrayList<Cell> cells) {
 		this.cells = cells;
@@ -122,9 +124,16 @@ public class BoardPanel extends JPanel{
 			
 			for(int i = 0; i < 16; i++) {
 				Location cellLoc = this.cells.get(i).getLocation();
-				if(x+dragWidth >= cellLoc.CoordinateX && x+dragWidth <= cellLoc.CoordinateX+cellLoc.width &&
-				   y+dragHeight >= cellLoc.CoordinateY && y+dragHeight <= cellLoc.CoordinateY+cellLoc.height)
-					set.add(i);
+				if(x+dragWidth >= cellLoc.CoordinateX+5 && x+dragWidth <= cellLoc.CoordinateX+cellLoc.width-5 &&
+				   y+dragHeight >= cellLoc.CoordinateY+5 && y+dragHeight <= cellLoc.CoordinateY+cellLoc.height-5)
+					if(stop == false) {
+						if(!set.isEmpty() && prev != i && set.contains(i)) {
+							stop = true;
+							break;
+						}
+						prev = i;
+						set.add(i);
+					}
 			} 
 
 			for(Integer num : set) {
@@ -175,6 +184,7 @@ public class BoardPanel extends JPanel{
 			g.drawString(s14, 7*height/40, 93*width/640);
 			g.drawString(s15, 89*height/360, 93*width/640);
 			set.clear();
+			stop = false;
 		}
 	}
 }
