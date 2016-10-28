@@ -2,6 +2,8 @@ package client.model;
 
 import java.util.HashMap;
 
+import util.Scoremap;
+
 /**
  * The letter class contains its score and multiplier.
  * @author team Pisces

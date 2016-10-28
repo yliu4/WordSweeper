@@ -11,6 +11,11 @@ public class Model {
 	Game game = null;
 	Location location = null;
 
+	
+	
+	public Model() {
+	}
+
 	public void setGame(Game game) {
 		this.game = game;
 	}
