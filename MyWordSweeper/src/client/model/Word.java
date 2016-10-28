@@ -3,7 +3,7 @@ package client.model;
 import java.util.*;
 
 /**
- * The <code>Word</code> class contains a List of <code>Cells</code> 
+ * The <code>Word</code> class contains a List of <code>Cells</code>
  * 
  * and a <code>String</code> represents the content of those <code>Cells</code>.
  * 
@@ -12,11 +12,11 @@ import java.util.*;
 public class Word {
 	ArrayList<Cell> cells = null;
 	String word = null;
-	
+
 	public Word(ArrayList<Cell> cells) {
 		this.cells = cells;
 		StringBuffer sb = new StringBuffer();
-		for (Cell cell: cells) {
+		for (Cell cell : cells) {
 			sb.append(cell.getLetter().getCharacter());
 		}
 		this.word = sb.toString();

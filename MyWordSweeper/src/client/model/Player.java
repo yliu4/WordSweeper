@@ -9,9 +9,9 @@ package client.model;
  */
 public class Player {
 	String name = null;
-	long score = 0; 
+	long score = 0;
 	Location originPosition = null;
-	
+
 	public Player(String name, long score, Location originPosition) {
 		this.name = name;
 		this.score = score;
