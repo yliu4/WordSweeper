@@ -9,7 +9,6 @@ import client.ServerAccess;
 import client.controller.PracticeGameController;
 import client.model.Model;
 
-
 public class Application extends JFrame {
 
 	/** GUI application maintains reference to Model for ease of navigation. */
@@ -19,7 +18,7 @@ public class Application extends JFrame {
 	PracticeGameController practiceGameController;
 
 	ServerAccess serverAccess;
-	
+
 	/**
 	 * Create the frame.
 	 */
@@ -27,13 +26,13 @@ public class Application extends JFrame {
 		super("WordSweeper");
 		this.model = model;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		int width = d.width;
 
-		setBounds(100, 100, 25*height/36, 5*width/16);
-		
+		setBounds(100, 100, 25 * height / 36, 5 * width / 16);
+
 		menuPanel = new MenuPanel(model, this);
 		practiceGamePanel = new PracticeGamePanel(model, this);
 		add(menuPanel);
@@ -43,46 +42,44 @@ public class Application extends JFrame {
 	public void setServerAccess(ServerAccess access) {
 		this.serverAccess = access;
 	}
-	
+
 	/** Get the server access object. */
 	public ServerAccess getServerAccess() {
 		return serverAccess;
 	}
-	
+
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
-	
-	public PracticeGamePanel getPracticeGamePanel(){
+
+	public PracticeGamePanel getPracticeGamePanel() {
 		return practiceGamePanel;
 	}
-	
-	//go to practice game panel
-	public void gotoPraticeGamePanel(){
+
+	// go to practice game panel
+	public void gotoPraticeGamePanel() {
 		menuPanel.setVisible(false);
 		remove(menuPanel);
 		practiceGamePanel.setVisible(true);
 		add(practiceGamePanel);
 	}
-	
+
 	// go to main menu
-	public void gotoMainMenu()
-	{
+	public void gotoMainMenu() {
 		practiceGamePanel.setVisible(false);
 		remove(practiceGamePanel);
 		menuPanel.setVisible(true);
 		add(menuPanel);
 	}
-	
-	public void setPracticeGameController(PracticeGameController practiceController)
-	{
+
+	public void setPracticeGameController(
+			PracticeGameController practiceController) {
 		this.practiceGamePanel.setGame(practiceController.getGame());
 		this.practiceGameController = practiceController;
 	}
-	
+
 	// reset the game
-	public void resetGame()
-	{
+	public void resetGame() {
 		this.practiceGameController.generateNewBoard();
 	}
 }

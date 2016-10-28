@@ -4,11 +4,11 @@ package server.model;
 
 public class ServerModel {
 	int numPlayers = 0;
-	
+
 	public void joinGame() {
 		numPlayers++;
 	}
-	
+
 	public int getNumPlayers() {
 		return numPlayers;
 	}

@@ -1,10 +1,11 @@
 package client.model;
 
 /**
- * The location contains the positional information of a panel
- * A panel is a subsection of the board assigned to a user
+ * The location contains the positional information of a panel A panel is a
+ * subsection of the board assigned to a user
+ * 
  * @author team Pisces
- *
+ * 
  */
 public class Location {
 	int row;
@@ -20,8 +21,7 @@ public class Location {
 		this.CoordinateX = 0;
 		this.CoordinateY = 0;
 	}
-	
-	
+
 	public void setPanelLocation(int x, int y, int width, int height) {
 		this.CoordinateX = x;
 		this.CoordinateY = y;
@@ -40,8 +40,8 @@ public class Location {
 	@Override
 	public boolean equals(Object arg0) {
 		Location lo = (Location) arg0;
-		
-		return (this.getColumn()==lo.getColumn())&&
-				(this.getRow()==lo.getRow());
+
+		return (this.getColumn() == lo.getColumn())
+				&& (this.getRow() == lo.getRow());
 	}
 }
