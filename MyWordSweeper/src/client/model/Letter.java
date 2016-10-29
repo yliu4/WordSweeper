@@ -2,6 +2,8 @@ package client.model;
 
 import java.util.HashMap;
 
+import util.Scoremap;
+
 /**
  * The <code>Letter</code> class contains its score and a flag to identify
  * 
