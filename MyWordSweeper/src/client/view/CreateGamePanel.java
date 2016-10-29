@@ -17,13 +17,26 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import client.controller.ReturnMenuPanelController;
+import client.controller.*;
 import client.model.Model;
 
+/**
+ * The <code>CreateGamePanel</code> class represents the view that enables 
+ * 
+ * the player to enter his/her nickname and password (optional) to create 
+ * 
+ * a new game.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class CreateGamePanel extends JPanel{
 	Model model;
 	Application application;
+	
+	/**	<code>JTextField</code> for nickname.*/
 	JTextField textFieldNN;
+	/**	<code>JTextField</code> for password.*/
 	JTextField textFieldPW;
 	ButtonGroup modeBtnGroup;
 	JRadioButton rdbtnPublic;
@@ -64,8 +77,7 @@ public class CreateGamePanel extends JPanel{
 		rdbtnPublic.setBounds(21*width/160, 41*height/180, 5*width/64, height/45);
 		rdbtnPublic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textFieldPW.setEditable(false);
-				textFieldPW.setText("");
+				new ChoosePublicController(CreateGamePanel.this.application).process(); 
 			}
 		});
 		
@@ -74,7 +86,7 @@ public class CreateGamePanel extends JPanel{
 		rdbtnPrivate.setBounds(21*width/160, 47*height/180, 5*width/64, height/45);
 		rdbtnPrivate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textFieldPW.setEditable(true);
+				new ChoosePrivateController(CreateGamePanel.this.application).process(); 
 			}
 		});
 		

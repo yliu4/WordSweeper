@@ -70,6 +70,10 @@ public class Application extends JFrame {
 		return practiceGamePanel;
 	}
 	
+	public CreateGamePanel getCreateGamePanel() {
+		return createGamePanel;
+	}
+
 	/**
 	 * Go to practice game panel
 	 */
