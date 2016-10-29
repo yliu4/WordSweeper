@@ -78,7 +78,10 @@ public class MenuPanel extends JPanel {
 		btnPractice.setFont(new Font("Tahoma", Font.PLAIN, height/30));
 		btnPractice.setBounds(83*height/360, width/5, 7*height/30, 7*width/160);
 		add(btnPractice);
-		PracticeGameController practice = new PracticeGameController(model, application);
-		btnPractice.addMouseListener(practice);
+		btnPractice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PracticeGameController(model, application).process();
+			}
+		});
 	}
 }
