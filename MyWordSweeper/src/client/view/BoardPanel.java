@@ -40,8 +40,7 @@ public class BoardPanel extends JPanel{
 		this.addMouseMotionListener(control);
 	}
 	
-	public void updateCells(ArrayList<Cell> cells)
-	{
+	public void updateCells(ArrayList<Cell> cells) {
 		this.cells = cells;
 	}
 
@@ -115,17 +114,18 @@ public class BoardPanel extends JPanel{
 		this.cells.get(14).setCoordinateLocation(26*height/180, 39*width/320, 13*height/180, 13*width/320);
 		this.cells.get(15).setCoordinateLocation(39*height/180, 39*width/320, 13*height/180, 13*width/320);
 
+		// record the cells mouse dragged. If mouse drags the previous cell, stop recording 
 		Location location = this.model.getFilledBoard();
 		if(location != null) {
-			int x = location.CoordinateX;
-			int y = location.CoordinateY;
-			int dragWidth = location.width;
-			int dragHeight = location.height;
+			int x = location.getCoordinateX();
+			int y = location.getCoordinateY();
+			int dragWidth = location.getWidth();
+			int dragHeight = location.getHeight();
 			
 			for(int i = 0; i < 16; i++) {
 				Location cellLoc = this.cells.get(i).getLocation();
-				if(x+dragWidth >= cellLoc.CoordinateX+5 && x+dragWidth <= cellLoc.CoordinateX+cellLoc.width-5 &&
-				   y+dragHeight >= cellLoc.CoordinateY+5 && y+dragHeight <= cellLoc.CoordinateY+cellLoc.height-5)
+				if(x+dragWidth >= cellLoc.getCoordinateX()+5 && x+dragWidth <= cellLoc.getCoordinateX()+cellLoc.getWidth()-5 &&
+				   y+dragHeight >= cellLoc.getCoordinateY()+5 && y+dragHeight <= cellLoc.getCoordinateY()+cellLoc.getHeight()-5)
 					if(stop == false) {
 						if(!set.isEmpty() && prev != i && set.contains(i)) {
 							stop = true;
@@ -135,11 +135,12 @@ public class BoardPanel extends JPanel{
 						set.add(i);
 					}
 			} 
-
+			
+			// fill the dragged cells
 			for(Integer num : set) {
 				Location cell = this.cells.get(num).getLocation();
 				g.setColor(Color.blue);
-				g.fillRect(cell.CoordinateX, cell.CoordinateY, cell.width, cell.height);
+				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
 			}
 			
 			g.setColor(Color.black);
@@ -163,7 +164,7 @@ public class BoardPanel extends JPanel{
 			for(Integer num : set) {
 				Location cell = this.cells.get(num).getLocation();
 				g.setColor(Color.blue);
-				g.fillRect(cell.CoordinateX, cell.CoordinateY, cell.width, cell.height);
+				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
 			}
 			
 			g.setColor(Color.black);
