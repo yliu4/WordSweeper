@@ -12,7 +12,7 @@ import client.view.Application;
  * Tells the client whether the model is locked or not BY SOME OTHER CLIENT. This will never be returned to a client
  * to tell him that HE has the model locked (that is job of LockResponse).
  */
-public class BoardResponseController {
+public class BoardResponseController extends ControllerChain{
 
 	public Application app;
 	public Model model;
@@ -22,7 +22,12 @@ public class BoardResponseController {
 		this.model = m;
 	}
 	
-	public void process(Message response) {
+	public boolean process(Message response) {
+		String type = response.contents.getFirstChild().getLocalName();
+		if (!type.equals ("boardResponse")) {
+			return next.process(response);
+		}
+		
 		// this refers to the outer node of the Message DOM (in this case, updateResponse).
 		Node boardResponse = response.contents.getFirstChild();
 		NamedNodeMap map = boardResponse.getAttributes();
@@ -42,7 +47,7 @@ public class BoardResponseController {
 		// at this point, you would normally start processing this...
 //		app.getResponseArea().append(response.toString());
 //		app.getResponseArea().append("\n");
-		
+		return true;
 	}
 
 }
