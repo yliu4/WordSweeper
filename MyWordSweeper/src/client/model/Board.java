@@ -3,8 +3,11 @@ package client.model;
 import java.util.*;
 
 /**
- * The board contains 16 cells. User can get and set cells
- * @author team Pisces
+ * The <code>Board</code> contains 16 <code>Cell</code>s. 
+ * 
+ * User can get and set <code>Cell</code>s.
+ * 
+ * @author Team Pisces
  *
  */
 public class Board {

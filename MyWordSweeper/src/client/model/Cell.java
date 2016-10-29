@@ -1,10 +1,9 @@
 package client.model;
 
 /**
- * Each Cell has location and letter, we can use
- * the row, column, width and height parameters 
- * to set the location
- * @author team pisces
+ * Each <code>Cell</code> has <code>Location</code> and <code>Letter</code>.
+ * 
+ * @author Team Pisces
  *
  */
 public class Cell {
@@ -20,6 +19,16 @@ public class Cell {
 		return this.location;
 	}
 	
+	/**
+	 * Use the row, column, width and height parameters to set the 
+	 * 
+	 * <code>Location</code> of the <code>Board</code>.
+	 * 
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
 	public void setCoordinateLocation(int x, int y, int width, int height) {
 		this.location.setPanelLocation(x, y, width, height);
 	}
@@ -30,5 +39,12 @@ public class Cell {
 	
 	public void setLetter(Letter letter) {
 		this.letter = letter;
+	}
+	
+	public boolean equals(Object obj) {
+		Cell cell = (Cell) obj;
+		
+		return (location.equals(cell.getLocation()) && 
+				letter.equals(cell.getLetter()));
 	}
 }

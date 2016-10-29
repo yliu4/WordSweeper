@@ -10,18 +10,31 @@ import client.controller.PracticeGameController;
 import client.model.Model;
 
 
+/**
+ * <code>Application</code> is the top-level boundary class that has access to
+ * 
+ * all other boundary classes.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class Application extends JFrame {
 
 	/** GUI application maintains reference to Model for ease of navigation. */
 	public Model model;
+	
 	MenuPanel menuPanel;
 	PracticeGamePanel practiceGamePanel;
+	CreateGamePanel createGamePanel;
+	
 	PracticeGameController practiceGameController;
 
 	ServerAccess serverAccess;
 	
 	/**
 	 * Create the frame.
+	 * 
+	 * @param model
 	 */
 	public Application(Model model) {
 		super("WordSweeper");
@@ -32,7 +45,7 @@ public class Application extends JFrame {
 		int height = d.height;
 		int width = d.width;
 
-		setBounds(100, 100, 25*height/36, 5*width/16);
+		setBounds(100, 100, 25*width/64, 5*height/9);
 		
 		menuPanel = new MenuPanel(model, this);
 		practiceGamePanel = new PracticeGamePanel(model, this);
@@ -57,21 +70,48 @@ public class Application extends JFrame {
 		return practiceGamePanel;
 	}
 	
-	//go to practice game panel
-	public void gotoPraticeGamePanel(){
+	public CreateGamePanel getCreateGamePanel() {
+		return createGamePanel;
+	}
+
+	/**
+	 * Go to practice game panel
+	 */
+	public void gotoPraticeGamePanel() {
 		menuPanel.setVisible(false);
 		remove(menuPanel);
 		practiceGamePanel.setVisible(true);
 		add(practiceGamePanel);
 	}
 	
-	// go to main menu
-	public void gotoMainMenu()
-	{
-		practiceGamePanel.setVisible(false);
-		remove(practiceGamePanel);
+	/**
+	 * Go to main menu.
+	 */
+	public void gotoMainMenu() {
+		System.out.println(this.getComponentCount());
+		if (practiceGamePanel != null) {
+			practiceGamePanel.setVisible(false);
+			remove(practiceGamePanel);
+		}
+		if (createGamePanel != null) {
+			createGamePanel.setVisible(false);
+			remove(createGamePanel);
+		}
+		System.out.println(this.getComponentCount());
+		System.out.println();
 		menuPanel.setVisible(true);
 		add(menuPanel);
+	}
+	
+	/**
+	 * Go to create game panel
+	 */
+	public void gotoCreateGamePanel() {
+		menuPanel.setVisible(false);
+		remove(menuPanel);
+		createGamePanel = new CreateGamePanel(model, this);
+		createGamePanel.setVisible(true);
+		add(createGamePanel);
 	}
 	
 	public void setPracticeGameController(PracticeGameController practiceController)
@@ -80,7 +120,9 @@ public class Application extends JFrame {
 		this.practiceGameController = practiceController;
 	}
 	
-	// reset the game
+	/**
+	 * Reset the game.
+	 */
 	public void resetGame()
 	{
 		this.practiceGameController.generateNewBoard();

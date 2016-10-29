@@ -7,9 +7,11 @@ import client.model.Model;
 import client.view.Application;
 
 /**
- * Controller to handle click of the return button in practice mode
- * to return back to main menu
- * @author team Pisces
+ * Controller to handle clicking the return button in practice mode
+ * 
+ * to return to main menu.
+ * 
+ * @author Team Pisces
  *
  */
 public class ReturnMenuPanelController extends MouseAdapter {

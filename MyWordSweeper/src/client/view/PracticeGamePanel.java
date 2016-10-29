@@ -11,6 +11,14 @@ import client.model.*;
 
 import javax.swing.GroupLayout.Alignment;
 
+/**
+ * The <code>PracticeGamePanel</code> class represents the practice game, which
+ * 
+ * contains a <code>Board</code>.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class PracticeGamePanel extends JPanel{
 	Model model;
 	Application application;

@@ -1,10 +1,11 @@
 package client.model;
 
 /**
- * Model describes the complete information of a game session
- * Including the game information and the subset of the board 
- * assigned to the player
- * @author team Pisces
+ * <code>Model</code> is the top-level entity class which has accecss to all
+ * 
+ * entity classes.
+ * 
+ * @author Team Pisces
  */
 
 public class Model {
@@ -24,6 +25,12 @@ public class Model {
 		return this.game;
 	}
 	
+	/**
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
 	public void setFilledBoard(int x, int y, int width, int height) {
 		if(x == -1 && y == -1) {
 			this.location = null;

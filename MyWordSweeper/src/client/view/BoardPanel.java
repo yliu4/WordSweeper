@@ -12,10 +12,21 @@ import client.model.*;
 import javax.swing.GroupLayout.Alignment;
 import java.util.HashSet;
 
+/**
+ * The <code>BoardPanel</code> class represents the 4*4 board that is assigned
+ * 
+ * to a player when he/she enters a game.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class BoardPanel extends JPanel{
 	ArrayList<Cell> cells;
 	Model model;
 	HashSet<Integer> set = new HashSet<Integer>();
+	int prev;
+	boolean stop = false;
+
 	public BoardPanel(Model model, ArrayList<Cell> cells) {
 		this.cells = cells;
 		this.model = model;
@@ -29,8 +40,7 @@ public class BoardPanel extends JPanel{
 		this.addMouseMotionListener(control);
 	}
 	
-	public void updateCells(ArrayList<Cell> cells)
-	{
+	public void updateCells(ArrayList<Cell> cells) {
 		this.cells = cells;
 	}
 
@@ -104,24 +114,33 @@ public class BoardPanel extends JPanel{
 		this.cells.get(14).setCoordinateLocation(26*height/180, 39*width/320, 13*height/180, 13*width/320);
 		this.cells.get(15).setCoordinateLocation(39*height/180, 39*width/320, 13*height/180, 13*width/320);
 
+		// record the cells mouse dragged. If mouse drags the previous cell, stop recording 
 		Location location = this.model.getFilledBoard();
 		if(location != null) {
-			int x = location.CoordinateX;
-			int y = location.CoordinateY;
-			int dragWidth = location.width;
-			int dragHeight = location.height;
+			int x = location.getCoordinateX();
+			int y = location.getCoordinateY();
+			int dragWidth = location.getWidth();
+			int dragHeight = location.getHeight();
 			
 			for(int i = 0; i < 16; i++) {
 				Location cellLoc = this.cells.get(i).getLocation();
-				if(x+dragWidth >= cellLoc.CoordinateX && x+dragWidth <= cellLoc.CoordinateX+cellLoc.width &&
-				   y+dragHeight >= cellLoc.CoordinateY && y+dragHeight <= cellLoc.CoordinateY+cellLoc.height)
-					set.add(i);
+				if(x+dragWidth >= cellLoc.getCoordinateX()+5 && x+dragWidth <= cellLoc.getCoordinateX()+cellLoc.getWidth()-5 &&
+				   y+dragHeight >= cellLoc.getCoordinateY()+5 && y+dragHeight <= cellLoc.getCoordinateY()+cellLoc.getHeight()-5)
+					if(stop == false) {
+						if(!set.isEmpty() && prev != i && set.contains(i)) {
+							stop = true;
+							break;
+						}
+						prev = i;
+						set.add(i);
+					}
 			} 
-
+			
+			// fill the dragged cells
 			for(Integer num : set) {
 				Location cell = this.cells.get(num).getLocation();
 				g.setColor(Color.blue);
-				g.fillRect(cell.CoordinateX, cell.CoordinateY, cell.width, cell.height);
+				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
 			}
 			
 			g.setColor(Color.black);
@@ -145,7 +164,7 @@ public class BoardPanel extends JPanel{
 			for(Integer num : set) {
 				Location cell = this.cells.get(num).getLocation();
 				g.setColor(Color.blue);
-				g.fillRect(cell.CoordinateX, cell.CoordinateY, cell.width, cell.height);
+				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
 			}
 			
 			g.setColor(Color.black);
@@ -166,6 +185,7 @@ public class BoardPanel extends JPanel{
 			g.drawString(s14, 7*height/40, 93*width/640);
 			g.drawString(s15, 89*height/360, 93*width/640);
 			set.clear();
+			stop = false;
 		}
 	}
 }

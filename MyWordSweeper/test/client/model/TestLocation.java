@@ -13,8 +13,8 @@ public class TestLocation extends TestCase {
 	public void testSetPanelLocation() {
 		Location location = new Location(1, 2);
 		location.setPanelLocation(1, 2, 3, 4);
-		assertEquals(1, location.CoordinateX);
-		assertEquals(2, location.CoordinateY);
+		assertEquals(1, location.getCoordinateX());
+		assertEquals(2, location.getCoordinateY());
 		assertEquals(3, location.width);
 		assertEquals(4, location.height);
 	}

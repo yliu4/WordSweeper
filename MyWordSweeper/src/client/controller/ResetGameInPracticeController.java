@@ -7,8 +7,9 @@ import client.model.Model;
 import client.view.Application;
 
 /**
- * Controller for clicking the Reset button in practice mode
- * @author team Pisces
+ * Controller for clicking the Reset button in practice mode.
+ * 
+ * @author Team Pisces
  *
  */
 public class ResetGameInPracticeController extends MouseAdapter {
