@@ -20,7 +20,10 @@ public class ConnectResponseController extends ControllerChain {
 		if (!type.equals ("connectResponse")) {
 			return next.process(response);
 		}
-
+		
+		// check response detail
+		System.out.println(response.toString() + "\n");
+		
 		return true;
 	}
 }
