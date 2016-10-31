@@ -21,9 +21,6 @@ public class ConnectResponseController extends ControllerChain {
 			return next.process(response);
 		}
 		
-		// check response detail
-		System.out.println(response.toString() + "\n");
-		
 		return true;
 	}
 }

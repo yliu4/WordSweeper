@@ -17,6 +17,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import client.controller.CreateGameController;
 import client.controller.ReturnMenuPanelController;
 import client.model.Model;
 
@@ -120,6 +121,11 @@ public class CreateGamePanel extends JPanel{
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, height/36));
 		btnNewButton.setBounds(3*width/32, 19*height/45, 3*width/32, height/20);
 		add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CreateGameController(model, application).process(textFieldNN.getText(), textFieldPW.getText());
+			}
+		});
 		
 		JButton btnCancelButton = new JButton("Cancel");
 		btnCancelButton.setFont(new Font("Tahoma", Font.PLAIN, height/36));
