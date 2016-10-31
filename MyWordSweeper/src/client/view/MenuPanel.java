@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -12,9 +14,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import client.controller.OpenCreateGamePanelController;
 import client.controller.PracticeGameController;
 import client.model.Model;
 
+/**
+ * The <code>MenuPanel</code> class represents the main menu of the game.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class MenuPanel extends JPanel {
 	Model model;
 	Application application;
@@ -54,6 +63,11 @@ public class MenuPanel extends JPanel {
 		btnCreate.setFont(new Font("Tahoma", Font.PLAIN, height/30));
 		btnCreate.setBounds(83*height/360, 3*width/40, 7*height/30, 7*width/160);
 		add(btnCreate);
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new OpenCreateGamePanelController(model, application).process();
+			}
+		});
 		
 		JButton btnJoin = new JButton("JOIN");
 		btnJoin.setFont(new Font("Tahoma", Font.PLAIN, height/30));
@@ -64,7 +78,10 @@ public class MenuPanel extends JPanel {
 		btnPractice.setFont(new Font("Tahoma", Font.PLAIN, height/30));
 		btnPractice.setBounds(83*height/360, width/5, 7*height/30, 7*width/160);
 		add(btnPractice);
-		PracticeGameController practice = new PracticeGameController(model, application);
-		btnPractice.addMouseListener(practice);
+		btnPractice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PracticeGameController(model, application).process();
+			}
+		});
 	}
 }
