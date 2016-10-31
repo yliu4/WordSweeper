@@ -1,12 +1,28 @@
 package client.controller;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import xml.Message;
+import client.model.Cell;
+import client.model.Game;
+import client.model.Letter;
+import client.model.Location;
 import client.model.Model;
 import client.view.Application;
 
-public class JoinGameController {
-
+public class JoinGameController extends MouseAdapter {
+	Game game;
 	Application app;
 	Model model;
 
@@ -25,5 +41,16 @@ public class JoinGameController {
 //		app.getRequestArea().append(m.toString());
 //		app.getRequestArea().append("\n");
 		app.getServerAccess().sendRequest(m);
+	}
+	
+
+	public void mouseClicked(MouseEvent me) {
+		//app.setJoinGameController(this);
+		app.gotoJoinGameRegisterPanel();
+	}
+
+	public Game getGame()
+	{
+		return this.game;
 	}
 }

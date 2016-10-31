@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 import client.ServerAccess;
+import client.controller.JoinGameController;
+import client.controller.JoinPrivateGameController;
 import client.controller.PracticeGameController;
 import client.model.Model;
 
@@ -26,9 +28,13 @@ public class Application extends JFrame {
 	MenuPanel menuPanel;
 	PracticeGamePanel practiceGamePanel;
 	CreateGamePanel createGamePanel;
-	
-	PracticeGameController practiceGameController;
 
+	JoinGamePanel joinGamePanel;
+	//PasswordPopupPanel passwordPopupPanel;
+	JoinPrivateGameController joinPrivateGameController;
+	JoinGameController joinGameController;
+
+	PracticeGameController practiceGameController;
 	ServerAccess serverAccess;
 	
 	/**
@@ -46,11 +52,14 @@ public class Application extends JFrame {
 		int width = d.width;
 
 		setBounds(100, 100, 25*width/64, 5*height/9);
-		
+
 		menuPanel = new MenuPanel(model, this);
+		joinGamePanel = new JoinGamePanel(model, this);
+		//  passwordPopupPanel = new PasswordPopupPanel(model, this);
 		practiceGamePanel = new PracticeGamePanel(model, this);
+		
 		add(menuPanel);
-	}
+		}
 
 	/** Record the means to communicate with server. */
 	public void setServerAccess(ServerAccess access) {
@@ -83,6 +92,29 @@ public class Application extends JFrame {
 		practiceGamePanel.setVisible(true);
 		add(practiceGamePanel);
 	}
+	
+	
+	/**
+	 *  Go to Join public Game register panel
+	 */
+	public void gotoJoinGameRegisterPanel(){
+		menuPanel.setVisible(false);
+		remove(menuPanel);
+		joinGamePanel.setVisible(true);
+		add(joinGamePanel);
+	}
+
+//	public void passwordPopupPanel()
+//	{
+//		remove(joinGamePanel);
+//		passwordPopupPanel.setVisible(true);
+//		add(passwordPopupPanel);	
+//	}
+//	public void setJoinGameController(JoinGameController joinController)
+//	{
+//		this.joinGamePanel.setGame(joinController.getGame());
+//		this.joinGameController = joinController;
+//	}
 	
 	/**
 	 * Go to main menu.
