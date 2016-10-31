@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import client.controller.CreateGameController;
-import client.controller.ReturnMenuPanelController;
+import client.controller.ReturnToMenuController;
 import client.model.Model;
 
 public class CreateGamePanel extends JPanel{
@@ -131,9 +131,11 @@ public class CreateGamePanel extends JPanel{
 		btnCancelButton.setFont(new Font("Tahoma", Font.PLAIN, height/36));
 		btnCancelButton.setBounds(17*width/80, 19*height/45, 3*width/32, height/20);
 		add(btnCancelButton);
-		ReturnMenuPanelController returnMenuController 
-			= new ReturnMenuPanelController(model, application);
-		btnCancelButton.addMouseListener(returnMenuController);
+		btnCancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ReturnToMenuController(model, application).process();
+			}
+		});
 	}
 
 	public JTextField getTextFieldNN() {
