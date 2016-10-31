@@ -8,9 +8,9 @@ import client.view.BoardPanel;
 
 /**
  * The board controller is used to record the mouse motion on the board.
- * 
- * @author Team Pisces
  *
+ * @author Team Pisces
+ * @since 2016-10-03
  */
 public class BoardController extends MouseAdapter implements MouseMotionListener{
 	Model model;

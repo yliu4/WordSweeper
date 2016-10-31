@@ -1,9 +1,15 @@
 package client.controller;
 
-
 import xml.Message;
 import client.model.Model;
 import client.view.Application;
+
+/**
+ * The create game controller is used to send create game request to server.
+ * 
+ * @author Team Pisces
+ * @since 2016-10-30
+ */
 
 public class CreateGameController {
 	Application app;
@@ -18,11 +24,9 @@ public class CreateGameController {
 	public void process(String player, String password) {
 		// send the request to create the game.
 		String createGameRequest = "<createGameRequest name='" + player + "'" + (password.isEmpty()? "":(" password='" + password + "'")) + "/></request>";
-		System.out.println(createGameRequest);
 		String xmlString = Message.requestHeader() + createGameRequest;
 		Message m = new Message (xmlString);
 
-		// Request the lock (this might not succeed).
 		app.getServerAccess().sendRequest(m);
 	}
 }

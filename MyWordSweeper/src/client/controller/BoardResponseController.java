@@ -9,9 +9,13 @@ import client.model.Model;
 import client.view.Application;
 
 /**
- * Tells the client whether the model is locked or not BY SOME OTHER CLIENT. This will never be returned to a client
- * to tell him that HE has the model locked (that is job of LockResponse).
+ * The board response controller is used to process board response from server.
+ * And it will draw a new board if it's for create game request, otherwise update the board.
+ * 
+ * @author Team Pisces
+ * @since 2016-10-30
  */
+
 public class BoardResponseController extends ControllerChain{
 
 	public Application app;
@@ -28,7 +32,6 @@ public class BoardResponseController extends ControllerChain{
 			return next.process(response);
 		}
 
-		// this refers to the outer node of the Message DOM (in this case, updateResponse).
 		Node boardResponse = response.contents.getFirstChild();
 		NamedNodeMap map = boardResponse.getAttributes();
 		
