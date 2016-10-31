@@ -6,8 +6,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 import client.ServerAccess;
+import client.controller.OpenJoinGamePanelController;
 import client.controller.JoinGameController;
-import client.controller.JoinPrivateGameController;
 import client.controller.PracticeGameController;
 import client.model.Model;
 
@@ -28,11 +28,9 @@ public class Application extends JFrame {
 	MenuPanel menuPanel;
 	PracticeGamePanel practiceGamePanel;
 	CreateGamePanel createGamePanel;
-
 	JoinGamePanel joinGamePanel;
-	//PasswordPopupPanel passwordPopupPanel;
-	JoinPrivateGameController joinPrivateGameController;
-	JoinGameController joinGameController;
+	JoinGameController joinPrivateGameController;
+	OpenJoinGamePanelController joinGameController;
 
 	PracticeGameController practiceGameController;
 	ServerAccess serverAccess;
@@ -55,7 +53,6 @@ public class Application extends JFrame {
 
 		menuPanel = new MenuPanel(model, this);
 		joinGamePanel = new JoinGamePanel(model, this);
-		//  passwordPopupPanel = new PasswordPopupPanel(model, this);
 		practiceGamePanel = new PracticeGamePanel(model, this);
 		
 		add(menuPanel);
@@ -82,6 +79,11 @@ public class Application extends JFrame {
 	public CreateGamePanel getCreateGamePanel() {
 		return createGamePanel;
 	}
+	
+	public JoinGamePanel getJoinGamePanel()
+	{
+		return joinGamePanel;
+	}
 
 	/**
 	 * Go to practice game panel
@@ -95,26 +97,14 @@ public class Application extends JFrame {
 	
 	
 	/**
-	 *  Go to Join public Game register panel
+	 *  Go to Join game panel
 	 */
-	public void gotoJoinGameRegisterPanel(){
+	public void gotoJoinGamePanel(){
 		menuPanel.setVisible(false);
 		remove(menuPanel);
 		joinGamePanel.setVisible(true);
 		add(joinGamePanel);
 	}
-
-//	public void passwordPopupPanel()
-//	{
-//		remove(joinGamePanel);
-//		passwordPopupPanel.setVisible(true);
-//		add(passwordPopupPanel);	
-//	}
-//	public void setJoinGameController(JoinGameController joinController)
-//	{
-//		this.joinGamePanel.setGame(joinController.getGame());
-//		this.joinGameController = joinController;
-//	}
 	
 	/**
 	 * Go to main menu.
@@ -129,6 +119,11 @@ public class Application extends JFrame {
 			createGamePanel.setVisible(false);
 			remove(createGamePanel);
 		}
+		if (joinGamePanel != null){
+			joinGamePanel.setVisible(false);
+			remove(joinGamePanel);
+		}
+		
 //		System.out.println(this.getComponentCount());
 //		System.out.println();
 		menuPanel.setVisible(true);

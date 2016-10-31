@@ -17,12 +17,17 @@ import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 
+import client.controller.OpenJoinGamePanelController;
 import client.controller.JoinGameController;
-import client.controller.JoinPrivateGameController;
 import client.controller.PracticeGameController;
+import client.controller.ReturnToMenuController;
 import client.model.Game;
 import client.model.Model;
 
+/*
+* The <code>CreateGamePanel</code> class represents the view that enables 
+* the player to enter his/her nickname and gmeID to join a game 
+*/
 
 public class JoinGamePanel extends JPanel {
 	 //Game game;
@@ -45,6 +50,22 @@ public class JoinGamePanel extends JPanel {
 		);
 		setLayout(groupLayout);
 		 //this.repaint();
+		
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = d.height;
+		int width = d.width;
+		
+		
+		nameTextField = new JTextField();
+		nameTextField.setFont(new Font("Times New Roman", Font.PLAIN, height/60));
+		nameTextField.setBounds(83*height/360, 3*width/40, 7*height/30, 7*width/180);
+		add(nameTextField);
+		
+		gameIDTextField = new JTextField();
+		gameIDTextField.setToolTipText("Enter a gameID to join a specfic game, or leave it empty to randomly join a public game.");
+		gameIDTextField.setFont(new Font("Times New Roman", Font.PLAIN, height/60));
+		gameIDTextField.setBounds(83*height/360, 11*width/80, 7*height/30, 7*width/180);
+		add(gameIDTextField);
 	}
 
 	@Override
@@ -70,51 +91,44 @@ public class JoinGamePanel extends JPanel {
 		lblNickname.setBounds(20*height/360, 3*width/40, 7*height/30, 7*width/160);
 		add(lblNickname);
 
-//		final JTextField nameTextField = new JTextField(30);
-//		nameTextField.setFont(new Font("Times New Roman", Font.PLAIN, height/60));
-//		nameTextField.setBounds(83*height/360, 3*width/40, 7*height/30, 7*width/180);
-//		add(nameTextField);
-		
-		nameTextField = new JTextField();
-		nameTextField.setFont(new Font("Times New Roman", Font.PLAIN, height/60));
-		nameTextField.setBounds(83*height/360, 3*width/40, 7*height/30, 7*width/180);
-		add(nameTextField);
-		nameTextField.setColumns(10);
-	
 		JLabel lbGameID = new JLabel("GameID:");
 		lbGameID.setHorizontalAlignment(SwingConstants.CENTER);
 		lbGameID.setFont(new Font("Tahoma", Font.PLAIN, height/50));
 		lbGameID.setBounds(20*height/360, 11*width/80, 7*height/30, 7*width/180);
-		add(lbGameID);
+		add(lbGameID);		
 		
-		gameIDTextField = new JTextField();
-		gameIDTextField.setToolTipText("Enter a gameID to join a specfic game, or leave it empty to randomly join a public game.");
-		gameIDTextField.setFont(new Font("Times New Roman", Font.PLAIN, height/60));
-		gameIDTextField.setBounds(83*height/360, 11*width/80, 7*height/30, 7*width/180);
-		add(gameIDTextField);
-		gameIDTextField.setColumns(10);
-		
-		
-		JButton btnNewButton = new JButton("GO");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, height/60));
-		btnNewButton.setBounds(40*height/360, 8*width/35, 7*height/70, 7*width/250);
-		add(btnNewButton);
-		JoinPrivateGameController go = new JoinPrivateGameController(model, application);
-		btnNewButton.addMouseListener(go);
+		JButton btnGoButton = new JButton("GO!");
+		btnGoButton.setFont(new Font("Tahoma", Font.BOLD, height/60));
+		btnGoButton.setBounds(40*height/360, 8*width/35, 7*height/70, 7*width/250);
+		add(btnGoButton);
+		btnGoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new JoinGameController(model, application).process();
+			}
+		});
 		
 		JButton cancelButton = new JButton("Cancel");
-		cancelButton.setFont(new Font("Tahoma", Font.BOLD, height/50));
+		cancelButton.setFont(new Font("Tahoma", Font.PLAIN, height/50));
 		cancelButton.setBounds(130*height/360, 8*width/35, 7*height/70, 7*width/250);
 		add(cancelButton);
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ReturnToMenuController(model, application).process();
+			}
+		});
 	}
 
 	private void setDefaultCloseOperation(int exitOnClose) {
 		// TODO Auto-generated method stub
 		
 	}
-
-//	public void setGame(Game game) {
-//		// TODO Auto-generated method stub
-//		this.game = game;
-//	}
+	// get the name of player
+	public JTextField getNameTextField() {
+		return nameTextField;
+	}
+	//get the the input gameID from player
+	public JTextField getGameIDTextField()
+	{
+		return gameIDTextField;
+	}
 }

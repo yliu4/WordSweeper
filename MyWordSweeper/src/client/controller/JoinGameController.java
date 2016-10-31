@@ -1,12 +1,7 @@
 package client.controller;
 
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Random;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,43 +9,71 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
 import xml.Message;
-import client.model.Cell;
-import client.model.Game;
-import client.model.Letter;
-import client.model.Location;
 import client.model.Model;
 import client.view.Application;
+import client.view.JoinGamePanel;
 
-public class JoinGameController extends MouseAdapter {
-	Game game;
-	Application app;
+
+/**
+ * This class handle the communication between the sever and client
+ * The client need to check the response message from sever to justify if the 
+ * the game is lock, private or public game
+ * @author Tean Pisces
+ *
+ */
+public class JoinGameController {
+	
 	Model model;
+	Application application;
+	
+	JPanel popOutPanel;
+	JPasswordField password;
 
-	public JoinGameController(Application app, Model model) {
-		this.app = app;
-		this.model = model;
+	public JoinGameController(Model m, Application app) {
+		this.model = m;
+		this.application = app;
+		
+		this.popOutPanel = new JPanel();
+		JLabel label = new JLabel("Please enter a password to join the game:");
+		this.password = new JPasswordField(10);
+		popOutPanel.add(label);
+		popOutPanel.add(this.password);
 	}
 
-	/** Make the request on the server and wait for response. */
-	public void process() {
-		// send the request to create the game.
-		String xmlString = Message.requestHeader() + "<joinGameRequest gameId='somePlace' name='nextOne'/></request>";
+	public void process() {		
+		// send the request to join the game.
+		
+		String gameID = application.getJoinGamePanel().getGameIDTextField().getText();
+		System.out.println("### Game ID" + gameID);
+		
+		String xmlString = Message.requestHeader() + 
+				"<joinGameRequest gameId='' name='nextOne'/></request>";
+		
+		
+		// <request asdfasdf>
+		// <joinGameRequest gameId='' name='nextOne'/>
+		//   <level>
+		// 
+		// </request>
+		
 		Message m = new Message (xmlString);
 
-		// Request the lock (this might not succeed).
-//		app.getRequestArea().append(m.toString());
-//		app.getRequestArea().append("\n");
-		app.getServerAccess().sendRequest(m);
-	}
+		application.getServerAccess().sendRequest(m);
+
+		// TODO: receive response from server
+		// parse message, if == SUCCESS: go to game panel
+		// if == FAIL, display "locked" pop up dialog
+		// if == PRIVATE, pop up password dialog
+		
+		String[] options = new String[]{"OK", "Cancel"};
 	
-
-	public void mouseClicked(MouseEvent me) {
-		//app.setJoinGameController(this);
-		app.gotoJoinGameRegisterPanel();
-	}
-
-	public Game getGame()
-	{
-		return this.game;
+		int option = JOptionPane.showOptionDialog(null, this.popOutPanel, "WordSweeper",
+	                     JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+	                     null, options, options[1]);
+		if(option == 0) // pressing OK button
+		{
+		    char[] pass = this.password.getPassword();
+		    System.out.println("Your password is: " + new String(pass));
+		}
 	}
 }
