@@ -1,7 +1,8 @@
 package client.view;
 
 import java.awt.*;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 
 import javax.swing.*;
@@ -57,18 +58,21 @@ public class PracticeGamePanel extends JPanel{
 		btnReturnButton.setFont(new Font("Tahoma", Font.PLAIN, height/50));
 		btnReturnButton.setBounds(height/180, width/320, height/9, width/64);
 		add(btnReturnButton);
-		
-		ReturnMenuPanelController returnMenuController 
-			= new ReturnMenuPanelController(model, application);
-		btnReturnButton.addMouseListener(returnMenuController);
+		btnReturnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ReturnToMenuController(model, application).process();
+			}
+		});
 
 		JButton btnResetGame = new JButton("Reset Game");
 		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, height/50));
 		btnResetGame.setBounds(23*height/45, 17*width/640, 3*height/20, width/64);
 		add(btnResetGame);
-		ResetGameInPracticeController resetGameController 
-			= new ResetGameInPracticeController(model, application);
-        btnResetGame.addMouseListener(resetGameController);
+		btnResetGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ResetPracticeGameController(model, application).process();
+			}
+		});
         
 		JLabel lblRoomm = new JLabel("Practice");
 		lblRoomm.setFont(new Font("Arial", Font.BOLD, height/30));

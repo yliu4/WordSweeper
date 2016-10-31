@@ -2,6 +2,8 @@ package client.model;
 
 import java.util.*;
 
+import util.WordTable;
+
 /**
  * The <code>Game</code> contains a <code>Board</code> and a list of 
  * 
@@ -18,11 +20,11 @@ public class Game {
 	Player managingPlayer = null;
 	Player currentPlayer = null;
 	String gameId = null;
-	
-	public Game(){
-		
+
+	public Game() {
+
 	}
-	
+
 	public Game(Player player) {
 		this.currentPlayer = player;
 	}
@@ -39,56 +41,66 @@ public class Game {
 		boolean hasMulti = false;
 		int length = 0;
 		int m = 1;
-		HashMap<Location, Integer> overlapcheck = overlapCheck();
-		ArrayList<Cell> cells = word.getCells(); 
+		HashMap<Integer, Integer> overlapcheck = overlapCheck();
+		ArrayList<Cell> cells = word.getCells();
 		Iterator<Cell> i = cells.iterator();
-		while (i.hasNext()){
-			Cell c = (Cell)i.next();
-			if (c.getLetter().isMultiplier()){
+		if (!WordTable.isWord(word.word)) {
+			return 0;
+		}
+		while (i.hasNext()) {
+			Cell c = (Cell) i.next();
+			if (c.getLetter().isMultiplier()) {
 				hasMulti = true;
 			}
-			if (c.getLetter().equals("Qu")){
+			if (c.getLetter().getCharacter().equals("Qu")) {
 				length++;
 			}
 			length++;
-			m = overlapcheck.get(c.getLocation());
-			score += c.getLetter().getPoint()*Math.pow(2, m);
+			m = 1;
+			if (overlapcheck.containsKey(c.getLocation().getColumn() * 4
+					+ c.getLocation().getRow())) {
+				m = overlapcheck.get(c.getLocation().getColumn() * 4
+						+ c.getLocation().getRow());
+			}
+			score += c.getLetter().getPoint() * Math.pow(2, m);
 		}
-		score = Math.pow(2, length)*10*score;
-		if (hasMulti){
-			score *=10;
+		score = Math.pow(2, length) * 10 * score;
+		if (hasMulti) {
+			score *= 10;
 		}
-		total = (long)score;
+		total = (long) score;
 		return total;
 	}
 	
 	/**
 	 * 
-	 * @return A <code>HashMap&lt;Location, Integer&gt;</code> where the key is
-	 * the <code>Location</code> of a <code>Cell</code> on the <code>Board</code>, 
-	 * and the value is the number of overlapped <code>Player</code>s on that <code>Cell</code>.
+	 * @return A <code>HashMap&lt;Integer, Integer&gt;</code> where the key is
+	 * the <code>Integer</code> representing the location of a <code>Cell</code> on 
+	 * the <code>Board</code>, and the value is the number of overlapped 
+	 * <code>Player</code>s on that <code>Cell</code>.
 	 */
-	private HashMap<Location, Integer> overlapCheck(){
-		HashMap<Location, Integer> positioncheck = new HashMap<Location, Integer>();
+	public HashMap<Integer, Integer> overlapCheck() {
+		HashMap<Integer, Integer> positioncheck = new HashMap<Integer, Integer>();
 		Iterator<Player> i = players.iterator();
 		int startx = this.currentPlayer.getOriginPosition().getColumn();
 		int starty = this.currentPlayer.getOriginPosition().getRow();
-		for (int x=0;x<4;x++){
-			for (int y =0;y<4;y++){
-				Location l = new Location(startx+x, starty+y);
-					positioncheck.put(l, 1);
-				}
+		for (int x = 0; x < 4; x++) {
+			for (int y = 0; y < 4; y++) {
+				positioncheck.put((startx + x) * 4 + (starty + y), 1);
 			}
-		while(i.hasNext()){
+		}
+		while (i.hasNext()) {
 			Player temp = (Player) i.next();
 			startx = temp.getOriginPosition().getColumn();
 			starty = temp.getOriginPosition().getRow();
-			for (int x=0;x<4;x++){
-				for (int y =0;y<4;y++){
-					Location l = new Location(startx+x, starty+y);
-					if (positioncheck.containsKey(l)){
-						int count = positioncheck.get(l)+1;
-						positioncheck.put(l, count);
+			for (int x = 0; x < 4; x++) {
+				for (int y = 0; y < 4; y++) {
+					if (positioncheck.containsKey((startx + x) * 4
+							+ (starty + y))) {
+						int count = positioncheck.get((startx + x) * 4
+								+ (starty + y)) + 1;
+						positioncheck.put((startx + x) * 4 + (starty + y),
+								count);
 					}
 				}
 			}
@@ -96,8 +108,6 @@ public class Game {
 		return positioncheck;
 	}
 
-	
-	
 	public Player getManagingPlayer() {
 		return managingPlayer;
 	}
@@ -120,9 +130,10 @@ public class Game {
 	 */
 	public void setBoard(ArrayList<Cell> cells, Location bonus) {
 		this.board = new Board(cells);
-		if (bonus.column >= 0 && bonus.column <= 3
-				&& bonus.row <= 3 && bonus.row >= 0) {
-			this.board.getCells().get(bonus.row*4+bonus.column).getLetter().setMultiplier();
+		if (bonus.column >= 0 && bonus.column <= 3 && bonus.row <= 3
+				&& bonus.row >= 0) {
+			this.board.getCells().get(bonus.row * 4 + bonus.column).getLetter()
+					.setMultiplier();
 		}
 	}
 

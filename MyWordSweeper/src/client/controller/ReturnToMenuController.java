@@ -14,17 +14,16 @@ import client.view.Application;
  * @author Team Pisces
  *
  */
-public class ReturnMenuPanelController extends MouseAdapter {
+public class ReturnToMenuController {
 	Model model;
 	Application application;
 
-	public ReturnMenuPanelController(Model m, Application app) {
+	public ReturnToMenuController(Model m, Application app) {
 		this.model = m;
 		this.application = app;
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent me) {
+	public void process() {
 		application.gotoMainMenu();
 	}
 

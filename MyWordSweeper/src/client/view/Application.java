@@ -70,6 +70,10 @@ public class Application extends JFrame {
 		return practiceGamePanel;
 	}
 	
+	public CreateGamePanel getCreateGamePanel() {
+		return createGamePanel;
+	}
+
 	/**
 	 * Go to practice game panel
 	 */
@@ -84,7 +88,7 @@ public class Application extends JFrame {
 	 * Go to main menu.
 	 */
 	public void gotoMainMenu() {
-		System.out.println(this.getComponentCount());
+//		System.out.println(this.getComponentCount());
 		if (practiceGamePanel != null) {
 			practiceGamePanel.setVisible(false);
 			remove(practiceGamePanel);
@@ -93,8 +97,8 @@ public class Application extends JFrame {
 			createGamePanel.setVisible(false);
 			remove(createGamePanel);
 		}
-		System.out.println(this.getComponentCount());
-		System.out.println();
+//		System.out.println(this.getComponentCount());
+//		System.out.println();
 		menuPanel.setVisible(true);
 		add(menuPanel);
 	}
