@@ -9,9 +9,13 @@ import client.model.Model;
 import client.view.Application;
 
 /**
- * Tells the client whether the model is locked or not BY SOME OTHER CLIENT. This will never be returned to a client
- * to tell him that HE has the model locked (that is job of LockResponse).
+ * The board response controller is used to process board response from server.
+ * And it will draw a new board if it's for create game request, otherwise update the board.
+ * 
+ * @author Team Pisces
+ * @since 2016-10-30
  */
+
 public class BoardResponseController extends ControllerChain{
 
 	public Application app;
@@ -27,26 +31,29 @@ public class BoardResponseController extends ControllerChain{
 		if (!type.equals ("boardResponse")) {
 			return next.process(response);
 		}
-		
-		// this refers to the outer node of the Message DOM (in this case, updateResponse).
+
 		Node boardResponse = response.contents.getFirstChild();
 		NamedNodeMap map = boardResponse.getAttributes();
 		
+		// get global game board information
 		String gameId = map.getNamedItem("gameId").getNodeValue();
-//		app.getResponseArea().append("Board Message received for game:" + gameId + "\n");
-//		app.getResponseArea().append("Players:\n");
+		String contents = map.getNamedItem("contents").getNodeValue();
+		String managingUser = map.getNamedItem("managingUser").getNodeValue();
+		String bonus = map.getNamedItem("managingUser").getNodeValue();
+		
+		// get game board information for the managing user
 		NodeList list = boardResponse.getChildNodes();
 		for (int i = 0; i < list.getLength(); i++) {
 			Node n = list.item(i);
 			String pname = n.getAttributes().getNamedItem("name").getNodeValue();
-//			app.getResponseArea().append("  " + pname  + "\n");
+			String pboard = n.getAttributes().getNamedItem("board").getNodeValue();
+			String pposition = n.getAttributes().getNamedItem("position").getNodeValue();
+			String pscore = n.getAttributes().getNamedItem("score").getNodeValue();
 		}
-		
-		
 
 		// at this point, you would normally start processing this...
-//		app.getResponseArea().append(response.toString());
-//		app.getResponseArea().append("\n");
+		// TBD
+		
 		return true;
 	}
 
