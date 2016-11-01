@@ -30,7 +30,7 @@ import client.model.Model;
 */
 
 public class JoinGamePanel extends JPanel {
-	 //Game game;
+	Game game;
 	Model model;
 	Application application;
 	private JTextField nameTextField;
@@ -66,6 +66,10 @@ public class JoinGamePanel extends JPanel {
 		gameIDTextField.setFont(new Font("Times New Roman", Font.PLAIN, height/60));
 		gameIDTextField.setBounds(83*height/360, 11*width/80, 7*height/30, 7*width/180);
 		add(gameIDTextField);
+	}
+	
+	public void setGame(Game game) {
+		this.game = game;
 	}
 
 	@Override
@@ -106,7 +110,7 @@ public class JoinGamePanel extends JPanel {
 				new JoinGameController(model, application).process();
 			}
 		});
-		
+						
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.setFont(new Font("Tahoma", Font.PLAIN, height/50));
 		cancelButton.setBounds(130*height/360, 8*width/35, 7*height/70, 7*width/250);
@@ -118,6 +122,8 @@ public class JoinGamePanel extends JPanel {
 		});
 	}
 
+	
+	
 	private void setDefaultCloseOperation(int exitOnClose) {
 		// TODO Auto-generated method stub
 		
