@@ -20,7 +20,7 @@ public class ChoosePublicController {
 	}
 	
 	public void process() {
-		app.getCreateGamePanel().getTextFieldPW().setEditable(false);
-		app.getCreateGamePanel().getTextFieldPW().setText("");
+		app.getCreateGamePanel().getTextFieldPassword().setEditable(false);
+		app.getCreateGamePanel().getTextFieldPassword().setText("");
 	}
 }

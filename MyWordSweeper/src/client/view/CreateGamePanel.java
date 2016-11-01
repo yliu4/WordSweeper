@@ -18,6 +18,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import client.controller.ChoosePrivateController;
+import client.controller.ChoosePublicController;
 import client.controller.CreateGameController;
 import client.controller.ReturnToMenuController;
 import client.model.Model;
@@ -32,11 +34,11 @@ import client.model.Model;
  */
 public class CreateGamePanel extends JPanel{
 	Model model;
-	Application application;
+	Application app;
 	/**	<code>JTextField</code> for the nickname */
-	JTextField textFieldNN;
+	JTextField textFieldNickname;
 	/**	<code>JPasswordField</code> for the password */
-	JPasswordField textFieldPW;
+	JPasswordField textFieldPassword;
 	ButtonGroup modeBtnGroup;
 	/**	<code>JRadioButton</code> indicating it's a public game */
 	JRadioButton rdbtnPublic;
@@ -45,7 +47,7 @@ public class CreateGamePanel extends JPanel{
 	
 	public CreateGamePanel (Model model, Application application) {
 		this.model = model;
-		this.application = application;
+		this.app = application;
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -61,24 +63,23 @@ public class CreateGamePanel extends JPanel{
 		int height = d.height;
 		int width = d.width;
 		
-		textFieldNN = new JTextField();
-		textFieldNN.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
-		textFieldNN.setBounds(21*width/160, 3*height/20, 3*width/16, height/20);
-		add(textFieldNN);
+		textFieldNickname = new JTextField();
+		textFieldNickname.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
+		textFieldNickname.setBounds(21*width/160, 3*height/20, 3*width/16, height/20);
+		add(textFieldNickname);
 		
-		textFieldPW = new JPasswordField();
-		textFieldPW.setEditable(false);
-		textFieldPW.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
-		textFieldPW.setBounds(21*width/160, 11*height/36, 3*width/16, height/20);
-		add(textFieldPW);
+		textFieldPassword = new JPasswordField();
+		textFieldPassword.setEditable(false);
+		textFieldPassword.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
+		textFieldPassword.setBounds(21*width/160, 11*height/36, 3*width/16, height/20);
+		add(textFieldPassword);
 		
 		rdbtnPublic = new JRadioButton("Public", true);
 		rdbtnPublic.setFont(new Font("Tahoma", Font.PLAIN, height/45));
 		rdbtnPublic.setBounds(21*width/160, 41*height/180, 5*width/64, height/45);
 		rdbtnPublic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textFieldPW.setEditable(false);
-				textFieldPW.setText("");
+				new ChoosePublicController(app).process();
 			}
 		});
 		
@@ -87,7 +88,7 @@ public class CreateGamePanel extends JPanel{
 		rdbtnPrivate.setBounds(21*width/160, 47*height/180, 5*width/64, height/45);
 		rdbtnPrivate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textFieldPW.setEditable(true);
+				new ChoosePrivateController(app).process();
 			}
 		});
 		
@@ -131,31 +132,31 @@ public class CreateGamePanel extends JPanel{
 		
 		JButton btnNewButton = new JButton("GO!");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, height/36));
-		btnNewButton.setBounds(3*width/32, 19*height/45, 3*width/32, height/20);
+		btnNewButton.setBounds(5*width/64, 19*height/45, 3*width/32, height/20);
 		add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CreateGameController(model, application).process();
+				new CreateGameController(model, app).process();
 			}
 		});
 		
-		JButton btnCancelButton = new JButton("Cancel");
-		btnCancelButton.setFont(new Font("Tahoma", Font.PLAIN, height/36));
-		btnCancelButton.setBounds(17*width/80, 19*height/45, 3*width/32, height/20);
-		add(btnCancelButton);
-		btnCancelButton.addActionListener(new ActionListener() {
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, height/36));
+		btnCancel.setBounds(17*width/80, 19*height/45, 3*width/32, height/20);
+		add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ReturnToMenuController(model, application).process();
+				new ReturnToMenuController(model, app).process();
 			}
 		});
 	}
 
-	public JTextField getTextFieldNN() {
-		return textFieldNN;
+	public JTextField getTextFieldNickname() {
+		return textFieldNickname;
 	}
 
-	public JPasswordField getTextFieldPW() {
-		return textFieldPW;
+	public JPasswordField getTextFieldPassword() {
+		return textFieldPassword;
 	}
 
 	public JRadioButton getRdbtnPrivate() {

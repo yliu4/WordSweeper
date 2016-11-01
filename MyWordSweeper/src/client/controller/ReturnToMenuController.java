@@ -16,18 +16,18 @@ import client.view.Application;
  */
 public class ReturnToMenuController {
 	Model model;
-	Application application;
+	Application app;
 
 	public ReturnToMenuController(Model m, Application app) {
 		this.model = m;
-		this.application = app;
+		this.app = app;
 	}
 
 	public void process() {
 		//clear the text field when go back to main menu
-		application.getJoinGamePanel().getNameTextField().setText(" ");
-		application.getJoinGamePanel().getGameIDTextField().setText(" ");
-		application.gotoMainMenu();
+		app.getJoinGamePanel().getNameTextField().setText("");
+		app.getJoinGamePanel().getGameIDTextField().setText("");
+		app.gotoMainMenu();
 	}
 
 }

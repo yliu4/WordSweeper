@@ -1,6 +1,5 @@
 package client.controller;
 
-import client.model.Model;
 import client.view.Application;
 
 /**
@@ -10,7 +9,6 @@ import client.view.Application;
  *
  */
 public class ChoosePrivateController {
-
 	Application app;
 
 	public ChoosePrivateController(Application app) {
@@ -18,6 +16,6 @@ public class ChoosePrivateController {
 	}
 	
 	public void process() {
-		app.getCreateGamePanel().getTextFieldPW().setEditable(true);
+		app.getCreateGamePanel().getTextFieldPassword().setEditable(true);
 	}
 }

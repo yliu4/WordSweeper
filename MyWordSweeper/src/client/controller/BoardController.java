@@ -1,8 +1,6 @@
 package client.controller;
 
-import java.awt.*;
 import java.awt.event.*;
-
 import client.model.Model;
 import client.view.BoardPanel;
 

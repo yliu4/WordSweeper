@@ -21,29 +21,31 @@ import client.view.JoinGamePanel;
 
 
 /**
- * This class handle the communication between the sever and client
- * The client need to check the response message from sever to justify if the 
- * the game is lock, private or public game
- * @author Tean Pisces
+ * This class handle the communication between the sever and client. The client 
+ * 
+ * need to check the response message from sever to justify if the the game is 
+ * 
+ * lock, private or public game
+ * 
+ * @author Team Pisces
  *
  */
 public class JoinGameController {
 	Game game;
 	Model model;
-	Application application;
+	Application app;
 	
-	JPanel popOutPanel;
+	JPanel popupPanel;
 	JPasswordField password;
 	
 
-	public JoinGameController(Model m, Application app) {
-		this.model = m;
-		this.application = app;
+	public JoinGameController(Model model, Application app) {
+		this.model = model;
+		this.app = app;
 	}
 
-	public void process() {		
-		// send the request to join the game.
-		
+	/** Send the request to join a game */
+	public void process() {
 		//generate random number(hardcode)
 		// TODO: receive response from server
 		// parse message, if == SUCCESS: go to game panel
@@ -58,8 +60,8 @@ public class JoinGameController {
 		{
 			this.game = new Game();
 			generateNewBoard();
-			application.setJoinGameController(this);
-			application.joinNormalGamePanel();
+			app.setJoinGameController(this);
+			app.joinNormalGamePanel();
 		}
 		else if (randomNum == 1) //Popup for the lock game
 		{
@@ -69,14 +71,14 @@ public class JoinGameController {
 		}
 		else //password Popup
 		{
-			this.popOutPanel = new JPanel();
+			this.popupPanel = new JPanel();
 			JLabel label = new JLabel("Please enter a password to join the game:");
 			this.password = new JPasswordField(10);
-			popOutPanel.add(label);
-			popOutPanel.add(this.password);
+			popupPanel.add(label);
+			popupPanel.add(this.password);
 			String[] options = new String[]{"OK", "Cancel"};
 		
-			int option = JOptionPane.showOptionDialog(null, this.popOutPanel, "WordSweeper",
+			int option = JOptionPane.showOptionDialog(null, this.popupPanel, "WordSweeper",
 		                     JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
 		                     null, options, options[1]);
 			if(option == 0) // pressing OK button
@@ -86,13 +88,13 @@ public class JoinGameController {
 			}
 		}
 
-		String gameID = application.getJoinGamePanel().getGameIDTextField().getText();
+		String gameID = app.getJoinGamePanel().getGameIDTextField().getText();
 		System.out.println("### Game ID" + gameID);
 		
 		String xmlString = Message.requestHeader() + 
 				"<joinGameRequest gameId='' name='nextOne'/></request>";
 		Message m = new Message (xmlString);
-		application.getServerAccess().sendRequest(m);
+		app.getServerAccess().sendRequest(m);
 		
 	}
 	

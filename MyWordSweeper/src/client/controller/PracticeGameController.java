@@ -20,19 +20,19 @@ import client.view.Application;
  */
 public class PracticeGameController {
 	Model model;
-	Application application;
+	Application app;
 	Game game;
 
 	public PracticeGameController(Model m, Application app) {
 		this.model = m;
-		this.application = app;
+		this.app = app;
 	}
 
 	public void process() {
 		this.game = new Game();
 		generateNewBoard();
-		application.setPracticeGameController(this);
-		application.gotoPraticeGamePanel();
+		app.setPracticeGameController(this);
+		app.gotoPraticeGamePanel();
 	}
 	
 	/**

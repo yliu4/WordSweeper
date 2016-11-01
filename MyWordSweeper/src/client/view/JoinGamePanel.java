@@ -32,13 +32,14 @@ import client.model.Model;
 public class JoinGamePanel extends JPanel {
 	Game game;
 	Model model;
-	Application application;
-	private JTextField nameTextField;
-	private JTextField gameIDTextField;
+	Application app;
+	JTextField textFieldNickname;
+	JTextField textFieldGameID;
 
 	public JoinGamePanel(Model model, Application application) {
 		this.model = model;
-		this.application = application;
+		this.app = application;
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -49,23 +50,22 @@ public class JoinGamePanel extends JPanel {
 				.addGap(0, 300, Short.MAX_VALUE)
 		);
 		setLayout(groupLayout);
-		 //this.repaint();
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		int width = d.width;
+
+		textFieldNickname = new JTextField();
+		textFieldNickname.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
+		textFieldNickname.setBounds(21*width/160, 3*height/20, 3*width/16, height/20);
+		add(textFieldNickname);
 		
-		
-		nameTextField = new JTextField();
-		nameTextField.setFont(new Font("Times New Roman", Font.PLAIN, height/60));
-		nameTextField.setBounds(83*height/360, 3*width/40, 7*height/30, 7*width/180);
-		add(nameTextField);
-		
-		gameIDTextField = new JTextField();
-		gameIDTextField.setToolTipText("Enter a gameID to join a specfic game, or leave it empty to randomly join a public game.");
-		gameIDTextField.setFont(new Font("Times New Roman", Font.PLAIN, height/60));
-		gameIDTextField.setBounds(83*height/360, 11*width/80, 7*height/30, 7*width/180);
-		add(gameIDTextField);
+		textFieldGameID = new JTextField();
+		textFieldGameID.setToolTipText("Enter a gameID to join a specfic game, " +
+				"or leave it empty to randomly join a public game.");
+		textFieldGameID.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
+		textFieldGameID.setBounds(21*width/160, 11*height/36, 3*width/16, height/20);
+		add(textFieldGameID);
 	}
 	
 	public void setGame(Game game) {
@@ -80,44 +80,41 @@ public class JoinGamePanel extends JPanel {
 		int height = d.height;
 		int width = d.width;
 		
-		setName("WordSweeper");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1039, 817);
-		
 		JLabel lblJoinNewGame = new JLabel("Join Game");
-		lblJoinNewGame.setFont(new Font("Times New Roman", Font.BOLD, height/20));
-		lblJoinNewGame.setBounds(60*height/360, width/64, 29*height/90, 7*width/160);
+		lblJoinNewGame.setHorizontalAlignment(SwingConstants.CENTER);
+		lblJoinNewGame.setFont(new Font("Times New Roman", Font.BOLD, 7*height/180));
+		lblJoinNewGame.setBounds(3*width/32, height/36, 3*width/16, height/18);
 		add(lblJoinNewGame);
 		
 		JLabel lblNickname = new JLabel("Nickname:");
 		lblNickname.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNickname.setFont(new Font("Tahoma", Font.PLAIN, height/50));
-		lblNickname.setBounds(20*height/360, 3*width/40, 7*height/30, 7*width/160);
+		lblNickname.setFont(new Font("Tahoma", Font.PLAIN, height/36));
+		lblNickname.setBounds(3*width/80, 3*height/20, width/10, height/20);
 		add(lblNickname);
 
 		JLabel lbGameID = new JLabel("GameID:");
 		lbGameID.setHorizontalAlignment(SwingConstants.CENTER);
-		lbGameID.setFont(new Font("Tahoma", Font.PLAIN, height/50));
-		lbGameID.setBounds(20*height/360, 11*width/80, 7*height/30, 7*width/180);
-		add(lbGameID);		
+		lbGameID.setFont(new Font("Tahoma", Font.PLAIN, height/36));
+		lbGameID.setBounds(3*width/80, 11*height/36, width/10, height/20);
+		add(lbGameID);	
 		
-		JButton btnGoButton = new JButton("GO!");
-		btnGoButton.setFont(new Font("Tahoma", Font.BOLD, height/60));
-		btnGoButton.setBounds(40*height/360, 8*width/35, 7*height/70, 7*width/250);
-		add(btnGoButton);
-		btnGoButton.addActionListener(new ActionListener() {
+		JButton btnGo = new JButton("GO!");
+		btnGo.setFont(new Font("Tahoma", Font.BOLD, height/36));
+		btnGo.setBounds(5*width/64, 19*height/45, 3*width/32, height/20);
+		add(btnGo);
+		btnGo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new JoinGameController(model, application).process();
+				new JoinGameController(model, app).process();
 			}
 		});
-						
-		JButton cancelButton = new JButton("Cancel");
-		cancelButton.setFont(new Font("Tahoma", Font.PLAIN, height/50));
-		cancelButton.setBounds(130*height/360, 8*width/35, 7*height/70, 7*width/250);
-		add(cancelButton);
-		cancelButton.addActionListener(new ActionListener() {
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, height/36));
+		btnCancel.setBounds(17*width/80, 19*height/45, 3*width/32, height/20);
+		add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ReturnToMenuController(model, application).process();
+				new ReturnToMenuController(model, app).process();
 			}
 		});
 	}
@@ -130,11 +127,11 @@ public class JoinGamePanel extends JPanel {
 	}
 	// get the name of player
 	public JTextField getNameTextField() {
-		return nameTextField;
+		return textFieldNickname;
 	}
 	//get the the input gameID from player
 	public JTextField getGameIDTextField()
 	{
-		return gameIDTextField;
+		return textFieldGameID;
 	}
 }

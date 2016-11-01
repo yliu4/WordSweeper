@@ -5,7 +5,9 @@ import client.view.Application;
 import xml.Message;
 
 /**
- * The connection response controller is used to process connection response from server.
+ * The connection response controller is used to process connection response from 
+ * 
+ * server.
  *
  * @author Team Pisces
  * @since 2016-10-30

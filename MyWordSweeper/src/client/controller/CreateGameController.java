@@ -22,19 +22,19 @@ public class CreateGameController {
 
 	/** Send the request to create a game */
 	public void process() {
-		String nn = app.getCreateGamePanel().getTextFieldNN().getText();
-		char[] pw = app.getCreateGamePanel().getTextFieldPW().getPassword();
+		String nickname = app.getCreateGamePanel().getTextFieldNickname().getText();
+		char[] password = app.getCreateGamePanel().getTextFieldPassword().getPassword();
 		boolean isPrivate = app.getCreateGamePanel().getRdbtnPrivate().isSelected();
 		
-		if (nn.isEmpty()) {
+		if (nickname.isEmpty()) {
 			app.popupEmptyNicknameWarnig();
 		}
-		else if (isPrivate && pw.length == 0) {
+		else if (isPrivate && password.length == 0) {
 			app.popupEmptyPasswordWarnig();
 		}
 		else {
-			String createGameRequest = "<createGameRequest name='" + nn + "'" 
-		+ ((pw.length == 0)? "":(" password='" + new String(pw) + "'"))
+			String createGameRequest = "<createGameRequest name='" + nickname + "'" 
+		+ ((password.length == 0)? "":(" password='" + new String(password) + "'"))
 		+ "/></request>";
 			String xmlString = Message.requestHeader() + createGameRequest;
 			Message m = new Message (xmlString);

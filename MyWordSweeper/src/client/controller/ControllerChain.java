@@ -3,7 +3,9 @@ package client.controller;
 import xml.Message;
 
 /**
- * The controller chain is to chain all response controllers for processing server response
+ * The controller chain is to chain all response controllers for processing server 
+ * 
+ * response.
  * 
  * @author Team Pisces
  * @since 2016-10-30

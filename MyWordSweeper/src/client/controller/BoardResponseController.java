@@ -10,6 +10,7 @@ import client.view.Application;
 
 /**
  * The board response controller is used to process board response from server.
+ * 
  * And it will draw a new board if it's for create game request, otherwise update the board.
  * 
  * @author Team Pisces
