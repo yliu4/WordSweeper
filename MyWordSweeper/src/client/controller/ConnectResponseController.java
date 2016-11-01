@@ -12,7 +12,6 @@ import xml.Message;
  * @author Team Pisces
  * @since 2016-10-30
  */
-
 public class ConnectResponseController extends ControllerChain {
 	public Application app;
 	public Model model;
