@@ -68,7 +68,7 @@ public class PracticeGameController {
 		}
 		return cells;
 	}
-
+	
 	public Game getGame()
 	{
 		return this.game;

@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 import client.ServerAccess;
+import client.controller.OpenJoinGamePanelController;
+import client.controller.JoinGameController;
 import client.controller.PracticeGameController;
 import client.model.Model;
 
@@ -18,6 +20,18 @@ import client.model.Model;
  * @author Team Pisces
  *
  */
+/**
+ * @author mitian
+ *
+ */
+/**
+ * @author mitian
+ *
+ */
+/**
+ * @author mitian
+ *
+ */
 public class Application extends JFrame {
 
 	/** GUI application maintains reference to Model for ease of navigation. */
@@ -26,9 +40,12 @@ public class Application extends JFrame {
 	MenuPanel menuPanel;
 	PracticeGamePanel practiceGamePanel;
 	CreateGamePanel createGamePanel;
-	
-	PracticeGameController practiceGameController;
+	JoinGamePanel joinGamePanel;
+	JoinGameBoardPanel joinGameBoardPanel;
+	JoinGameController joinNormalGameController;
+	OpenJoinGamePanelController joinGameController;
 
+	PracticeGameController practiceGameController;
 	ServerAccess serverAccess;
 	
 	/**
@@ -46,11 +63,14 @@ public class Application extends JFrame {
 		int width = d.width;
 
 		setBounds(100, 100, 25*width/64, 5*height/9);
-		
+
 		menuPanel = new MenuPanel(model, this);
+		joinGamePanel = new JoinGamePanel(model, this);
+		joinGameBoardPanel = new JoinGameBoardPanel(model,this);
 		practiceGamePanel = new PracticeGamePanel(model, this);
+		
 		add(menuPanel);
-	}
+		}
 
 	/** Record the means to communicate with server. */
 	public void setServerAccess(ServerAccess access) {
@@ -73,6 +93,11 @@ public class Application extends JFrame {
 	public CreateGamePanel getCreateGamePanel() {
 		return createGamePanel;
 	}
+	
+	public JoinGamePanel getJoinGamePanel()
+	{
+		return joinGamePanel;
+	}
 
 	/**
 	 * Go to practice game panel
@@ -83,6 +108,26 @@ public class Application extends JFrame {
 		practiceGamePanel.setVisible(true);
 		add(practiceGamePanel);
 	}
+	
+	
+	/**
+	 *  Go to Join game register panel
+	 */
+	public void gotoJoinGamePanel(){
+		menuPanel.setVisible(false);
+		remove(menuPanel);
+		joinGamePanel.setVisible(true);
+		add(joinGamePanel);
+	}
+	
+	
+    public void joinNormalGamePanel()
+    {
+    	joinGamePanel.setVisible(false);
+		remove(joinGamePanel);
+		joinGameBoardPanel.setVisible(true);
+		add(joinGameBoardPanel);
+    }
 	
 	/**
 	 * Go to main menu.
@@ -97,6 +142,11 @@ public class Application extends JFrame {
 			createGamePanel.setVisible(false);
 			remove(createGamePanel);
 		}
+		if (joinGamePanel != null){
+			joinGamePanel.setVisible(false);
+			remove(joinGamePanel);
+		}
+		
 //		System.out.println(this.getComponentCount());
 //		System.out.println();
 		menuPanel.setVisible(true);
@@ -112,6 +162,12 @@ public class Application extends JFrame {
 		createGamePanel = new CreateGamePanel(model, this);
 		createGamePanel.setVisible(true);
 		add(createGamePanel);
+	}
+	
+	public void setJoinGameController(JoinGameController joinGameController)
+	{
+		this.joinGameBoardPanel.setGame(joinGameController.getGame());
+		this.joinNormalGameController = joinGameController;
 	}
 	
 	public void setPracticeGameController(PracticeGameController practiceController)
