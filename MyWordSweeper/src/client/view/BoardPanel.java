@@ -23,7 +23,7 @@ import java.util.HashSet;
 public class BoardPanel extends JPanel{
 	ArrayList<Cell> cells;
 	Model model;
-	HashSet<Integer> set = new HashSet<Integer>();
+	ArrayList<Integer> list = new ArrayList<Integer>();
 	int prev;
 	boolean stop = false;
 
@@ -127,17 +127,18 @@ public class BoardPanel extends JPanel{
 				if(x+dragWidth >= cellLoc.getCoordinateX()+5 && x+dragWidth <= cellLoc.getCoordinateX()+cellLoc.getWidth()-5 &&
 				   y+dragHeight >= cellLoc.getCoordinateY()+5 && y+dragHeight <= cellLoc.getCoordinateY()+cellLoc.getHeight()-5)
 					if(stop == false) {
-						if(!set.isEmpty() && prev != i && set.contains(i)) {
+						if(!list.isEmpty() && prev != i && list.contains(i)) {
 							stop = true;
 							break;
 						}
 						prev = i;
-						set.add(i);
+						if(!list.contains(i))
+							list.add(i);
 					}
 			} 
 			
 			// fill the dragged cells
-			for(Integer num : set) {
+			for(Integer num : list) {
 				Location cell = this.cells.get(num).getLocation();
 				g.setColor(Color.blue);
 				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
@@ -161,7 +162,7 @@ public class BoardPanel extends JPanel{
 			g.drawString(s14, 7*height/40, 93*width/640);
 			g.drawString(s15, 89*height/360, 93*width/640);
 		} else {
-			for(Integer num : set) {
+			for(Integer num : list) {
 				Location cell = this.cells.get(num).getLocation();
 				g.setColor(Color.blue);
 				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
@@ -184,7 +185,7 @@ public class BoardPanel extends JPanel{
 			g.drawString(s13, 37*height/360, 93*width/640);
 			g.drawString(s14, 7*height/40, 93*width/640);
 			g.drawString(s15, 89*height/360, 93*width/640);
-			set.clear();
+			list.clear();
 			stop = false;
 		}
 	}
