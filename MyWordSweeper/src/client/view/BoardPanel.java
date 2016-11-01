@@ -35,12 +35,16 @@ public class BoardPanel extends JPanel{
 		int height = d.height;
 		int width = d.width;
 		setBounds(height/36, 17*width/160, 13*height/45, 13*width/80);
-		currentWord = new StringBuilder();
+		currentWord = new StringBuilder("");
 		
 		
 		BoardController control = new BoardController(model, this);
 		this.addMouseListener(control);
 		this.addMouseMotionListener(control);
+	}
+	
+	public String getCurrentWord() {
+		return this.currentWord.toString();
 	}
 	
 	public void updateCells(ArrayList<Cell> cells) {

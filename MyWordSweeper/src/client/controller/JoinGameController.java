@@ -91,7 +91,7 @@ public class JoinGameController {
 			// Following is for function display only!
 			if (this.wantFunctionDisplay) {
 				Random rand = new Random(System.currentTimeMillis());
-				int randomNum = rand.nextInt(3);
+				int randomNum = rand.nextInt(1);
 				System.out.println(randomNum);
 				
 				if (randomNum == 0) {

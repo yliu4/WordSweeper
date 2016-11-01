@@ -24,11 +24,13 @@ import client.controller.ReturnToMenuController;
 import client.model.Game;
 import client.model.Model;
 
-/*
-* The <code>CreateGamePanel</code> class represents the view that enables 
-* the player to enter his/her nickname and gmeID to join a game 
+/**
+* The <code>JoinGamePanel</code> class represents the view that enables
+*  
+* the player to enter his/her nickname and gmeID to join a game.
+* 
+* @author Team Pisces
 */
-
 public class JoinGamePanel extends JPanel {
 	Game game;
 	Model model;
