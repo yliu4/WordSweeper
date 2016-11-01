@@ -34,8 +34,8 @@ public class CreateGameController {
 		}
 		else {
 			String createGameRequest = "<createGameRequest name='" + nickname + "'" 
-		+ ((password.length == 0)? "":(" password='" + new String(password) + "'"))
-		+ "/></request>";
+					+ ((password.length == 0)? "":(" password='" + new String(password) + "'"))
+					+ "/></request>";
 			String xmlString = Message.requestHeader() + createGameRequest;
 			Message m = new Message (xmlString);
 
