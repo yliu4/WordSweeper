@@ -1,9 +1,16 @@
 package client.view;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 
 import client.ServerAccess;
 import client.controller.PracticeGameController;
@@ -21,7 +28,7 @@ import client.model.Model;
 public class Application extends JFrame {
 
 	/** GUI application maintains reference to Model for ease of navigation. */
-	public Model model;
+	Model model;
 	
 	MenuPanel menuPanel;
 	PracticeGamePanel practiceGamePanel;
@@ -32,7 +39,7 @@ public class Application extends JFrame {
 	ServerAccess serverAccess;
 	
 	/**
-	 * Create the frame.
+	 * Create the frame for WordSweeper.
 	 * 
 	 * @param model
 	 */
@@ -74,9 +81,7 @@ public class Application extends JFrame {
 		return createGamePanel;
 	}
 
-	/**
-	 * Go to practice game panel
-	 */
+	/** Go to practice game panel */
 	public void gotoPraticeGamePanel() {
 		menuPanel.setVisible(false);
 		remove(menuPanel);
@@ -84,11 +89,8 @@ public class Application extends JFrame {
 		add(practiceGamePanel);
 	}
 	
-	/**
-	 * Go to main menu.
-	 */
+	/** Go to main menu. */
 	public void gotoMainMenu() {
-//		System.out.println(this.getComponentCount());
 		if (practiceGamePanel != null) {
 			practiceGamePanel.setVisible(false);
 			remove(practiceGamePanel);
@@ -97,15 +99,12 @@ public class Application extends JFrame {
 			createGamePanel.setVisible(false);
 			remove(createGamePanel);
 		}
-//		System.out.println(this.getComponentCount());
-//		System.out.println();
+
 		menuPanel.setVisible(true);
 		add(menuPanel);
 	}
 	
-	/**
-	 * Go to create game panel
-	 */
+	/** Go to create game panel */
 	public void gotoCreateGamePanel() {
 		menuPanel.setVisible(false);
 		remove(menuPanel);
@@ -120,11 +119,43 @@ public class Application extends JFrame {
 		this.practiceGameController = practiceController;
 	}
 	
-	/**
-	 * Reset the game.
-	 */
+	/** Reset the game. */
 	public void resetGame()
 	{
 		this.practiceGameController.generateNewBoard();
+	}
+	
+	/**	Show a popup thats warns the player to enter a nickname. */
+	public void popupEmptyNicknameWarnig() {
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = d.height;
+		
+		Object[] options = {"OK"};
+		UIManager.put("OptionPane.buttonFont", 
+				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
+		UIManager.put("OptionPane.messageFont", 
+				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
+		
+		JOptionPane.showOptionDialog(this.getCreateGamePanel(),
+				"Please enter a nickname!", "Warning", 
+				JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
+				null, options, options[0]);
+	}
+
+	/**	Show a popup thats warns the player to enter a password. */
+	public void popupEmptyPasswordWarnig() {
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = d.height;
+		
+		Object[] options = {"OK"};
+		UIManager.put("OptionPane.buttonFont", 
+				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
+		UIManager.put("OptionPane.messageFont", 
+				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
+		
+		JOptionPane.showOptionDialog(this.getCreateGamePanel(),
+				"Please enter a password!", "Warning", 
+				JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
+				null, options, options[0]);
 	}
 }

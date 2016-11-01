@@ -20,13 +20,26 @@ public class CreateGameController {
 		this.model = model;
 	}
 
-	/** Make the request on the server and wait for response. */
-	public void process(String player, String password) {
-		// send the request to create the game.
-		String createGameRequest = "<createGameRequest name='" + player + "'" + (password.isEmpty()? "":(" password='" + password + "'")) + "/></request>";
-		String xmlString = Message.requestHeader() + createGameRequest;
-		Message m = new Message (xmlString);
+	/** Send the request to create a game */
+	public void process() {
+		String nn = app.getCreateGamePanel().getTextFieldNN().getText();
+		char[] pw = app.getCreateGamePanel().getTextFieldPW().getPassword();
+		boolean isPrivate = app.getCreateGamePanel().getRdbtnPrivate().isSelected();
+		
+		if (nn.isEmpty()) {
+			app.popupEmptyNicknameWarnig();
+		}
+		else if (isPrivate && pw.length == 0) {
+			app.popupEmptyPasswordWarnig();
+		}
+		else {
+			String createGameRequest = "<createGameRequest name='" + nn + "'" 
+		+ ((pw.length == 0)? "":(" password='" + new String(pw) + "'"))
+		+ "/></request>";
+			String xmlString = Message.requestHeader() + createGameRequest;
+			Message m = new Message (xmlString);
 
-		app.getServerAccess().sendRequest(m);
+			app.getServerAccess().sendRequest(m);
+		}
 	}
 }

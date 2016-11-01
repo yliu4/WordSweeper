@@ -13,6 +13,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -21,13 +22,25 @@ import client.controller.CreateGameController;
 import client.controller.ReturnToMenuController;
 import client.model.Model;
 
+/**
+ * The <code>CreateGamePanel</code> class gathers the information needed for creating 
+ * 
+ * a new game, and provides the function to create a game. 
+ * 
+ * @author Team Pisces
+ *
+ */
 public class CreateGamePanel extends JPanel{
 	Model model;
 	Application application;
+	/**	<code>JTextField</code> for the nickname */
 	JTextField textFieldNN;
-	JTextField textFieldPW;
+	/**	<code>JPasswordField</code> for the password */
+	JPasswordField textFieldPW;
 	ButtonGroup modeBtnGroup;
+	/**	<code>JRadioButton</code> indicating it's a public game */
 	JRadioButton rdbtnPublic;
+	/**	<code>JRadioButton</code> indicating it's a private game */
 	JRadioButton rdbtnPrivate;
 	
 	public CreateGamePanel (Model model, Application application) {
@@ -49,12 +62,11 @@ public class CreateGamePanel extends JPanel{
 		int width = d.width;
 		
 		textFieldNN = new JTextField();
-		textFieldNN.setToolTipText("A default name will be assigned if it's empty.");
 		textFieldNN.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
 		textFieldNN.setBounds(21*width/160, 3*height/20, 3*width/16, height/20);
 		add(textFieldNN);
 		
-		textFieldPW = new JTextField();
+		textFieldPW = new JPasswordField();
 		textFieldPW.setEditable(false);
 		textFieldPW.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
 		textFieldPW.setBounds(21*width/160, 11*height/36, 3*width/16, height/20);
@@ -123,7 +135,7 @@ public class CreateGamePanel extends JPanel{
 		add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CreateGameController(model, application).process(textFieldNN.getText(), textFieldPW.getText());
+				new CreateGameController(model, application).process();
 			}
 		});
 		
@@ -142,12 +154,8 @@ public class CreateGamePanel extends JPanel{
 		return textFieldNN;
 	}
 
-	public JTextField getTextFieldPW() {
+	public JPasswordField getTextFieldPW() {
 		return textFieldPW;
-	}
-
-	public JRadioButton getRdbtnPublic() {
-		return rdbtnPublic;
 	}
 
 	public JRadioButton getRdbtnPrivate() {
