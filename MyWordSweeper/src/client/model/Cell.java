@@ -43,7 +43,6 @@ public class Cell {
 	
 	public boolean equals(Object obj) {
 		Cell cell = (Cell) obj;
-		
 		return (location.equals(cell.getLocation()) && 
 				letter.equals(cell.getLetter()));
 	}

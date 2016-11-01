@@ -17,9 +17,11 @@ public class Word {
 	public Word(ArrayList<Cell> cells) {
 		this.cells = cells;
 		StringBuffer sb = new StringBuffer();
+		
 		for (Cell cell: cells) {
 			sb.append(cell.getLetter().getCharacter());
 		}
+		
 		this.word = sb.toString();
 	}
 
