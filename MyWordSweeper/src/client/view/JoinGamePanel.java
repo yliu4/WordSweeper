@@ -61,8 +61,8 @@ public class JoinGamePanel extends JPanel {
 		add(textFieldNickname);
 		
 		textFieldGameID = new JTextField();
-		textFieldGameID.setToolTipText("Enter a gameID to join a specfic game, " +
-				"or leave it empty to randomly join a public game.");
+//		textFieldGameID.setToolTipText("Enter a gameID to join a specfic game, " +
+//				"or leave it empty to randomly join a public game.");
 		textFieldGameID.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
 		textFieldGameID.setBounds(21*width/160, 11*height/36, 3*width/16, height/20);
 		add(textFieldGameID);
@@ -70,6 +70,14 @@ public class JoinGamePanel extends JPanel {
 	
 	public void setGame(Game game) {
 		this.game = game;
+	}
+
+	public JTextField getTextFieldNickname() {
+		return textFieldNickname;
+	}
+
+	public JTextField getTextFieldGameID() {
+		return textFieldGameID;
 	}
 
 	@Override
