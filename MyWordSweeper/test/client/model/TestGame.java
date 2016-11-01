@@ -110,10 +110,10 @@ public class TestGame extends TestCase {
 		cells.add(new Cell(location3, letter3));
 
 		Word w = new Word(cells);
-		assertEquals(9600, g.calculate(w));
+		assertEquals(4800, g.calculate(w));
 	}
 
-	public void testCalculateOverLap() {
+	public void testCalculatehasOverLap() {
 		Game g = new Game();
 		Location l1 = new Location(1, 2);
 		Player p1 = new Player("Ann", 10, l1);
@@ -137,7 +137,7 @@ public class TestGame extends TestCase {
 		cells.add(new Cell(location3, letter3));
 
 		Word w = new Word(cells);
-		assertEquals(19200, g.calculate(w));
+		assertEquals(9600, g.calculate(w));
 	}
 
 	public void testCalculateMult() {
