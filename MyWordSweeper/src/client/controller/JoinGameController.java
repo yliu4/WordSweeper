@@ -19,6 +19,7 @@ import client.model.Game;
 import client.model.Letter;
 import client.model.Location;
 import client.model.Model;
+import client.model.Player;
 import client.view.Application;
 
 
@@ -40,7 +41,7 @@ public class JoinGameController {
 	JPanel popupPanel;
 	JPasswordField password;
 	
-	final boolean wantFunctionDisplay = false;
+	final boolean wantFunctionDisplay = true;
 	
 
 	public JoinGameController(Model model, Application app) {
@@ -94,10 +95,11 @@ public class JoinGameController {
 				System.out.println(randomNum);
 				
 				if (randomNum == 0) {
-					this.game = new Game();
+					this.game = new Game(new Player(nickname, 0, new Location(1, 1)));
+					this.game.setGameId(gameID);
 					generateNewBoard();
 					app.setJoinGameController(this);
-					app.joinNormalGamePanel();
+					app.gotoOnlineGamePanel();
 				}
 				else if (randomNum == 1) { //Popup for the lock game
 					UIManager.put("OptionPane.buttonFont", 

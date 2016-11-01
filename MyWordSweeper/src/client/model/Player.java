@@ -34,4 +34,8 @@ public class Player {
 	public void setOriginPosition(Location originPosition) {
 		this.originPosition = originPosition;
 	}
+
+	public String getName() {
+		return name;
+	}
 }

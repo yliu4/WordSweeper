@@ -48,7 +48,7 @@ public class Application extends JFrame {
 	PracticeGamePanel practiceGamePanel;
 	CreateGamePanel createGamePanel;
 	JoinGamePanel joinGamePanel;
-	JoinGameBoardPanel joinGameBoardPanel;
+	OnlineGamePanel onlineGamePanel;
 	JoinGameController joinNormalGameController;
 	OpenJoinGamePanelController joinGameController;
 
@@ -73,7 +73,7 @@ public class Application extends JFrame {
 
 		menuPanel = new MenuPanel(model, this);
 		joinGamePanel = new JoinGamePanel(model, this);
-		joinGameBoardPanel = new JoinGameBoardPanel(model,this);
+		onlineGamePanel = new OnlineGamePanel(model,this);
 		practiceGamePanel = new PracticeGamePanel(model, this);
 		
 		add(menuPanel);
@@ -126,12 +126,12 @@ public class Application extends JFrame {
 	}
 	
 	
-    public void joinNormalGamePanel()
+    public void gotoOnlineGamePanel()
     {
     	joinGamePanel.setVisible(false);
 		remove(joinGamePanel);
-		joinGameBoardPanel.setVisible(true);
-		add(joinGameBoardPanel);
+		onlineGamePanel.setVisible(true);
+		add(onlineGamePanel);
     }
 	
 	/** Go to main menu. */
@@ -147,6 +147,10 @@ public class Application extends JFrame {
 		if (joinGamePanel != null){
 			joinGamePanel.setVisible(false);
 			remove(joinGamePanel);
+		}
+		if (onlineGamePanel != null){
+			onlineGamePanel.setVisible(false);
+			remove(onlineGamePanel);
 		}
 
 		menuPanel.setVisible(true);
@@ -164,7 +168,7 @@ public class Application extends JFrame {
 	
 	public void setJoinGameController(JoinGameController joinGameController)
 	{
-		this.joinGameBoardPanel.setGame(joinGameController.getGame());
+		this.onlineGamePanel.setGame(joinGameController.getGame());
 		this.joinNormalGameController = joinGameController;
 	}
 	

@@ -13,22 +13,22 @@ import client.model.*;
 import javax.swing.GroupLayout.Alignment;
 
 /**
- * The <code>JoinGameBoardPanel</code> class represents the join the private or public game, which
+ * The <code>OnlineGamePanel</code> class represents an online game, which
  * 
- * contains a <code>Board</code>.
+ * contains a <code>Board</code>, and a list of <code>Player</code>s.
  * 
  * @author Team Pisces
  *
  */
-public class JoinGameBoardPanel extends JPanel{
+public class OnlineGamePanel extends JPanel{
 	Model model;
-	Application application;
+	Application app;
 	Game game;
 	BoardPanel boardPanel = null;
 	
-	public JoinGameBoardPanel (Model model, Application application) {
+	public OnlineGamePanel (Model model, Application application) {
 		this.model = model;
-		this.application = application;
+		this.app = application;
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -39,7 +39,6 @@ public class JoinGameBoardPanel extends JPanel{
 				.addGap(0, 300, Short.MAX_VALUE)
 		);
 		setLayout(groupLayout);
-//		this.repaint();
 	}
 
 	public void setGame(Game game) {
@@ -54,22 +53,22 @@ public class JoinGameBoardPanel extends JPanel{
 		int height = d.height;
 		int width = d.width;
 
-		JButton btnReturnButton = new JButton("Return");
-		btnReturnButton.setFont(new Font("Tahoma", Font.PLAIN, height/50));
-		btnReturnButton.setBounds(height/180, width/320, height/9, width/64);
-		add(btnReturnButton);
-		btnReturnButton.addActionListener(new ActionListener() {
+		JButton btnReturn = new JButton("Return");
+		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, height/50));
+		btnReturn.setBounds(height/180, width/320, height/9, width/64);
+		add(btnReturn);
+		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ReturnToMenuController(model, application).process();
+				new ReturnToMenuController(model, app).process();
 			}
 		});
 
-		JLabel lblRoomm = new JLabel("Room 13");
+		JLabel lblRoomm = new JLabel("Room " + game.getGameId());
 		lblRoomm.setFont(new Font("Arial", Font.BOLD, height/30));
 		lblRoomm.setBounds(height/4, 17*width/640, 7*height/45, width/64);
 		add(lblRoomm);
 
-		JLabel lblYourNameAnna = new JLabel("Your Name: Mi");
+		JLabel lblYourNameAnna = new JLabel("Your Name: " + game.getCurrentPlayer().getName());
 		lblYourNameAnna.setFont(new Font("Tahoma", Font.PLAIN, height/60));
 		lblYourNameAnna.setBounds(83*height/180, 7*width/100, height/6, 7*width/640);
 		add(lblYourNameAnna);

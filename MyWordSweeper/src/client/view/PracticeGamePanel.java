@@ -39,7 +39,6 @@ public class PracticeGamePanel extends JPanel{
 				.addGap(0, 300, Short.MAX_VALUE)
 		);
 		setLayout(groupLayout);
-//		this.repaint();
 	}
 
 	public void setGame(Game game) {
@@ -54,11 +53,11 @@ public class PracticeGamePanel extends JPanel{
 		int height = d.height;
 		int width = d.width;
 
-		JButton btnReturnButton = new JButton("Return");
-		btnReturnButton.setFont(new Font("Tahoma", Font.PLAIN, height/50));
-		btnReturnButton.setBounds(height/180, width/320, height/9, width/64);
-		add(btnReturnButton);
-		btnReturnButton.addActionListener(new ActionListener() {
+		JButton btnReturn = new JButton("Return");
+		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, height/50));
+		btnReturn.setBounds(height/180, width/320, height/9, width/64);
+		add(btnReturn);
+		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ReturnToMenuController(model, application).process();
 			}
