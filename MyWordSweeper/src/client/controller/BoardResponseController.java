@@ -17,8 +17,7 @@ import client.view.Application;
  * @since 2016-10-30
  */
 
-public class BoardResponseController extends ControllerChain{
-
+public class BoardResponseController extends ControllerChain {
 	public Application app;
 	public Model model;
 	
@@ -57,5 +56,4 @@ public class BoardResponseController extends ControllerChain{
 		
 		return true;
 	}
-
 }

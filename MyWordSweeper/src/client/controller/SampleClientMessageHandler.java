@@ -1,4 +1,5 @@
 package client.controller;
+
 import xml.Message;
 import client.IMessageHandler;
 import client.view.Application;

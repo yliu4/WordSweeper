@@ -10,9 +10,7 @@ import xml.Message;
  * @author Team Pisces
  * @since 2016-10-30
  */
-
 public abstract class ControllerChain implements IClientController {
-
 	/** Next one in the chain. Once null is reached, done. */
 	IClientController next = null;
 	
@@ -30,5 +28,4 @@ public abstract class ControllerChain implements IClientController {
 	 * Carry out the processing. 
 	 */
 	public abstract boolean process(Message response);
-
 }

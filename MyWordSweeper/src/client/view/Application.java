@@ -31,19 +31,13 @@ import client.model.Model;
  * @author mitian
  *
  */
-/**
- * @author mitian
- *
- */
-/**
- * @author mitian
- *
- */
+
 public class Application extends JFrame {
 
 	/** GUI application maintains reference to Model for ease of navigation. */
 	Model model;
-	
+	ServerAccess serverAccess;
+
 	MenuPanel menuPanel;
 	PracticeGamePanel practiceGamePanel;
 	CreateGamePanel createGamePanel;
@@ -51,9 +45,7 @@ public class Application extends JFrame {
 	OnlineGamePanel onlineGamePanel;
 	JoinGameController joinNormalGameController;
 	OpenJoinGamePanelController joinGameController;
-
 	PracticeGameController practiceGameController;
-	ServerAccess serverAccess;
 	
 	/**
 	 * Create the frame for WordSweeper.
@@ -77,7 +69,7 @@ public class Application extends JFrame {
 		practiceGamePanel = new PracticeGamePanel(model, this);
 		
 		add(menuPanel);
-		}
+	}
 
 	/** Record the means to communicate with server. */
 	public void setServerAccess(ServerAccess access) {
@@ -93,7 +85,7 @@ public class Application extends JFrame {
 		return menuPanel;
 	}
 	
-	public PracticeGamePanel getPracticeGamePanel(){
+	public PracticeGamePanel getPracticeGamePanel() {
 		return practiceGamePanel;
 	}
 	
@@ -101,8 +93,7 @@ public class Application extends JFrame {
 		return createGamePanel;
 	}
 	
-	public JoinGamePanel getJoinGamePanel()
-	{
+	public JoinGamePanel getJoinGamePanel() {
 		return joinGamePanel;
 	}
 
@@ -140,14 +131,17 @@ public class Application extends JFrame {
 			practiceGamePanel.setVisible(false);
 			remove(practiceGamePanel);
 		}
+
 		if (createGamePanel != null) {
 			createGamePanel.setVisible(false);
 			remove(createGamePanel);
 		}
+
 		if (joinGamePanel != null){
 			joinGamePanel.setVisible(false);
 			remove(joinGamePanel);
 		}
+
 		if (onlineGamePanel != null){
 			onlineGamePanel.setVisible(false);
 			remove(onlineGamePanel);
@@ -166,21 +160,18 @@ public class Application extends JFrame {
 		add(createGamePanel);
 	}
 	
-	public void setJoinGameController(JoinGameController joinGameController)
-	{
+	public void setJoinGameController(JoinGameController joinGameController) {
 		this.onlineGamePanel.setGame(joinGameController.getGame());
 		this.joinNormalGameController = joinGameController;
 	}
 	
-	public void setPracticeGameController(PracticeGameController practiceController)
-	{
+	public void setPracticeGameController(PracticeGameController practiceController) {
 		this.practiceGamePanel.setGame(practiceController.getGame());
 		this.practiceGameController = practiceController;
 	}
 	
 	/** Reset the game. */
-	public void resetGame()
-	{
+	public void resetGame() {
 		this.practiceGameController.generateNewBoard();
 	}
 	

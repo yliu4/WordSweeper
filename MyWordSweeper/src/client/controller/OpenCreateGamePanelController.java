@@ -1,6 +1,5 @@
 package client.controller;
 
-
 import xml.Message;
 import client.model.Model;
 import client.view.Application;
@@ -14,7 +13,6 @@ import client.view.Application;
  *
  */
 public class OpenCreateGamePanelController {
-
 	Application app;
 	Model model;
 

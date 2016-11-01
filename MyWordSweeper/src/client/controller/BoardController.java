@@ -1,6 +1,7 @@
 package client.controller;
 
 import java.awt.event.*;
+
 import client.model.Model;
 import client.view.BoardPanel;
 
@@ -10,7 +11,7 @@ import client.view.BoardPanel;
  * @author Team Pisces
  * @since 2016-10-03
  */
-public class BoardController extends MouseAdapter implements MouseMotionListener{
+public class BoardController extends MouseAdapter implements MouseMotionListener {
 	Model model;
 	BoardPanel panel;
 	private int x;

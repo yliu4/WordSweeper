@@ -40,8 +40,7 @@ public class PracticeGameController {
 	 * 
 	 * The location of bonus is set to be outside the range of a <code>Board</code>
 	 */
-	public void generateNewBoard()
-	{
+	public void generateNewBoard() {
 		/** The location of bonus is set to be outside the range of a <code>Board</code> */
 		Location nomulti = new Location(10, 10);
 		this.game.setBoard(this.generatecells(), nomulti);
@@ -52,7 +51,7 @@ public class PracticeGameController {
 	 * 
 	 * @return A List of <code>Cells</code>
 	 */
-	public ArrayList<Cell> generatecells (){
+	public ArrayList<Cell> generatecells () {
 		ArrayList<Cell> cells = new ArrayList<Cell>(16);
 		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "P", "Qu","R","S","T","U","V","W","X","Y","Z"};
 		int l = alp.length;
@@ -69,8 +68,7 @@ public class PracticeGameController {
 		return cells;
 	}
 	
-	public Game getGame()
-	{
+	public Game getGame() {
 		return this.game;
 	}
 }

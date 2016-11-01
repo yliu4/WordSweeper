@@ -22,7 +22,6 @@ import client.model.Model;
 import client.model.Player;
 import client.view.Application;
 
-
 /**
  * This class handle the communication between the sever and client. The client 
  * 
@@ -37,13 +36,10 @@ public class JoinGameController {
 	Game game;
 	Model model;
 	Application app;
-	
 	JPanel popupPanel;
 	JPasswordField password;
-	
 	final boolean wantFunctionDisplay = true;
 	
-
 	public JoinGameController(Model model, Application app) {
 		this.model = model;
 		this.app = app;
@@ -67,9 +63,8 @@ public class JoinGameController {
 					"Please enter a nickname!", "Warning", 
 					JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
 					null, options, options[0]);
-		}
-		// If server supports randomly assign game, the following will be removed
-		else if (gameID.isEmpty()) {
+		} else if (gameID.isEmpty()) {
+			// If server supports randomly assign game, the following will be removed
 			Object[] options = {"OK"};
 			UIManager.put("OptionPane.buttonFont", 
 					new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
@@ -80,8 +75,7 @@ public class JoinGameController {
 					"Please enter a gameID!", "Warning", 
 					JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
 					null, options, options[0]);
-		}
-		else {
+		} else {
 			//generate random number(hardcode)
 			// TODO: receive response from server
 			// parse message, if == SUCCESS: go to game panel
@@ -92,7 +86,6 @@ public class JoinGameController {
 			if (this.wantFunctionDisplay) {
 				Random rand = new Random(System.currentTimeMillis());
 				int randomNum = rand.nextInt(3);
-				System.out.println(randomNum);
 				
 				if (randomNum == 0) {
 					this.game = new Game(new Player(nickname, 0, new Location(1, 1)));
@@ -100,8 +93,8 @@ public class JoinGameController {
 					generateNewBoard();
 					app.setJoinGameController(this);
 					app.gotoOnlineGamePanel();
-				}
-				else if (randomNum == 1) { //Popup for the lock game
+				} else if (randomNum == 1) { 
+					//Popup for the lock game
 					UIManager.put("OptionPane.buttonFont", 
 							new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
 					UIManager.put("OptionPane.messageFont", 
@@ -109,8 +102,7 @@ public class JoinGameController {
 					String message = "The game is locked! please click \"ok\" to go back.";
 					JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
 			        JOptionPane.ERROR_MESSAGE);
-				}
-				else { //password Popup
+				} else { //password Popup
 					this.popupPanel = new JPanel();
 					JLabel label = new JLabel("Please enter a password to join the game:");
 					this.password = new JPasswordField(10);
@@ -136,8 +128,7 @@ public class JoinGameController {
 			Message m = new Message (xmlString);
 			
 			app.getServerAccess().sendRequest(m);
-		}
-		
+		}	
 	}
 	
 	/**
@@ -145,8 +136,7 @@ public class JoinGameController {
 	 * 
 	 * The location of bonus is set to be outside the range of a <code>Board</code>
 	 */
-	public void generateNewBoard()
-	{
+	public void generateNewBoard() {
 		/** The location of bonus is set to be outside the range of a <code>Board</code> */
 		Location nomulti = new Location(10, 10);
 		this.game.setBoard(this.generatecells(), nomulti);
@@ -157,7 +147,7 @@ public class JoinGameController {
 	 * 
 	 * @return A List of <code>Cells</code>
 	 */
-	public ArrayList<Cell> generatecells (){
+	public ArrayList<Cell> generatecells () {
 		ArrayList<Cell> cells = new ArrayList<Cell>(16);
 		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "P", "Qu","R","S","T","U","V","W","X","Y","Z"};
 		int l = alp.length;
@@ -174,8 +164,7 @@ public class JoinGameController {
 		return cells;
 	}
 	
-	public Game getGame()
-	{
+	public Game getGame() {
 		return this.game;
 	}
 }
