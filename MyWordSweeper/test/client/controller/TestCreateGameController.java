@@ -75,7 +75,7 @@ public class TestCreateGameController extends TestCase {
 	 * sends a GrabLock request to the server.
 	 */
 	public void testJoinGameProcess() {
-		 new JoinGameController(client, model).process();
+		 new OpenJoinGamePanelController(client, model).process();
 		 
 		 // validate from mockServer
 		 

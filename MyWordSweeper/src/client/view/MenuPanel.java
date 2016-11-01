@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
@@ -14,7 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+
 import client.controller.OpenCreateGamePanelController;
+import client.controller.OpenJoinGamePanelController;
+
 import client.controller.PracticeGameController;
 import client.model.Model;
 
@@ -24,7 +28,7 @@ import client.model.Model;
  * @author Team Pisces
  *
  */
-public class MenuPanel extends JPanel {
+public class MenuPanel extends JPanel{
 	Model model;
 	Application application;
 	
@@ -73,6 +77,11 @@ public class MenuPanel extends JPanel {
 		btnJoin.setFont(new Font("Tahoma", Font.PLAIN, height/30));
 		btnJoin.setBounds(83*height/360, 11*width/80, 7*height/30, 7*width/160);
 		add(btnJoin);
+		btnJoin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new OpenJoinGamePanelController(application, model).process();
+			}
+		});
 		
 		JButton btnPractice = new JButton("PRACTICE");
 		btnPractice.setFont(new Font("Tahoma", Font.PLAIN, height/30));
