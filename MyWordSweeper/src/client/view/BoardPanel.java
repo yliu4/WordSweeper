@@ -23,10 +23,11 @@ import java.util.HashSet;
 public class BoardPanel extends JPanel{
 	ArrayList<Cell> cells;
 	Model model;
-	HashSet<Integer> set = new HashSet<Integer>();
+	ArrayList<Integer> list = new ArrayList<Integer>();
 	int prev;
 	boolean stop = false;
-
+	StringBuilder currentWord;
+	
 	public BoardPanel(Model model, ArrayList<Cell> cells) {
 		this.cells = cells;
 		this.model = model;
@@ -34,6 +35,8 @@ public class BoardPanel extends JPanel{
 		int height = d.height;
 		int width = d.width;
 		setBounds(height/36, 17*width/160, 13*height/45, 13*width/80);
+		currentWord = new StringBuilder();
+		
 		
 		BoardController control = new BoardController(model, this);
 		this.addMouseListener(control);
@@ -127,17 +130,18 @@ public class BoardPanel extends JPanel{
 				if(x+dragWidth >= cellLoc.getCoordinateX()+5 && x+dragWidth <= cellLoc.getCoordinateX()+cellLoc.getWidth()-5 &&
 				   y+dragHeight >= cellLoc.getCoordinateY()+5 && y+dragHeight <= cellLoc.getCoordinateY()+cellLoc.getHeight()-5)
 					if(stop == false) {
-						if(!set.isEmpty() && prev != i && set.contains(i)) {
+						if(!list.isEmpty() && prev != i && list.contains(i)) {
 							stop = true;
 							break;
 						}
 						prev = i;
-						set.add(i);
+						if(!list.contains(i))
+							list.add(i);
 					}
 			} 
 			
 			// fill the dragged cells
-			for(Integer num : set) {
+			for(Integer num : list) {
 				Location cell = this.cells.get(num).getLocation();
 				g.setColor(Color.blue);
 				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
@@ -161,8 +165,10 @@ public class BoardPanel extends JPanel{
 			g.drawString(s14, 7*height/40, 93*width/640);
 			g.drawString(s15, 89*height/360, 93*width/640);
 		} else {
-			for(Integer num : set) {
+			currentWord.delete(0, currentWord.length());
+			for(Integer num : list) {
 				Location cell = this.cells.get(num).getLocation();
+				currentWord.append(this.cells.get(num).getLetter().getCharacter());
 				g.setColor(Color.blue);
 				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
 			}
@@ -184,7 +190,7 @@ public class BoardPanel extends JPanel{
 			g.drawString(s13, 37*height/360, 93*width/640);
 			g.drawString(s14, 7*height/40, 93*width/640);
 			g.drawString(s15, 89*height/360, 93*width/640);
-			set.clear();
+			list.clear();
 			stop = false;
 		}
 	}

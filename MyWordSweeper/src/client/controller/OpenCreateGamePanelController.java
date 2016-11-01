@@ -5,6 +5,14 @@ import xml.Message;
 import client.model.Model;
 import client.view.Application;
 
+/**
+ * The <code>OpenCreateGamePanelController</code> class creates a panel to gather
+ * 
+ * the information needed for creating a new game.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class OpenCreateGamePanelController {
 
 	Application app;
@@ -15,16 +23,7 @@ public class OpenCreateGamePanelController {
 		this.model = model;
 	}
 
-	/** Make the request on the server and wait for response. */
 	public void process() {
-		/*// send the request to create the game.
-		String xmlString = Message.requestHeader() + "<createGameRequest name='samplePlayer'/></request>";
-		Message m = new Message (xmlString);
-
-		// Request the lock (this might not succeed).
-//		app.getRequestArea().append(m.toString());
-//		app.getRequestArea().append("\n");
-		app.getServerAccess().sendRequest(m);*/
 		app.gotoCreateGamePanel();
 	}
 }

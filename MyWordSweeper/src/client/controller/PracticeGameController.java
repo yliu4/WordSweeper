@@ -18,25 +18,21 @@ import client.view.Application;
  * @author Team Pisces
  * 
  */
-public class PracticeGameController extends MouseAdapter {
+public class PracticeGameController {
 	Model model;
-	Application application;
+	Application app;
 	Game game;
 
 	public PracticeGameController(Model m, Application app) {
 		this.model = m;
-		this.application = app;
+		this.app = app;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseClicked(MouseEvent me) {
+	public void process() {
 		this.game = new Game();
 		generateNewBoard();
-		application.setPracticeGameController(this);
-		application.gotoPraticeGamePanel();
+		app.setPracticeGameController(this);
+		app.gotoPraticeGamePanel();
 	}
 	
 	/**
@@ -72,7 +68,7 @@ public class PracticeGameController extends MouseAdapter {
 		}
 		return cells;
 	}
-
+	
 	public Game getGame()
 	{
 		return this.game;

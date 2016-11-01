@@ -12,17 +12,17 @@ import client.view.Application;
  * @author Team Pisces
  *
  */
-public class ResetGameInPracticeController extends MouseAdapter {
+public class ResetPracticeGameController {
 	Model model;
-	Application application;
+	Application app;
 
-	public ResetGameInPracticeController(Model m, Application app) {
+	public ResetPracticeGameController(Model m, Application app) {
 		this.model = m;
-		this.application = app;
+		this.app = app;
 	}
 
-	public void mouseClicked(MouseEvent me) {
-		application.resetGame();
+	public void process() {
+		app.resetGame();
 	}
 
 }

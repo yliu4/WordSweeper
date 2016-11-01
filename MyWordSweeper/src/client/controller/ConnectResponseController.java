@@ -4,6 +4,15 @@ import client.model.Model;
 import client.view.Application;
 import xml.Message;
 
+/**
+ * The connection response controller is used to process connection response from 
+ * 
+ * server.
+ *
+ * @author Team Pisces
+ * @since 2016-10-30
+ */
+
 public class ConnectResponseController extends ControllerChain {
 	public Application app;
 	public Model model;
@@ -20,9 +29,6 @@ public class ConnectResponseController extends ControllerChain {
 		if (!type.equals ("connectResponse")) {
 			return next.process(response);
 		}
-		
-		// check response detail
-		System.out.println(response.toString() + "\n");
 		
 		return true;
 	}
