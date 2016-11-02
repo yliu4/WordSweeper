@@ -3,11 +3,20 @@ package client.model;
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
-import client.model.*;
 
-public class TestBoard extends TestCase{
+/**
+ * The <code>TestBoard</code> class tests the <code>Board</code> class.
+ * 
+ * @author Team Pisces
+ *
+ */
+public class TestBoard extends TestCase {
+	/**
+	 * Test the constructor.
+	 */
 	public void testConstructor() {
 		ArrayList<Cell> cells = new ArrayList<Cell>();
+		
 		for (int i = 0; i < 16; i++) {
 			Location location = new Location(i/4, i%4);
 			Letter letter = new Letter("A");
@@ -19,8 +28,12 @@ public class TestBoard extends TestCase{
 		assertEquals(cells.get(10), board.getCells().get(10));
 	}
 	
+	/**
+	 * Test the setCells method.
+	 */
 	public void testSetCells() {
 		ArrayList<Cell> cells = new ArrayList<Cell>();
+		
 		for (int i = 0; i < 16; i++) {
 			Location location = new Location(i/4, i%4);
 			Letter letter = new Letter("A");
@@ -30,6 +43,7 @@ public class TestBoard extends TestCase{
 		Board board = new Board(cells);
 		
 		ArrayList<Cell> newCells = new ArrayList<Cell>();
+		
 		for (int i = 0; i < 16; i++) {
 			Location location = new Location(i/4, i%4);
 			Letter letter = new Letter("B");

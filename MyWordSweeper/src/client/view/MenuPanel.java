@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-
 import client.controller.OpenCreateGamePanelController;
 import client.controller.OpenJoinGamePanelController;
 import client.controller.PracticeGameController;
@@ -25,17 +24,29 @@ import client.model.Model;
  * @author Team Pisces
  *
  */
-public class MenuPanel extends JPanel{
+public class MenuPanel extends JPanel {
+	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
-	Application application;
+
+	/** Refrence <code>Application</code> for easy navigation. */
+	Application app;
 	
-	public MenuPanel (Model model, Application application) {
+	/**
+	 * Create the main menu panel.
+	 * 
+	 * @param model <code>Model</code> for current application.
+	 * @param application Current <code>Application</code>.
+	 */
+	public MenuPanel(Model model, Application application) {
 		this.model = model;
-		this.application = application;
+		this.app = application;
 
 		setLayout(new GroupLayout(this));
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -43,7 +54,6 @@ public class MenuPanel extends JPanel{
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		int width = d.width;
-
 		
 		JLabel lblWordswepper = new JLabel("WordSwepper");
 		lblWordswepper.setFont(new Font("Times New Roman", Font.BOLD, 2*height/45));
@@ -57,7 +67,7 @@ public class MenuPanel extends JPanel{
 		add(btnCreate);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new OpenCreateGamePanelController(model, application).process();
+				new OpenCreateGamePanelController(model, app).process();
 			}
 		});
 		
@@ -67,7 +77,7 @@ public class MenuPanel extends JPanel{
 		add(btnJoin);
 		btnJoin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new OpenJoinGamePanelController(application, model).process();
+				new OpenJoinGamePanelController(app, model).process();
 			}
 		});
 		
@@ -77,7 +87,7 @@ public class MenuPanel extends JPanel{
 		add(btnPractice);
 		btnPractice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new PracticeGameController(model, application).process();
+				new PracticeGameController(model, app).process();
 			}
 		});
 	}
