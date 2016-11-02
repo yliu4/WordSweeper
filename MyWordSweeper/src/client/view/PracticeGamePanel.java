@@ -101,7 +101,7 @@ public class PracticeGamePanel extends JPanel{
 		ArrayList<Cell> cells = this.game.getBoard().getCells();
 		if (this.boardPanel == null)
 		{
-			this.boardPanel = new BoardPanel(model, cells);
+			this.boardPanel = new BoardPanel(model, application, cells);
 			add(boardPanel);
 		}
 		else

@@ -96,6 +96,10 @@ public class Application extends JFrame {
 	public JoinGamePanel getJoinGamePanel() {
 		return joinGamePanel;
 	}
+	
+	public OnlineGamePanel getOnlineGamePanel() {
+		return onlineGamePanel;
+	}
 
 	/** Go to practice game panel */
 	public void gotoPraticeGamePanel() {
@@ -119,6 +123,8 @@ public class Application extends JFrame {
 	
     public void gotoOnlineGamePanel()
     {
+    	createGamePanel.setVisible(false);
+		remove(createGamePanel);
     	joinGamePanel.setVisible(false);
 		remove(joinGamePanel);
 		onlineGamePanel.setVisible(true);

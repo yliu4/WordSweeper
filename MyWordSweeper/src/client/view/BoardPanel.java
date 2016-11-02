@@ -23,14 +23,16 @@ import java.util.HashSet;
 public class BoardPanel extends JPanel{
 	ArrayList<Cell> cells;
 	Model model;
+	Application app;
 	ArrayList<Integer> list = new ArrayList<Integer>();
 	int prev;
 	boolean stop = false;
 	StringBuilder currentWord;
 	
-	public BoardPanel(Model model, ArrayList<Cell> cells) {
+	public BoardPanel(Model model, Application app, ArrayList<Cell> cells) {
 		this.cells = cells;
 		this.model = model;
+		this.app = app;
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		int width = d.width;
@@ -192,6 +194,11 @@ public class BoardPanel extends JPanel{
 			g.drawString(s15, 89*height/360, 93*width/640);
 			list.clear();
 			stop = false;
+			
+			OnlineGamePanel onlinePanel = this.app.getOnlineGamePanel();
+			onlinePanel.setCurrentWord(currentWord.toString());
+			//onlinePanel.repaint();
+			//onlinePanel.revalidate();
 		}
 	}
 }

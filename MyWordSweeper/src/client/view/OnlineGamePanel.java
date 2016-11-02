@@ -25,10 +25,18 @@ public class OnlineGamePanel extends JPanel{
 	Application app;
 	Game game;
 	BoardPanel boardPanel = null;
+	JLabel lblScore_1 = null;
+	JLabel lblCurrentWord = null;
+	String currentWord;
+	int score;
+	
 	
 	public OnlineGamePanel (Model model, Application application) {
 		this.model = model;
 		this.app = application;
+		this.score = 0;
+		this.currentWord = "";
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -38,11 +46,26 @@ public class OnlineGamePanel extends JPanel{
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 300, Short.MAX_VALUE)
 		);
+		
+		lblScore_1 = new JLabel("Score: " + score + "\r\n");
+		lblCurrentWord = new JLabel("Current Word: " + currentWord);
 		setLayout(groupLayout);
 	}
 
 	public void setGame(Game game) {
 		this.game = game;
+	}
+	
+	public Game getGame() {
+		return this.game;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public void setCurrentWord(String word) {
+		this.currentWord = word;
 	}
 
 	@Override
@@ -78,12 +101,12 @@ public class OnlineGamePanel extends JPanel{
 		lblScore.setBounds(83*height/180, 17*width/200, height/6, 7*width/640);
 		add(lblScore);
 
-		JLabel lblCurrentWord = new JLabel("Current Word: ");
+		lblCurrentWord.setText("Current Word: " + currentWord);
 		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, height/60));
 		lblCurrentWord.setBounds(height/36, 23*width/320, 53*height/180, 9*width/640);
 		add(lblCurrentWord);
 
-		JLabel lblScore_1 = new JLabel("Score: \r\n");
+		lblScore_1.setText("Score: " + score + "\r\n");
 		lblScore_1.setFont(new Font("Arial", Font.BOLD, height/60));
 		lblScore_1.setBounds(height/36, 7*width/80, 53*height/180, 9*width/640);
 		add(lblScore_1);
@@ -91,7 +114,7 @@ public class OnlineGamePanel extends JPanel{
 		ArrayList<Cell> cells = this.game.getBoard().getCells();
 		if (this.boardPanel == null)
 		{
-			this.boardPanel = new BoardPanel(model, cells);
+			this.boardPanel = new BoardPanel(model, app, cells);
 			add(boardPanel);
 		}
 		else
