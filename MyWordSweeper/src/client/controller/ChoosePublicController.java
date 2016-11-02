@@ -1,6 +1,5 @@
 package client.controller;
 
-import client.model.Model;
 import client.view.Application;
 
 /**
@@ -12,7 +11,6 @@ import client.view.Application;
  *
  */
 public class ChoosePublicController {
-
 	Application app;
 
 	public ChoosePublicController(Application app) {

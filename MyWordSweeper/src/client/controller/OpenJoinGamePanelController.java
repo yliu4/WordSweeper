@@ -1,6 +1,5 @@
 package client.controller;
 
-
 import xml.Message;
 import client.model.Game;
 import client.model.Model;
@@ -21,8 +20,7 @@ public class OpenJoinGamePanelController {
 		app.gotoJoinGamePanel();
 	}
 
-	public Game getGame()
-	{
+	public Game getGame() {
 		return this.game;
 	}
 }

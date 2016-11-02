@@ -95,7 +95,7 @@ public class Application extends JFrame {
 		return menuPanel;
 	}
 	
-	public PracticeGamePanel getPracticeGamePanel(){
+	public PracticeGamePanel getPracticeGamePanel() {
 		return practiceGamePanel;
 	}
 	
@@ -103,8 +103,7 @@ public class Application extends JFrame {
 		return createGamePanel;
 	}
 	
-	public JoinGamePanel getJoinGamePanel()
-	{
+	public JoinGamePanel getJoinGamePanel() {
 		return joinGamePanel;
 	}
 
@@ -142,14 +141,17 @@ public class Application extends JFrame {
 			practiceGamePanel.setVisible(false);
 			remove(practiceGamePanel);
 		}
+
 		if (createGamePanel != null) {
 			createGamePanel.setVisible(false);
 			remove(createGamePanel);
 		}
+
 		if (joinGamePanel != null){
 			joinGamePanel.setVisible(false);
 			remove(joinGamePanel);
 		}
+
 		if (onlineGamePanel != null){
 			onlineGamePanel.setVisible(false);
 			remove(onlineGamePanel);
@@ -168,21 +170,18 @@ public class Application extends JFrame {
 		add(createGamePanel);
 	}
 	
-	public void setJoinGameController(JoinGameController joinGameController)
-	{
+	public void setJoinGameController(JoinGameController joinGameController) {
 		this.onlineGamePanel.setGame(joinGameController.getGame());
 		this.joinGameController = joinGameController;
 	}
 	
-	public void setPracticeGameController(PracticeGameController practiceController)
-	{
+	public void setPracticeGameController(PracticeGameController practiceController) {
 		this.practiceGamePanel.setGame(practiceController.getGame());
 		this.practiceGameController = practiceController;
 	}
 	
 	/** Reset the game. */
-	public void resetGame()
-	{
+	public void resetGame() {
 		this.practiceGameController.generateNewBoard();
 	}
 	
