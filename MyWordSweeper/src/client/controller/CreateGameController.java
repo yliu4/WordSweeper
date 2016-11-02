@@ -13,21 +13,13 @@ import client.view.Application;
 public class CreateGameController {
 	Application app;
 	Model model;
-	
-	/**
-	 * CreateGameController constructor
-	 * 
-	 * @param model    initialize model
-	 * @param app      initialize application
-	 */
+
 	public CreateGameController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}
 
-	/**
-	 * process create game request and them send a request to server in xml format
-	 */
+	/** Send the request to create a game */
 	public void process() {
 		String nickname = app.getCreateGamePanel().getTextFieldNickname().getText();
 		char[] password = app.getCreateGamePanel().getTextFieldPassword().getPassword();

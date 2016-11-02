@@ -16,24 +16,12 @@ public class ConnectResponseController extends ControllerChain {
 	public Application app;
 	public Model model;
 	
-	/**
-	 * ChoosePublicController constructor
-	 *
-	 * @param app  	 initialize application
-	 * @param model	 initialize model
-	 */
-	public ConnectResponseController(Application app, Model model) {
+	public ConnectResponseController(Application a, Model m) {
 		super();
-		this.app = app;
-		this.model = model;
+		this.app = a;
+		this.model = m;
 	}
 	
-	/**
-	 * process connection response from server after client try to 
-	 * connect with server 
-	 *
-	 * @param response  connection response from server in xml format
-	 */
 	@Override
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();

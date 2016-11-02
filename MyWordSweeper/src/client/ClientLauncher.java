@@ -2,7 +2,6 @@ package client;
 import client.ServerAccess;
 import client.controller.BoardResponseController;
 import client.controller.ConnectResponseController;
-import client.controller.JoinGameResponseController;
 import client.controller.SampleClientMessageHandler;
 import client.model.Model;
 import client.view.Application;
@@ -39,7 +38,6 @@ public class ClientLauncher {
 		SampleClientMessageHandler handler = new SampleClientMessageHandler(app);
 		handler.registerHandler(new BoardResponseController(app, model));
 		handler.registerHandler(new ConnectResponseController(app, model));
-		handler.registerHandler(new JoinGameResponseController(app, model));
 		
 		// try to connect to the server. Once connected, messages are going to be processed by 
 		// SampleClientMessageHandler. For now we just continue on with the initialization because

@@ -102,8 +102,7 @@ public class JoinGameController {
 					String message = "The game is locked! please click \"ok\" to go back.";
 					JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
 			        JOptionPane.ERROR_MESSAGE);
-				} else {
-					//password Popup
+				} else { //password Popup
 					this.popupPanel = new JPanel();
 					JLabel label = new JLabel("Please enter a password to join the game:");
 					this.password = new JPasswordField(10);
@@ -114,8 +113,7 @@ public class JoinGameController {
 					int option = JOptionPane.showOptionDialog(app.getJoinGamePanel(), this.popupPanel,
 							"Warning", JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE,
 							null, options, options[1]);
-					if(option == 0) {
-						// pressing OK button
+					if(option == 0) { // pressing OK button
 						char[] pass = this.password.getPassword();
 						System.out.println("Your password is: " + new String(pass));
 					}
