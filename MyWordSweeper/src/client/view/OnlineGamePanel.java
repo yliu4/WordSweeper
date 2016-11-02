@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.*;
 
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
 
 import client.controller.*;
 import client.controller.OnlineGameController.ShiftDirection;
@@ -20,16 +19,35 @@ import client.model.*;
  * @author Team Pisces
  *
  */
-public class OnlineGamePanel extends JPanel{
+public class OnlineGamePanel extends JPanel {
+	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
+
+	/** Refrence <code>Application</code> for easy navigation. */
 	Application app;
+	
+	/** Current game. */
 	Game game;
+	
+	/** <code>JPanel</code> for the <code>Board</code> in this <code>Game</code>.*/
 	BoardPanel boardPanel = null;
+	
+	/** <code>JLabel</code> for displaying the gameID. */
 	JLabel lblRoom;
+	
+	/** <code>JLabel</code> for displaying the current player's name. */
 	JLabel lblYourName;
+	
+	/** <code>JLabel</code> for displaying the total score of the current player. */
 	JLabel lblTotalScore;
 	
-	public OnlineGamePanel (Model model, Application application) {
+	/**
+	 * Create the panel for online game view.
+	 * 
+	 * @param model <code>Model</code> for current application.
+	 * @param application Current <code>Application</code>.
+	 */
+	public OnlineGamePanel(Model model, Application application) {
 		this.model = model;
 		this.app = application;
 		
@@ -51,15 +69,27 @@ public class OnlineGamePanel extends JPanel{
 		add(lblShift);
 	}
 
-	public Game getGame()
-	{
+	/**
+	 * Get the current <code>Game> object.
+	 * 
+	 * @return A <code>Game</code> object for the current game.
+	 */
+	public Game getGame() {
 		return this.game;
 	}
 	
+	/**
+	 * Set the current game.
+	 * 
+	 * @param game A <code>Game</code> object for the current game.
+	 */
 	public void setGame(Game game) {
 		this.game = game;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

@@ -16,7 +16,7 @@ import client.model.*;
  * @author Team Pisces
  *
  */
-public class BoardPanel extends JPanel{
+public class BoardPanel extends JPanel {
 	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
 	

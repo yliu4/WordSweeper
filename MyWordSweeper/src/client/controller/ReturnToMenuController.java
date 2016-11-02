@@ -25,8 +25,8 @@ public class ReturnToMenuController {
 
 	public void process() {
 		//clear the text field when go back to main menu
-		app.getJoinGamePanel().getNameTextField().setText("");
-		app.getJoinGamePanel().getGameIDTextField().setText("");
+		app.getJoinGamePanel().getTextFieldNickname().setText("");
+		app.getJoinGamePanel().getTextFieldGameID().setText("");
 		app.gotoMainMenu();
 	}
 }
