@@ -21,14 +21,31 @@ import java.util.HashSet;
  *
  */
 public class BoardPanel extends JPanel{
-	ArrayList<Cell> cells;
+	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
 	Application app;
+	
+	/** An <code>ArrayList</code> for the <code>Cell</code>s in a <code>Board</code>. */
+	ArrayList<Cell> cells;
+	
+	/** An <code>ArrayList</code> for */
 	ArrayList<Integer> list = new ArrayList<Integer>();
-	int prev;
-	boolean stop = false;
+	
+	/** For building the current selected word. */
 	StringBuilder currentWord;
 	
+	/** */
+	int prev;
+	
+	/** */
+	boolean stop = false;
+
+	/**
+	 * Construct the panel for the board according to the cells. 
+	 * 
+	 * @param model <code>Model</code> for current application.
+	 * @param cells <code>Cell</code>s in this <code>Board</code>.
+	 */
 	public BoardPanel(Model model, Application app, ArrayList<Cell> cells) {
 		this.cells = cells;
 		this.model = model;
@@ -44,11 +61,29 @@ public class BoardPanel extends JPanel{
 		this.addMouseListener(control);
 		this.addMouseMotionListener(control);
 	}
+
+	/**
+	 * Get the current selected word.
+	 * 
+	 * @return A <code>String</code> represents the current selected word.
+	 */
+	public String getCurrentWord() {
+		return this.currentWord.toString();
+	}
 	
+	/**
+	 * Update the board with a list of new cells.
+	 * 
+	 * @param cells A new list of cells assigned to this board.
+	 */
 	public void updateCells(ArrayList<Cell> cells) {
 		this.cells = cells;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();

@@ -71,62 +71,97 @@ public class Application extends JFrame {
 		add(menuPanel);
 	}
 
-	/** Record the means to communicate with server. */
+	/** 
+	 * Record the means to communicate with server. 
+	 * 
+	 * @param access Access to a server.
+	 */
 	public void setServerAccess(ServerAccess access) {
 		this.serverAccess = access;
 	}
 	
-	/** Get the server access object. */
+	/** 
+	 * Get the server access object. 
+	 * 
+	 * @return Current <code>ServerAccess</code> object.
+	 */
 	public ServerAccess getServerAccess() {
 		return serverAccess;
 	}
-	
+
+	/** 
+	 * Get the <code>MenuPanel</code> object.
+	 * 
+	 * @return Current <code>MenuPanel</code> object.
+	 */
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
-	
+
+	/** 
+	 * Get the <code>PracticeGamePanel</code> object. 
+	 * 
+	 * @return Current <code>PracticeGamePanel</code> object.
+	 */
 	public PracticeGamePanel getPracticeGamePanel() {
 		return practiceGamePanel;
 	}
-	
+
+	/** 
+	 * Get the <code>CreateGamePanel</code> object. 
+	 * 
+	 * @return Current <code>CreateGamePanel</code> object.
+	 */
 	public CreateGamePanel getCreateGamePanel() {
 		return createGamePanel;
 	}
-	
+
+	/** 
+	 * Get the <code>JoinGamePanel</code> object. 
+	 * 
+	 * @return Current <code>JoinGamePanel</code> object. 
+	 */
 	public JoinGamePanel getJoinGamePanel() {
 		return joinGamePanel;
 	}
-	
-	public OnlineGamePanel getOnlineGamePanel() {
+
+	/** 
+	 * Get the <code>OnlineGamePanel</code> object. 
+	 * 
+	 *  Current <code>OnlineGamePanel</code> object. 
+	 */
+	public OnlineGamePanel getOnlineGamePanel()
+	{
 		return onlineGamePanel;
 	}
 
-	/** Go to practice game panel */
+	/** Go to practice game panel. */
 	public void gotoPraticeGamePanel() {
 		menuPanel.setVisible(false);
 		remove(menuPanel);
+		
 		practiceGamePanel.setVisible(true);
 		add(practiceGamePanel);
 	}
 	
 	
-	/**
-	 *  Go to Join game register panel
-	 */
+	/** Go to join game panel. */
 	public void gotoJoinGamePanel(){
 		menuPanel.setVisible(false);
 		remove(menuPanel);
+		
 		joinGamePanel.setVisible(true);
 		add(joinGamePanel);
 	}
 	
-	
+	/** Go to online game panel. */
     public void gotoOnlineGamePanel()
     {
     	createGamePanel.setVisible(false);
 		remove(createGamePanel);
     	joinGamePanel.setVisible(false);
 		remove(joinGamePanel);
+		
 		onlineGamePanel.setVisible(true);
 		add(onlineGamePanel);
     }
@@ -157,7 +192,7 @@ public class Application extends JFrame {
 		add(menuPanel);
 	}
 	
-	/** Go to create game panel */
+	/** Go to the create game panel. */
 	public void gotoCreateGamePanel() {
 		menuPanel.setVisible(false);
 		remove(menuPanel);
@@ -165,18 +200,23 @@ public class Application extends JFrame {
 		createGamePanel.setVisible(true);
 		add(createGamePanel);
 	}
-	
+
 	public void setJoinGameController(JoinGameController joinGameController) {
 		this.onlineGamePanel.setGame(joinGameController.getGame());
 		this.joinNormalGameController = joinGameController;
 	}
-	
+
+	/**
+	 * Set the <code>PracticeGameController</code> for the <code>PracticeGamePanel</code>.
+	 * 
+	 * @param practiceController Controller for creating a practice game.
+	 */
 	public void setPracticeGameController(PracticeGameController practiceController) {
 		this.practiceGamePanel.setGame(practiceController.getGame());
 		this.practiceGameController = practiceController;
 	}
 	
-	/** Reset the game. */
+	/** Reset the the board in practice game. */
 	public void resetGame() {
 		this.practiceGameController.generateNewBoard();
 	}
@@ -185,8 +225,8 @@ public class Application extends JFrame {
 	public void popupEmptyNicknameWarnig() {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
-		
 		Object[] options = {"OK"};
+		
 		UIManager.put("OptionPane.buttonFont", 
 				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
 		UIManager.put("OptionPane.messageFont", 
@@ -202,8 +242,8 @@ public class Application extends JFrame {
 	public void popupEmptyPasswordWarnig() {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
-		
 		Object[] options = {"OK"};
+		
 		UIManager.put("OptionPane.buttonFont", 
 				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
 		UIManager.put("OptionPane.messageFont", 
