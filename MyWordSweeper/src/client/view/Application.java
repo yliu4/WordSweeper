@@ -90,32 +90,56 @@ public class Application extends JFrame {
 		this.serverAccess = access;
 	}
 	
-	/** Get the server access object. */
+	/** 
+	 * Get the server access object. 
+	 * 
+	 * @return Current <code>ServerAccess</code> object.
+	 */
 	public ServerAccess getServerAccess() {
 		return serverAccess;
 	}
 
-	/** Get the <code>MenuPanel</code> object. */
+	/** 
+	 * Get the <code>MenuPanel</code> object.
+	 * 
+	 * @return Current <code>MenuPanel</code> object.
+	 */
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
 
-	/** Get the <code>PracticeGamePanel</code> object. */
+	/** 
+	 * Get the <code>PracticeGamePanel</code> object. 
+	 * 
+	 * @return Current <code>PracticeGamePanel</code> object.
+	 */
 	public PracticeGamePanel getPracticeGamePanel() {
 		return practiceGamePanel;
 	}
 
-	/** Get the <code>CreateGamePanel</code> object. */
+	/** 
+	 * Get the <code>CreateGamePanel</code> object. 
+	 * 
+	 * @return Current <code>CreateGamePanel</code> object.
+	 */
 	public CreateGamePanel getCreateGamePanel() {
 		return createGamePanel;
 	}
 
-	/** Get the <code>JoinGamePanel</code> object. */
+	/** 
+	 * Get the <code>JoinGamePanel</code> object. 
+	 * 
+	 * @return Current <code>JoinGamePanel</code> object. 
+	 */
 	public JoinGamePanel getJoinGamePanel() {
 		return joinGamePanel;
 	}
 
-	/** Get the <code>OnlineGamePanel</code> object. */
+	/** 
+	 * Get the <code>OnlineGamePanel</code> object. 
+	 * 
+	 *  Current <code>OnlineGamePanel</code> object. 
+	 */
 	public OnlineGamePanel getOnlineGamePanel()
 	{
 		return onlineGamePanel;
