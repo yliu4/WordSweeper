@@ -1,16 +1,12 @@
 package client.view;
 
 import java.awt.*;
-import java.awt.event.MouseMotionListener;
 import java.util.*;
 
 import javax.swing.*;
 
 import client.controller.*;
 import client.model.*;
-
-import javax.swing.GroupLayout.Alignment;
-import java.util.HashSet;
 
 /**
  * The <code>BoardPanel</code> class represents the 4*4 board that is assigned
@@ -31,12 +27,13 @@ public class BoardPanel extends JPanel{
 	public BoardPanel(Model model, ArrayList<Cell> cells) {
 		this.cells = cells;
 		this.model = model;
+		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		int width = d.width;
+		
 		setBounds(height/36, 17*width/160, 13*height/45, 13*width/80);
 		currentWord = new StringBuilder("");
-		
 		
 		BoardController control = new BoardController(model, this);
 		this.addMouseListener(control);
@@ -53,6 +50,7 @@ public class BoardPanel extends JPanel{
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		int width = d.width;
@@ -168,7 +166,8 @@ public class BoardPanel extends JPanel{
 			g.drawString(s13, 37*height/360, 93*width/640);
 			g.drawString(s14, 7*height/40, 93*width/640);
 			g.drawString(s15, 89*height/360, 93*width/640);
-		} else {
+		} 
+		else {
 			currentWord.delete(0, currentWord.length());
 			for(Integer num : list) {
 				Location cell = this.cells.get(num).getLocation();

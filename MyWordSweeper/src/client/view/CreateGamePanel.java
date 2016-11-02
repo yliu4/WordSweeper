@@ -35,29 +35,26 @@ import client.model.Model;
 public class CreateGamePanel extends JPanel{
 	Model model;
 	Application app;
+	
 	/**	<code>JTextField</code> for the nickname */
 	JTextField textFieldNickname;
+	
 	/**	<code>JPasswordField</code> for the password */
 	JPasswordField textFieldPassword;
+	
 	ButtonGroup modeBtnGroup;
+	
 	/**	<code>JRadioButton</code> indicating it's a public game */
 	JRadioButton rdbtnPublic;
+	
 	/**	<code>JRadioButton</code> indicating it's a private game */
 	JRadioButton rdbtnPrivate;
 	
 	public CreateGamePanel (Model model, Application application) {
 		this.model = model;
 		this.app = application;
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 450, Short.MAX_VALUE)
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 300, Short.MAX_VALUE)
-		);
-		setLayout(groupLayout);
+
+		setLayout(new GroupLayout(this));
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;

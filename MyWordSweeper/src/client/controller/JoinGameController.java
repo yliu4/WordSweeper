@@ -85,7 +85,7 @@ public class JoinGameController {
 			// Following is for function display only!
 			if (this.wantFunctionDisplay) {
 				Random rand = new Random(System.currentTimeMillis());
-				int randomNum = rand.nextInt(3);
+				int randomNum = rand.nextInt(1);
 				
 				if (randomNum == 0) {
 					this.game = new Game(new Player(nickname, 0, new Location(1, 1)));
