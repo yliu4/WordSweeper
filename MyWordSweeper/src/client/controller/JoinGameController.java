@@ -22,7 +22,6 @@ import client.model.Model;
 import client.model.Player;
 import client.view.Application;
 
-
 /**
  * This class handle the communication between the sever and client. The client 
  * 
@@ -37,13 +36,11 @@ public class JoinGameController {
 	Game game;
 	Model model;
 	Application app;
-	
 	JPanel popupPanel;
 	JPasswordField password;
+	final boolean wantFunctionDisplay = false;
+	ArrayList<Cell> cells;
 	
-	final boolean wantFunctionDisplay = true;
-	
-
 	public JoinGameController(Model model, Application app) {
 		this.model = model;
 		this.app = app;
@@ -67,9 +64,8 @@ public class JoinGameController {
 					"Please enter a nickname!", "Warning", 
 					JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
 					null, options, options[0]);
-		}
-		// If server supports randomly assign game, the following will be removed
-		else if (gameID.isEmpty()) {
+		} else if (gameID.isEmpty()) {
+			// If server supports randomly assign game, the following will be removed
 			Object[] options = {"OK"};
 			UIManager.put("OptionPane.buttonFont", 
 					new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
@@ -80,8 +76,7 @@ public class JoinGameController {
 					"Please enter a gameID!", "Warning", 
 					JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
 					null, options, options[0]);
-		}
-		else {
+		} else {
 			//generate random number(hardcode)
 			// TODO: receive response from server
 			// parse message, if == SUCCESS: go to game panel
@@ -91,17 +86,11 @@ public class JoinGameController {
 			// Following is for function display only!
 			if (this.wantFunctionDisplay) {
 				Random rand = new Random(System.currentTimeMillis());
-				int randomNum = rand.nextInt(3);
-				System.out.println(randomNum);
+				int randomNum = rand.nextInt(1);
 				
-				if (randomNum == 0) {
-					this.game = new Game(new Player(nickname, 0, new Location(1, 1)));
-					this.game.setGameId(gameID);
-					generateNewBoard();
-					app.setJoinGameController(this);
-					app.gotoOnlineGamePanel();
-				}
-				else if (randomNum == 1) { //Popup for the lock game
+				if (randomNum == 0) 
+				{ 
+					//Popup for the lock game
 					UIManager.put("OptionPane.buttonFont", 
 							new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
 					UIManager.put("OptionPane.messageFont", 
@@ -109,8 +98,9 @@ public class JoinGameController {
 					String message = "The game is locked! please click \"ok\" to go back.";
 					JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
 			        JOptionPane.ERROR_MESSAGE);
-				}
-				else { //password Popup
+				} 
+				else if (randomNum == 1)
+				{ //password Popup
 					this.popupPanel = new JPanel();
 					JLabel label = new JLabel("Please enter a password to join the game:");
 					this.password = new JPasswordField(10);
@@ -130,52 +120,18 @@ public class JoinGameController {
 				System.out.println("### Game ID" + gameID);
 			}
 			
+			// the server should respond with a board, which will be handled in BoardResponseController
+			// to create a new game
 			String joinGameRequest = "<joinGameRequest gameId='" + gameID
 					+ "' name='" + nickname + "'/></request>";
 			String xmlString = Message.requestHeader() + joinGameRequest;
 			Message m = new Message (xmlString);
 			
 			app.getServerAccess().sendRequest(m);
-		}
-		
+		}	
 	}
 	
-	/**
-	 * Generate a new <code>Board</code> for practice game.
-	 * 
-	 * The location of bonus is set to be outside the range of a <code>Board</code>
-	 */
-	public void generateNewBoard()
-	{
-		/** The location of bonus is set to be outside the range of a <code>Board</code> */
-		Location nomulti = new Location(10, 10);
-		this.game.setBoard(this.generatecells(), nomulti);
-	}
-	
-	/**
-	 * Randomly generate 16 <code>Cells</code> for the <code>Board</code>
-	 * 
-	 * @return A List of <code>Cells</code>
-	 */
-	public ArrayList<Cell> generatecells (){
-		ArrayList<Cell> cells = new ArrayList<Cell>(16);
-		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "P", "Qu","R","S","T","U","V","W","X","Y","Z"};
-		int l = alp.length;
-		Random r = new Random(System.currentTimeMillis());
-		for (int y = 0; y <= 3; y++) {
-			for (int x = 0; x <= 3; x++) {
-				String s = alp[r.nextInt(l)];
-				Letter le = new Letter(s);
-				Location lo = new Location(x, y);
-				Cell ce = new Cell(lo, le);
-				cells.add(ce);
-			}
-		}
-		return cells;
-	}
-	
-	public Game getGame()
-	{
+	public Game getGame() {
 		return this.game;
 	}
 }

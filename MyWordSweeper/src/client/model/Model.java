@@ -11,10 +11,9 @@ package client.model;
 public class Model {
 	Game game = null;
 	Location location = null;
-
-	
 	
 	public Model() {
+		
 	}
 
 	public void setGame(Game game) {
@@ -25,12 +24,6 @@ public class Model {
 		return this.game;
 	}
 	
-	/**
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 */
 	public void setFilledBoard(int x, int y, int width, int height) {
 		if(x == -1 && y == -1) {
 			this.location = null;

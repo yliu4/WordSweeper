@@ -8,7 +8,6 @@ import xml.Message;
  * @author Team Pisces
  * @since 2016-10-30
  */
-
 public interface IClientController {
 	
 	/**

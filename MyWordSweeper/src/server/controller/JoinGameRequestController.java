@@ -47,7 +47,7 @@ public class JoinGameRequestController implements IProtocolHandler {
 				Server.getState(id).sendMessage(message);
 			}
 		}
-
+		
 		// send this response back to the client which sent us the request.
 		return message;
 	}

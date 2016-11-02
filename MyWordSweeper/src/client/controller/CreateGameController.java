@@ -10,7 +10,6 @@ import client.view.Application;
  * @author Team Pisces
  * @since 2016-10-30
  */
-
 public class CreateGameController {
 	Application app;
 	Model model;
@@ -28,11 +27,9 @@ public class CreateGameController {
 		
 		if (nickname.isEmpty()) {
 			app.popupEmptyNicknameWarnig();
-		}
-		else if (isPrivate && password.length == 0) {
+		} else if (isPrivate && password.length == 0) {
 			app.popupEmptyPasswordWarnig();
-		}
-		else {
+		} else {
 			String createGameRequest = "<createGameRequest name='" + nickname + "'" 
 					+ ((password.length == 0)? "":(" password='" + new String(password) + "'"))
 					+ "/></request>";

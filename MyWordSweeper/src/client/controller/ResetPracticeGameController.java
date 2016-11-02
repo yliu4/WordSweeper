@@ -24,5 +24,4 @@ public class ResetPracticeGameController {
 	public void process() {
 		app.resetGame();
 	}
-
 }

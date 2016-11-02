@@ -29,5 +29,4 @@ public class ReturnToMenuController {
 		app.getJoinGamePanel().getGameIDTextField().setText("");
 		app.gotoMainMenu();
 	}
-
 }
