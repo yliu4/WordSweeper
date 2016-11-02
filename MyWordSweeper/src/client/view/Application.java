@@ -106,6 +106,11 @@ public class Application extends JFrame {
 	public JoinGamePanel getJoinGamePanel() {
 		return joinGamePanel;
 	}
+	
+	public OnlineGamePanel getOnlineGamePanel()
+	{
+		return onlineGamePanel;
+	}
 
 	/** Go to practice game panel */
 	public void gotoPraticeGamePanel() {
@@ -168,11 +173,6 @@ public class Application extends JFrame {
 		createGamePanel = new CreateGamePanel(model, this);
 		createGamePanel.setVisible(true);
 		add(createGamePanel);
-	}
-	
-	public void setJoinGameController(JoinGameController joinGameController) {
-		this.onlineGamePanel.setGame(joinGameController.getGame());
-		this.joinGameController = joinGameController;
 	}
 	
 	public void setPracticeGameController(PracticeGameController practiceController) {
