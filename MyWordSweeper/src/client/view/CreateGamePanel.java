@@ -33,7 +33,10 @@ import client.model.Model;
  *
  */
 public class CreateGamePanel extends JPanel{
+	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
+
+	/** Refrence <code>Application</code> for easy navigation. */
 	Application app;
 	
 	/**	<code>JTextField</code> for the nickname */
@@ -41,7 +44,8 @@ public class CreateGamePanel extends JPanel{
 	
 	/**	<code>JPasswordField</code> for the password */
 	JPasswordField textFieldPassword;
-	
+
+	/** A <code>ButtonGroup</code> to manage the radiobuttons as a whole. */
 	ButtonGroup modeBtnGroup;
 	
 	/**	<code>JRadioButton</code> indicating it's a public game */
@@ -50,6 +54,10 @@ public class CreateGamePanel extends JPanel{
 	/**	<code>JRadioButton</code> indicating it's a private game */
 	JRadioButton rdbtnPrivate;
 	
+	/**
+	 * @param model <code>Model</code> for current application.
+	 * @param application Current <code>Application</code>.
+	 */
 	public CreateGamePanel (Model model, Application application) {
 		this.model = model;
 		this.app = application;
@@ -96,6 +104,10 @@ public class CreateGamePanel extends JPanel{
 		add(rdbtnPrivate);
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -148,14 +160,29 @@ public class CreateGamePanel extends JPanel{
 		});
 	}
 
+	/**
+	 * Get the <code>JTextField</code> recording the nickname.
+	 * 
+	 * @return A <code>JTextField</code> recording the nickname.
+	 */
 	public JTextField getTextFieldNickname() {
 		return textFieldNickname;
 	}
 
+	/**
+	 * Get the <code>JPasswordField</code> recording the password.
+	 * 
+	 * @return A <code>JPasswordField</code> recording the password.
+	 */
 	public JPasswordField getTextFieldPassword() {
 		return textFieldPassword;
 	}
 
+	/**
+	 * Get the <code>JRadioButton</code> representing the private mode.
+	 * 
+	 * @return A <code>JRadioButton</code> representing the private mode.
+	 */
 	public JRadioButton getRdbtnPrivate() {
 		return rdbtnPrivate;
 	}
