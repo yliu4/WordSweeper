@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 
 import client.controller.*;
+import client.controller.OnlineGameController.ShiftDirection;
 import client.model.*;
 
 /**
@@ -58,6 +59,11 @@ public class OnlineGamePanel extends JPanel{
 		add(lblShift);
 	}
 
+	public Game getGame()
+	{
+		return this.game;
+	}
+	
 	public void setGame(Game game) {
 		this.game = game;
 	}
@@ -124,20 +130,40 @@ public class OnlineGamePanel extends JPanel{
 		btnLeft.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
 		btnLeft.setBounds(16*height/45, 61*width/320, height/15, 3*width/80);
 		add(btnLeft);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new OnlineGameController(model, app).processShift(ShiftDirection.Left);
+			}
+		});
 
 		JButton btnRight = new JButton("\u2192"); //Right
 		btnRight.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
 		btnRight.setBounds(16*height/45, 74*width/320, height/15, 3*width/80);
 		add(btnRight);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new OnlineGameController(model, app).processShift(ShiftDirection.Right);
+			}
+		});
 
 		JButton btnUp = new JButton("\u2191"); // Up
 		btnUp.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
 		btnUp.setBounds(16*height/45, 35*width/320, height/15, 3*width/80);
 		add(btnUp);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new OnlineGameController(model, app).processShift(ShiftDirection.Up);
+			}
+		});
 
 		JButton btnDown = new JButton("\u2193"); // Down
 		btnDown.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
 		btnDown.setBounds(16*height/45, 48*width/320, height/15, 3*width/80);
 		add(btnDown);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new OnlineGameController(model, app).processShift(ShiftDirection.Down);
+			}
+		});
 	}
 }
