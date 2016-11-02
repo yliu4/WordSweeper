@@ -16,16 +16,26 @@ import client.view.Application;
  * @author Team Pisces
  * @since 2016-10-30
  */
-
 public class BoardResponseController extends ControllerChain {
 	public Application app;
 	public Model model;
 	
-	public BoardResponseController(Application a, Model m) {
-		this.app = a;
-		this.model = m;
+	/**
+	 * BoardResponseController constructor
+	 *
+	 * @param app  	 initialize application
+	 * @param panel  initialize panel
+	 */
+	public BoardResponseController(Application app, Model model) {
+		this.app = app;
+		this.model = model;
 	}
 	
+	/**
+	 * process board responses from server after createGameRquest or joinGameRequest
+	 *
+	 * @param Message board response message from server in xml format
+	 */
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
 		if (!type.equals ("boardResponse")) {
