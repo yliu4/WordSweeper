@@ -20,7 +20,7 @@ import client.model.*;
  *
  */
 public class OnlineGamePanel extends JPanel {
-	/** Refernce <code>Model</code> for easy navigation. */
+	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 
 	/** Reference <code>Application</code> for easy navigation. */
