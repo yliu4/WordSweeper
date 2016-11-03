@@ -3,7 +3,7 @@ package client.controller;
 import client.view.Application;
 
 /**
- * The <code>ChoosePrivateController</code> class enables the editing of password field.
+ * The ChoosePrivateController class enables the editing of password field.
  * 
  * @author Team Pisces
  * @since  2016-11-01
