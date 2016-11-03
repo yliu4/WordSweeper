@@ -5,7 +5,7 @@ import client.model.Model;
 import client.view.Application;
 
 /**
- * The <code>OpenCreateGamePanelController</code> class creates a panel to gather
+ * The OpenCreateGamePanelController class creates a panel to gather
  * 
  * the information needed for creating a new game.
  * 
