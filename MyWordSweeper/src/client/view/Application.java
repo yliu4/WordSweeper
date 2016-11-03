@@ -210,7 +210,7 @@ public class Application extends JFrame {
 
 	public void setJoinGameController(JoinGameController joinGameController) {
 		this.onlineGamePanel.setGame(joinGameController.getGame());
-		this.joinNormalGameController = joinGameController;
+		this.joinGameController = joinGameController;
 	}
 
 	/**

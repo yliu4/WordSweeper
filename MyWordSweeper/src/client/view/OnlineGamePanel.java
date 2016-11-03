@@ -21,10 +21,10 @@ import javax.swing.GroupLayout.Alignment;
  *
  */
 public class OnlineGamePanel extends JPanel {
-	/** Refrence <code>Model</code> for easy navigation. */
+	/** Refernce <code>Model</code> for easy navigation. */
 	Model model;
 
-	/** Refrence <code>Application</code> for easy navigation. */
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
 	/** Current game. */
@@ -93,6 +93,7 @@ public class OnlineGamePanel extends JPanel {
 	
 	public void setCurrentWord(String word) {
 		this.currentWord = word;
+	}
 
 	/**
 	 * Set the current game.
