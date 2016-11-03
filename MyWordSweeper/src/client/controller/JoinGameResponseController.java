@@ -27,7 +27,7 @@ public class JoinGameResponseController extends ControllerChain {
 	
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
-		if (!type.equals ("connectResponse")) {
+		if (!type.equals ("joinGameResponse")) {
 			return next.process(response);
 		}
 		
