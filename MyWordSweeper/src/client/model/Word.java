@@ -22,14 +22,14 @@ public class Word {
 		
 		/** String buffer to append character */
 		StringBuffer sb = new StringBuffer();
-		
+
 		/** Iterate all the cells and append the letters in these
 		 *  cells into string buffer
 		 */
 		for (Cell cell: cells) {
 			sb.append(cell.getLetter().getCharacter());
 		}
-		
+
 		/** Convert word to string */
 		this.word = sb.toString();
 	}

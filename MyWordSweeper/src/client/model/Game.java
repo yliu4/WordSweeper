@@ -35,7 +35,7 @@ public class Game {
 	
    /** construct a game with given player */
 	public Game(Player player) {
-		/** assign a current palyer */
+		/** assign a current player */
 		this.currentPlayer = player;
 	}
 		
@@ -48,11 +48,12 @@ public class Game {
 	public long calculate(Word word) {
 		/** The score for the selected word */
 		double score = 0;
-		
+
 		/** A variable to store the temporary score */
 		double tempscore = 0;
 		
 		/** The total score for the word */
+
 		long total = 0;
 		
 		/** Set if the word is multiplier as false */
@@ -87,8 +88,11 @@ public class Game {
 				/** Set it as true */
 				hasMulti = true;
 			}
-			
+	
 			/** Calculate the length of word */
+			if (c.getLetter().getCharacter().equals("Qu")) {
+				length++;
+			}
 			length++;
 			
 			/** The letter is shared  by one player */
@@ -96,41 +100,32 @@ public class Game {
 			
 			/**  Check if the letter is shared by multiple players */
 			if (overlapcheck.containsKey(c.getLocation().getColumn() * 4 + c.getLocation().getRow())) {
-				/** The number of players who shared the letter */
-				m = overlapcheck.get(c.getLocation().getColumn() * 4
-						+ c.getLocation().getRow());
+				/** Get the number of players who shared the letter */
+				if (overlapcheck.containsKey(c.getLocation().getColumn() * 4
+						+ c.getLocation().getRow())) {
+					m = overlapcheck.get(c.getLocation().getColumn() * 4
+							+ c.getLocation().getRow());
+				}
+				
+			/** Calculate the score of the letter */
+			score += c.getLetter().getPoint() * Math.pow(2, m);
 			}
+		
+			/** Calculate the score for the selected word */
+			score = Math.pow(2, length) * 10 * score;
 			
-			/** The score for the letter */
-			tempscore = c.getLetter().getPoint();
-			
-			/** If the letter are shared by multiple players, calculate the score for the word
-			 *  using 2^m
-			 */
-			if (m!=1){
-				/** Calculate the score for the word */
-				tempscore *= Math.pow(2, m);
+			/** Check if the word is multiplier */
+			if (hasMulti) {
+				/** If it is, multiply 10 */
+				score *= 10;
 			}
-			
-			/** Calculate the total of score for the word */
-			score += tempscore;
-			
 		}
 		
-		/** Calculate the score for the selected word */
-		score = Math.pow(2, length) * 10 * score;
-		
-		/** Check if the word is multiplier */
-		if (hasMulti) {
-			/** If it is, multiply 10 */
-			score *= 10;
-		}
-		
-		/** The total score for the word */
-		total = (long) score;
-		
-		/** Return the score */
-		return total;
+			/** The total score for the word */
+			total = (long) score;
+			
+			/** Return the score */
+			return total;	
 	}
 		
 	/**

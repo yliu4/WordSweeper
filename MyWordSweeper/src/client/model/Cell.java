@@ -44,6 +44,7 @@ public class Cell {
 	/** Return the letter and location that belong to that cell */
 	public boolean equals(Object obj) {
 		Cell cell = (Cell) obj;
+		
 		return (location.equals(cell.getLocation()) && 
 				letter.equals(cell.getLetter()));
 	}

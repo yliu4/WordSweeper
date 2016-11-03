@@ -11,10 +11,9 @@ public class Model {
 	
 	/** Reference Location for easy navigation */ 
 	Location location = null;
-	
+
 	/** Constructor for the model */
 	public Model() {
-		
 	}
 
 	/** Set a game with the given game object */
@@ -27,7 +26,14 @@ public class Model {
 		return this.game;
 	}
 	
-	/** Set the board with the given x, y, width and height */
+	/** Set the board with the given x, y, width and height 
+	 * 
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
+
 	public void setFilledBoard(int x, int y, int width, int height) {
 		/** Check if the x and y for the board are valid. */
 		if(x == -1 && y == -1) {
