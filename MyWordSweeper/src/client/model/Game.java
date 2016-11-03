@@ -37,7 +37,6 @@ public class Game {
 	 */
 	public long calculate(Word word) {
 		double score = 0;
-		double tempscore = 0;
 		long total = 0;
 		boolean hasMulti = false;
 		int length = 0;
@@ -53,18 +52,17 @@ public class Game {
 			if (c.getLetter().isMultiplier()) {
 				hasMulti = true;
 			}
+			if (c.getLetter().getCharacter().equals("Qu")) {
+				length++;
+			}
 			length++;
 			m = 1;
-			if (overlapcheck.containsKey(c.getLocation().getColumn() * 4 + c.getLocation().getRow())) {
+			if (overlapcheck.containsKey(c.getLocation().getColumn() * 4
+					+ c.getLocation().getRow())) {
 				m = overlapcheck.get(c.getLocation().getColumn() * 4
 						+ c.getLocation().getRow());
 			}
-			tempscore = c.getLetter().getPoint();
-			if (m!=1){
-				tempscore *= Math.pow(2, m);
-			}
-			score += tempscore;
-			
+			score += c.getLetter().getPoint() * Math.pow(2, m);
 		}
 		score = Math.pow(2, length) * 10 * score;
 		if (hasMulti) {

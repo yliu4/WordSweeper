@@ -9,23 +9,26 @@ import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.EmptyBorder;
 
+import client.controller.OpenJoinGamePanelController;
 import client.controller.JoinGameController;
+import client.controller.PracticeGameController;
 import client.controller.ReturnToMenuController;
 import client.model.Game;
 import client.model.Model;
 
-/**
-* The <code>JoinGamePanel</code> class represents the view that enables
-*  
-* the player to enter his/her nickname and gmeID to join a game.
-* 
-* @author Team Pisces
+/*
+* The <code>CreateGamePanel</code> class represents the view that enables 
+* the player to enter his/her nickname and gmeID to join a game 
 */
+
 public class JoinGamePanel extends JPanel {
 	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
@@ -52,7 +55,16 @@ public class JoinGamePanel extends JPanel {
 		this.model = model;
 		this.app = application;
 		
-		setLayout(new GroupLayout(this));
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 450, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 300, Short.MAX_VALUE)
+		);
+		setLayout(groupLayout);
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;

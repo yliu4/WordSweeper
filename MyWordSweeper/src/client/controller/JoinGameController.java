@@ -38,8 +38,7 @@ public class JoinGameController {
 	Application app;
 	JPanel popupPanel;
 	JPasswordField password;
-	final boolean wantFunctionDisplay = false;
-	ArrayList<Cell> cells;
+	final boolean wantFunctionDisplay = true;
 	
 	public JoinGameController(Model model, Application app) {
 		this.model = model;
@@ -86,10 +85,15 @@ public class JoinGameController {
 			// Following is for function display only!
 			if (this.wantFunctionDisplay) {
 				Random rand = new Random(System.currentTimeMillis());
-				int randomNum = rand.nextInt(1);
+				int randomNum = rand.nextInt(3);
 				
-				if (randomNum == 0) 
-				{ 
+				if (randomNum == 0) {
+					this.game = new Game(new Player(nickname, 0, new Location(1, 1)));
+					this.game.setGameId(gameID);
+					generateNewBoard();
+					app.setJoinGameController(this);
+					app.gotoOnlineGamePanel();
+				} else if (randomNum == 1) { 
 					//Popup for the lock game
 					UIManager.put("OptionPane.buttonFont", 
 							new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
@@ -98,9 +102,8 @@ public class JoinGameController {
 					String message = "The game is locked! please click \"ok\" to go back.";
 					JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
 			        JOptionPane.ERROR_MESSAGE);
-				} 
-				else if (randomNum == 1)
-				{ //password Popup
+				} else {
+					//password Popup
 					this.popupPanel = new JPanel();
 					JLabel label = new JLabel("Please enter a password to join the game:");
 					this.password = new JPasswordField(10);
@@ -111,7 +114,8 @@ public class JoinGameController {
 					int option = JOptionPane.showOptionDialog(app.getJoinGamePanel(), this.popupPanel,
 							"Warning", JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE,
 							null, options, options[1]);
-					if(option == 0) { // pressing OK button
+					if(option == 0) {
+						// pressing OK button
 						char[] pass = this.password.getPassword();
 						System.out.println("Your password is: " + new String(pass));
 					}
@@ -120,8 +124,6 @@ public class JoinGameController {
 				System.out.println("### Game ID" + gameID);
 			}
 			
-			// the server should respond with a board, which will be handled in BoardResponseController
-			// to create a new game
 			String joinGameRequest = "<joinGameRequest gameId='" + gameID
 					+ "' name='" + nickname + "'/></request>";
 			String xmlString = Message.requestHeader() + joinGameRequest;
@@ -129,6 +131,39 @@ public class JoinGameController {
 			
 			app.getServerAccess().sendRequest(m);
 		}	
+	}
+	
+	/**
+	 * Generate a new <code>Board</code> for practice game.
+	 * 
+	 * The location of bonus is set to be outside the range of a <code>Board</code>
+	 */
+	public void generateNewBoard() {
+		/** The location of bonus is set to be outside the range of a <code>Board</code> */
+		Location nomulti = new Location(10, 10);
+		this.game.setBoard(this.generatecells(), nomulti);
+	}
+	
+	/**
+	 * Randomly generate 16 <code>Cells</code> for the <code>Board</code>
+	 * 
+	 * @return A List of <code>Cells</code>
+	 */
+	public ArrayList<Cell> generatecells () {
+		ArrayList<Cell> cells = new ArrayList<Cell>(16);
+		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "P", "Qu","R","S","T","U","V","W","X","Y","Z"};
+		int l = alp.length;
+		Random r = new Random(System.currentTimeMillis());
+		for (int y = 0; y <= 3; y++) {
+			for (int x = 0; x <= 3; x++) {
+				String s = alp[r.nextInt(l)];
+				Letter le = new Letter(s);
+				Location lo = new Location(x, y);
+				Cell ce = new Cell(lo, le);
+				cells.add(ce);
+			}
+		}
+		return cells;
 	}
 	
 	public Game getGame() {
