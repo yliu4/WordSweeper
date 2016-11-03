@@ -16,6 +16,7 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	BoardPanel panel;
 	private int x;
 	private int y;
+	boolean press = false;
 	
 	/**
 	 * BoardController constructor
@@ -37,6 +38,7 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	public void mousePressed(MouseEvent me) {
         this.x = me.getX();
         this.y = me.getY();
+        press = true;
 	}
 	
 	/**
@@ -59,7 +61,10 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	 */
 	@Override
 	public void mouseReleased(MouseEvent me) {
-		model.setFilledBoard(-1, -1, 0, 0);
-		panel.repaint();
+		if(press == true) {
+			model.setFilledBoard(-1, -1, 0, 0);
+			panel.repaint();
+			press = false;
+		}
 	}
 }

@@ -85,7 +85,6 @@ public class OnlineGamePanel extends JPanel {
 	public Game getGame() {
 		return this.game;
 	}
-	
 
 	public void setScore(int score) {
 		this.score = score;

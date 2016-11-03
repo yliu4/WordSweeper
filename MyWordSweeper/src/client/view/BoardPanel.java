@@ -210,6 +210,9 @@ public class BoardPanel extends JPanel {
 				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
 			}
 			
+			OnlineGamePanel onlinePanel = this.app.getOnlineGamePanel();
+			onlinePanel.setCurrentWord(currentWord.toString());
+			
 			g.setColor(Color.black);
 			g.drawString(s0, 11*height/360, 3*width/128);
 			g.drawString(s1, 37*height/360, 3*width/128);
@@ -229,11 +232,6 @@ public class BoardPanel extends JPanel {
 			g.drawString(s15, 89*height/360, 93*width/640);
 			list.clear();
 			stop = false;
-			
-			OnlineGamePanel onlinePanel = this.app.getOnlineGamePanel();
-			onlinePanel.setCurrentWord(currentWord.toString());
-			//onlinePanel.repaint();
-			//onlinePanel.revalidate();
 		}
 	}
 }
