@@ -10,8 +10,6 @@ import javax.swing.*;
 import client.controller.*;
 import client.model.*;
 
-import javax.swing.GroupLayout.Alignment;
-
 /**
  * The <code>PracticeGamePanel</code> class represents the practice game, which
  * 
@@ -21,30 +19,67 @@ import javax.swing.GroupLayout.Alignment;
  *
  */
 public class PracticeGamePanel extends JPanel{
+	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
-	Application application;
+
+	/** Refrence <code>Application</code> for easy navigation. */
+	Application app;
+	
+	/** Current game. */
 	Game game;
+	
+	/** <code>JPanel</code> for the <code>Board</code> in this <code>Game</code>.*/
 	BoardPanel boardPanel = null;
 	
-	public PracticeGamePanel (Model model, Application application) {
+	/** <code>JLabel</code> for displaying the gameID. */
+	JLabel lblRoom;
+	
+	/** <code>JLabel</code> for displaying the current player's name. */
+	JLabel lblYourName;
+	
+	/** <code>JLabel</code> for displaying the total score of the current player. */
+	JLabel lblTotalScore;
+	
+	/** <code>JLabel</code> for displaying the current selected word. */
+	JLabel lblCurrentWord;
+	
+	/** <code>JLabel</code> for displaying the score of the current selected word. */
+	JLabel lblScore;
+
+	/**
+	 * Create the panel for practice game view.
+	 * 
+	 * @param model <code>Model</code> for current application.
+	 * @param application Current <code>Application</code>.
+	 */
+	public PracticeGamePanel(Model model, Application application) {
 		this.model = model;
-		this.application = application;
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 450, Short.MAX_VALUE)
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 300, Short.MAX_VALUE)
-		);
-		setLayout(groupLayout);
+		this.app = application;
+
+		setLayout(new GroupLayout(this));
+		
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = d.height;
+		int width = d.width;
+		
+		lblCurrentWord = new JLabel("Current Word: ");
+		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, height/60));
+		lblCurrentWord.setBounds(height/36, 23*width/320, 53*height/180, 9*width/640);
+		add(lblCurrentWord);
 	}
 
+	/**
+	 * Set the current game.
+	 * 
+	 * @param game A <code>Game</code> object for the current game.
+	 */
 	public void setGame(Game game) {
 		this.game = game;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -59,7 +94,7 @@ public class PracticeGamePanel extends JPanel{
 		add(btnReturn);
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ReturnToMenuController(model, application).process();
+				new ReturnToMenuController(model, app).process();
 			}
 		});
 
@@ -69,14 +104,14 @@ public class PracticeGamePanel extends JPanel{
 		add(btnResetGame);
 		btnResetGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ResetPracticeGameController(model, application).process();
+				new ResetPracticeGameController(model, app).process();
 			}
 		});
-        
-		JLabel lblRoomm = new JLabel("Practice");
-		lblRoomm.setFont(new Font("Arial", Font.BOLD, height/30));
-		lblRoomm.setBounds(height/4, 17*width/640, 7*height/45, width/64);
-		add(lblRoomm);
+
+		lblRoom = new JLabel("Practice");
+		lblRoom.setFont(new Font("Arial", Font.BOLD, height/30));
+		lblRoom.setBounds(height/4, 17*width/640, 7*height/45, width/64);
+		add(lblRoom);
 
 		JLabel lblYourNameAnna = new JLabel("Your Name: Practicer");
 		lblYourNameAnna.setFont(new Font("Tahoma", Font.PLAIN, height/60));

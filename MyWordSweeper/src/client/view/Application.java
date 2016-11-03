@@ -4,11 +4,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
@@ -18,7 +15,6 @@ import client.controller.JoinGameController;
 import client.controller.PracticeGameController;
 import client.model.Model;
 
-
 /**
  * <code>Application</code> is the top-level boundary class that has access to
  * 
@@ -27,25 +23,36 @@ import client.model.Model;
  * @author Team Pisces
  *
  */
-/**
- * @author mitian
- *
- */
-
 public class Application extends JFrame {
-
 	/** GUI application maintains reference to Model for ease of navigation. */
 	Model model;
-	ServerAccess serverAccess;
 
+	/** <code>JPanel</code> for main menu. */
 	MenuPanel menuPanel;
+
+	/** <code>JPanel</code> for practice game view. */
 	PracticeGamePanel practiceGamePanel;
+
+	/** <code>JPanel</code> for create game window. */
 	CreateGamePanel createGamePanel;
+
+	/** <code>JPanel</code> for join game window. */
 	JoinGamePanel joinGamePanel;
+
+	/** <code>JPanel</code> for online game view. */
 	OnlineGamePanel onlineGamePanel;
-	JoinGameController joinNormalGameController;
-	OpenJoinGamePanelController joinGameController;
+
+	/** Controller for joining a game. */
+	JoinGameController joinGameController;
+
+	/** Controller for opening a join game window. */
+	OpenJoinGamePanelController openJoinGamePanelController;
+
+	/** Controller for creating a practice game. */
 	PracticeGameController practiceGameController;
+	
+	/** Access server. */
+	ServerAccess serverAccess;
 	
 	/**
 	 * Create the frame for WordSweeper.

@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,28 +31,35 @@ import client.model.Model;
  * @author Team Pisces
  *
  */
-public class CreateGamePanel extends JPanel{
+public class CreateGamePanel extends JPanel {
 	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
 
 	/** Refrence <code>Application</code> for easy navigation. */
 	Application app;
-	/**	<code>JTextField</code> for the nickname */
+	
+	/**	<code>JTextField</code> for the nickname. */
 	JTextField textFieldNickname;
-	/**	<code>JPasswordField</code> for the password */
+	
+	/**	<code>JPasswordField</code> for the password. */
 	JPasswordField textFieldPassword;
+
 	/** A <code>ButtonGroup</code> to manage the radiobuttons as a whole. */
 	ButtonGroup modeBtnGroup;
-	/**	<code>JRadioButton</code> indicating it's a public game */
+	
+	/**	<code>JRadioButton</code> indicating it's a public game. */
 	JRadioButton rdbtnPublic;
-	/**	<code>JRadioButton</code> indicating it's a private game */
+	
+	/**	<code>JRadioButton</code> indicating it's a private game. */
 	JRadioButton rdbtnPrivate;
 	
 	/**
+	 * Create the panel for collecting information for create game request.
+	 * 
 	 * @param model <code>Model</code> for current application.
 	 * @param application Current <code>Application</code>.
 	 */
-	public CreateGamePanel (Model model, Application application) {
+	public CreateGamePanel(Model model, Application application) {
 		this.model = model;
 		this.app = application;
 		GroupLayout groupLayout = new GroupLayout(this);

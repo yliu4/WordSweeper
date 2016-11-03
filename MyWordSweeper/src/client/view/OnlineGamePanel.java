@@ -20,18 +20,41 @@ import javax.swing.GroupLayout.Alignment;
  * @author Team Pisces
  *
  */
-public class OnlineGamePanel extends JPanel{
+public class OnlineGamePanel extends JPanel {
+	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
+
+	/** Refrence <code>Application</code> for easy navigation. */
 	Application app;
+	
+	/** Current game. */
 	Game game;
+	
+	/** <code>JPanel</code> for the <code>Board</code> in this <code>Game</code>.*/
 	BoardPanel boardPanel = null;
+
 	JLabel lblScore_1 = null;
 	JLabel lblCurrentWord = null;
 	String currentWord;
 	int score;
+
 	
+	/** <code>JLabel</code> for displaying the gameID. */
+	JLabel lblRoom;
 	
-	public OnlineGamePanel (Model model, Application application) {
+	/** <code>JLabel</code> for displaying the current player's name. */
+	JLabel lblYourName;
+	
+	/** <code>JLabel</code> for displaying the total score of the current player. */
+	JLabel lblTotalScore;
+	
+	/**
+	 * Create the panel for online game view.
+	 * 
+	 * @param model <code>Model</code> for current application.
+	 * @param application Current <code>Application</code>.
+	 */
+	public OnlineGamePanel(Model model, Application application) {
 		this.model = model;
 		this.app = application;
 		this.score = 0;
@@ -52,22 +75,37 @@ public class OnlineGamePanel extends JPanel{
 		setLayout(groupLayout);
 	}
 
-	public void setGame(Game game) {
-		this.game = game;
-	}
-	
+
+	/**
+	 * Get the current <code>Game> object.
+	 * 
+	 * @return A <code>Game</code> object for the current game.
+	 */
+
 	public Game getGame() {
 		return this.game;
 	}
 	
+
 	public void setScore(int score) {
 		this.score = score;
 	}
 	
 	public void setCurrentWord(String word) {
 		this.currentWord = word;
+
+	/**
+	 * Set the current game.
+	 * 
+	 * @param game A <code>Game</code> object for the current game.
+	 */
+	public void setGame(Game game) {
+		this.game = game;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

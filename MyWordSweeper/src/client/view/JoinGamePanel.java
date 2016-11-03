@@ -30,12 +30,27 @@ import client.model.Model;
 */
 
 public class JoinGamePanel extends JPanel {
-	Game game;
+	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
+
+	/** Refrence <code>Application</code> for easy navigation. */
 	Application app;
+	
+	/** Current game. */
+	Game game; // Do we need this?
+	
+	/**	<code>JTextField</code> for the nickname. */
 	JTextField textFieldNickname;
+	
+	/**	<code>JTextField</code> for the gameID. */
 	JTextField textFieldGameID;
 
+	/**
+	 * Create the panel for collecting information for join game request.
+	 * 
+	 * @param model <code>Model</code> for current application.
+	 * @param application Current <code>Application</code>.
+	 */
 	public JoinGamePanel(Model model, Application application) {
 		this.model = model;
 		this.app = application;
@@ -68,18 +83,32 @@ public class JoinGamePanel extends JPanel {
 		add(textFieldGameID);
 	}
 	
+	// Do we need this?
 	public void setGame(Game game) {
 		this.game = game;
 	}
 
+	/**
+	 * Get the <code>JTextField</code> recording the nickname.
+	 * 
+	 * @return A <code>JTextField</code> recording the nickname.
+	 */
 	public JTextField getTextFieldNickname() {
 		return textFieldNickname;
 	}
 
+	/**
+	 * Get the <code>JTextField</code> recording the gameID.
+	 * 
+	 * @return A <code>JTextField</code> recording the gameID.
+	 */
 	public JTextField getTextFieldGameID() {
 		return textFieldGameID;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -125,21 +154,5 @@ public class JoinGamePanel extends JPanel {
 				new ReturnToMenuController(model, app).process();
 			}
 		});
-	}
-
-	
-	
-	private void setDefaultCloseOperation(int exitOnClose) {
-		// TODO Auto-generated method stub
-		
-	}
-	// get the name of player
-	public JTextField getNameTextField() {
-		return textFieldNickname;
-	}
-	//get the the input gameID from player
-	public JTextField getGameIDTextField()
-	{
-		return textFieldGameID;
 	}
 }

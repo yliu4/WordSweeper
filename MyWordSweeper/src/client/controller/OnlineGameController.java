@@ -10,7 +10,7 @@ import client.view.Application;
  * 
  * need to check the response message from sever to justify if the the game is 
  * 
- * lock, private or public game
+ * lock, private or public game.
  * 
  * @author Team Pisces
  *

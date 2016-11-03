@@ -20,7 +20,7 @@ import java.util.HashSet;
  * @author Team Pisces
  *
  */
-public class BoardPanel extends JPanel{
+public class BoardPanel extends JPanel {
 	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
 	Application app;
