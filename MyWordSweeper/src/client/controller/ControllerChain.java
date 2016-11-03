@@ -24,7 +24,7 @@ public abstract class ControllerChain implements IClientController {
 	/**
 	 * ControllerChain constructor for chaining next response controller
 	 *
-	 * @param next    the next response controller for current response controller
+	 * @param next  the next response controller for current response controller
 	 */
 	protected ControllerChain(ControllerChain next) {
 		this.next = next;
@@ -33,7 +33,7 @@ public abstract class ControllerChain implements IClientController {
 	/**
 	 * ControllerChain constructor for chaining next response controller
 	 *
-	 * @param response    response from server in xml format
+	 * @param response  response from server in xml format
 	 */
 	public abstract boolean process(Message response);
 }

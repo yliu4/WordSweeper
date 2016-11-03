@@ -16,7 +16,7 @@ public class ChoosePublicController {
 	/**
 	 * ChoosePublicController constructor
 	 *
-	 * @param app  	 initialize application
+	 * @param app  initialize the reference of application
 	 */
 	public ChoosePublicController(Application app) {
 		this.app = app;
@@ -24,7 +24,6 @@ public class ChoosePublicController {
 	
 	/**
 	 * set password's text field uneditable when choosing public mode
-	 *
 	 */
 	public void process() {
 		app.getCreateGamePanel().getTextFieldPassword().setEditable(false);

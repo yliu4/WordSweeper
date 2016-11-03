@@ -27,14 +27,17 @@ import client.view.OnlineGamePanel;
  * @since 2016-10-30
  */
 public class BoardResponseController extends ControllerChain {
+	/** Reference <code>Application</code> for easy navigation. */
 	public Application app;
+	
+	/** Reference <code>Model</code> for easy navigation. */
 	public Model model;
 	
 	/**
 	 * BoardResponseController constructor
 	 *
-	 * @param app  	 initialize application
-	 * @param panel  initialize panel
+	 * @param app  	 initialize the reference of application
+	 * @param panel  initialize the reference of panel
 	 */
 	public BoardResponseController(Application app, Model model) {
 		this.app = app;
