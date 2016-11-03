@@ -8,9 +8,8 @@ import java.util.*;
 import javax.swing.*;
 
 import client.controller.*;
+import client.controller.OnlineGameController.ShiftDirection;
 import client.model.*;
-
-import javax.swing.GroupLayout.Alignment;
 
 /**
  * The <code>OnlineGamePanel</code> class represents an online game, which
@@ -33,11 +32,8 @@ public class OnlineGamePanel extends JPanel {
 	/** <code>JPanel</code> for the <code>Board</code> in this <code>Game</code>.*/
 	BoardPanel boardPanel = null;
 
-	JLabel lblScore_1 = null;
+	/** <code>JLabel</code> for displaying the current selected Word. */
 	JLabel lblCurrentWord = null;
-	String currentWord;
-	int score;
-
 	
 	/** <code>JLabel</code> for displaying the gameID. */
 	JLabel lblRoom;
@@ -47,6 +43,9 @@ public class OnlineGamePanel extends JPanel {
 	
 	/** <code>JLabel</code> for displaying the total score of the current player. */
 	JLabel lblTotalScore;
+
+	String currentWord;
+	int score;
 	
 	/**
 	 * Create the panel for online game view.
@@ -59,20 +58,21 @@ public class OnlineGamePanel extends JPanel {
 		this.app = application;
 		this.score = 0;
 		this.currentWord = "";
+
+		setLayout(new GroupLayout(this));
 		
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 450, Short.MAX_VALUE)
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 300, Short.MAX_VALUE)
-		);
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = d.height;
+		int width = d.width;
 		
-		lblScore_1 = new JLabel("Score: " + score + "\r\n");
+		JLabel lblShift = new JLabel("Shift");
+		lblShift.setHorizontalAlignment(SwingConstants.CENTER);
+		lblShift.setFont(new Font("Arial", Font.PLAIN, 7*height/360));
+		lblShift.setBounds(16*height/45, 27*width/320, height/15, 7*width/320);
+		add(lblShift);
+		
+		lblTotalScore = new JLabel("Score: " + score + "\r\n");
 		lblCurrentWord = new JLabel("Current Word: " + currentWord);
-		setLayout(groupLayout);
 	}
 
 
@@ -86,6 +86,7 @@ public class OnlineGamePanel extends JPanel {
 		return this.game;
 	}
 
+	// Why not use model directly?
 	public void setScore(int score) {
 		this.score = score;
 	}
@@ -144,21 +145,59 @@ public class OnlineGamePanel extends JPanel {
 		lblCurrentWord.setBounds(height/36, 23*width/320, 53*height/180, 9*width/640);
 		add(lblCurrentWord);
 
-		lblScore_1.setText("Score: " + score + "\r\n");
-		lblScore_1.setFont(new Font("Arial", Font.BOLD, height/60));
-		lblScore_1.setBounds(height/36, 7*width/80, 53*height/180, 9*width/640);
-		add(lblScore_1);
+		lblTotalScore.setText("Score: " + score + "\r\n");
+		lblTotalScore.setFont(new Font("Arial", Font.BOLD, height/60));
+		lblTotalScore.setBounds(height/36, 7*width/80, 53*height/180, 9*width/640);
+		add(lblTotalScore);
 
 		ArrayList<Cell> cells = this.game.getBoard().getCells();
-		if (this.boardPanel == null)
-		{
+		if (this.boardPanel == null) {
 			this.boardPanel = new BoardPanel(model, app, cells);
 			add(boardPanel);
 		}
-		else
-		{
+		else {
 			this.boardPanel.updateCells(cells);
 			this.boardPanel.repaint();
 		}
+		
+		JButton btnLeft = new JButton("\u2190"); //Left
+		btnLeft.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
+		btnLeft.setBounds(16*height/45, 61*width/320, height/15, 3*width/80);
+		add(btnLeft);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new OnlineGameController(model, app).processShift(ShiftDirection.Left);
+			}
+		});
+
+		JButton btnRight = new JButton("\u2192"); //Right
+		btnRight.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
+		btnRight.setBounds(16*height/45, 74*width/320, height/15, 3*width/80);
+		add(btnRight);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new OnlineGameController(model, app).processShift(ShiftDirection.Right);
+			}
+		});
+
+		JButton btnUp = new JButton("\u2191"); // Up
+		btnUp.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
+		btnUp.setBounds(16*height/45, 35*width/320, height/15, 3*width/80);
+		add(btnUp);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new OnlineGameController(model, app).processShift(ShiftDirection.Up);
+			}
+		});
+		
+		JButton btnDown = new JButton("\u2193"); // Down
+		btnDown.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
+		btnDown.setBounds(16*height/45, 48*width/320, height/15, 3*width/80);
+		add(btnDown);
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new OnlineGameController(model, app).processShift(ShiftDirection.Down);
+			}
+		});
 	}
 }
