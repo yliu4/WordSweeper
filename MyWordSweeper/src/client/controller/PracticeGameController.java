@@ -49,7 +49,11 @@ public class PracticeGameController {
 	/**
 	 * Randomly generate 16 Cells for the Board
 	 * 
+<<<<<<< HEAD
+	 * @return A List of cells
+=======
 	 * @return A List of Cells
+>>>>>>> mtian0415
 	 */
 	public ArrayList<Cell> generatecells () {
 		ArrayList<Cell> cells = new ArrayList<Cell>(16);
