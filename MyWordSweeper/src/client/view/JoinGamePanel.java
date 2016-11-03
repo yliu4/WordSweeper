@@ -29,10 +29,10 @@ import client.model.Model;
 */
 
 public class JoinGamePanel extends JPanel {
-	/** Refrence <code>Model</code> for easy navigation. */
+	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 
-	/** Refrence <code>Application</code> for easy navigation. */
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
 	/** Current game. */

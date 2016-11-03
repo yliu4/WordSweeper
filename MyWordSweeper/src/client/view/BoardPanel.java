@@ -17,7 +17,7 @@ import client.model.*;
  *
  */
 public class BoardPanel extends JPanel {
-	/** Refrence <code>Model</code> for easy navigation. */
+	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 	Application app;
 	
