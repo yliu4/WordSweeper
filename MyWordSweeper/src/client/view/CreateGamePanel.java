@@ -32,10 +32,10 @@ import client.model.Model;
  *
  */
 public class CreateGamePanel extends JPanel {
-	/** Refrence <code>Model</code> for easy navigation. */
+	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 
-	/** Refrence <code>Application</code> for easy navigation. */
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
 	/**	<code>JTextField</code> for the nickname. */
@@ -62,7 +62,7 @@ public class CreateGamePanel extends JPanel {
 	public CreateGamePanel(Model model, Application application) {
 		this.model = model;
 		this.app = application;
-
+		
 		setLayout(new GroupLayout(this));
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();

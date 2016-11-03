@@ -164,6 +164,8 @@ public class Application extends JFrame {
 	/** Go to online game panel. */
     public void gotoOnlineGamePanel()
     {
+    	createGamePanel.setVisible(false);
+		remove(createGamePanel);
     	joinGamePanel.setVisible(false);
 		remove(joinGamePanel);
 		
@@ -205,7 +207,12 @@ public class Application extends JFrame {
 		createGamePanel.setVisible(true);
 		add(createGamePanel);
 	}
-	
+
+	public void setJoinGameController(JoinGameController joinGameController) {
+		this.onlineGamePanel.setGame(joinGameController.getGame());
+		this.joinGameController = joinGameController;
+	}
+
 	/**
 	 * Set the <code>PracticeGameController</code> for the <code>PracticeGamePanel</code>.
 	 * 

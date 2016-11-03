@@ -20,12 +20,14 @@ import client.model.Game;
 import client.model.Model;
 
 /**
-* The <code>JoinGamePanel</code> class represents the view that enables
-*  
+* The <code>JoinGamePanel</code> class represents the view that enables 
+* 
 * the player to enter his/her nickname and gmeID to join a game.
 * 
 * @author Team Pisces
+* 
 */
+
 public class JoinGamePanel extends JPanel {
 	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;

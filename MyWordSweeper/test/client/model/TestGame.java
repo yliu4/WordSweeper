@@ -167,7 +167,7 @@ public class TestGame extends TestCase {
 		game.addPlayer(player1);
 		game.addPlayer(player2);
 		game.currentPlayer = player1;
-		
+
 		ArrayList<Cell> cells = new ArrayList<Cell>();
 
 		Location location1 = new Location(1, 2);

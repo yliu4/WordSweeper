@@ -14,18 +14,26 @@ public abstract class ControllerChain implements IClientController {
 	/** Next one in the chain. Once null is reached, done. */
 	IClientController next = null;
 	
-	/** Terminal entry in the chain. */
+	/**
+	 * ControllerChain constructor
+	 */
 	protected ControllerChain() {
 		
 	}
 	
-	/** Chain together. */
+	/**
+	 * ControllerChain constructor for chaining next response controller
+	 *
+	 * @param next    the next response controller for current response controller
+	 */
 	protected ControllerChain(ControllerChain next) {
 		this.next = next;
 	}
 	
-	/** 
-	 * Carry out the processing. 
+	/**
+	 * ControllerChain constructor for chaining next response controller
+	 *
+	 * @param response    response from server in xml format
 	 */
 	public abstract boolean process(Message response);
 }

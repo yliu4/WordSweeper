@@ -1,9 +1,10 @@
+
 package client.controller;
 
 import client.view.Application;
 
 /**
- * The <code>ChoosePrivateController</code> class enables the editing of password field.
+ * The ChoosePrivateController class enables the editing of password field.
  * 
  * @author Team Pisces
  *
@@ -19,3 +20,4 @@ public class ChoosePrivateController {
 		app.getCreateGamePanel().getTextFieldPassword().setEditable(true);
 	}
 }
+
