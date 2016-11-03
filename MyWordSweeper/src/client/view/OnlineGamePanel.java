@@ -10,19 +10,21 @@ import javax.swing.*;
 import client.controller.*;
 import client.model.*;
 
+import javax.swing.GroupLayout.Alignment;
+
 /**
- * The <code>PracticeGamePanel</code> class represents the practice game, which
+ * The <code>OnlineGamePanel</code> class represents an online game, which
  * 
- * contains a <code>Board</code>.
+ * contains a <code>Board</code>, and a list of <code>Player</code>s.
  * 
  * @author Team Pisces
  *
  */
-public class PracticeGamePanel extends JPanel{
-	/** Refrence <code>Model</code> for easy navigation. */
+public class OnlineGamePanel extends JPanel {
+	/** Refernce <code>Model</code> for easy navigation. */
 	Model model;
 
-	/** Refrence <code>Application</code> for easy navigation. */
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
 	/** Current game. */
@@ -30,6 +32,12 @@ public class PracticeGamePanel extends JPanel{
 	
 	/** <code>JPanel</code> for the <code>Board</code> in this <code>Game</code>.*/
 	BoardPanel boardPanel = null;
+
+	JLabel lblScore_1 = null;
+	JLabel lblCurrentWord = null;
+	String currentWord;
+	int score;
+
 	
 	/** <code>JLabel</code> for displaying the gameID. */
 	JLabel lblRoom;
@@ -40,32 +48,50 @@ public class PracticeGamePanel extends JPanel{
 	/** <code>JLabel</code> for displaying the total score of the current player. */
 	JLabel lblTotalScore;
 	
-	/** <code>JLabel</code> for displaying the current selected word. */
-	JLabel lblCurrentWord;
-	
-	/** <code>JLabel</code> for displaying the score of the current selected word. */
-	JLabel lblScore;
-
 	/**
-	 * Create the panel for practice game view.
+	 * Create the panel for online game view.
 	 * 
 	 * @param model <code>Model</code> for current application.
 	 * @param application Current <code>Application</code>.
 	 */
-	public PracticeGamePanel(Model model, Application application) {
+	public OnlineGamePanel(Model model, Application application) {
 		this.model = model;
 		this.app = application;
+		this.score = 0;
+		this.currentWord = "";
+		
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 450, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 300, Short.MAX_VALUE)
+		);
+		
+		lblScore_1 = new JLabel("Score: " + score + "\r\n");
+		lblCurrentWord = new JLabel("Current Word: " + currentWord);
+		setLayout(groupLayout);
+	}
 
-		setLayout(new GroupLayout(this));
-		
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
-		
-		lblCurrentWord = new JLabel("Current Word: ");
-		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, height/60));
-		lblCurrentWord.setBounds(height/36, 23*width/320, 53*height/180, 9*width/640);
-		add(lblCurrentWord);
+
+	/**
+	 * Get the current <code>Game> object.
+	 * 
+	 * @return A <code>Game</code> object for the current game.
+	 */
+
+	public Game getGame() {
+		return this.game;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public void setCurrentWord(String word) {
+		this.currentWord = word;
 	}
 
 	/**
@@ -98,22 +124,12 @@ public class PracticeGamePanel extends JPanel{
 			}
 		});
 
-		JButton btnResetGame = new JButton("Reset Game");
-		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, height/50));
-		btnResetGame.setBounds(23*height/45, 17*width/640, 3*height/20, width/64);
-		add(btnResetGame);
-		btnResetGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new ResetPracticeGameController(model, app).process();
-			}
-		});
+		JLabel lblRoomm = new JLabel("Room " + game.getGameId());
+		lblRoomm.setFont(new Font("Arial", Font.BOLD, height/30));
+		lblRoomm.setBounds(height/4, 17*width/640, 7*height/45, width/64);
+		add(lblRoomm);
 
-		lblRoom = new JLabel("Practice");
-		lblRoom.setFont(new Font("Arial", Font.BOLD, height/30));
-		lblRoom.setBounds(height/4, 17*width/640, 7*height/45, width/64);
-		add(lblRoom);
-
-		JLabel lblYourNameAnna = new JLabel("Your Name: Practicer");
+		JLabel lblYourNameAnna = new JLabel("Your Name: " + game.getCurrentPlayer().getName());
 		lblYourNameAnna.setFont(new Font("Tahoma", Font.PLAIN, height/60));
 		lblYourNameAnna.setBounds(83*height/180, 7*width/100, height/6, 7*width/640);
 		add(lblYourNameAnna);
@@ -123,12 +139,12 @@ public class PracticeGamePanel extends JPanel{
 		lblScore.setBounds(83*height/180, 17*width/200, height/6, 7*width/640);
 		add(lblScore);
 
-		JLabel lblCurrentWord = new JLabel("Current Word: ");
+		lblCurrentWord.setText("Current Word: " + currentWord);
 		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, height/60));
 		lblCurrentWord.setBounds(height/36, 23*width/320, 53*height/180, 9*width/640);
 		add(lblCurrentWord);
 
-		JLabel lblScore_1 = new JLabel("Score: \r\n");
+		lblScore_1.setText("Score: " + score + "\r\n");
 		lblScore_1.setFont(new Font("Arial", Font.BOLD, height/60));
 		lblScore_1.setBounds(height/36, 7*width/80, 53*height/180, 9*width/640);
 		add(lblScore_1);

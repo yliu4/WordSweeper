@@ -1,28 +1,38 @@
 package client.model;
 
 import junit.framework.TestCase;
-import client.model.*;
 
+/**
+ * The <code>TestCell</code> class tests the <code>Cell</code> class.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class TestCell extends TestCase {
+	/**
+	 * Test the constructor.
+	 */
 	public void testConstructor() {
-		Location lo = new Location(1, 2);
-		Letter le = new Letter("A");
+		Location location = new Location(1, 2);
+		Letter letter = new Letter("A");
+		Cell cell = new Cell(location, letter);
 		
-		Cell cell = new Cell(lo, le);
-		
-		assertEquals(lo, cell.getLocation());
-		assertEquals(le, cell.getLetter());
+		assertEquals(location, cell.getLocation());
+		assertEquals(letter, cell.getLetter());
 	}
 	
+	/**
+	 * Test the setLetter method.
+	 */
 	public void testSetLetter() {
-		Location lo = new Location(1, 2);
-		Letter le = new Letter("A");
+		Location location = new Location(1, 2);
+		Letter letter = new Letter("A");
+		Cell cell = new Cell(location, letter);
 		
-		Cell cell = new Cell(lo, le);
-		Letter letter = new Letter("B");
-		cell.setLetter(letter);
+		Letter newLetter = new Letter("B");
+		cell.setLetter(newLetter);
 		
-		assertEquals(letter, cell.getLetter());
-		assertEquals(false, le.equals(cell.getLetter()));
+		assertEquals(newLetter, cell.getLetter());
+		assertEquals(false, letter.equals(cell.getLetter()));
 	}
 }

@@ -19,7 +19,10 @@ public class JoinGameRequestController implements IProtocolHandler {
 	}
 	
 	public Message process(ClientState client, Message request) {
-		
+		//Node child = request.content.
+	    //System.out.println(child.getUserData("gameId").toString());
+		//string id = 
+				
 		model.joinGame(); 
 		
 		String otherPlayers = "";

@@ -1,53 +1,120 @@
 package client.controller;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import xml.Message;
+import client.model.Cell;
+import client.model.Game;
+import client.model.Letter;
+import client.model.Location;
 import client.model.Model;
+import client.model.Player;
 import client.view.Application;
+import client.view.OnlineGamePanel;
 
 /**
- * Tells the client whether the model is locked or not BY SOME OTHER CLIENT. This will never be returned to a client
- * to tell him that HE has the model locked (that is job of LockResponse).
+ * The board response controller is used to process board response from server.
+ * 
+ * And it will draw a new board if it's for create game request, otherwise
+ * update the board.
+ * 
+ * @author Team Pisces
+ * @since 2016-10-30
  */
-public class BoardResponseController extends ControllerChain{
-
+public class BoardResponseController extends ControllerChain {
 	public Application app;
 	public Model model;
 	
-	public BoardResponseController(Application a, Model m) {
-		this.app = a;
-		this.model = m;
+	/**
+	 * BoardResponseController constructor
+	 *
+	 * @param app  	 initialize application
+	 * @param panel  initialize panel
+	 */
+	public BoardResponseController(Application app, Model model) {
+		this.app = app;
+		this.model = model;
 	}
 	
+	/**
+	 * process board responses from server after createGameRquest or joinGameRequest
+	 *
+	 * @param Message board response message from server in xml format
+	 */
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
-		if (!type.equals ("boardResponse")) {
+		if (!type.equals("boardResponse")) {
 			return next.process(response);
 		}
-		
-		// this refers to the outer node of the Message DOM (in this case, updateResponse).
+		System.out.println(response);
 		Node boardResponse = response.contents.getFirstChild();
 		NamedNodeMap map = boardResponse.getAttributes();
+		String gameId = null, contents = null, managingUser = null, bonus = null;
+		String pname = null, pboard = null, pposition = null, pscore = null;
 		
-		String gameId = map.getNamedItem("gameId").getNodeValue();
-//		app.getResponseArea().append("Board Message received for game:" + gameId + "\n");
-//		app.getResponseArea().append("Players:\n");
+		// get global game board information
+		gameId = map.getNamedItem("gameId").getNodeValue();
+		contents = map.getNamedItem("contents").getNodeValue();
+		managingUser = map.getNamedItem("managingUser").getNodeValue();
+		bonus = map.getNamedItem("managingUser").getNodeValue();
+		
+		// get game board information for the managing user
+		// TODO: need to construct a board from the following information
+		ArrayList<Cell> cells = new ArrayList<Cell>();
+		// TODO: need to set the bonus from server response
+		Location bonusLoc = new Location(10, 10);
+
 		NodeList list = boardResponse.getChildNodes();
 		for (int i = 0; i < list.getLength(); i++) {
 			Node n = list.item(i);
-			String pname = n.getAttributes().getNamedItem("name").getNodeValue();
-//			app.getResponseArea().append("  " + pname  + "\n");
+			pname = n.getAttributes().getNamedItem("name").getNodeValue();
+			pboard = n.getAttributes().getNamedItem("board").getNodeValue();
+			pposition = n.getAttributes().getNamedItem("position").getNodeValue();
+			pscore = n.getAttributes().getNamedItem("score").getNodeValue();
 		}
-		
-		
 
 		// at this point, you would normally start processing this...
-//		app.getResponseArea().append(response.toString());
-//		app.getResponseArea().append("\n");
+		OnlineGamePanel onlinePanel = app.getOnlineGamePanel();
+		Game game = onlinePanel.getGame();
+
+		if(game == null)
+			game = new Game(new Player(pname, 0, new Location(1, 1)));
+
+		// set game id 
+		game.setGameId(gameId);
+		
+		// set game board
+		generateCells(pboard, cells);
+		String[] cellLocation = pposition.split(",");
+		game.setBoard(cells, new Location(Integer.valueOf(cellLocation[0]), Integer.valueOf(cellLocation[1])));
+		
+		// set score
+		onlinePanel.setScore(Integer.valueOf(pscore)); 
+		
+		// go to online panel
+		onlinePanel.setGame(game);
+		app.gotoOnlineGamePanel();
+		onlinePanel.repaint();
+		onlinePanel.revalidate();
+		
 		return true;
 	}
-
+	
+	public void generateCells(String cellString, ArrayList<Cell> cells) {
+		if(cellString.length() != 16) {
+			System.err.println("Wrong cell string length");
+			return;
+		}
+		
+		for(int i = 0; i < cellString.length(); i++) {
+			Location cellLocation = new Location(i/4, i%4);
+			Letter cellLetter = new Letter(String.valueOf(cellString.charAt(i)));
+			cells.add(new Cell(cellLocation, cellLetter));
+		}
+	}
 }

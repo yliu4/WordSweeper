@@ -13,38 +13,56 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import client.controller.*;
+import client.controller.ChoosePrivateController;
+import client.controller.ChoosePublicController;
+import client.controller.CreateGameController;
+import client.controller.ReturnToMenuController;
 import client.model.Model;
 
 /**
- * The <code>CreateGamePanel</code> class represents the view that enables 
+ * The <code>CreateGamePanel</code> class gathers the information needed for creating 
  * 
- * the player to enter his/her nickname and password (optional) to create 
- * 
- * a new game.
+ * a new game, and provides the function to create a game. 
  * 
  * @author Team Pisces
  *
  */
-public class CreateGamePanel extends JPanel{
+public class CreateGamePanel extends JPanel {
+	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
-	Application application;
+
+	/** Reference <code>Application</code> for easy navigation. */
+	Application app;
 	
-	/**	<code>JTextField</code> for nickname.*/
-	JTextField textFieldNN;
-	/**	<code>JTextField</code> for password.*/
-	JTextField textFieldPW;
+	/**	<code>JTextField</code> for the nickname. */
+	JTextField textFieldNickname;
+	
+	/**	<code>JPasswordField</code> for the password. */
+	JPasswordField textFieldPassword;
+
+	/** A <code>ButtonGroup</code> to manage the radiobuttons as a whole. */
 	ButtonGroup modeBtnGroup;
+	
+	/**	<code>JRadioButton</code> indicating it's a public game. */
 	JRadioButton rdbtnPublic;
+	
+	/**	<code>JRadioButton</code> indicating it's a private game. */
 	JRadioButton rdbtnPrivate;
 	
-	public CreateGamePanel (Model model, Application application) {
+	/**
+	 * Create the panel for collecting information for create game request.
+	 * 
+	 * @param model <code>Model</code> for current application.
+	 * @param application Current <code>Application</code>.
+	 */
+	public CreateGamePanel(Model model, Application application) {
 		this.model = model;
-		this.application = application;
+		this.app = application;
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -60,24 +78,23 @@ public class CreateGamePanel extends JPanel{
 		int height = d.height;
 		int width = d.width;
 		
-		textFieldNN = new JTextField();
-		textFieldNN.setToolTipText("A default name will be assigned if it's empty.");
-		textFieldNN.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
-		textFieldNN.setBounds(21*width/160, 3*height/20, 3*width/16, height/20);
-		add(textFieldNN);
+		textFieldNickname = new JTextField();
+		textFieldNickname.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
+		textFieldNickname.setBounds(21*width/160, 3*height/20, 3*width/16, height/20);
+		add(textFieldNickname);
 		
-		textFieldPW = new JTextField();
-		textFieldPW.setEditable(false);
-		textFieldPW.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
-		textFieldPW.setBounds(21*width/160, 11*height/36, 3*width/16, height/20);
-		add(textFieldPW);
+		textFieldPassword = new JPasswordField();
+		textFieldPassword.setEditable(false);
+		textFieldPassword.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
+		textFieldPassword.setBounds(21*width/160, 11*height/36, 3*width/16, height/20);
+		add(textFieldPassword);
 		
 		rdbtnPublic = new JRadioButton("Public", true);
 		rdbtnPublic.setFont(new Font("Tahoma", Font.PLAIN, height/45));
 		rdbtnPublic.setBounds(21*width/160, 41*height/180, 5*width/64, height/45);
 		rdbtnPublic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ChoosePublicController(CreateGamePanel.this.application).process(); 
+				new ChoosePublicController(app).process();
 			}
 		});
 		
@@ -86,7 +103,7 @@ public class CreateGamePanel extends JPanel{
 		rdbtnPrivate.setBounds(21*width/160, 47*height/180, 5*width/64, height/45);
 		rdbtnPrivate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ChoosePrivateController(CreateGamePanel.this.application).process(); 
+				new ChoosePrivateController(app).process();
 			}
 		});
 		
@@ -97,6 +114,10 @@ public class CreateGamePanel extends JPanel{
 		add(rdbtnPrivate);
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -130,32 +151,48 @@ public class CreateGamePanel extends JPanel{
 		
 		JButton btnNewButton = new JButton("GO!");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, height/36));
-		btnNewButton.setBounds(3*width/32, 19*height/45, 3*width/32, height/20);
+		btnNewButton.setBounds(5*width/64, 19*height/45, 3*width/32, height/20);
 		add(btnNewButton);
-		
-		JButton btnCancelButton = new JButton("Cancel");
-		btnCancelButton.setFont(new Font("Tahoma", Font.PLAIN, height/36));
-		btnCancelButton.setBounds(17*width/80, 19*height/45, 3*width/32, height/20);
-		add(btnCancelButton);
-		btnCancelButton.addActionListener(new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ReturnToMenuController(model, application).process();
+				new CreateGameController(model, app).process();
+			}
+		});
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, height/36));
+		btnCancel.setBounds(17*width/80, 19*height/45, 3*width/32, height/20);
+		add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ReturnToMenuController(model, app).process();
 			}
 		});
 	}
 
-	public JTextField getTextFieldNN() {
-		return textFieldNN;
+	/**
+	 * Get the <code>JTextField</code> recording the nickname.
+	 * 
+	 * @return A <code>JTextField</code> recording the nickname.
+	 */
+	public JTextField getTextFieldNickname() {
+		return textFieldNickname;
 	}
 
-	public JTextField getTextFieldPW() {
-		return textFieldPW;
+	/**
+	 * Get the <code>JPasswordField</code> recording the password.
+	 * 
+	 * @return A <code>JPasswordField</code> recording the password.
+	 */
+	public JPasswordField getTextFieldPassword() {
+		return textFieldPassword;
 	}
 
-	public JRadioButton getRdbtnPublic() {
-		return rdbtnPublic;
-	}
-
+	/**
+	 * Get the <code>JRadioButton</code> representing the private mode.
+	 * 
+	 * @return A <code>JRadioButton</code> representing the private mode.
+	 */
 	public JRadioButton getRdbtnPrivate() {
 		return rdbtnPrivate;
 	}

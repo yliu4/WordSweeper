@@ -1,14 +1,19 @@
 package client.view;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 
 import client.ServerAccess;
+import client.controller.OpenJoinGamePanelController;
+import client.controller.JoinGameController;
 import client.controller.PracticeGameController;
 import client.model.Model;
-
 
 /**
  * <code>Application</code> is the top-level boundary class that has access to
@@ -19,20 +24,38 @@ import client.model.Model;
  *
  */
 public class Application extends JFrame {
-
 	/** GUI application maintains reference to Model for ease of navigation. */
-	public Model model;
-	
-	MenuPanel menuPanel;
-	PracticeGamePanel practiceGamePanel;
-	CreateGamePanel createGamePanel;
-	
-	PracticeGameController practiceGameController;
+	Model model;
 
+	/** <code>JPanel</code> for main menu. */
+	MenuPanel menuPanel;
+
+	/** <code>JPanel</code> for practice game view. */
+	PracticeGamePanel practiceGamePanel;
+
+	/** <code>JPanel</code> for create game window. */
+	CreateGamePanel createGamePanel;
+
+	/** <code>JPanel</code> for join game window. */
+	JoinGamePanel joinGamePanel;
+
+	/** <code>JPanel</code> for online game view. */
+	OnlineGamePanel onlineGamePanel;
+
+	/** Controller for joining a game. */
+	JoinGameController joinGameController;
+
+	/** Controller for opening a join game window. */
+	OpenJoinGamePanelController openJoinGamePanelController;
+
+	/** Controller for creating a practice game. */
+	PracticeGameController practiceGameController;
+	
+	/** Access server. */
 	ServerAccess serverAccess;
 	
 	/**
-	 * Create the frame.
+	 * Create the frame for WordSweeper.
 	 * 
 	 * @param model
 	 */
@@ -46,66 +69,137 @@ public class Application extends JFrame {
 		int width = d.width;
 
 		setBounds(100, 100, 25*width/64, 5*height/9);
-		
+
 		menuPanel = new MenuPanel(model, this);
+		joinGamePanel = new JoinGamePanel(model, this);
+		onlineGamePanel = new OnlineGamePanel(model,this);
 		practiceGamePanel = new PracticeGamePanel(model, this);
+		
 		add(menuPanel);
 	}
 
-	/** Record the means to communicate with server. */
+	/** 
+	 * Record the means to communicate with server. 
+	 * 
+	 * @param access Access to a server.
+	 */
 	public void setServerAccess(ServerAccess access) {
 		this.serverAccess = access;
 	}
 	
-	/** Get the server access object. */
+	/** 
+	 * Get the server access object. 
+	 * 
+	 * @return Current <code>ServerAccess</code> object.
+	 */
 	public ServerAccess getServerAccess() {
 		return serverAccess;
 	}
-	
+
+	/** 
+	 * Get the <code>MenuPanel</code> object.
+	 * 
+	 * @return Current <code>MenuPanel</code> object.
+	 */
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
-	
-	public PracticeGamePanel getPracticeGamePanel(){
+
+	/** 
+	 * Get the <code>PracticeGamePanel</code> object. 
+	 * 
+	 * @return Current <code>PracticeGamePanel</code> object.
+	 */
+	public PracticeGamePanel getPracticeGamePanel() {
 		return practiceGamePanel;
 	}
-	
+
+	/** 
+	 * Get the <code>CreateGamePanel</code> object. 
+	 * 
+	 * @return Current <code>CreateGamePanel</code> object.
+	 */
 	public CreateGamePanel getCreateGamePanel() {
 		return createGamePanel;
 	}
 
-	/**
-	 * Go to practice game panel
+	/** 
+	 * Get the <code>JoinGamePanel</code> object. 
+	 * 
+	 * @return Current <code>JoinGamePanel</code> object. 
 	 */
+	public JoinGamePanel getJoinGamePanel() {
+		return joinGamePanel;
+	}
+
+	/** 
+	 * Get the <code>OnlineGamePanel</code> object. 
+	 * 
+	 *  Current <code>OnlineGamePanel</code> object. 
+	 */
+	public OnlineGamePanel getOnlineGamePanel()
+	{
+		return onlineGamePanel;
+	}
+
+	/** Go to practice game panel. */
 	public void gotoPraticeGamePanel() {
 		menuPanel.setVisible(false);
 		remove(menuPanel);
+		
 		practiceGamePanel.setVisible(true);
 		add(practiceGamePanel);
 	}
 	
-	/**
-	 * Go to main menu.
-	 */
+	
+	/** Go to join game panel. */
+	public void gotoJoinGamePanel(){
+		menuPanel.setVisible(false);
+		remove(menuPanel);
+		
+		joinGamePanel.setVisible(true);
+		add(joinGamePanel);
+	}
+	
+	/** Go to online game panel. */
+    public void gotoOnlineGamePanel()
+    {
+    	createGamePanel.setVisible(false);
+		remove(createGamePanel);
+    	joinGamePanel.setVisible(false);
+		remove(joinGamePanel);
+		
+		onlineGamePanel.setVisible(true);
+		add(onlineGamePanel);
+    }
+	
+	/** Go to main menu. */
 	public void gotoMainMenu() {
-//		System.out.println(this.getComponentCount());
 		if (practiceGamePanel != null) {
 			practiceGamePanel.setVisible(false);
 			remove(practiceGamePanel);
 		}
+
 		if (createGamePanel != null) {
 			createGamePanel.setVisible(false);
 			remove(createGamePanel);
 		}
-//		System.out.println(this.getComponentCount());
-//		System.out.println();
+
+		if (joinGamePanel != null){
+			joinGamePanel.setVisible(false);
+			remove(joinGamePanel);
+		}
+
+		if (onlineGamePanel != null){
+			onlineGamePanel.setVisible(false);
+			remove(onlineGamePanel);
+		}
+
 		menuPanel.setVisible(true);
 		add(menuPanel);
 	}
 	
-	/**
-	 * Go to create game panel
-	 */
+	/** Go to the create game panel. */
 	public void gotoCreateGamePanel() {
 		menuPanel.setVisible(false);
 		remove(menuPanel);
@@ -113,18 +207,58 @@ public class Application extends JFrame {
 		createGamePanel.setVisible(true);
 		add(createGamePanel);
 	}
-	
-	public void setPracticeGameController(PracticeGameController practiceController)
-	{
+
+	public void setJoinGameController(JoinGameController joinGameController) {
+		this.onlineGamePanel.setGame(joinGameController.getGame());
+		this.joinGameController = joinGameController;
+	}
+
+	/**
+	 * Set the <code>PracticeGameController</code> for the <code>PracticeGamePanel</code>.
+	 * 
+	 * @param practiceController Controller for creating a practice game.
+	 */
+	public void setPracticeGameController(PracticeGameController practiceController) {
 		this.practiceGamePanel.setGame(practiceController.getGame());
 		this.practiceGameController = practiceController;
 	}
 	
-	/**
-	 * Reset the game.
-	 */
-	public void resetGame()
-	{
+	/** Reset the the board in practice game. */
+	public void resetGame() {
 		this.practiceGameController.generateNewBoard();
+	}
+	
+	/**	Show a popup thats warns the player to enter a nickname. */
+	public void popupEmptyNicknameWarnig() {
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = d.height;
+		Object[] options = {"OK"};
+		
+		UIManager.put("OptionPane.buttonFont", 
+				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
+		UIManager.put("OptionPane.messageFont", 
+				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
+		
+		JOptionPane.showOptionDialog(this.getCreateGamePanel(),
+				"Please enter a nickname!", "Warning", 
+				JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
+				null, options, options[0]);
+	}
+
+	/**	Show a popup thats warns the player to enter a password. */
+	public void popupEmptyPasswordWarnig() {
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = d.height;
+		Object[] options = {"OK"};
+		
+		UIManager.put("OptionPane.buttonFont", 
+				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
+		UIManager.put("OptionPane.messageFont", 
+				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
+		
+		JOptionPane.showOptionDialog(this.getCreateGamePanel(),
+				"Please enter a password!", "Warning", 
+				JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
+				null, options, options[0]);
 	}
 }

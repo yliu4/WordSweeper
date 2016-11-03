@@ -20,39 +20,42 @@ import client.view.Application;
  */
 public class PracticeGameController {
 	Model model;
-	Application application;
+	Application app;
 	Game game;
 
 	public PracticeGameController(Model m, Application app) {
 		this.model = m;
-		this.application = app;
+		this.app = app;
 	}
 
 	public void process() {
 		this.game = new Game();
 		generateNewBoard();
-		application.setPracticeGameController(this);
-		application.gotoPraticeGamePanel();
+		app.setPracticeGameController(this);
+		app.gotoPraticeGamePanel();
 	}
 	
 	/**
-	 * Generate a new <code>Board</code> for practice game.
+	 * Generate a new Board for practice game.
 	 * 
 	 * The location of bonus is set to be outside the range of a <code>Board</code>
 	 */
-	public void generateNewBoard()
-	{
+	public void generateNewBoard() {
 		/** The location of bonus is set to be outside the range of a <code>Board</code> */
 		Location nomulti = new Location(10, 10);
 		this.game.setBoard(this.generatecells(), nomulti);
 	}
 	
 	/**
-	 * Randomly generate 16 <code>Cells</code> for the <code>Board</code>
+	 * Randomly generate 16 Cells for the Board
 	 * 
-	 * @return A List of <code>Cells</code>
+<<<<<<< HEAD
+	 * @return A List of cells
+=======
+	 * @return A List of Cells
+>>>>>>> mtian0415
 	 */
-	public ArrayList<Cell> generatecells (){
+	public ArrayList<Cell> generatecells () {
 		ArrayList<Cell> cells = new ArrayList<Cell>(16);
 		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "P", "Qu","R","S","T","U","V","W","X","Y","Z"};
 		int l = alp.length;
@@ -68,9 +71,8 @@ public class PracticeGameController {
 		}
 		return cells;
 	}
-
-	public Game getGame()
-	{
+	
+	public Game getGame() {
 		return this.game;
 	}
 }

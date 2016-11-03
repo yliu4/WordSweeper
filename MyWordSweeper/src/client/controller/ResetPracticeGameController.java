@@ -14,15 +14,14 @@ import client.view.Application;
  */
 public class ResetPracticeGameController {
 	Model model;
-	Application application;
+	Application app;
 
 	public ResetPracticeGameController(Model m, Application app) {
 		this.model = m;
-		this.application = app;
+		this.app = app;
 	}
 
 	public void process() {
-		application.resetGame();
+		app.resetGame();
 	}
-
 }
