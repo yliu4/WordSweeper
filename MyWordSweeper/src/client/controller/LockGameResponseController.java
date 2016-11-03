@@ -16,18 +16,18 @@ import xml.Message;
 import client.model.Model;
 import client.view.Application;
 
-public class JoinGameResponseController extends ControllerChain {
+public class LockGameResponseController extends ControllerChain {
 	Application app;
 	Model model;
 
-	public JoinGameResponseController(Application app, Model model) {
+	public LockGameResponseController(Application app, Model model)  {
 		this.app = app;
 		this.model = model;
 	}
 	
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
-		if (!type.equals ("joinGameResponse")) {
+		if (!type.equals ("lockGameResponse")) {
 			return next.process(response);
 		}
 		
@@ -44,7 +44,7 @@ public class JoinGameResponseController extends ControllerChain {
 				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
 		UIManager.put("OptionPane.messageFont", 
 				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
-		String message = "The game" + gameId + "is locked or your password is wrong! please click \"ok\" to go back.";
+		String message = "The game" + gameId + "is ";
 		JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
         JOptionPane.ERROR_MESSAGE);
 		

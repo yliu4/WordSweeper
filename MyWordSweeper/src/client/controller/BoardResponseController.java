@@ -51,7 +51,7 @@ public class BoardResponseController extends ControllerChain {
 		if (!type.equals("boardResponse")) {
 			return next.process(response);
 		}
-		System.out.println(response);
+
 		Node boardResponse = response.contents.getFirstChild();
 		NamedNodeMap map = boardResponse.getAttributes();
 		String gameId = null, contents = null, managingUser = null, bonus = null;
