@@ -11,24 +11,21 @@ import junit.framework.TestCase;
  *
  */
 public class TestGame extends TestCase {
-	/**
-	 * Test the constructor.
-	 */
+	/** Test the constructor. */
 	public void testConstructor() {
 		Game game = new Game();
 		
 		assertEquals(0, game.getPlayers().size());
 	}
 
-	/**
-	 * Test the getCurrentPlayer method.
-	 */
+	/** Test the getCurrentPlayer method. */
 	public void testGetCurrentPlayer() {
 		ArrayList<Cell> cells = new ArrayList<Cell>();
 		
 		for (int i = 0; i < 16; i++) {
 			Location location = new Location(i / 4, i % 4);
 			Letter letter = new Letter("A");
+			
 			cells.add(new Cell(location, letter));
 		}
 		
@@ -42,9 +39,7 @@ public class TestGame extends TestCase {
 				.getOriginPosition());
 	}
 
-	/**
-	 * Test the addPlayer method.
-	 */
+	/** Test the addPlayer method. */
 	public void testAddPlayer() {
 		Game game = new Game();
 		Location location = new Location(1, 2);
@@ -55,69 +50,56 @@ public class TestGame extends TestCase {
 		assertEquals(1, game.getPlayers().size());
 	}
 
-	/**
-	 * Test the setGameID method.
-	 */
+	/** Test the setGameID method. */
 	public void testSetGameID() {
 		Game game = new Game();
+		
 		game.setGameId("gameid");
 		
 		assertEquals("gameid", game.getGameId());
 	}
 
-	/**
-	 * Test the calculate method with valid word.
-	 */
+	/** Test the calculate method with valid word. */
 	public void testCalculateValid() {
 		Game game = new Game();
-		Location location = new Location(1, 2);
-		Player player = new Player("Ann", 10, location);
+		Location locationOfPlayer = new Location(1, 2);
+		Player player = new Player("Ann", 10, locationOfPlayer);
+		ArrayList<Cell> cells = new ArrayList<Cell>();
+		Location location1 = new Location(1, 2);
+		Letter letter1 = new Letter("A");
+		Location location2 = new Location(1, 3);
+		Letter letter2 = new Letter("A");
+		Location location3 = new Location(1, 4);
+		Letter letter3 = new Letter("L");
 		
 		game.addPlayer(player);
 		game.currentPlayer = player;
-		
-		ArrayList<Cell> cells = new ArrayList<Cell>();
-
-		Location location1 = new Location(1, 2);
-		Letter letter1 = new Letter("A");
 		cells.add(new Cell(location1, letter1));
-
-		Location location2 = new Location(1, 3);
-		Letter letter2 = new Letter("A");
 		cells.add(new Cell(location2, letter2));
-
-		Location location3 = new Location(1, 4);
-		Letter letter3 = new Letter("L");
 		cells.add(new Cell(location3, letter3));
-
+		
 		Word word = new Word(cells);
 		
 		assertEquals(2240, game.calculate(word));
 	}
 
-	/**
-	 * Test the calculate method with invalid word. 
-	 */
+	/** Test the calculate method with invalid word. */
 	public void testCalculateNotValid() {
 		Game game = new Game();
-		Location location = new Location(1, 2);
-		Player player = new Player("Ann", 10, location);
+		Location locationOfPlayer = new Location(1, 2);
+		Player player = new Player("Ann", 10, locationOfPlayer);
+		ArrayList<Cell> cells = new ArrayList<Cell>();
+		Location location1 = new Location(1, 2);
+		Letter letter1 = new Letter("A");
+		Location location2 = new Location(1, 3);
+		Letter letter2 = new Letter("Qu");
+		Location location3 = new Location(1, 4);
+		Letter letter3 = new Letter("L");
 		
 		game.addPlayer(player);
 		game.currentPlayer = player;
-		
-		ArrayList<Cell> cells = new ArrayList<Cell>();
-
-		Location location1 = new Location(1, 2);
-		Letter letter1 = new Letter("A");
 		cells.add(new Cell(location1, letter1));
-
-		Location location2 = new Location(1, 3);
-		Letter letter2 = new Letter("Qu");
 		cells.add(new Cell(location2, letter2));
-
-		Location location3 = new Location(1, 4);
-		Letter letter3 = new Letter("L");
 		cells.add(new Cell(location3, letter3));
 
 		Word word = new Word(cells);
@@ -125,91 +107,75 @@ public class TestGame extends TestCase {
 		assertEquals(0, game.calculate(word));
 	}
 
-	/**
-	 * Test the calculate method with word that contains "Qu".
-	 */
+	/** Test the calculate method with word that contains "Qu". */
 	public void testCalculateQu() {
 		Game game = new Game();
-		Location location = new Location(1, 2);
-		Player player = new Player("Ann", 10, location);
+		Location locationOfPlayer = new Location(1, 2);
+		Player player = new Player("Ann", 10, locationOfPlayer);
+		ArrayList<Cell> cells = new ArrayList<Cell>();
+		Location location1 = new Location(1, 2);
+		Letter letter1 = new Letter("Qu");
+		Location location2 = new Location(1, 3);
+		Letter letter2 = new Letter("I");
+		Location location3 = new Location(1, 4);
+		Letter letter3 = new Letter("N");
 		
 		game.addPlayer(player);
 		game.currentPlayer = player;
-		
-		ArrayList<Cell> cells = new ArrayList<Cell>();
-
-		Location location1 = new Location(1, 2);
-		Letter letter1 = new Letter("Qu");
 		cells.add(new Cell(location1, letter1));
-
-		Location location2 = new Location(1, 3);
-		Letter letter2 = new Letter("I");
 		cells.add(new Cell(location2, letter2));
-
-		Location location3 = new Location(1, 4);
-		Letter letter3 = new Letter("N");
 		cells.add(new Cell(location3, letter3));
 
 		Word word = new Word(cells);
+		
 		assertEquals(4800, game.calculate(word));
 	}
 
-	/**
-	 * Test the calculate method with word that contains overlapped cell(s).
-	 */
+	/** Test the calculate method with word that contains overlapped cell(s). */
 	public void testCalculateHasOverlap() {
 		Game game = new Game();
 		Location locationOfPlayer1 = new Location(1, 2);
 		Player player1 = new Player("Ann", 10, locationOfPlayer1);
 		Location locationOfPlayer2 = new Location(1, 2);
 		Player player2 = new Player("Tom", 10, locationOfPlayer2);
+		ArrayList<Cell> cells = new ArrayList<Cell>();
+		Location location1 = new Location(1, 2);
+		Letter letter1 = new Letter("Qu");
+		Location location2 = new Location(1, 3);
+		Letter letter2 = new Letter("I");
+		Location location3 = new Location(1, 4);
+		Letter letter3 = new Letter("N");
 		
 		game.addPlayer(player1);
 		game.addPlayer(player2);
 		game.currentPlayer = player1;
-
-		ArrayList<Cell> cells = new ArrayList<Cell>();
-
-		Location location1 = new Location(1, 2);
-		Letter letter1 = new Letter("Qu");
 		cells.add(new Cell(location1, letter1));
-
-		Location location2 = new Location(1, 3);
-		Letter letter2 = new Letter("I");
 		cells.add(new Cell(location2, letter2));
-
-		Location location3 = new Location(1, 4);
-		Letter letter3 = new Letter("N");
 		cells.add(new Cell(location3, letter3));
 
 		Word word = new Word(cells);
+		
 		assertEquals(9600, game.calculate(word));
 	}
 
-	/**
-	 * Test the calculate method with word that contains a multiplier.
-	 */
+	/** Test the calculate method with word that contains a multiplier. */
 	public void testCalculateMultiplier() {
 		Game game = new Game();
-		Location location = new Location(1, 2);
-		Player player = new Player("Ann", 10, location);
+		Location locationOfPlayer = new Location(1, 2);
+		Player player = new Player("Ann", 10, locationOfPlayer);
+		ArrayList<Cell> cells = new ArrayList<Cell>();
+		Location location1 = new Location(1, 2);
+		Letter letter1 = new Letter("A");
+		Location location2 = new Location(1, 3);
+		Letter letter2 = new Letter("A");
+		Location location3 = new Location(1, 4);
+		Letter letter3 = new Letter("L");
 		
 		game.addPlayer(player);
 		game.currentPlayer = player;
-		
-		ArrayList<Cell> cells = new ArrayList<Cell>();
-
-		Location location1 = new Location(1, 2);
-		Letter letter1 = new Letter("A");
 		letter1.setMultiplier();
 		cells.add(new Cell(location1, letter1));
-
-		Location location2 = new Location(1, 3);
-		Letter letter2 = new Letter("A");
 		cells.add(new Cell(location2, letter2));
-
-		Location location3 = new Location(1, 4);
-		Letter letter3 = new Letter("L");
 		cells.add(new Cell(location3, letter3));
 
 		Word word = new Word(cells);
@@ -217,9 +183,7 @@ public class TestGame extends TestCase {
 		assertEquals(22400, game.calculate(word));
 	}
 
-	/**
-	 * Test the setManagingPlayer method.
-	 */
+	/** Test the setManagingPlayer method. */
 	public void testSetManagingPlayer() {
 		Game game = new Game();
 		Location location = new Location(1, 2);
@@ -232,41 +196,37 @@ public class TestGame extends TestCase {
 		assertEquals(location, game.getManagingPlayer().getOriginPosition());
 	}
 
-	/**
-	 * Test the setBoard method with a board that has a multiplier.
-	 */
+	/** Test the setBoard method with a board that has a multiplier. */
 	public void testSetBoardHasBonus() {
 		ArrayList<Cell> cells = new ArrayList<Cell>();
+		Game game = new Game();
+		Location locationOfBonus = new Location(1, 1);
 		
 		for (int i = 0; i < 16; i++) {
 			Location location = new Location(i / 4, i % 4);
 			Letter letter = new Letter("A");
+			
 			cells.add(new Cell(location, letter));
 		}
 
-		Game game = new Game();
-		Location location = new Location(1, 1);
-		
-		game.setBoard(cells, location);
+		game.setBoard(cells, locationOfBonus);
 		assertEquals(16, game.getBoard().getCells().size());
 	}
 
-	/**
-	 * Test the setBoard method with a board that doesn't have a multiplier.
-	 */
+	/** Test the setBoard method with a board that doesn't have a multiplier. */
 	public void testSetBoardNoBonus() {
 		ArrayList<Cell> cells = new ArrayList<Cell>();
+		Game game = new Game();
+		Location locationOfBonus = new Location(20, 1);
 		
 		for (int i = 0; i < 16; i++) {
 			Location location = new Location(i / 4, i % 4);
 			Letter letter = new Letter("A");
+			
 			cells.add(new Cell(location, letter));
 		}
 
-		Game game = new Game();
-		Location location = new Location(20, 1);
-		
-		game.setBoard(cells, location);
+		game.setBoard(cells, locationOfBonus);
 		
 		assertEquals(16, game.getBoard().getCells().size());
 	}

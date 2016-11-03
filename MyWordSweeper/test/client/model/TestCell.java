@@ -9,9 +9,7 @@ import junit.framework.TestCase;
  *
  */
 public class TestCell extends TestCase {
-	/**
-	 * Test the constructor.
-	 */
+	/** Test the constructor. */
 	public void testConstructor() {
 		Location location = new Location(1, 2);
 		Letter letter = new Letter("A");
@@ -21,15 +19,13 @@ public class TestCell extends TestCase {
 		assertEquals(letter, cell.getLetter());
 	}
 	
-	/**
-	 * Test the setLetter method.
-	 */
+	/** Test the setLetter method. */
 	public void testSetLetter() {
 		Location location = new Location(1, 2);
 		Letter letter = new Letter("A");
 		Cell cell = new Cell(location, letter);
-		
 		Letter newLetter = new Letter("B");
+		
 		cell.setLetter(newLetter);
 		
 		assertEquals(newLetter, cell.getLetter());

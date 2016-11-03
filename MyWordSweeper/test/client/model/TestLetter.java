@@ -9,9 +9,7 @@ import junit.framework.TestCase;
  *
  */
 public class TestLetter extends TestCase {
-	/**
-	 * Test the constructor.
-	 */
+	/** Test the constructor.*/
 	public void testConstructor() {
 		String str = "B";
 		Letter letter = new Letter(str);
@@ -19,9 +17,7 @@ public class TestLetter extends TestCase {
 		assertEquals(str, letter.getCharacter());
 	}
 	
-	/**
-	 * Test the setMultiplier method.
-	 */
+	/** Test the setMultiplier method. */
 	public void testSetMultiplier() {
 		String str = "B";
 		Letter letter = new Letter(str);
