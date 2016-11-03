@@ -36,7 +36,7 @@ public class PracticeGameController {
 	}
 	
 	/**
-	 * Generate a new <code>Board</code> for practice game.
+	 * Generate a new Board for practice game.
 	 * 
 	 * The location of bonus is set to be outside the range of a <code>Board</code>
 	 */
@@ -47,9 +47,9 @@ public class PracticeGameController {
 	}
 	
 	/**
-	 * Randomly generate 16 <code>Cells</code> for the <code>Board</code>
+	 * Randomly generate 16 Cells for the Board
 	 * 
-	 * @return A List of <code>Cells</code>
+	 * @return A List of Cells
 	 */
 	public ArrayList<Cell> generatecells () {
 		ArrayList<Cell> cells = new ArrayList<Cell>(16);
