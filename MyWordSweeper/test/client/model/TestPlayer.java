@@ -2,32 +2,49 @@ package client.model;
 
 import junit.framework.TestCase;
 
+/**
+ * The <code>TestPlayer</code> class tests the <code>Player</code> class.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class TestPlayer extends TestCase {
-	public void testgetScore() {
-		Location l = new Location(1, 2);
-		Player p = new Player("Ann", 10, l);
-		assertEquals(10, p.getScore());
+	public void testGetScore() {
+		/** Test the getScore method. */
+		Location location = new Location(1, 2);
+		Player player = new Player("Ann", 10, location);
+		
+		assertEquals(10, player.getScore());
 	}
 
-	public void testsetScore() {
-		Location l = new Location(1, 2);
-		Player p = new Player("Ann", 10, l);
-		p.setScore(11);
-		assertEquals(11, p.getScore());
+	/** Test the setScore method. */
+	public void testSetScore() {
+		Location location = new Location(1, 2);
+		Player player = new Player("Ann", 10, location);
+		
+		player.setScore(11);
+		
+		assertEquals(11, player.getScore());
 	}
 
-	public void testgetOriginalPoint() {
-		Location l = new Location(1, 2);
-		Player p = new Player("Ann", 10, l);
-		assertEquals(l, p.getOriginPosition());
+	/** Test the getOriginalPoint method. */
+	public void testGetOriginalPoint() {
+		Location location = new Location(1, 2);
+		Player player = new Player("Ann", 10, location);
+		
+		assertEquals(location, player.getOriginPosition());
 	}
 
-	public void testsetOriginalPoint() {
-		Location l1 = new Location(1, 2);
-		Location l2 = new Location(1, 2);
-		Player p = new Player("Ann", 10, l1);
-		p.setOriginPosition(l2);
-		assertEquals(l2, p.getOriginPosition());
+	/** Test the setOriginalPoint method. */
+	public void testSetOriginalPoint() {
+		Location location = new Location(1, 2);
+		Location newLocation = new Location(3, 4);
+		Player player = new Player("Ann", 10, location);
+		
+		player.setOriginPosition(newLocation);
+
+		assertEquals(newLocation, player.getOriginPosition());
+		assertEquals(false, location.equals(player.getOriginPosition()));
 	}
 
 }
