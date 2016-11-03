@@ -32,37 +32,47 @@ import client.model.Model;
  * @author Team Pisces
  *
  */
-public class CreateGamePanel extends JPanel{
-	/** Refrence <code>Model</code> for easy navigation. */
+public class CreateGamePanel extends JPanel {
+	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 
-	/** Refrence <code>Application</code> for easy navigation. */
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
-	/**	<code>JTextField</code> for the nickname */
+	/**	<code>JTextField</code> for the nickname. */
 	JTextField textFieldNickname;
 	
-	/**	<code>JPasswordField</code> for the password */
+	/**	<code>JPasswordField</code> for the password. */
 	JPasswordField textFieldPassword;
 
 	/** A <code>ButtonGroup</code> to manage the radiobuttons as a whole. */
 	ButtonGroup modeBtnGroup;
 	
-	/**	<code>JRadioButton</code> indicating it's a public game */
+	/**	<code>JRadioButton</code> indicating it's a public game. */
 	JRadioButton rdbtnPublic;
 	
-	/**	<code>JRadioButton</code> indicating it's a private game */
+	/**	<code>JRadioButton</code> indicating it's a private game. */
 	JRadioButton rdbtnPrivate;
 	
 	/**
+	 * Create the panel for collecting information for create game request.
+	 * 
 	 * @param model <code>Model</code> for current application.
 	 * @param application Current <code>Application</code>.
 	 */
-	public CreateGamePanel (Model model, Application application) {
+	public CreateGamePanel(Model model, Application application) {
 		this.model = model;
 		this.app = application;
-
-		setLayout(new GroupLayout(this));
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 450, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 300, Short.MAX_VALUE)
+		);
+		setLayout(groupLayout);
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;

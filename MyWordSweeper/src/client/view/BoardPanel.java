@@ -1,12 +1,16 @@
 package client.view;
 
 import java.awt.*;
+import java.awt.event.MouseMotionListener;
 import java.util.*;
 
 import javax.swing.*;
 
 import client.controller.*;
 import client.model.*;
+
+import javax.swing.GroupLayout.Alignment;
+import java.util.HashSet;
 
 /**
  * The <code>BoardPanel</code> class represents the 4*4 board that is assigned
@@ -16,9 +20,10 @@ import client.model.*;
  * @author Team Pisces
  *
  */
-public class BoardPanel extends JPanel{
+public class BoardPanel extends JPanel {
 	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
+	Application app;
 	
 	/** An <code>ArrayList</code> for the <code>Cell</code>s in a <code>Board</code>. */
 	ArrayList<Cell> cells;
@@ -34,29 +39,29 @@ public class BoardPanel extends JPanel{
 	
 	/** */
 	boolean stop = false;
-	
+
 	/**
 	 * Construct the panel for the board according to the cells. 
 	 * 
 	 * @param model <code>Model</code> for current application.
 	 * @param cells <code>Cell</code>s in this <code>Board</code>.
 	 */
-	public BoardPanel(Model model, ArrayList<Cell> cells) {
+	public BoardPanel(Model model, Application app, ArrayList<Cell> cells) {
 		this.cells = cells;
 		this.model = model;
-		
+		this.app = app;
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		int width = d.width;
-		
 		setBounds(height/36, 17*width/160, 13*height/45, 13*width/80);
-		currentWord = new StringBuilder("");
+		currentWord = new StringBuilder();
+		
 		
 		BoardController control = new BoardController(model, this);
 		this.addMouseListener(control);
 		this.addMouseMotionListener(control);
 	}
-	
+
 	/**
 	 * Get the current selected word.
 	 * 
@@ -81,7 +86,6 @@ public class BoardPanel extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		int width = d.width;
@@ -197,8 +201,7 @@ public class BoardPanel extends JPanel{
 			g.drawString(s13, 37*height/360, 93*width/640);
 			g.drawString(s14, 7*height/40, 93*width/640);
 			g.drawString(s15, 89*height/360, 93*width/640);
-		} 
-		else {
+		} else {
 			currentWord.delete(0, currentWord.length());
 			for(Integer num : list) {
 				Location cell = this.cells.get(num).getLocation();
@@ -206,6 +209,9 @@ public class BoardPanel extends JPanel{
 				g.setColor(Color.blue);
 				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
 			}
+			
+			OnlineGamePanel onlinePanel = this.app.getOnlineGamePanel();
+			onlinePanel.setCurrentWord(currentWord.toString());
 			
 			g.setColor(Color.black);
 			g.drawString(s0, 11*height/360, 3*width/128);

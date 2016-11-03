@@ -9,35 +9,66 @@ import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.EmptyBorder;
 
+import client.controller.OpenJoinGamePanelController;
 import client.controller.JoinGameController;
+import client.controller.PracticeGameController;
 import client.controller.ReturnToMenuController;
 import client.model.Game;
 import client.model.Model;
 
 /**
-* The <code>JoinGamePanel</code> class represents the view that enables
-*  
+* The <code>JoinGamePanel</code> class represents the view that enables 
+* 
 * the player to enter his/her nickname and gmeID to join a game.
 * 
 * @author Team Pisces
+* 
 */
+
 public class JoinGamePanel extends JPanel {
-	Game game;
+	/** Refrence <code>Model</code> for easy navigation. */
 	Model model;
+
+	/** Refrence <code>Application</code> for easy navigation. */
 	Application app;
+	
+	/** Current game. */
+	Game game; // Do we need this?
+	
+	/**	<code>JTextField</code> for the nickname. */
 	JTextField textFieldNickname;
+	
+	/**	<code>JTextField</code> for the gameID. */
 	JTextField textFieldGameID;
 
+	/**
+	 * Create the panel for collecting information for join game request.
+	 * 
+	 * @param model <code>Model</code> for current application.
+	 * @param application Current <code>Application</code>.
+	 */
 	public JoinGamePanel(Model model, Application application) {
 		this.model = model;
 		this.app = application;
 		
-		setLayout(new GroupLayout(this));
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 450, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 300, Short.MAX_VALUE)
+		);
+		setLayout(groupLayout);
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
@@ -56,18 +87,32 @@ public class JoinGamePanel extends JPanel {
 		add(textFieldGameID);
 	}
 	
+	// Do we need this?
 	public void setGame(Game game) {
 		this.game = game;
 	}
 
+	/**
+	 * Get the <code>JTextField</code> recording the nickname.
+	 * 
+	 * @return A <code>JTextField</code> recording the nickname.
+	 */
 	public JTextField getTextFieldNickname() {
 		return textFieldNickname;
 	}
 
+	/**
+	 * Get the <code>JTextField</code> recording the gameID.
+	 * 
+	 * @return A <code>JTextField</code> recording the gameID.
+	 */
 	public JTextField getTextFieldGameID() {
 		return textFieldGameID;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -113,21 +158,5 @@ public class JoinGamePanel extends JPanel {
 				new ReturnToMenuController(model, app).process();
 			}
 		});
-	}
-
-	
-	
-	private void setDefaultCloseOperation(int exitOnClose) {
-		// TODO Auto-generated method stub
-		
-	}
-	// get the name of player
-	public JTextField getNameTextField() {
-		return textFieldNickname;
-	}
-	//get the the input gameID from player
-	public JTextField getGameIDTextField()
-	{
-		return textFieldGameID;
 	}
 }

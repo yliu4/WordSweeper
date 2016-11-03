@@ -3,43 +3,50 @@ package client.model;
 import java.util.*;
 
 /**
- * The class contains a List of cells and represents 
- * the content of those cells
+ * The Word class contains a List of Cells and a String represents the content of 
+ * 
+ * those Cells.
  * 
  * @author Team Pisces
  * 
  */
 public class Word {
-	/** A list of cells for the word */
+	/** A List of Cells for the word. */
 	ArrayList<Cell> cells = null;
 	
-	/** Initialize a word */
+	/** A String represents the word. */
 	String word = null;
 	
-	/** Construct a word with a list of cells */
+	/** 
+	 * Construct a Word with a list of Cells.
+	 * 
+	 * @param cells The List of Cells
+	 */
 	public Word(ArrayList<Cell> cells) {
 		this.cells = cells;
 		
-		/** String buffer to append character */
 		StringBuffer sb = new StringBuffer();
-
-		/** Iterate all the cells and append the letters in these
-		 *  cells into string buffer
-		 */
+		
 		for (Cell cell: cells) {
 			sb.append(cell.getLetter().getCharacter());
 		}
-
-		/** Convert word to string */
 		this.word = sb.toString();
 	}
 
-	/** Get the cell object */
+	/** 
+	 * Get the object of the List of Cells.
+	 * 
+	 * @return A List of Cells.
+	 */
 	public ArrayList<Cell> getCells() {
 		return cells;
 	}
 
-	/** Get the word object */
+	/** 
+	 * Get the String representation of the Word.
+	 * 
+	 * @return A String representing the Word.
+	 */
 	public String getWord() {
 		return word;
 	}

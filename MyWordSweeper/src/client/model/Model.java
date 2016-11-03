@@ -1,6 +1,7 @@
 package client.model;
+
 /**
- * Model is the top-level entity class which has access to all entity classes
+ * Model is the top-level entity class which has access to all entity classes.
  * 
  * @author Team Pisces
  *
@@ -16,38 +17,47 @@ public class Model {
 	public Model() {
 	}
 
-	/** Set a game with the given game object */
+	/** 
+	 * Set the Game with the given Game object.
+	 * 
+	 * @param game The Game.
+	 */
 	public void setGame(Game game) {
 		this.game = game;
 	}
 	
-	/** Get the game object */
+	/** 
+	 * Get the Game object.
+	 * 
+	 * @return A Game object of the current game.
+	 */
 	public Game getGame() {
 		return this.game;
 	}
 	
-	/** Set the board with the given x, y, width and height 
+	/** 
+	 * Set the board with the given x, y, width and height. 
 	 * 
 	 * @param x
 	 * @param y
 	 * @param width
 	 * @param height
 	 */
-
 	public void setFilledBoard(int x, int y, int width, int height) {
-		/** Check if the x and y for the board are valid. */
 		if(x == -1 && y == -1) {
 			this.location = null;
-		} else {
-			/** Set the initial location */
+		} 
+		else {
 			this.location = new Location(0,0);
-			
-			/** Set the location for the panel */
 			this.location.setPanelLocation(x, y, width, height);
 		}	
 	}
 	
-	/** Get the location of the board */
+	/** 
+	 * Get the Location of the Board?
+	 * 
+	 * @return
+	 */
 	public Location getFilledBoard() {
 		return location;
 	}

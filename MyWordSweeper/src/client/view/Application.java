@@ -4,11 +4,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
@@ -167,6 +164,8 @@ public class Application extends JFrame {
 	/** Go to online game panel. */
     public void gotoOnlineGamePanel()
     {
+    	createGamePanel.setVisible(false);
+		remove(createGamePanel);
     	joinGamePanel.setVisible(false);
 		remove(joinGamePanel);
 		
@@ -208,7 +207,12 @@ public class Application extends JFrame {
 		createGamePanel.setVisible(true);
 		add(createGamePanel);
 	}
-	
+
+	public void setJoinGameController(JoinGameController joinGameController) {
+		this.onlineGamePanel.setGame(joinGameController.getGame());
+		this.joinGameController = joinGameController;
+	}
+
 	/**
 	 * Set the <code>PracticeGameController</code> for the <code>PracticeGamePanel</code>.
 	 * 
