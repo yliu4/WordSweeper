@@ -3,9 +3,9 @@ package client.model;
 import java.util.*;
 
 /**
- * The Word class contains a List of Cells and a String represents the content of 
+ * The Word class contains a List of Cells and a String represents the 
  * 
- * those Cells.
+ * content of those Cells.
  * 
  * @author Team Pisces
  * 

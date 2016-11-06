@@ -1,16 +1,16 @@
 package client.model;
 
 /**
- * The location contains the positional information of a board
+ * The Location contains the positional information.
  * 
  * @author Team Pisces
  *
  */
 public class Location {
-	/** Row for tracking the location */
+	/** Row number. */
 	int row;
 	
-	/** Column for tracking the location later */
+	/** Column number. */
 	int column;
 	
 	/** The coordinate x of the location */
@@ -25,7 +25,12 @@ public class Location {
 	/** The height of the panel*/
 	int height;
 
-	/** Construct the location with the given row and column */
+	/** 
+	 * Construct the Location with the given row and column.
+	 * 
+	 * @param row The row number.
+	 * @param column The colun number
+	 */
 	public Location(int row, int column) {
 		this.row = row;
 		this.column = column;
@@ -36,7 +41,8 @@ public class Location {
 	}
 
 	/** 
-	 * Set the panel with the x, y, width and height
+	 * Set the panel with the x, y, width and height.
+	 * 
 	 * @param x
 	 * @param y
 	 * @param width
@@ -49,39 +55,67 @@ public class Location {
 		this.height = height;
 	}
 	
-	/** Get the coordinate of x of the panel */
+	/** 
+	 * Get the coordinate of x of the panel.
+	 * 
+	 * @return
+	 */
 	public int getCoordinateX() {
 		return coordinateX;
 	}
 	
-	/** Get the coordinate of y of the panel */
+	/** 
+	 * Get the coordinate of y of the panel.
+	 * 
+	 * @return
+	 */
 	public int getCoordinateY() {
 		return coordinateY;
 	}
 	
-	/** Get the width of the panel */
+	/** 
+	 * Get the width of the panel.
+	 * 
+	 * @return
+	 */
 	public int getWidth() {
 		return width;
 	}
 	
-	/** Get the height of the panel */
+	/** 
+	 * Get the height of the panel.
+	 * 
+	 * @return
+	 */
 	public int getHeight() {
 		return height;
 	}
 
-	/** Get the row of the board */
+	/** 
+	 * Get the row number.
+	 * 
+	 * @return An <code>int</code> indicating the row number.
+	 */
 	public int getRow() {
 		return row;
 	}
 
-	/** Get the column of the board */
+	/** 
+	 * Get the column number.
+	 * 
+	 * @return An <code>int</code>representing the column number.
+	 */
 	public int getColumn() {
 		return column;
 	}
 
-	/** Check if the two locations are the same */
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
 	public boolean equals(Object arg0) {
 		Location lo = (Location) arg0;
+		
 		return (this.getColumn()==lo.getColumn())&&
 				(this.getRow()==lo.getRow());
 	}

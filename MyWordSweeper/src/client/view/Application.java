@@ -164,8 +164,11 @@ public class Application extends JFrame {
 	/** Go to online game panel. */
     public void gotoOnlineGamePanel()
     {
-    	createGamePanel.setVisible(false);
-		remove(createGamePanel);
+		if (createGamePanel != null) {
+			createGamePanel.setVisible(false);
+			remove(createGamePanel);
+		}
+		
     	joinGamePanel.setVisible(false);
 		remove(joinGamePanel);
 		
