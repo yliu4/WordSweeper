@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import client.controller.OpenCreateGamePanelController;
 import client.controller.OpenJoinGamePanelController;
+
 import client.controller.PracticeGameController;
 import client.model.Model;
 

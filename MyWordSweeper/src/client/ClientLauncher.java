@@ -3,6 +3,10 @@ import client.ServerAccess;
 import client.controller.BoardResponseController;
 import client.controller.ConnectResponseController;
 import client.controller.JoinGameResponseController;
+import client.controller.ResetGameResponseController;
+import client.controller.LockGameResponseController;
+import client.controller.ExitGameResponseController;
+import client.controller.FindWordResponseController;
 import client.controller.SampleClientMessageHandler;
 import client.model.Model;
 import client.view.Application;
@@ -40,6 +44,11 @@ public class ClientLauncher {
 		handler.registerHandler(new BoardResponseController(app, model));
 		handler.registerHandler(new ConnectResponseController(app, model));
 		handler.registerHandler(new JoinGameResponseController(app, model));
+		handler.registerHandler(new JoinGameResponseController(app, model));
+		handler.registerHandler(new ExitGameResponseController(app, model));
+		handler.registerHandler(new LockGameResponseController(app, model));
+		handler.registerHandler(new ResetGameResponseController(app, model));
+		handler.registerHandler(new FindWordResponseController(app, model));
 		
 		// try to connect to the server. Once connected, messages are going to be processed by 
 		// SampleClientMessageHandler. For now we just continue on with the initialization because
