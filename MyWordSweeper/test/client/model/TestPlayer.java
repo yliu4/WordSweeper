@@ -47,4 +47,11 @@ public class TestPlayer extends TestCase {
 		assertEquals(false, location.equals(player.getOriginPosition()));
 	}
 
+	/** Test the getName method. */
+	public void testGetName() {
+		Location location = new Location(1, 2);
+		Player player = new Player("Ann", 10, location);
+		
+		assertEquals("Ann", player.getName());
+	}
 }
