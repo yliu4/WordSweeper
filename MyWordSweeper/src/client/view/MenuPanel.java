@@ -5,11 +5,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,7 +15,6 @@ import javax.swing.SwingConstants;
 
 import client.controller.OpenCreateGamePanelController;
 import client.controller.OpenJoinGamePanelController;
-
 import client.controller.PracticeGameController;
 import client.model.Model;
 
@@ -28,10 +25,10 @@ import client.model.Model;
  *
  */
 public class MenuPanel extends JPanel {
-	/** Refrence <code>Model</code> for easy navigation. */
+	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 
-	/** Refrence <code>Application</code> for easy navigation. */
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
 	/**

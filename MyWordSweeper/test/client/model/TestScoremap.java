@@ -3,11 +3,18 @@ package client.model;
 import util.Scoremap;
 import junit.framework.TestCase;
 
+/**
+ * The <code>TestScoremap</code> class tests the <code>Scoremap</code> class.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class TestScoremap extends TestCase {
-
-	public void testfindLetterScore() {
-		Scoremap s = new Scoremap();
-		assertEquals(1, s.findLetterScore("E"));
-		assertEquals(11, s.findLetterScore("Qu"));
+	/** Test the findLetterScore method. */
+	public void testFindLetterScore() {
+		Scoremap scoremap = new Scoremap();
+		
+		assertEquals(1, scoremap.findLetterScore("E"));
+		assertEquals(11, scoremap.findLetterScore("Qu"));
 	}
 }

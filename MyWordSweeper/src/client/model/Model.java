@@ -7,14 +7,15 @@ package client.model;
  *
  */
 public class Model {
-	/**  Reference Game for easy navigation */
+	/**  Reference Game for easy navigation. */
 	Game game = null;
 	
-	/** Reference Location for easy navigation */ 
+	/** Reference Location for easy navigation. */ 
 	Location location = null;
 
-	/** Constructor for the model */
+	/** Constructor for the Model. */
 	public Model() {
+		
 	}
 
 	/** 

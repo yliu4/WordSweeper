@@ -5,55 +5,77 @@ import java.util.HashMap;
 import util.Scoremap;
 
 /**
- * This class contains its score and a flag to identify whether this 
- * letter is the special multiplier or not
+ * This class contains the points of the Letter and a flag to identify whether 
+ * 
+ * this Letter is the special multiplier or not.
  * 
  * @author Team Pisces
  *
  */
 public class Letter {
-	/** A character for each letter */
+	/** The character in this Letter. */
 	String character = null; 
 	
-	/** Set the letter's multiplier as false */
+	/** 
+	 * The flag indicating whether this Letter is the special multiplier. 
+	 * 
+	 * It's set to <code>false</code> in default.
+	 */
 	boolean isMultiplier = false;
 	
-	/** Points for the letter */
+	/** Points of the Letter. */
 	final int points; 
 	
-	/** Create a new score map */
+	/** A Scoremap for getting the score of a Letter. */
 	final Scoremap SMap = new Scoremap(); 
 	
-	/** Construct a letter with given character */
+	/** 
+	 * Construct a Letter with a given character.
+	 * 
+	 * @param character The character in this Letter
+	 */
 	public Letter(String character) {
-		/** Assign the given character */
 		this.character = character;
-		
-		/** Find the score of the letter from the score map */
 		this.points = SMap.findLetterScore(character);
 	}
 	
-	/** Get the character object */
+	/** 
+	 * Get the character of this Letter.
+	 * 
+	 * @return A String representing the character in a Letter.
+	 */
 	public String getCharacter() {
 		return this.character;
 	}
 	
-	/** Get the point of the letter */
+	/** 
+	 * Get the points of the letter.
+	 * 
+	 * @return An <code>int</code> representing the points of a Letter.
+	 */
 	public int getPoint() {
 		return this.points;
 	}
 	
-	/** Check if the letter is multiplier */
+	/** 
+	 * Check if the Letter is a special multiplier.
+	 * 
+	 * @return <code>true</code> if it's a special multiplier, 
+	 * <code>false</code> if it's not a special multiplier.
+	 */
 	public boolean isMultiplier() {
 		return this.isMultiplier;
 	}
 	
-	/** Set the Multiplier as true */
+	/** Set this Letter as the special multiplier. */
 	public void setMultiplier() {
 		this.isMultiplier = true;
 	}
 	
-	/** Check if the letter is equal to the object */
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
 	public boolean equals(Object obj) {
 		Letter letter = (Letter) obj;
 		

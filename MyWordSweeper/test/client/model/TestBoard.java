@@ -11,15 +11,14 @@ import junit.framework.TestCase;
  *
  */
 public class TestBoard extends TestCase {
-	/**
-	 * Test the constructor.
-	 */
+	/** Test the constructor. */
 	public void testConstructor() {
 		ArrayList<Cell> cells = new ArrayList<Cell>();
 		
 		for (int i = 0; i < 16; i++) {
 			Location location = new Location(i/4, i%4);
 			Letter letter = new Letter("A");
+			
 			cells.add(new Cell(location, letter));
 		}
 		
@@ -28,15 +27,14 @@ public class TestBoard extends TestCase {
 		assertEquals(cells.get(10), board.getCells().get(10));
 	}
 	
-	/**
-	 * Test the setCells method.
-	 */
+	/** Test the setCells method. */
 	public void testSetCells() {
 		ArrayList<Cell> cells = new ArrayList<Cell>();
 		
 		for (int i = 0; i < 16; i++) {
 			Location location = new Location(i/4, i%4);
 			Letter letter = new Letter("A");
+			
 			cells.add(new Cell(location, letter));
 		}
 		
@@ -47,6 +45,7 @@ public class TestBoard extends TestCase {
 		for (int i = 0; i < 16; i++) {
 			Location location = new Location(i/4, i%4);
 			Letter letter = new Letter("B");
+			
 			newCells.add(new Cell(location, letter));
 		}
 		board.setCells(newCells);
