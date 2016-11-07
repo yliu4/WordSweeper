@@ -14,6 +14,8 @@ public final class EmptyHandler extends ControllerChain {
 
 	/**
 	 * if all response controllers cannot handle the response, just pop up an error message
+	 *
+	 * @param Message  response message from server in xml format
 	 */
 	@Override
 	public boolean process(Message response) {

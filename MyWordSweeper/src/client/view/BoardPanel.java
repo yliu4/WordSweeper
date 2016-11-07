@@ -19,6 +19,8 @@ import client.model.*;
 public class BoardPanel extends JPanel {
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
+	
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
 	/** An <code>ArrayList</code> for the <code>Cell</code>s in a <code>Board</code>. */

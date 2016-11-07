@@ -11,14 +11,17 @@ import client.view.Application;
  * @since 2016-10-30
  */
 public class CreateGameController {
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
+	
+	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 	
 	/**
 	 * CreateGameController constructor
 	 * 
-	 * @param model    initialize model
-	 * @param app      initialize application
+	 * @param model  initialize the reference of model
+	 * @param app    initialize the reference of application
 	 */
 	public CreateGameController(Model model, Application app) {
 		this.app = app;
