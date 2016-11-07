@@ -16,32 +16,32 @@ import xml.Message;
 import client.model.Model;
 import client.view.Application;
 
-public class JoinGameResponseController extends ControllerChain {
+public class LockGameResponseController extends ControllerChain {
 	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
-	
+
 	/**
-	 * JoinGameResponseController constructor
+	 * LockGameResponseController constructor
 	 *
 	 * @param app  	 initialize the reference of application
 	 * @param model  initialize the reference of model
 	 */
-	public JoinGameResponseController(Application app, Model model) {
+	public LockGameResponseController(Application app, Model model)  {
 		this.app = app;
 		this.model = model;
 	}
 	
 	/**
-	 * process join game responses from server if fail when join a specific game
+	 * process lock game responses from server
 	 *
-	 * @param Message  join game response message from server in xml format
+	 * @param Message  lock game response message from server in xml format
 	 */
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
-		if (!type.equals ("joinGameResponse")) {
+		if (!type.equals ("lockGameResponse")) {
 			return next.process(response);
 		}
 		
@@ -58,7 +58,7 @@ public class JoinGameResponseController extends ControllerChain {
 				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
 		UIManager.put("OptionPane.messageFont", 
 				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
-		String message = "The game" + gameId + "is locked or your password is wrong! please click \"ok\" to go back.";
+		String message = "The game" + gameId + "is ";
 		JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
         JOptionPane.ERROR_MESSAGE);
 		
