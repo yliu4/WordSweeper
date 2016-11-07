@@ -14,9 +14,9 @@ import junit.framework.TestCase;
  * To make this work we need to create a "mock" Server whose only purpose is to WAIT for requests to come
  * from the client being pressed into service here in this test case. 
  * 
- * @author heineman
+ * @author Team Pisces
  */
-public class TestCreateGameController extends TestCase {
+public class TestOpenCreateGamePanelController extends TestCase {
 	
 	// Mock server object that extends (and overrides) ServerAccess for its purposes
 	MockServerAccess mockServer;
@@ -51,43 +51,11 @@ public class TestCreateGameController extends TestCase {
 	 * The real test case whose purpose is to validate that selecting the Locked button
 	 * sends a GrabLock request to the server.
 	 */
-	public void testCreateGameProcess() {
+	public void testOpenCreateGamePanelProcess() {
 		 new OpenCreateGamePanelController(model, client).process();
 		 
-		 // validate from mockServer
+		 assertFalse(client.getMenuPanel().isVisible());
+		 assertTrue(client.getCreateGamePanel().isVisible());
 		 
-		 ArrayList<Message> reqs = mockServer.getAndClearMessages();
-		 assertTrue (reqs.size() == 1);
-		 Message r = reqs.get(0);
-		 
-		 // a lock request is sent out.
-		 assertEquals ("createGameRequest", r.contents.getFirstChild().getLocalName());
-		 
-		 // make sure "grab" attribute is there, and true
-		 System.out.println (r.toString());
-		 assertEquals ("samplePlayer", r.contents.getFirstChild().getAttributes().getNamedItem("name").getNodeValue());
-		 
-	}
-	
-
-	/**
-	 * The real test case whose purpose is to validate that selecting the Locked button
-	 * sends a GrabLock request to the server.
-	 */
-	public void testJoinGameProcess() {
-		 new OpenJoinGamePanelController(client, model).process();
-		 
-		 // validate from mockServer
-		 
-		 ArrayList<Message> reqs = mockServer.getAndClearMessages();
-		 assertTrue (reqs.size() == 1);
-		 Message r = reqs.get(0);
-		 
-		 // a lock request is sent out.
-		 assertEquals ("joinGameRequest", r.contents.getFirstChild().getLocalName());
-		 
-		 // make sure "grab" attribute is there, and true
-		 System.out.println (r.toString());
-		 assertEquals ("nextOne", r.contents.getFirstChild().getAttributes().getNamedItem("name").getNodeValue());
 	}
 }
