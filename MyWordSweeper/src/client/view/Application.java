@@ -226,7 +226,7 @@ public class Application extends JFrame {
 		this.practiceGameController = practiceController;
 	}
 	
-	
+	/**  get the practiceController */
 	public PracticeGameController getPracticeGameController()
 	{
 		return this.practiceGameController;
