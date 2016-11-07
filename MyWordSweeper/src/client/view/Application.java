@@ -226,6 +226,12 @@ public class Application extends JFrame {
 		this.practiceGameController = practiceController;
 	}
 	
+	
+	public PracticeGameController getPracticeGameController()
+	{
+		return this.practiceGameController;
+	}
+	
 	/** Reset the the board in practice game. */
 	public void resetGame() {
 		this.practiceGameController.generateNewBoard();
