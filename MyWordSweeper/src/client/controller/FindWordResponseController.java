@@ -27,7 +27,7 @@ public class FindWordResponseController extends ControllerChain {
 	
 	
 	/**
-	 * process find word game responses from server after submitiing a word
+	 * process find word game responses from server after submitting a word
 	 *
 	 * @param Message  find word response message from server in xml format
 	 */
