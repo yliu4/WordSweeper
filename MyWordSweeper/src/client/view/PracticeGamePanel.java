@@ -46,11 +46,11 @@ public class PracticeGamePanel extends JPanel{
 	/**
 	 * Create the panel for practice game view.
 	 * 
-	 * @param model <code>Model</code> for current application.
+	 * @param m <code>Model</code> for current application.
 	 * @param application Current <code>Application</code>.
 	 */
-	public PracticeGamePanel(Model model, Application application) {
-		this.model = model;
+	public PracticeGamePanel(Model m, Application application) {
+		this.model = m;
 		this.app = application;
 
 		setLayout(new GroupLayout(this));
@@ -88,27 +88,6 @@ public class PracticeGamePanel extends JPanel{
 		lblScore.setFont(new Font("Arial", Font.BOLD, height/60));
 		lblScore.setBounds(height/36, 7*width/80, 53*height/180, 9*width/640);
 		add(lblScore);
-	}
-
-	/**
-	 * Set the current game.
-	 * 
-	 * @param game A <code>Game</code> object for the current game.
-	 */
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
 
 		JButton btnReturn = new JButton("Return");
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, height/50));
@@ -129,6 +108,23 @@ public class PracticeGamePanel extends JPanel{
 				new ResetPracticeGameController(model, app).process();
 			}
 		});
+	}
+
+	/**
+	 * Set the current game.
+	 * 
+	 * @param game A <code>Game</code> object for the current game.
+	 */
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 
 		ArrayList<Cell> cells = this.game.getBoard().getCells();
 		if (this.boardPanel == null)

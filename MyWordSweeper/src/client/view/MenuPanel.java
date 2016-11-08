@@ -35,11 +35,11 @@ public class MenuPanel extends JPanel {
 	/**
 	 * Create the main menu panel.
 	 * 
-	 * @param model <code>Model</code> for current application.
+	 * @param m <code>Model</code> for current application.
 	 * @param application Current <code>Application</code>.
 	 */
-	public MenuPanel(Model model, Application application) {
-		this.model = model;
+	public MenuPanel(Model m, Application application) {
+		this.model = m;
 		this.app = application;
 
 		setLayout(new GroupLayout(this));
@@ -53,19 +53,6 @@ public class MenuPanel extends JPanel {
 		lblWordswepper.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWordswepper.setBounds(67*height/360, width/64, 29*height/90, 7*width/160);
 		add(lblWordswepper);
-	}
-	
-	/* (non-Javadoc)
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
-		
 		JButton btnCreate = new JButton("CREATE");
 		btnCreate.setFont(new Font("Tahoma", Font.PLAIN, height/30));
 		btnCreate.setBounds(83*height/360, 3*width/40, 7*height/30, 7*width/160);
@@ -96,4 +83,17 @@ public class MenuPanel extends JPanel {
 			}
 		});
 	}
+	
+//	/* (non-Javadoc)
+//	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+//	 */
+//	@Override
+//	public void paintComponent(Graphics g) {
+//		super.paintComponent(g);
+//		
+//		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+//		int height = d.height;
+//		int width = d.width;
+//		
+//	}
 }

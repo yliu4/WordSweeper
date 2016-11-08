@@ -47,11 +47,11 @@ public class JoinGamePanel extends JPanel {
 	/**
 	 * Create the panel for collecting information for join game request.
 	 * 
-	 * @param model <code>Model</code> for current application.
+	 * @param m <code>Model</code> for current application.
 	 * @param application Current <code>Application</code>.
 	 */
-	public JoinGamePanel(Model model, Application application) {
-		this.model = model;
+	public JoinGamePanel(Model m, Application application) {
+		this.model = m;
 		this.app = application;
 		
 		setLayout(new GroupLayout(this));
@@ -89,6 +89,26 @@ public class JoinGamePanel extends JPanel {
 		lbGameID.setFont(new Font("Tahoma", Font.PLAIN, height/36));
 		lbGameID.setBounds(3*width/80, 11*height/36, width/10, height/20);
 		add(lbGameID);	
+		
+		JButton btnGo = new JButton("GO!");
+		btnGo.setFont(new Font("Tahoma", Font.BOLD, height/36));
+		btnGo.setBounds(5*width/64, 19*height/45, 3*width/32, height/20);
+		add(btnGo);
+		btnGo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new JoinGameController(model, app).process();
+			}
+		});
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, height/36));
+		btnCancel.setBounds(17*width/80, 19*height/45, 3*width/32, height/20);
+		add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ReturnToMenuController(model, app).process();
+			}
+		});
 	}
 	
 	// Do we need this?
@@ -114,35 +134,15 @@ public class JoinGamePanel extends JPanel {
 		return textFieldGameID;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
-		
-		JButton btnGo = new JButton("GO!");
-		btnGo.setFont(new Font("Tahoma", Font.BOLD, height/36));
-		btnGo.setBounds(5*width/64, 19*height/45, 3*width/32, height/20);
-		add(btnGo);
-		btnGo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new JoinGameController(model, app).process();
-			}
-		});
-		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, height/36));
-		btnCancel.setBounds(17*width/80, 19*height/45, 3*width/32, height/20);
-		add(btnCancel);
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new ReturnToMenuController(model, app).process();
-			}
-		});
-	}
+//	/* (non-Javadoc)
+//	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+//	 */
+//	@Override
+//	public void paintComponent(Graphics g) {
+//		super.paintComponent(g);
+//
+//		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+//		int height = d.height;
+//		int width = d.width;
+//	}
 }
