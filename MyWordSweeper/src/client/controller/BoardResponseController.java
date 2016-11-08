@@ -57,12 +57,12 @@ public class BoardResponseController extends ControllerChain {
 
 		Node boardResponse = response.contents.getFirstChild();
 		NamedNodeMap map = boardResponse.getAttributes();
-		String gameId = null, contents = null, managingUser = null, bonus = null;
+		String gameId = null, /*contents = null, */managingUser = null, bonus = null;
 		String pname = null, pboard = null, pposition = null, pscore = null;
 		
 		// get global game board information
 		gameId = map.getNamedItem("gameId").getNodeValue();
-		contents = map.getNamedItem("contents").getNodeValue();
+		//contents = map.getNamedItem("contents").getNodeValue();
 		managingUser = map.getNamedItem("managingUser").getNodeValue();
 		bonus = map.getNamedItem("managingUser").getNodeValue();
 		
@@ -116,7 +116,12 @@ public class BoardResponseController extends ControllerChain {
 		
 		for(int i = 0; i < cellString.length(); i++) {
 			Location cellLocation = new Location(i/4, i%4);
-			Letter cellLetter = new Letter(String.valueOf(cellString.charAt(i)));
+			String letter = String.valueOf(cellString.charAt(i));
+			
+			if("Q".equals(letter)) letter = "Qu";
+			
+			Letter cellLetter = new Letter(letter);
+			
 			cells.add(new Cell(cellLocation, cellLetter));
 		}
 	}

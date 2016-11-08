@@ -73,6 +73,11 @@ public class OnlineGamePanel extends JPanel {
 		
 		lblTotalScore = new JLabel("Score: " + score + "\r\n");
 		lblCurrentWord = new JLabel("Current Word: " + currentWord);
+		
+		lblRoom = new JLabel("Room ");
+		lblRoom.setFont(new Font("Arial", Font.BOLD, height/30));
+		lblRoom.setBounds(height/4, 17*width/640, 7*height/45, width/64);
+		add(lblRoom);
 	}
 
 
@@ -125,10 +130,7 @@ public class OnlineGamePanel extends JPanel {
 			}
 		});
 
-		JLabel lblRoomm = new JLabel("Room " + game.getGameId());
-		lblRoomm.setFont(new Font("Arial", Font.BOLD, height/30));
-		lblRoomm.setBounds(height/4, 17*width/640, 7*height/45, width/64);
-		add(lblRoomm);
+		lblRoom.setText("Room " + game.getGameId());
 
 		JLabel lblYourNameAnna = new JLabel("Your Name: " + game.getCurrentPlayer().getName());
 		lblYourNameAnna.setFont(new Font("Tahoma", Font.PLAIN, height/60));

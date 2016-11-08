@@ -103,18 +103,6 @@ public class CreateGamePanel extends JPanel {
 		modeBtnGroup.add(rdbtnPrivate);
 		add(rdbtnPublic);
 		add(rdbtnPrivate);
-	}
-	
-	/* (non-Javadoc)
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
 
 		JLabel lblCreateNewGame = new JLabel("Create New Game");
 		lblCreateNewGame.setHorizontalAlignment(SwingConstants.CENTER);
@@ -139,6 +127,18 @@ public class CreateGamePanel extends JPanel {
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, height/36));
 		lblPassword.setBounds(3*width/80, 11*height/36, width/10, height/20);
 		add(lblPassword);
+	}
+	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = d.height;
+		int width = d.width;
 		
 		JButton btnNewButton = new JButton("GO!");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, height/36));

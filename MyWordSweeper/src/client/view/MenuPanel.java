@@ -43,6 +43,16 @@ public class MenuPanel extends JPanel {
 		this.app = application;
 
 		setLayout(new GroupLayout(this));
+		
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = d.height;
+		int width = d.width;
+		
+		JLabel lblWordswepper = new JLabel("WordSwepper");
+		lblWordswepper.setFont(new Font("Times New Roman", Font.BOLD, 2*height/45));
+		lblWordswepper.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWordswepper.setBounds(67*height/360, width/64, 29*height/90, 7*width/160);
+		add(lblWordswepper);
 	}
 	
 	/* (non-Javadoc)
@@ -55,12 +65,6 @@ public class MenuPanel extends JPanel {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		int width = d.width;
-		
-		JLabel lblWordswepper = new JLabel("WordSwepper");
-		lblWordswepper.setFont(new Font("Times New Roman", Font.BOLD, 2*height/45));
-		lblWordswepper.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWordswepper.setBounds(67*height/360, width/64, 29*height/90, 7*width/160);
-		add(lblWordswepper);
 		
 		JButton btnCreate = new JButton("CREATE");
 		btnCreate.setFont(new Font("Tahoma", Font.PLAIN, height/30));
