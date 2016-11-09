@@ -18,7 +18,7 @@ import junit.framework.TestCase;
  * 
  * @author Team Pisces
  */
-public class TestOpenCreateGamePanelController extends TestCase {
+public class TestCreateGameController extends TestCase {
 
 	// Mock server object that extends (and overrides) ServerAccess for its
 	// purposes
