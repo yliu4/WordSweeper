@@ -35,6 +35,9 @@ public class OnlineGamePanel extends JPanel {
 	/** <code>JLabel</code> for displaying the current selected Word. */
 	JLabel lblCurrentWord = null;
 	
+	/** <code>JLabel</code> for displaying the score of the current selected word. */
+	JLabel lblScore;
+	
 	/** <code>JLabel</code> for displaying the gameID. */
 	JLabel lblRoom;
 	
@@ -50,11 +53,11 @@ public class OnlineGamePanel extends JPanel {
 	/**
 	 * Create the panel for online game view.
 	 * 
-	 * @param model <code>Model</code> for current application.
+	 * @param m <code>Model</code> for current application.
 	 * @param application Current <code>Application</code>.
 	 */
-	public OnlineGamePanel(Model model, Application application) {
-		this.model = model;
+	public OnlineGamePanel(Model m, Application application) {
+		this.model = m;
 		this.app = application;
 		this.score = 0;
 		this.currentWord = "";
@@ -71,49 +74,30 @@ public class OnlineGamePanel extends JPanel {
 		lblShift.setBounds(16*height/45, 27*width/320, height/15, 7*width/320);
 		add(lblShift);
 		
-		lblTotalScore = new JLabel("Score: " + score + "\r\n");
-		lblCurrentWord = new JLabel("Current Word: " + currentWord);
-	}
-
-
-	/**
-	 * Get the current <code>Game> object.
-	 * 
-	 * @return A <code>Game</code> object for the current game.
-	 */
-
-	public Game getGame() {
-		return this.game;
-	}
-
-	// Why not use model directly?
-	public void setScore(int score) {
-		this.score = score;
-	}
-	
-	public void setCurrentWord(String word) {
-		this.currentWord = word;
-	}
-
-	/**
-	 * Set the current game.
-	 * 
-	 * @param game A <code>Game</code> object for the current game.
-	 */
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+		lblScore = new JLabel("Score: " + score + "\r\n");
+		lblScore.setFont(new Font("Arial", Font.BOLD, height/60));
+		lblScore.setBounds(height/36, 7*width/80, 53*height/180, 9*width/640);
+		add(lblScore);
 		
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
+		lblCurrentWord = new JLabel("Current Word: " + currentWord);
+		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, height/60));
+		lblCurrentWord.setBounds(height/36, 23*width/320, 53*height/180, 9*width/640);
+		add(lblCurrentWord);
+		
+		lblRoom = new JLabel("Room ");
+		lblRoom.setFont(new Font("Arial", Font.BOLD, height/30));
+		lblRoom.setBounds(height/4, 17*width/640, 7*height/45, width/64);
+		add(lblRoom);
+
+		lblYourName = new JLabel("Your Name: ");
+		lblYourName.setFont(new Font("Tahoma", Font.PLAIN, height/60));
+		lblYourName.setBounds(83*height/180, 7*width/100, height/6, 7*width/640);
+		add(lblYourName);
+		
+		lblTotalScore = new JLabel("Total Score: 0.");
+		lblTotalScore.setFont(new Font("Tahoma", Font.PLAIN, height/60));
+		lblTotalScore.setBounds(83*height/180, 17*width/200, height/6, 7*width/640);
+		add(lblTotalScore);
 
 		JButton btnReturn = new JButton("Return");
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, height/50));
@@ -124,41 +108,6 @@ public class OnlineGamePanel extends JPanel {
 				new ReturnToMenuController(model, app).process();
 			}
 		});
-
-		JLabel lblRoomm = new JLabel("Room " + game.getGameId());
-		lblRoomm.setFont(new Font("Arial", Font.BOLD, height/30));
-		lblRoomm.setBounds(height/4, 17*width/640, 7*height/45, width/64);
-		add(lblRoomm);
-
-		JLabel lblYourNameAnna = new JLabel("Your Name: " + game.getCurrentPlayer().getName());
-		lblYourNameAnna.setFont(new Font("Tahoma", Font.PLAIN, height/60));
-		lblYourNameAnna.setBounds(83*height/180, 7*width/100, height/6, 7*width/640);
-		add(lblYourNameAnna);
-
-		JLabel lblScore = new JLabel("Total Score: 0.");
-		lblScore.setFont(new Font("Tahoma", Font.PLAIN, height/60));
-		lblScore.setBounds(83*height/180, 17*width/200, height/6, 7*width/640);
-		add(lblScore);
-
-		lblCurrentWord.setText("Current Word: " + currentWord);
-		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, height/60));
-		lblCurrentWord.setBounds(height/36, 23*width/320, 53*height/180, 9*width/640);
-		add(lblCurrentWord);
-
-		lblTotalScore.setText("Score: " + score + "\r\n");
-		lblTotalScore.setFont(new Font("Arial", Font.BOLD, height/60));
-		lblTotalScore.setBounds(height/36, 7*width/80, 53*height/180, 9*width/640);
-		add(lblTotalScore);
-
-		ArrayList<Cell> cells = this.game.getBoard().getCells();
-		if (this.boardPanel == null) {
-			this.boardPanel = new BoardPanel(model, app, cells);
-			add(boardPanel);
-		}
-		else {
-			this.boardPanel.updateCells(cells);
-			this.boardPanel.repaint();
-		}
 		
 		JButton btnLeft = new JButton("\u2190"); //Left
 		btnLeft.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
@@ -199,5 +148,58 @@ public class OnlineGamePanel extends JPanel {
 				new OnlineGameController(model, app).processShift(ShiftDirection.Down);
 			}
 		});
+	}
+
+
+	/**
+	 * Get the current <code>Game> object.
+	 * 
+	 * @return A <code>Game</code> object for the current game.
+	 */
+
+	public Game getGame() {
+		return this.game;
+	}
+
+	// Why not use model directly?
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public void setCurrentWord(String word) {
+		this.currentWord = word;
+	}
+
+	/**
+	 * Set the current game.
+	 * 
+	 * @param game A <code>Game</code> object for the current game.
+	 */
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		lblRoom.setText("Room " + game.getGameId());
+		lblYourName.setText("Your Name: " + game.getCurrentPlayer().getName());
+		lblCurrentWord.setText("Current Word: " + currentWord);
+		lblScore.setText("Score: " + score + "\r\n");
+
+		ArrayList<Cell> cells = this.game.getBoard().getCells();
+		
+		if (this.boardPanel == null) {
+			this.boardPanel = new BoardPanel(model, app, cells);
+			add(boardPanel);
+		}
+		else {
+			this.boardPanel.updateCells(cells);
+			this.boardPanel.repaint();
+		}
 	}
 }

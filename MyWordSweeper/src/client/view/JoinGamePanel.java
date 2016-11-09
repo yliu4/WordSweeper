@@ -47,11 +47,11 @@ public class JoinGamePanel extends JPanel {
 	/**
 	 * Create the panel for collecting information for join game request.
 	 * 
-	 * @param model <code>Model</code> for current application.
+	 * @param m <code>Model</code> for current application.
 	 * @param application Current <code>Application</code>.
 	 */
-	public JoinGamePanel(Model model, Application application) {
-		this.model = model;
+	public JoinGamePanel(Model m, Application application) {
+		this.model = m;
 		this.app = application;
 		
 		setLayout(new GroupLayout(this));
@@ -71,41 +71,6 @@ public class JoinGamePanel extends JPanel {
 		textFieldGameID.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
 		textFieldGameID.setBounds(21*width/160, 11*height/36, 3*width/16, height/20);
 		add(textFieldGameID);
-	}
-	
-	// Do we need this?
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
-	/**
-	 * Get the <code>JTextField</code> recording the nickname.
-	 * 
-	 * @return A <code>JTextField</code> recording the nickname.
-	 */
-	public JTextField getTextFieldNickname() {
-		return textFieldNickname;
-	}
-
-	/**
-	 * Get the <code>JTextField</code> recording the gameID.
-	 * 
-	 * @return A <code>JTextField</code> recording the gameID.
-	 */
-	public JTextField getTextFieldGameID() {
-		return textFieldGameID;
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
 		
 		JLabel lblJoinNewGame = new JLabel("Join Game");
 		lblJoinNewGame.setHorizontalAlignment(SwingConstants.CENTER);
@@ -145,4 +110,39 @@ public class JoinGamePanel extends JPanel {
 			}
 		});
 	}
+	
+	// Do we need this?
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	/**
+	 * Get the <code>JTextField</code> recording the nickname.
+	 * 
+	 * @return A <code>JTextField</code> recording the nickname.
+	 */
+	public JTextField getTextFieldNickname() {
+		return textFieldNickname;
+	}
+
+	/**
+	 * Get the <code>JTextField</code> recording the gameID.
+	 * 
+	 * @return A <code>JTextField</code> recording the gameID.
+	 */
+	public JTextField getTextFieldGameID() {
+		return textFieldGameID;
+	}
+
+//	/* (non-Javadoc)
+//	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+//	 */
+//	@Override
+//	public void paintComponent(Graphics g) {
+//		super.paintComponent(g);
+//
+//		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+//		int height = d.height;
+//		int width = d.width;
+//	}
 }
