@@ -56,11 +56,11 @@ public class CreateGamePanel extends JPanel {
 	/**
 	 * Create the panel for collecting information for create game request.
 	 * 
-	 * @param model <code>Model</code> for current application.
+	 * @param m <code>Model</code> for current application.
 	 * @param application Current <code>Application</code>.
 	 */
-	public CreateGamePanel(Model model, Application application) {
-		this.model = model;
+	public CreateGamePanel(Model m, Application application) {
+		this.model = m;
 		this.app = application;
 		
 		setLayout(new GroupLayout(this));
@@ -103,18 +103,6 @@ public class CreateGamePanel extends JPanel {
 		modeBtnGroup.add(rdbtnPrivate);
 		add(rdbtnPublic);
 		add(rdbtnPrivate);
-	}
-	
-	/* (non-Javadoc)
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
 
 		JLabel lblCreateNewGame = new JLabel("Create New Game");
 		lblCreateNewGame.setHorizontalAlignment(SwingConstants.CENTER);
@@ -160,6 +148,18 @@ public class CreateGamePanel extends JPanel {
 			}
 		});
 	}
+	
+//	/* (non-Javadoc)
+//	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+//	 */
+//	@Override
+//	public void paintComponent(Graphics g) {
+//		super.paintComponent(g);
+//		
+//		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+//		int height = d.height;
+//		int width = d.width;
+//	}
 
 	/**
 	 * Get the <code>JTextField</code> recording the nickname.

@@ -33,8 +33,8 @@ public class CreateGameRequestController implements IProtocolHandler {
 		
 		// Construct message reflecting state
 		String xmlString = Message.responseHeader(request.id()) +
-				"<boardResponse gameId='hg12jhd' managingUser='" + pname + "' bonus='4,3' contents='ABCGBCJDH...HDJHJD'>" +
-			      "<player name='" + pname + "' score='392489038' position='4,6' board='AFERKSOEROIERPOR'/>" +
+				"<boardResponse gameId='hg12jhd' managingUser='" + pname + "' bonus='4,3'>" +
+			      "<player name='" + pname + "' score='392489038' position='4,6' board='AFERKSOEROIQRPOR'/>" +
 			  "</boardResponse>" +
 			"</response>";
 		
