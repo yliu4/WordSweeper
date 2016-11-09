@@ -7,6 +7,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.sun.scenario.effect.Blend.Mode;
+
 import xml.Message;
 import client.model.Cell;
 import client.model.Game;
@@ -55,6 +57,11 @@ public class BoardResponseController extends ControllerChain {
 			return next.process(response);
 		}
 
+		// at this point, you would normally start processing this...
+		OnlineGamePanel onlinePanel = app.getOnlineGamePanel();
+		Game game = model.getGame();
+		game.getPlayers().clear();
+
 		Node boardResponse = response.contents.getFirstChild();
 		NamedNodeMap map = boardResponse.getAttributes();
 		String gameId = null, /*contents = null, */managingUser = null, bonus = null;
@@ -64,40 +71,43 @@ public class BoardResponseController extends ControllerChain {
 		gameId = map.getNamedItem("gameId").getNodeValue();
 		//contents = map.getNamedItem("contents").getNodeValue();
 		managingUser = map.getNamedItem("managingUser").getNodeValue();
-		bonus = map.getNamedItem("managingUser").getNodeValue();
+		bonus = map.getNamedItem("bonus").getNodeValue();
 		
 		// get game board information for the managing user
 		// TODO: need to construct a board from the following information
 		ArrayList<Cell> cells = new ArrayList<Cell>();
 		// TODO: need to set the bonus from server response
-		Location bonusLoc = new Location(10, 10);
+		String[] bonusLocation = bonus.split(",");
+		Location bonusLoc = null;
 
 		NodeList list = boardResponse.getChildNodes();
 		for (int i = 0; i < list.getLength(); i++) {
 			Node n = list.item(i);
 			pname = n.getAttributes().getNamedItem("name").getNodeValue();
-			pboard = n.getAttributes().getNamedItem("board").getNodeValue();
 			pposition = n.getAttributes().getNamedItem("position").getNodeValue();
 			pscore = n.getAttributes().getNamedItem("score").getNodeValue();
+			String[] cellLocation = pposition.split(",");
+			if(pname.equals(model.getGame().getCurrentPlayer().getName())) {
+				pboard = n.getAttributes().getNamedItem("board").getNodeValue();
+				bonusLoc = new Location(Integer.valueOf(bonusLocation[0])-Integer.valueOf(cellLocation[0]), 
+						Integer.valueOf(bonusLocation[1])-Integer.valueOf(cellLocation[1]));
+			}
+			Player player = new Player(pname, Long.valueOf(pscore), new Location(Integer.valueOf(cellLocation[0]), Integer.valueOf(cellLocation[1])));
+			game.getPlayers().add(player);
 		}
-
-		// at this point, you would normally start processing this...
-		OnlineGamePanel onlinePanel = app.getOnlineGamePanel();
-		Game game = onlinePanel.getGame();
-
-		if(game == null)
-			game = new Game(new Player(pname, 0, new Location(1, 1)));
 
 		// set game id 
 		game.setGameId(gameId);
 		
 		// set game board
 		generateCells(pboard, cells);
-		String[] cellLocation = pposition.split(",");
-		game.setBoard(cells, new Location(Integer.valueOf(cellLocation[0]), Integer.valueOf(cellLocation[1])));
 		
-		// set score
-		onlinePanel.setScore(Integer.valueOf(pscore)); 
+		game.setBoard(cells, bonusLoc);
+		
+		// managing user
+		if(model.getGame().getCurrentPlayer().getName().equals(managingUser)) {
+			game.setManagingPlayer(model.getGame().getCurrentPlayer());
+		}
 		
 		// go to online panel
 		onlinePanel.setGame(game);
@@ -114,6 +124,8 @@ public class BoardResponseController extends ControllerChain {
 			return;
 		}
 		
+		//cells.clear();
+	
 		for(int i = 0; i < cellString.length(); i++) {
 			Location cellLocation = new Location(i/4, i%4);
 			String letter = String.valueOf(cellString.charAt(i));
