@@ -7,8 +7,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.sun.scenario.effect.Blend.Mode;
-
 import xml.Message;
 import client.model.Cell;
 import client.model.Game;
@@ -64,19 +62,15 @@ public class BoardResponseController extends ControllerChain {
 
 		Node boardResponse = response.contents.getFirstChild();
 		NamedNodeMap map = boardResponse.getAttributes();
-		String gameId = null, /*contents = null, */managingUser = null, bonus = null;
+		String gameId = null, managingUser = null, bonus = null;
 		String pname = null, pboard = null, pposition = null, pscore = null;
 		
 		// get global game board information
 		gameId = map.getNamedItem("gameId").getNodeValue();
-		//contents = map.getNamedItem("contents").getNodeValue();
 		managingUser = map.getNamedItem("managingUser").getNodeValue();
 		bonus = map.getNamedItem("bonus").getNodeValue();
-		
-		// get game board information for the managing user
-		// TODO: need to construct a board from the following information
+
 		ArrayList<Cell> cells = new ArrayList<Cell>();
-		// TODO: need to set the bonus from server response
 		String[] bonusLocation = bonus.split(",");
 		Location bonusLoc = null;
 
@@ -101,13 +95,11 @@ public class BoardResponseController extends ControllerChain {
 		
 		// set game board
 		generateCells(pboard, cells);
-		
 		game.setBoard(cells, bonusLoc);
 		
 		// managing user
-		if(model.getGame().getCurrentPlayer().getName().equals(managingUser)) {
+		if(model.getGame().getCurrentPlayer().getName().equals(managingUser))
 			game.setManagingPlayer(model.getGame().getCurrentPlayer());
-		}
 		
 		// go to online panel
 		onlinePanel.setGame(game);
@@ -124,7 +116,7 @@ public class BoardResponseController extends ControllerChain {
 			return;
 		}
 		
-		//cells.clear();
+		cells.clear();
 	
 		for(int i = 0; i < cellString.length(); i++) {
 			Location cellLocation = new Location(i/4, i%4);
