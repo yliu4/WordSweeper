@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import junit.framework.TestCase;
 import client.controller.PracticeGameController;
+import client.view.PracticeGamePanel;
 import client.model.Game;
 import client.model.Model;
 
