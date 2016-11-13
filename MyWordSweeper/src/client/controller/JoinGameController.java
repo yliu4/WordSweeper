@@ -23,11 +23,7 @@ import client.model.Player;
 import client.view.Application;
 
 /**
- * This class handle the communication between the sever and client. The client 
- * 
- * need to check the response message from sever to justify if the the game is 
- * 
- * lock, private or public game
+ * This class handle the join game request.
  * 
  * @author Team Pisces
  *
@@ -48,7 +44,7 @@ public class JoinGameController {
 	/** Send the request to join a game */
 	public void process() {
 		String nickname = app.getJoinGamePanel().getTextFieldNickname().getText();
-		String gameID = app.getJoinGamePanel().getTextFieldGameID().getText();
+		String gameId = app.getJoinGamePanel().getTextFieldGameID().getText();
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 
@@ -63,7 +59,7 @@ public class JoinGameController {
 					"Please enter a nickname!", "Warning", 
 					JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
 					null, options, options[0]);
-		} else if (gameID.isEmpty()) {
+		} else if (gameId.isEmpty()) {
 			// If server supports randomly assign game, the following will be removed
 			Object[] options = {"OK"};
 			UIManager.put("OptionPane.buttonFont", 
@@ -89,7 +85,7 @@ public class JoinGameController {
 				
 				if (randomNum == 0) {
 					this.game = new Game(new Player(nickname, 0, new Location(1, 1)));
-					this.game.setGameId(gameID);
+					this.game.setGameId(gameId);
 					generateNewBoard();
 					app.setJoinGameController(this);
 					app.gotoOnlineGamePanel();
@@ -121,10 +117,10 @@ public class JoinGameController {
 					}
 				}
 
-				System.out.println("### Game ID" + gameID);
+				System.out.println("### Game ID" + gameId);
 			}
 			
-			String joinGameRequest = "<joinGameRequest gameId='" + gameID
+			String joinGameRequest = "<joinGameRequest gameId='" + gameId
 					+ "' name='" + nickname + "'/></request>";
 			String xmlString = Message.requestHeader() + joinGameRequest;
 			Message m = new Message (xmlString);
