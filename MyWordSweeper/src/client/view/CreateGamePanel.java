@@ -66,23 +66,23 @@ public class CreateGamePanel extends JPanel {
 		setLayout(new GroupLayout(this));
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
+		int height = d.height / 180;
+		int width = d.width / 320;
 		
 		textFieldNickname = new JTextField();
-		textFieldNickname.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
-		textFieldNickname.setBounds(21*width/160, 3*height/20, 3*width/16, height/20);
+		textFieldNickname.setFont(new Font("Times New Roman", Font.PLAIN, 5*height));
+		textFieldNickname.setBounds(42*width, 27*height, 60*width, 9*height);
 		add(textFieldNickname);
 		
 		textFieldPassword = new JPasswordField();
 		textFieldPassword.setEditable(false);
-		textFieldPassword.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
-		textFieldPassword.setBounds(21*width/160, 11*height/36, 3*width/16, height/20);
+		textFieldPassword.setFont(new Font("Times New Roman", Font.PLAIN, 5*height));
+		textFieldPassword.setBounds(42*width, 55*height, 60*width, 9*height);
 		add(textFieldPassword);
 		
 		rdbtnPublic = new JRadioButton("Public", true);
-		rdbtnPublic.setFont(new Font("Tahoma", Font.PLAIN, height/45));
-		rdbtnPublic.setBounds(21*width/160, 41*height/180, 5*width/64, height/45);
+		rdbtnPublic.setFont(new Font("Tahoma", Font.PLAIN, 4*height));
+		rdbtnPublic.setBounds(42*width, 41*height, 25*width, 4*height);
 		rdbtnPublic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ChoosePublicController(app).process();
@@ -90,8 +90,8 @@ public class CreateGamePanel extends JPanel {
 		});
 		
 		rdbtnPrivate = new JRadioButton("Private", false);
-		rdbtnPrivate.setFont(new Font("Tahoma", Font.PLAIN, height/45));
-		rdbtnPrivate.setBounds(21*width/160, 47*height/180, 5*width/64, height/45);
+		rdbtnPrivate.setFont(new Font("Tahoma", Font.PLAIN, 4*height));
+		rdbtnPrivate.setBounds(42*width, 47*height, 25*width, 4*height);
 		rdbtnPrivate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ChoosePrivateController(app).process();
@@ -106,41 +106,41 @@ public class CreateGamePanel extends JPanel {
 
 		JLabel lblCreateNewGame = new JLabel("Create New Game");
 		lblCreateNewGame.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCreateNewGame.setFont(new Font("Times New Roman", Font.BOLD, 7*height/180));
-		lblCreateNewGame.setBounds(3*width/32, height/36, 3*width/16, height/18);
+		lblCreateNewGame.setFont(new Font("Times New Roman", Font.BOLD, 7*height));
+		lblCreateNewGame.setBounds(30*width, 5*height, 60*width, 10*height);
 		add(lblCreateNewGame);
 		
 		JLabel lblNickname = new JLabel("Nickname:");
 		lblNickname.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNickname.setFont(new Font("Tahoma", Font.PLAIN, height/36));
-		lblNickname.setBounds(3*width/80, 3*height/20, width/10, height/20);
+		lblNickname.setFont(new Font("Tahoma", Font.PLAIN, 5*height));
+		lblNickname.setBounds(12*width, 27*height, 32*width, 9*height);
 		add(lblNickname);
 		
 		JLabel lblMode = new JLabel("Mode:");
 		lblMode.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMode.setFont(new Font("Tahoma", Font.PLAIN, height/36));
-		lblMode.setBounds(3*width/80, 41*height/180, width/10, height/20);
+		lblMode.setFont(new Font("Tahoma", Font.PLAIN, 5*height));
+		lblMode.setBounds(12*width, 41*height, 32*width, 9*height);
 		add(lblMode);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, height/36));
-		lblPassword.setBounds(3*width/80, 11*height/36, width/10, height/20);
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 5*height));
+		lblPassword.setBounds(12*width, 55*height, 32*width, 9*height);
 		add(lblPassword);
 		
-		JButton btnNewButton = new JButton("GO!");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, height/36));
-		btnNewButton.setBounds(5*width/64, 19*height/45, 3*width/32, height/20);
-		add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnGo = new JButton("GO!");
+		btnGo.setFont(new Font("Tahoma", Font.BOLD, 5*height));
+		btnGo.setBounds(25*width, 76*height, 30*width, 9*height);
+		add(btnGo);
+		btnGo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new CreateGameController(model, app).process();
 			}
 		});
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, height/36));
-		btnCancel.setBounds(17*width/80, 19*height/45, 3*width/32, height/20);
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 5*height));
+		btnCancel.setBounds(68*width, 76*height, 30*width, 9*height);
 		add(btnCancel);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,18 +148,6 @@ public class CreateGamePanel extends JPanel {
 			}
 		});
 	}
-	
-//	/* (non-Javadoc)
-//	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-//	 */
-//	@Override
-//	public void paintComponent(Graphics g) {
-//		super.paintComponent(g);
-//		
-//		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-//		int height = d.height;
-//		int width = d.width;
-//	}
 
 	/**
 	 * Get the <code>JTextField</code> recording the nickname.
