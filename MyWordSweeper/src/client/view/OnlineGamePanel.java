@@ -146,6 +146,16 @@ public class OnlineGamePanel extends JPanel {
 				new RepositionBoardController(model, app).process(ShiftDirection.Right);
 			}
 		});
+
+		JButton btnResetGame = new JButton("Reset Game");
+		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		btnResetGame.setBounds(96*width, 9*height, 22*width, 5*height);
+		add(btnResetGame);
+		btnResetGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ResetGameController(model, app).process();
+			}
+		});
 	}
 
 
