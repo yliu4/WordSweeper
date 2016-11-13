@@ -1,7 +1,10 @@
 package client.controller;
 
 import xml.Message;
+import client.model.Game;
+import client.model.Location;
 import client.model.Model;
+import client.model.Player;
 import client.view.Application;
 
 /**
@@ -46,6 +49,9 @@ public class CreateGameController {
 					+ "/></request>";
 			String xmlString = Message.requestHeader() + createGameRequest;
 			Message m = new Message (xmlString);
+			
+			Game game = new Game(new Player(nickname, 0, new Location(1, 1)));
+			model.setGame(game);
 
 			app.getServerAccess().sendRequest(m);
 		}
