@@ -57,42 +57,40 @@ public class JoinGamePanel extends JPanel {
 		setLayout(new GroupLayout(this));
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
+		int height = d.height / 180;
+		int width = d.width / 320;
 
 		textFieldNickname = new JTextField();
-		textFieldNickname.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
-		textFieldNickname.setBounds(21*width/160, 3*height/20, 3*width/16, height/20);
+		textFieldNickname.setFont(new Font("Times New Roman", Font.PLAIN, 5*height));
+		textFieldNickname.setBounds(42*width, 27*height, 60*width, 9*height);
 		add(textFieldNickname);
 		
 		textFieldGameID = new JTextField();
-//		textFieldGameID.setToolTipText("Enter a gameID to join a specfic game, " +
-//				"or leave it empty to randomly join a public game.");
-		textFieldGameID.setFont(new Font("Times New Roman", Font.PLAIN, height/36));
-		textFieldGameID.setBounds(21*width/160, 11*height/36, 3*width/16, height/20);
+		textFieldGameID.setFont(new Font("Times New Roman", Font.PLAIN, 5*height));
+		textFieldGameID.setBounds(42*width, 55*height, 60*width, 9*height);
 		add(textFieldGameID);
 		
 		JLabel lblJoinNewGame = new JLabel("Join Game");
 		lblJoinNewGame.setHorizontalAlignment(SwingConstants.CENTER);
-		lblJoinNewGame.setFont(new Font("Times New Roman", Font.BOLD, 7*height/180));
-		lblJoinNewGame.setBounds(3*width/32, height/36, 3*width/16, height/18);
+		lblJoinNewGame.setFont(new Font("Times New Roman", Font.BOLD, 7*height));
+		lblJoinNewGame.setBounds(30*width, 5*height, 60*width, 10*height);
 		add(lblJoinNewGame);
 		
 		JLabel lblNickname = new JLabel("Nickname:");
 		lblNickname.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNickname.setFont(new Font("Tahoma", Font.PLAIN, height/36));
-		lblNickname.setBounds(3*width/80, 3*height/20, width/10, height/20);
+		lblNickname.setFont(new Font("Tahoma", Font.PLAIN, 5*height));
+		lblNickname.setBounds(12*width, 27*height, 32*width, 9*height);
 		add(lblNickname);
 
 		JLabel lbGameID = new JLabel("GameID:");
 		lbGameID.setHorizontalAlignment(SwingConstants.CENTER);
-		lbGameID.setFont(new Font("Tahoma", Font.PLAIN, height/36));
-		lbGameID.setBounds(3*width/80, 11*height/36, width/10, height/20);
+		lbGameID.setFont(new Font("Tahoma", Font.PLAIN, 5*height));
+		lbGameID.setBounds(12*width, 55*height, 32*width, 9*height);
 		add(lbGameID);	
 		
 		JButton btnGo = new JButton("GO!");
-		btnGo.setFont(new Font("Tahoma", Font.BOLD, height/36));
-		btnGo.setBounds(5*width/64, 19*height/45, 3*width/32, height/20);
+		btnGo.setFont(new Font("Tahoma", Font.BOLD, 5*height));
+		btnGo.setBounds(25*width, 76*height, 30*width, 9*height);
 		add(btnGo);
 		btnGo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -101,19 +99,14 @@ public class JoinGamePanel extends JPanel {
 		});
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, height/36));
-		btnCancel.setBounds(17*width/80, 19*height/45, 3*width/32, height/20);
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 5*height));
+		btnCancel.setBounds(68*width, 76*height, 30*width, 9*height);
 		add(btnCancel);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ReturnToMenuController(model, app).process();
 			}
 		});
-	}
-	
-	// Do we need this?
-	public void setGame(Game game) {
-		this.game = game;
 	}
 
 	/**
@@ -133,16 +126,4 @@ public class JoinGamePanel extends JPanel {
 	public JTextField getTextFieldGameID() {
 		return textFieldGameID;
 	}
-
-//	/* (non-Javadoc)
-//	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-//	 */
-//	@Override
-//	public void paintComponent(Graphics g) {
-//		super.paintComponent(g);
-//
-//		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-//		int height = d.height;
-//		int width = d.width;
-//	}
 }

@@ -37,6 +37,15 @@ public class SampleProtocolHandler implements IShutdownHandler {
 			return new JoinGameRequestController(model).process(st, request);
 		}
 		
+		String xmlString = Message.responseHeader(request.id()) +
+				"<boardResponse gameId='hg12jhd' managingUser='testtest' bonus='5,5'>" +
+			      "<player name='testtest' score='12345678' position='4,4' board='AFERKSOEROIQRPOR'/>" +
+			  "</boardResponse>" +
+			"</response>";
+		
+		// send this response back to the client which sent us the request.
+//		return new Message (xmlString);
+		
 		// unknown? no idea what to do
 		System.err.println("Unable to handle message:" + request);
 		return null;

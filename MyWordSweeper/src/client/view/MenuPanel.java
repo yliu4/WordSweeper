@@ -45,17 +45,18 @@ public class MenuPanel extends JPanel {
 		setLayout(new GroupLayout(this));
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
+		int height = d.height / 180;
+		int width = d.width / 32;
 		
 		JLabel lblWordswepper = new JLabel("WordSwepper");
-		lblWordswepper.setFont(new Font("Times New Roman", Font.BOLD, 2*height/45));
+		lblWordswepper.setFont(new Font("Times New Roman", Font.BOLD, 8*height));
 		lblWordswepper.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWordswepper.setBounds(67*height/360, width/64, 29*height/90, 7*width/160);
+		lblWordswepper.setBounds(3*width, 5*height, 6*width, 14*height);
 		add(lblWordswepper);
+		
 		JButton btnCreate = new JButton("CREATE");
-		btnCreate.setFont(new Font("Tahoma", Font.PLAIN, height/30));
-		btnCreate.setBounds(83*height/360, 3*width/40, 7*height/30, 7*width/160);
+		btnCreate.setFont(new Font("Tahoma", Font.PLAIN, 6*height));
+		btnCreate.setBounds(4*width, 24*height, 4*width, 14*height);
 		add(btnCreate);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -64,8 +65,8 @@ public class MenuPanel extends JPanel {
 		});
 		
 		JButton btnJoin = new JButton("JOIN");
-		btnJoin.setFont(new Font("Tahoma", Font.PLAIN, height/30));
-		btnJoin.setBounds(83*height/360, 11*width/80, 7*height/30, 7*width/160);
+		btnJoin.setFont(new Font("Tahoma", Font.PLAIN, 6*height));
+		btnJoin.setBounds(4*width, 44*height, 4*width, 14*height);
 		add(btnJoin);
 		btnJoin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -74,8 +75,8 @@ public class MenuPanel extends JPanel {
 		});
 		
 		JButton btnPractice = new JButton("PRACTICE");
-		btnPractice.setFont(new Font("Tahoma", Font.PLAIN, height/30));
-		btnPractice.setBounds(83*height/360, width/5, 7*height/30, 7*width/160);
+		btnPractice.setFont(new Font("Tahoma", Font.PLAIN, 6*height));
+		btnPractice.setBounds(4*width, 64*height, 4*width, 14*height);
 		add(btnPractice);
 		btnPractice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -83,17 +84,4 @@ public class MenuPanel extends JPanel {
 			}
 		});
 	}
-	
-//	/* (non-Javadoc)
-//	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-//	 */
-//	@Override
-//	public void paintComponent(Graphics g) {
-//		super.paintComponent(g);
-//		
-//		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-//		int height = d.height;
-//		int width = d.width;
-//		
-//	}
 }
