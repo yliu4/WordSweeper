@@ -21,10 +21,10 @@ public class CreateGameController {
 	Model model;
 	
 	/**
-	 * CreateGameController constructor
+	 * CreateGameController constructor.
 	 * 
-	 * @param model  initialize the reference of model
-	 * @param app    initialize the reference of application
+	 * @param model  The model.
+	 * @param app    The application.
 	 */
 	public CreateGameController(Model model, Application app) {
 		this.app = app;
@@ -32,7 +32,7 @@ public class CreateGameController {
 	}
 
 	/**
-	 * process create game request and them send a request to server in xml format
+	 * Process create game request and them send a request to server in xml format.
 	 */
 	public void process() {
 		String nickname = app.getCreateGamePanel().getTextFieldNickname().getText();
@@ -49,10 +49,9 @@ public class CreateGameController {
 					+ "/></request>";
 			String xmlString = Message.requestHeader() + createGameRequest;
 			Message m = new Message (xmlString);
-			
 			Game game = new Game(new Player(nickname, 0, new Location(1, 1)));
+			
 			model.setGame(game);
-
 			app.getServerAccess().sendRequest(m);
 		}
 	}
