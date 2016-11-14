@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.MockServerAccess;
+import client.model.Board;
 import client.model.Game;
 import client.model.Model;
 import client.view.Application;
@@ -50,15 +51,12 @@ public class TestPracticeGameController extends TestCase {
 	}
 	
 	public void testResetPracticeGame(){
-		List<Object> list1 = new ArrayList<Object>();
-	    List<Object> list2 = new ArrayList<Object>();
 		PracticeGameController practiceController = new PracticeGameController(model, app);
 		practiceController.process();
-		list1.add(practiceController.getGame().getBoard().getCells());
+		Board b1 = practiceController.getGame().getBoard();
 		new ResetPracticeGameController (model, app).process();
-		list2.add(practiceController.getGame().getBoard().getCells());
-		assertFalse(list1.equals(list2));
-		
+		Board b2 = practiceController.getGame().getBoard();
+		assertFalse(b1.equals(b2));
 	}
 	
 	

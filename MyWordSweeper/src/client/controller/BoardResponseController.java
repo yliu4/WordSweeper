@@ -33,12 +33,12 @@ public class BoardResponseController extends ControllerChain {
 	public Model model;
 	
 	/**
-	 * BoardResponseController constructor
+	 * BoardResponseController constructor.
 	 *
-	 * @param app  	 initialize the reference of application
-	 * @param panel  initialize the reference of panel
+	 * @param model  The model.
+	 * @param app    The application.
 	 */
-	public BoardResponseController(Application app, Model model) {
+	public BoardResponseController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}

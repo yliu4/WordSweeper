@@ -37,4 +37,16 @@ public class Board {
 	public ArrayList<Cell> getCells() {
 		return cells;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Board other = (Board) obj;
+		for(int i=0;i<this.getCells().size();i++){
+			if (!this.getCells().get(i).equals(other.getCells().get(i))){
+				return false;
+			}
+		}
+		return true;
+	}
+	
 }

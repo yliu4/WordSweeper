@@ -1,5 +1,8 @@
 package server.controller;
 
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
 import server.ClientState;
 import server.IProtocolHandler;
 import server.Server;
@@ -25,7 +28,11 @@ public class JoinGameRequestController implements IProtocolHandler {
 				
 		model.joinGame(); 
 		
-		String otherPlayers = "";
+		Node createRequest = request.contents.getFirstChild();
+		NamedNodeMap map = createRequest.getAttributes();
+		
+		String pname = map.getNamedItem("name").getNodeValue();
+		String otherPlayers = "<player name='" + pname + "' score='38974' position='2,2' board='ECDRFTGOUIGERPRT'/>";
 		for (int i = 0; i < model.getNumPlayers(); i++) {
 			otherPlayers += "<player name='player" + i + "' score='38974' position='2,2' board='ECDRFTGOUIGERPRT'/>";
 		}
