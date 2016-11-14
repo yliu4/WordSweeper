@@ -104,5 +104,14 @@ public class TestCreateGameController extends TestCase {
 		new ChoosePublicController(client).process();
 		assertFalse(client.getCreateGamePanel().getTextFieldPassword()
 				.isEditable());
+		
+		reqs = mockServer.getAndClearMessages();
+		new ResetGameController(model, client).process();
+		reqs = mockServer.getAndClearMessages();
+		assertEquals(1, reqs.size());
+		r = reqs.get(0);
+		assertEquals("resetGameRequest", r.contents.getFirstChild()
+				.getLocalName());
+		
 	}
 }
