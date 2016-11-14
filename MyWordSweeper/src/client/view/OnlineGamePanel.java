@@ -8,7 +8,7 @@ import java.util.*;
 import javax.swing.*;
 
 import client.controller.*;
-import client.controller.OnlineGameController.ShiftDirection;
+import client.controller.RepositionBoardController.ShiftDirection;
 import client.model.*;
 
 /**
@@ -63,43 +63,37 @@ public class OnlineGamePanel extends JPanel {
 		setLayout(new GroupLayout(this));
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
-		
-		JLabel lblShift = new JLabel("Shift");
-		lblShift.setHorizontalAlignment(SwingConstants.CENTER);
-		lblShift.setFont(new Font("Arial", Font.PLAIN, 7*height/360));
-		lblShift.setBounds(16*height/45, 27*width/320, height/15, 7*width/320);
-		add(lblShift);
-		
-		lblScore = new JLabel("Score: " + "\r\n");
-		lblScore.setFont(new Font("Arial", Font.BOLD, height/60));
-		lblScore.setBounds(height/36, 7*width/80, 53*height/180, 9*width/640);
-		add(lblScore);
+		int height = d.height / 180;
+		int width = d.width / 320;
 		
 		lblCurrentWord = new JLabel("Current Word: " + currentWord);
-		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, height/60));
-		lblCurrentWord.setBounds(height/36, 23*width/320, 53*height/180, 9*width/640);
+		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, 3*height));
+		lblCurrentWord.setBounds(5*width, 24*height, 53*width, 4*height);
 		add(lblCurrentWord);
 		
+		lblScore = new JLabel("Score: " + "\r\n");
+		lblScore.setFont(new Font("Arial", Font.BOLD, 3*height));
+		lblScore.setBounds(5*width, 28*height, 53*width, 4*height);
+		add(lblScore);
+		
 		lblRoom = new JLabel("Room ");
-		lblRoom.setFont(new Font("Arial", Font.BOLD, height/30));
-		lblRoom.setBounds(height/4, 17*width/640, 7*height/45, width/64);
+		lblRoom.setFont(new Font("Arial", Font.BOLD, 6*height));
+		lblRoom.setBounds(45*width, 8*height, 28*width, 5*height);
 		add(lblRoom);
 
 		lblYourName = new JLabel("Your Name: ");
-		lblYourName.setFont(new Font("Tahoma", Font.PLAIN, height/60));
-		lblYourName.setBounds(83*height/180, 7*width/100, height/6, 7*width/640);
+		lblYourName.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		lblYourName.setBounds(83*width, 20*height, 30*width, 4*height);
 		add(lblYourName);
 		
 		lblTotalScore = new JLabel("Total Score: 0.");
-		lblTotalScore.setFont(new Font("Tahoma", Font.PLAIN, height/60));
-		lblTotalScore.setBounds(83*height/180, 17*width/200, height/6, 7*width/640);
+		lblTotalScore.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		lblTotalScore.setBounds(83*width, 24*height, 30*width, 4*height);
 		add(lblTotalScore);
 
 		JButton btnReturn = new JButton("Return");
-		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, height/50));
-		btnReturn.setBounds(height/180, width/320, height/9, width/64);
+		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		btnReturn.setBounds(width, height, 20*width, 5*height);
 		add(btnReturn);
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -107,43 +101,59 @@ public class OnlineGamePanel extends JPanel {
 			}
 		});
 		
-		JButton btnLeft = new JButton("\u2190"); //Left
-		btnLeft.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
-		btnLeft.setBounds(16*height/45, 61*width/320, height/15, 3*width/80);
-		add(btnLeft);
-		btnLeft.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new OnlineGameController(model, app).processShift(ShiftDirection.Left);
-			}
-		});
-
-		JButton btnRight = new JButton("\u2192"); //Right
-		btnRight.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
-		btnRight.setBounds(16*height/45, 74*width/320, height/15, 3*width/80);
-		add(btnRight);
-		btnLeft.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new OnlineGameController(model, app).processShift(ShiftDirection.Right);
-			}
-		});
+		JLabel lblShift = new JLabel("Shift");
+		lblShift.setHorizontalAlignment(SwingConstants.CENTER);
+		lblShift.setFont(new Font("Arial", Font.PLAIN, 3*height));
+		lblShift.setBounds(64*width, 26*height, 12*width, 8*height);
+		add(lblShift);
 
 		JButton btnUp = new JButton("\u2191"); // Up
-		btnUp.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
-		btnUp.setBounds(16*height/45, 35*width/320, height/15, 3*width/80);
+		btnUp.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		btnUp.setBounds(64*width, 35*height, 12*width, 12*height);
 		add(btnUp);
-		btnLeft.addActionListener(new ActionListener() {
+		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new OnlineGameController(model, app).processShift(ShiftDirection.Up);
+				new RepositionBoardController(model, app).process(ShiftDirection.Up);
 			}
 		});
 		
 		JButton btnDown = new JButton("\u2193"); // Down
-		btnDown.setFont(new Font("Tahoma", Font.PLAIN, 7*height/360));
-		btnDown.setBounds(16*height/45, 48*width/320, height/15, 3*width/80);
+		btnDown.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		btnDown.setBounds(64*width, 48*height, 12*width, 12*height);
 		add(btnDown);
+		btnDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new RepositionBoardController(model, app).process(ShiftDirection.Down);
+			}
+		});
+		
+		JButton btnLeft = new JButton("\u2190"); //Left
+		btnLeft.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		btnLeft.setBounds(64*width, 61*height, 12*width, 12*height);
+		add(btnLeft);
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new OnlineGameController(model, app).processShift(ShiftDirection.Down);
+				new RepositionBoardController(model, app).process(ShiftDirection.Left);
+			}
+		});
+
+		JButton btnRight = new JButton("\u2192"); //Right
+		btnRight.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		btnRight.setBounds(64*width, 74*height, 12*width, 12*height);
+		add(btnRight);
+		btnRight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new RepositionBoardController(model, app).process(ShiftDirection.Right);
+			}
+		});
+
+		JButton btnResetGame = new JButton("Reset Game");
+		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		btnResetGame.setBounds(96*width, 9*height, 22*width, 5*height);
+		add(btnResetGame);
+		btnResetGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ResetGameController(model, app).process();
 			}
 		});
 	}
