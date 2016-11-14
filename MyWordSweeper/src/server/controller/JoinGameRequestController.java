@@ -1,5 +1,8 @@
 package server.controller;
 
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
 import server.ClientState;
 import server.IProtocolHandler;
 import server.Server;
@@ -23,21 +26,50 @@ public class JoinGameRequestController implements IProtocolHandler {
 	    //System.out.println(child.getUserData("gameId").toString());
 		//string id = 
 				
-		model.joinGame(); 
+		model.joinGame();
 		
-		String otherPlayers = "";
-		for (int i = 0; i < model.getNumPlayers(); i++) {
-			otherPlayers += "<player name='player" + i + "' score='38974' position='2,2' board='ECDRFTGOUIGERPRT'/>";
+		Node joinRequest = request.contents.getFirstChild();
+		NamedNodeMap map = joinRequest.getAttributes();
+		
+		String gameId = map.getNamedItem("gameId").getNodeValue();
+		
+		Message message;
+		if (gameId.equals("11"))
+		{
+			// simulate game is locked
+			String lockedResponse = "<joinGameResponse gameId='-1'/></response>";
+			String xmlString = Message.responseHeader(request.id()) +
+					lockedResponse;
+			message = new Message (xmlString);
 		}
-		
-		// Construct message reflecting state
-		String xmlString = Message.responseHeader(request.id()) +
-				"<boardResponse gameId='hg12jhd' managingUser='player2' bonus='4,3' contents='ABCGBCJDH...HDJHJD'>" +
-			      otherPlayers +
-			  "</boardResponse>" +
-			"</response>";
-		
-		Message message = new Message (xmlString);
+		else if (gameId.equals("22"))
+		{
+			// simulate game needs password
+			String needPasswordResponse = "<joinGameResponse gameId='-2'/></response>";
+			String xmlString = Message.responseHeader(request.id()) +
+					needPasswordResponse;
+			message = new Message (xmlString);
+		}
+		else
+		{
+			// simulate join directly
+			String successResponse = "<joinGameResponse gameId='" + gameId + "'/></response>";
+			String xmlString = Message.responseHeader(request.id()) +
+					successResponse;
+//			String otherPlayers = "";
+//			for (int i = 0; i < model.getNumPlayers(); i++) {
+//				otherPlayers += "<player name='player" + i + "' score='38974' position='2,2' board='ECDRFTGOUIGERPRT'/>";
+//			}
+//			
+//			// Construct message reflecting state
+//			String xmlString = Message.responseHeader(request.id()) + 
+//					"<boardResponse gameId='hg12jhd' managingUser='player2' bonus='4,3' contents='ABCGBCJDH...HDJHJD'>" +
+//				      otherPlayers +
+//				  "</boardResponse>" +
+//				"</response>";
+			
+			message = new Message (xmlString);
+		}
 		
 		// all other players on game (excepting this particular client) need to be told of this
 		// same response. Note this is inefficient and should be replaced by more elegant functioning

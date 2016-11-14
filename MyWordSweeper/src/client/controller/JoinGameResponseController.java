@@ -1,16 +1,7 @@
 package client.controller;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
-
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.plaf.FontUIResource;
-
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import xml.Message;
 import client.model.Model;
@@ -40,27 +31,30 @@ public class JoinGameResponseController extends ControllerChain {
 	 * @param Message  join game response message from server in xml format
 	 */
 	public boolean process(Message response) {
-		String type = response.contents.getFirstChild().getLocalName();
-		if (!type.equals ("joinGameResponse")) {
+		Node joinGameResponse = response.contents.getFirstChild();
+		if (!joinGameResponse.getLocalName().equals ("joinGameResponse")) {
 			return next.process(response);
 		}
 		
-		Node boardResponse = response.contents.getFirstChild();
-		NamedNodeMap map = boardResponse.getAttributes();
+		//Node boardResponse = response.contents.getFirstChild();
+		NamedNodeMap map = joinGameResponse.getAttributes();
 		
 		String gameId = map.getNamedItem("gameId").getNodeValue();
 		
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		
-		//Show warning message
-		UIManager.put("OptionPane.buttonFont", 
-				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
-		UIManager.put("OptionPane.messageFont", 
-				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
-		String message = "The game" + gameId + "is locked or your password is wrong! please click \"ok\" to go back.";
-		JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
-        JOptionPane.ERROR_MESSAGE);
+		if (gameId.equals("-1"))
+		{
+			app.getJoinGamePanel().PopUpLocked();
+		}
+		else if (gameId.equals("-2"))
+		{
+			app.getJoinGamePanel().PopUpPassword();
+		}
+		else
+		{
+			// TODO: successfully joined the game, change panel to online
+			// and get board response to draw board
+			app.getJoinGamePanel().PopUpJoinSuccess();
+		}
 		
 		return true;
 	}
