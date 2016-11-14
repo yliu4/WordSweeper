@@ -34,7 +34,7 @@ public class JoinGameController {
 	Application app;
 	JPanel popupPanel;
 	JPasswordField password;
-	final boolean wantFunctionDisplay = true;
+	final boolean wantFunctionDisplay = false;
 	
 	public JoinGameController(Model model, Application app) {
 		this.model = model;
@@ -79,46 +79,46 @@ public class JoinGameController {
 			// if == PRIVATE, pop up password dialog
 			
 			// Following is for function display only!
-			if (this.wantFunctionDisplay) {
-				Random rand = new Random(System.currentTimeMillis());
-				int randomNum = rand.nextInt(3);
-				
-				if (randomNum == 0) {
-					this.game = new Game(new Player(nickname, 0, new Location(1, 1)));
-					this.game.setGameId(gameId);
-					generateNewBoard();
-					app.setJoinGameController(this);
-					app.gotoOnlineGamePanel();
-				} else if (randomNum == 1) { 
-					//Popup for the lock game
-					UIManager.put("OptionPane.buttonFont", 
-							new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
-					UIManager.put("OptionPane.messageFont", 
-							new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
-					String message = "The game is locked! please click \"ok\" to go back.";
-					JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
-			        JOptionPane.ERROR_MESSAGE);
-				} else {
-					//password Popup
-					this.popupPanel = new JPanel();
-					JLabel label = new JLabel("Please enter a password to join the game:");
-					this.password = new JPasswordField(10);
-					popupPanel.add(label);
-					popupPanel.add(this.password);
-					String[] options = new String[]{"OK", "Cancel"};
-				
-					int option = JOptionPane.showOptionDialog(app.getJoinGamePanel(), this.popupPanel,
-							"Warning", JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE,
-							null, options, options[1]);
-					if(option == 0) {
-						// pressing OK button
-						char[] pass = this.password.getPassword();
-						System.out.println("Your password is: " + new String(pass));
-					}
-				}
-
-				System.out.println("### Game ID" + gameId);
-			}
+//			if (this.wantFunctionDisplay) {
+//				Random rand = new Random(System.currentTimeMillis());
+//				int randomNum = rand.nextInt(3);
+//				
+//				if (randomNum == 0) {
+//					this.game = new Game(new Player(nickname, 0, new Location(1, 1)));
+//					this.game.setGameId(gameId);
+//					generateNewBoard();
+//					app.setJoinGameController(this);
+//					app.gotoOnlineGamePanel();
+//				} else if (randomNum == 1) { 
+//					//Popup for the lock game
+//					UIManager.put("OptionPane.buttonFont", 
+//							new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
+//					UIManager.put("OptionPane.messageFont", 
+//							new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
+//					String message = "The game is locked! please click \"ok\" to go back.";
+//					JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
+//			        JOptionPane.ERROR_MESSAGE);
+//				} else {
+//					//password Popup
+//					this.popupPanel = new JPanel();
+//					JLabel label = new JLabel("Please enter a password to join the game:");
+//					this.password = new JPasswordField(10);
+//					popupPanel.add(label);
+//					popupPanel.add(this.password);
+//					String[] options = new String[]{"OK", "Cancel"};
+//				
+//					int option = JOptionPane.showOptionDialog(app.getJoinGamePanel(), this.popupPanel,
+//							"Warning", JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE,
+//							null, options, options[1]);
+//					if(option == 0) {
+//						// pressing OK button
+//						char[] pass = this.password.getPassword();
+//						System.out.println("Your password is: " + new String(pass));
+//					}
+//				}
+//
+//				System.out.println("### Game ID" + gameId);
+//			}
 			
 			String joinGameRequest = "<joinGameRequest gameId='" + gameId
 					+ "' name='" + nickname + "'/></request>";
