@@ -29,7 +29,7 @@ public class JoinGameResponseController extends ControllerChain {
 	 * @param app  	 initialize the reference of application
 	 * @param model  initialize the reference of model
 	 */
-	public JoinGameResponseController(Application app, Model model) {
+	public JoinGameResponseController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}
