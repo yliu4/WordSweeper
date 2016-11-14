@@ -74,9 +74,9 @@ public class TestJoinGameController extends TestCase {
 			j3.process();
 			
 			//test Generate Board
-			j1.game = new Game();
-			j1.generateNewBoard();
-			assertNotNull(j1.getGame().getBoard());
+//			j1.game = new Game();
+//			j1.generateNewBoard();
+//			assertNotNull(j1.getGame().getBoard());
 			
 			//test Return to Menu
 			new ReturnToMenuController(model, client).process();

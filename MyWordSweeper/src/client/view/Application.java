@@ -211,8 +211,9 @@ public class Application extends JFrame {
 		add(createGamePanel);
 	}
 
+	// Not needed?
 	public void setJoinGameController(JoinGameController joinGameController) {
-		this.onlineGamePanel.setGame(joinGameController.getGame());
+//		this.onlineGamePanel.setGame(joinGameController.getGame());
 		this.joinGameController = joinGameController;
 	}
 

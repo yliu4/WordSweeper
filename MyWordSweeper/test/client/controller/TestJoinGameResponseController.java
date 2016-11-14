@@ -7,6 +7,8 @@ import client.model.Model;
 import client.view.Application;
 
 public class TestJoinGameResponseController extends TestCase{
+	// TODO: use MockServer?
+	
 	public void testProcess() {
 		Message.configure("wordsweeper.xsd");
 		
@@ -15,7 +17,7 @@ public class TestJoinGameResponseController extends TestCase{
 		JoinGameResponseController controller = new JoinGameResponseController(model, app);
 		
 		String response = "<joinGameResponse gameId='TEST'/></response>";
-		String xmlString = Message.responseHeader("id", "test") + response;
+		String xmlString = Message.responseHeader("id", "lock") + response;
 		Message m = new Message (xmlString);
 		controller.process(m);
 	}
