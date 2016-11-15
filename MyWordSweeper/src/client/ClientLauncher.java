@@ -41,14 +41,14 @@ public class ClientLauncher {
 		
 		// set up the chain of responsibility
 		SampleClientMessageHandler handler = new SampleClientMessageHandler(app);
-		handler.registerHandler(new BoardResponseController(app, model));
-		handler.registerHandler(new ConnectResponseController(app, model));
-		handler.registerHandler(new JoinGameResponseController(app, model));
-		handler.registerHandler(new JoinGameResponseController(app, model));
-		handler.registerHandler(new ExitGameResponseController(app, model));
-		handler.registerHandler(new LockGameResponseController(app, model));
-		handler.registerHandler(new ResetGameResponseController(app, model));
-		handler.registerHandler(new FindWordResponseController(app, model));
+		handler.registerHandler(new BoardResponseController(model, app));
+		handler.registerHandler(new ConnectResponseController(model, app));
+		handler.registerHandler(new JoinGameResponseController(model, app));
+		handler.registerHandler(new JoinGameResponseController(model, app));
+		handler.registerHandler(new ExitGameResponseController(model, app));
+		handler.registerHandler(new LockGameResponseController(model, app));
+		handler.registerHandler(new ResetGameResponseController(model, app));
+		handler.registerHandler(new FindWordResponseController(model, app));
 		
 		// try to connect to the server. Once connected, messages are going to be processed by 
 		// SampleClientMessageHandler. For now we just continue on with the initialization because

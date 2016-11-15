@@ -1,7 +1,6 @@
 package client.controller;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -34,12 +33,12 @@ public class BoardResponseController extends ControllerChain {
 	public Model model;
 	
 	/**
-	 * BoardResponseController constructor
+	 * BoardResponseController constructor.
 	 *
-	 * @param app  	 initialize the reference of application
-	 * @param panel  initialize the reference of panel
+	 * @param model  The model.
+	 * @param app    The application.
 	 */
-	public BoardResponseController(Application app, Model model) {
+	public BoardResponseController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}
@@ -104,11 +103,10 @@ public class BoardResponseController extends ControllerChain {
 		// Set game board
 		generateCells(pboard, cells);
 		game.setBoard(cells, bonusLoc);
-		
+
 		// Set managing user
-		if(model.getGame().getCurrentPlayer().getName().equals(managingUser)) {
+		if(model.getGame().getCurrentPlayer().getName().equals(managingUser))
 			game.setManagingPlayer(model.getGame().getCurrentPlayer());
-		}
 		
 		// Go to online panel
 		onlinePanel.setGame(game);

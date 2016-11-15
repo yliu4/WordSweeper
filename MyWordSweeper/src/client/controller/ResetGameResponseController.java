@@ -28,7 +28,7 @@ public class ResetGameResponseController extends ControllerChain {
 	 * @param app  	 initialize the reference of application
 	 * @param model  initialize the reference of model
 	 */
-	public ResetGameResponseController(Application app, Model model) {
+	public ResetGameResponseController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}
@@ -44,23 +44,29 @@ public class ResetGameResponseController extends ControllerChain {
 			return next.process(response);
 		}
 		
-		Node boardResponse = response.contents.getFirstChild();
-		NamedNodeMap map = boardResponse.getAttributes();
+		boolean success = response.success();
 		
-		String gameId = map.getNamedItem("gameId").getNodeValue();
+		if(success) {
 		
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		
-		//Show warning message
-		UIManager.put("OptionPane.buttonFont", 
-				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
-		UIManager.put("OptionPane.messageFont", 
-				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
-		String message = "The game" + gameId + "is ";
-		JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
-        JOptionPane.ERROR_MESSAGE);
-		
+		} else {
+			String reason = response.reason();
+			Node boardResponse = response.contents.getFirstChild();
+			NamedNodeMap map = boardResponse.getAttributes();
+			
+			String gameId = map.getNamedItem("gameId").getNodeValue();
+			
+			Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+			int height = d.height;
+			
+			//Show warning message
+			UIManager.put("OptionPane.buttonFont", 
+					new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
+			UIManager.put("OptionPane.messageFont", 
+					new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
+			String message = "The game" + gameId + "can't be reset because of " + reason;
+			JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
+	        JOptionPane.ERROR_MESSAGE);
+		}
 		return true;
 	}
 }

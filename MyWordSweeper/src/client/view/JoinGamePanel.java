@@ -10,9 +10,15 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
+
+import xml.Message;
 
 import client.controller.JoinGameController;
 import client.controller.ReturnToMenuController;
@@ -107,6 +113,37 @@ public class JoinGamePanel extends JPanel {
 				new ReturnToMenuController(model, app).process();
 			}
 		});
+	}
+	
+    /** 
+     * Popup that asks for a password.
+	 * 
+	 * @return
+	 */
+	public String popupNeedPassword() {
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = d.height;
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel("Enter a password:");
+		JPasswordField pass = new JPasswordField(10);
+
+		label.setFont(new Font("Times New Roman", Font.PLAIN, 2*height/45));
+		panel.add(label);
+		pass.setFont(new Font("Times New Roman", Font.PLAIN, 2*height/45));
+		panel.add(pass);
+		
+		String[] options = new String[]{"OK", "Cancel"};
+		int option = JOptionPane.showOptionDialog(this, panel, "Warning"
+				, JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE
+				, null, options, options[1]);
+		String password = "";
+		
+		if(option == 0) // Pressing OK button
+		{
+		    password = new String(pass.getPassword());
+		}
+		
+		return password;
 	}
 
 	/**

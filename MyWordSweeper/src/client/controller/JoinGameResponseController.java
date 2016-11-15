@@ -4,13 +4,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
-
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import xml.Message;
 import client.model.Model;
@@ -29,7 +28,7 @@ public class JoinGameResponseController extends ControllerChain {
 	 * @param app  	 initialize the reference of application
 	 * @param model  initialize the reference of model
 	 */
-	public JoinGameResponseController(Application app, Model model) {
+	public JoinGameResponseController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}
@@ -45,22 +44,27 @@ public class JoinGameResponseController extends ControllerChain {
 			return next.process(response);
 		}
 		
-		Node boardResponse = response.contents.getFirstChild();
-		NamedNodeMap map = boardResponse.getAttributes();
-		
-		String gameId = map.getNamedItem("gameId").getNodeValue();
-		
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
+		String reason = response.reason();
 		
 		//Show warning message
-		UIManager.put("OptionPane.buttonFont", 
-				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
-		UIManager.put("OptionPane.messageFont", 
-				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
-		String message = "The game" + gameId + "is locked or your password is wrong! please click \"ok\" to go back.";
-		JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
-        JOptionPane.ERROR_MESSAGE);
+		if ("private".equals(reason)) {
+		    String password = app.getJoinGamePanel().popupNeedPassword();
+		    
+		    if (password.length() > 0){
+		    	String nickname = app.getJoinGamePanel().getTextFieldNickname().getText();
+				String gameId = app.getJoinGamePanel().getTextFieldGameID().getText();
+				String joinGameRequest = "<joinGameRequest gameId='" + gameId
+						+ "' name='" + nickname + "' password='" + password
+						+ "'/></request>";
+				String xmlString = Message.requestHeader() + joinGameRequest;
+				Message m = new Message (xmlString);
+
+				app.getServerAccess().sendRequest(m);
+		    }
+		}
+		else {
+			app.popupWarnig("This game is locked or doesn't exist!");
+		}
 		
 		return true;
 	}

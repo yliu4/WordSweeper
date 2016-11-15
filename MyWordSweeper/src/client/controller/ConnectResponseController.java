@@ -25,7 +25,7 @@ public class ConnectResponseController extends ControllerChain {
 	 * @param app  	 initialize the reference of application
 	 * @param model	 initialize the reference of model
 	 */
-	public ConnectResponseController(Application app, Model model) {
+	public ConnectResponseController(Model model, Application app) {
 		super();
 		this.app = app;
 		this.model = model;

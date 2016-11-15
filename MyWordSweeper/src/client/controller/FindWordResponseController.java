@@ -20,7 +20,7 @@ public class FindWordResponseController extends ControllerChain {
 	 * @param app  	 initialize the reference of application
 	 * @param model  initialize the reference of model
 	 */
-	public FindWordResponseController(Application app, Model model) {
+	public FindWordResponseController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}
@@ -37,13 +37,19 @@ public class FindWordResponseController extends ControllerChain {
 			return next.process(response);
 		}
 		
-		Node boardResponse = response.contents.getFirstChild();
-		NamedNodeMap map = boardResponse.getAttributes();
+		boolean success = response.success();
 		
-		String gameId = map.getNamedItem("gameId").getNodeValue();
-		String name = map.getNamedItem("gameId").getNodeValue();
-		String score = map.getNamedItem("score").getNodeValue();
+		if(success) {
+			Node boardResponse = response.contents.getFirstChild();
+			NamedNodeMap map = boardResponse.getAttributes();
 		
+			String gameId = map.getNamedItem("gameId").getNodeValue();
+			String name = map.getNamedItem("name").getNodeValue();
+			String score = map.getNamedItem("score").getNodeValue();
+		
+		} else {
+			
+		}
 		return true;
 	}
 }

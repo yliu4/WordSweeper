@@ -211,8 +211,9 @@ public class Application extends JFrame {
 		add(createGamePanel);
 	}
 
+	// Not needed?
 	public void setJoinGameController(JoinGameController joinGameController) {
-		this.onlineGamePanel.setGame(joinGameController.getGame());
+//		this.onlineGamePanel.setGame(joinGameController.getGame());
 		this.joinGameController = joinGameController;
 	}
 
@@ -236,26 +237,13 @@ public class Application extends JFrame {
 	public void resetGame() {
 		this.practiceGameController.generateNewBoard();
 	}
-	
-	/**	Show a popup thats warns the player to enter a nickname. */
-	public void popupEmptyNicknameWarnig() {
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		Object[] options = {"OK"};
-		
-		UIManager.put("OptionPane.buttonFont", 
-				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
-		UIManager.put("OptionPane.messageFont", 
-				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
-		
-		JOptionPane.showOptionDialog(this.getCreateGamePanel(),
-				"Please enter a nickname!", "Warning", 
-				JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
-				null, options, options[0]);
-	}
 
-	/**	Show a popup thats warns the player to enter a password. */
-	public void popupEmptyPasswordWarnig() {
+	/**	
+	 * Show a popup thats warns the player.
+	 * 
+	 * @param warningMsg The warning message.
+	 */
+	public void popupWarnig(String warningMsg) {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		Object[] options = {"OK"};
@@ -265,8 +253,8 @@ public class Application extends JFrame {
 		UIManager.put("OptionPane.messageFont", 
 				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
 		
-		JOptionPane.showOptionDialog(this.getCreateGamePanel(),
-				"Please enter a password!", "Warning", 
+		JOptionPane.showOptionDialog(this,
+				warningMsg, "Warning", 
 				JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
 				null, options, options[0]);
 	}

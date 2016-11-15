@@ -32,11 +32,13 @@ public class BoardPanel extends JPanel {
 	/** For building the current selected word. */
 	StringBuilder currentWord;
 	
-	/** */
+	/** For recording the previous dragged cell */
 	int prev;
 	
-	/** */
+	/** Mark if you dragged the same cell two times */
 	boolean stop = false;
+	
+	BoardController boardController = null;
 
 	/**
 	 * Construct the panel for the board according to the cells. 
@@ -50,16 +52,25 @@ public class BoardPanel extends JPanel {
 		this.app = app;
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
+		int height = d.height / 360;
+		int width = d.width / 640;
 		
-		setBounds(width/64, 17*height/90, 13*height/45, 13*height/45);
+		setBounds(10*width, 68*height, 104*width, 104*height);
 		currentWord = new StringBuilder();
 		
-		BoardController control = new BoardController(model, this);
+		this.boardController = new BoardController(model, this);
 		
-		this.addMouseListener(control);
-		this.addMouseMotionListener(control);
+		this.addMouseListener(boardController);
+		this.addMouseMotionListener(boardController);
+	}
+	
+	/** Get the board controller object 
+	 * 
+	 * @returnA <code>boardController</code> 
+	 */
+	public BoardController getBoardController()
+	{
+		return this.boardController;
 	}
 
 	/**
@@ -68,7 +79,7 @@ public class BoardPanel extends JPanel {
 	 * @return A <code>String</code> represents the current selected word.
 	 */
 	public String getCurrentWord() {
-		return this.currentWord.toString();
+		return this.currentWord.toString().toUpperCase();
 	}
 	
 	/**
