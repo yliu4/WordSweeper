@@ -11,10 +11,6 @@ import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import xml.Message;
 import client.model.Model;
 import client.view.Application;
@@ -49,52 +45,25 @@ public class JoinGameResponseController extends ControllerChain {
 		}
 		
 		String reason = response.reason();
-//		Node boardResponse = response.contents.getFirstChild();
-//		NamedNodeMap map = boardResponse.getAttributes();
-//		String gameId = map.getNamedItem("gameId").getNodeValue();
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
 		
 		//Show warning message
 		if ("private".equals(reason)) {
-			JPanel panel = new JPanel();
-			JLabel label = new JLabel("Enter a password:");
-			JPasswordField pass = new JPasswordField(10);
+		    String password = app.getJoinGamePanel().popupNeedPassword();
+		    
+		    if (password.length() > 0){
+		    	String nickname = app.getJoinGamePanel().getTextFieldNickname().getText();
+				String gameId = app.getJoinGamePanel().getTextFieldGameID().getText();
+				String joinGameRequest = "<joinGameRequest gameId='" + gameId
+						+ "' name='" + nickname + "' password='" + password
+						+ "'/></request>";
+				String xmlString = Message.requestHeader() + joinGameRequest;
+				Message m = new Message (xmlString);
 
-			label.setFont(new Font("Times New Roman", Font.PLAIN, 2*height/45));
-			panel.add(label);
-			pass.setFont(new Font("Times New Roman", Font.PLAIN, 2*height/45));
-			panel.add(pass);
-			String[] options = new String[]{"OK", "Cancel"};
-			int option = JOptionPane.showOptionDialog(app.getJoinGamePanel(), panel
-					, "Warning", JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE,
-					null, options, options[1]);
-			if(option == 0) // pressing OK button
-			{
-			    String password = new String(pass.getPassword());
-			    if (password.length() > 0){
-			    	String nickname = app.getJoinGamePanel().getTextFieldNickname().getText();
-					String gameId = app.getJoinGamePanel().getTextFieldGameID().getText();
-					String joinGameRequest = "<joinGameRequest gameId='" + gameId
-							+ "' name='" + nickname + "' password='" + password
-							+ "'/></request>";
-					String xmlString = Message.requestHeader() + joinGameRequest;
-					Message m = new Message (xmlString);
-
-					app.getServerAccess().sendRequest(m);
-			    }
-			}
+				app.getServerAccess().sendRequest(m);
+		    }
 		}
 		else {
-			UIManager.put("OptionPane.buttonFont", 
-					new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
-			UIManager.put("OptionPane.messageFont", 
-					new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
-			
-			String message = "This game is locked or does not exist!";
-			
-			JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
-	        JOptionPane.ERROR_MESSAGE);
+			app.popupWarnig("This game is locked or doesn't exist!");
 		}
 		
 		return true;
