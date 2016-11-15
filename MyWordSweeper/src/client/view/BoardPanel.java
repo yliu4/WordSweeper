@@ -32,10 +32,10 @@ public class BoardPanel extends JPanel {
 	/** For building the current selected word. */
 	StringBuilder currentWord;
 	
-	/** */
+	/** For recording the previous dragged cell */
 	int prev;
 	
-	/** */
+	/** Mark if you dragged the same cell two times */
 	boolean stop = false;
 	
 	BoardController boardController = null;
