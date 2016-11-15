@@ -50,10 +50,10 @@ public class BoardPanel extends JPanel {
 		this.app = app;
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
+		int height = d.height / 360;
+		int width = d.width / 640;
 		
-		setBounds(width/64, 17*height/90, 13*height/45, 13*height/45);
+		setBounds(10*width, 68*height, 104*width, 104*height);
 		currentWord = new StringBuilder();
 		
 		BoardController control = new BoardController(model, this);

@@ -40,9 +40,9 @@ public class CreateGameController {
 		boolean isPrivate = app.getCreateGamePanel().getRdbtnPrivate().isSelected();
 		
 		if (nickname.isEmpty()) {
-			app.popupEmptyNicknameWarnig();
+			app.popupWarnig("Please enter a nickname!");
 		} else if (isPrivate && password.length == 0) {
-			app.popupEmptyPasswordWarnig();
+			app.popupWarnig("Please enter a password!");
 		} else {
 			String createGameRequest = "<createGameRequest name='" + nickname + "'" 
 					+ ((password.length == 0)? "":(" password='" + new String(password) + "'"))
