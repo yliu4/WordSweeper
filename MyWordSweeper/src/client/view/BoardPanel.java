@@ -68,7 +68,7 @@ public class BoardPanel extends JPanel {
 	 * @return A <code>String</code> represents the current selected word.
 	 */
 	public String getCurrentWord() {
-		return this.currentWord.toString();
+		return this.currentWord.toString().toUpperCase();
 	}
 	
 	/**

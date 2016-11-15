@@ -37,8 +37,8 @@ public class PracticeGamePanel extends JPanel{
 	/** <code>JLabel</code> for displaying the total score of the current player. */
 	JLabel lblTotalScore;
 	
-	/** <code>JLabel</code> for displaying the current selected word. */
-	JLabel lblCurrentWord;
+	/** <code>JTextField</code> for displaying the current selected word. */
+	JTextField textFieldWord;
 	
 	/** <code>JLabel</code> for displaying the score of the current selected word. */
 	JLabel lblScore;
@@ -64,10 +64,17 @@ public class PracticeGamePanel extends JPanel{
 		lblRoom.setBounds(45*width, 8*height, 28*width, 5*height);
 		add(lblRoom);
 		
-		lblCurrentWord = new JLabel("Current Word: ");
+		JLabel lblCurrentWord = new JLabel("Current Word: ");
 		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, 3*height));
-		lblCurrentWord.setBounds(5*width, 24*height, 53*width, 4*height);
+		lblCurrentWord.setBounds(5*width, 24*height, 22*width, 4*height);
 		add(lblCurrentWord);
+
+		textFieldWord = new JTextField();
+		textFieldWord.setEditable(false);
+		textFieldWord.setBorder(null);
+		textFieldWord.setFont(new Font("Arial", Font.PLAIN, 3*height));
+		textFieldWord.setBounds(27*width, 24*height, 40*width, 4*height);
+		add(textFieldWord);
 
 		lblScore = new JLabel("Score: \r\n");
 		lblScore.setFont(new Font("Arial", Font.BOLD, 3*height));
@@ -132,6 +139,8 @@ public class PracticeGamePanel extends JPanel{
 			this.boardPanel.updateCells(cells);
 			this.boardPanel.repaint();
 		}
+		
+		textFieldWord.setText(boardPanel.getCurrentWord());
 	}
 	
 	/**
@@ -141,5 +150,14 @@ public class PracticeGamePanel extends JPanel{
 	 */
 	public JPanel getBoardPanel() {
 		return this.boardPanel;
+	}
+
+	/**
+	 * Get the JTextField that displays the word.
+	 * 
+	 * @return The JTextField that displays the word.
+	 */
+	public JTextField getTextFieldWord() {
+		return textFieldWord;
 	}
 }
