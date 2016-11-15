@@ -37,6 +37,8 @@ public class BoardPanel extends JPanel {
 	
 	/** */
 	boolean stop = false;
+	
+	BoardController boardController = null;
 
 	/**
 	 * Construct the panel for the board according to the cells. 
@@ -56,10 +58,19 @@ public class BoardPanel extends JPanel {
 		setBounds(width/64, 17*height/90, 13*height/45, 13*height/45);
 		currentWord = new StringBuilder();
 		
-		BoardController control = new BoardController(model, this);
+		this.boardController = new BoardController(model, this);
 		
-		this.addMouseListener(control);
-		this.addMouseMotionListener(control);
+		this.addMouseListener(boardController);
+		this.addMouseMotionListener(boardController);
+	}
+	
+	/** Get the board controller object 
+	 * 
+	 * @returnA <code>boardController</code> 
+	 */
+	public BoardController getBoardController()
+	{
+		return this.boardController;
 	}
 
 	/**
