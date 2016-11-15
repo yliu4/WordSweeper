@@ -27,49 +27,65 @@ public class JoinGameRequestController implements IProtocolHandler {
 		//string id = 
 				
 		model.joinGame();
-		
+
 		Node joinRequest = request.contents.getFirstChild();
 		NamedNodeMap map = joinRequest.getAttributes();
+		
+		String pname = map.getNamedItem("name").getNodeValue();
+		String otherPlayers = "<player name='" + pname + "' score='38974' position='2,2' board='ECDRFTGOUIGERPRT'/>";
+		
+		for (int i = 0; i < model.getNumPlayers(); i++) {
+			otherPlayers += "<player name='player" + i + "' score='38974' position='2,2' board='ECDRFTGOUIGERPRT'/>";
+		}
 		
 		String gameId = map.getNamedItem("gameId").getNodeValue();
 		
 		Message message;
-		if (gameId.equals("11"))
+		String xmlString = "";
+		
+		if (gameId.equals("lock"))
 		{
-			// simulate game is locked
-			String lockedResponse = "<joinGameResponse gameId='-1'/></response>";
-			String xmlString = Message.responseHeader(request.id()) +
-					lockedResponse;
-			message = new Message (xmlString);
+			// Game is locked
+			String response = "<joinGameResponse gameId='" + gameId 
+					+ "'/></response>";
+			xmlString = Message.responseHeader(request.id(), "lock") 
+					+ response;
 		}
-		else if (gameId.equals("22"))
+		else if (gameId.equals("private"))
 		{
-			// simulate game needs password
-			String needPasswordResponse = "<joinGameResponse gameId='-2'/></response>";
-			String xmlString = Message.responseHeader(request.id()) +
-					needPasswordResponse;
-			message = new Message (xmlString);
-		}
-		else
-		{
-			// simulate join directly
-			String successResponse = "<joinGameResponse gameId='" + gameId + "'/></response>";
-			String xmlString = Message.responseHeader(request.id()) +
-					successResponse;
-//			String otherPlayers = "";
-//			for (int i = 0; i < model.getNumPlayers(); i++) {
-//				otherPlayers += "<player name='player" + i + "' score='38974' position='2,2' board='ECDRFTGOUIGERPRT'/>";
-//			}
-//			
-//			// Construct message reflecting state
-//			String xmlString = Message.responseHeader(request.id()) + 
-//					"<boardResponse gameId='hg12jhd' managingUser='player2' bonus='4,3' contents='ABCGBCJDH...HDJHJD'>" +
-//				      otherPlayers +
-//				  "</boardResponse>" +
-//				"</response>";
+			// Game needs password
+			Node password = map.getNamedItem("password");
 			
-			message = new Message (xmlString);
+			if (password == null) {
+				String response = "<joinGameResponse gameId='" + gameId 
+						+ "'/></response>";
+				xmlString = Message.responseHeader(request.id(), "private") 
+						+ response;
+			}
+			else if ("password".equals(password.getNodeValue())) {
+				xmlString = Message.responseHeader(request.id()) + 
+						"<boardResponse gameId='" + gameId + "' managingUser='player2' bonus='4,3' contents='ABCGBCJDH...HDJHJD'>" +
+					      otherPlayers +
+					  "</boardResponse>" +
+					"</response>";
+			}
+			else {
+				String response = "<joinGameResponse gameId='" + gameId 
+						+ "'/></response>";
+				xmlString = Message.responseHeader(request.id(), "private") 
+						+ response;
+			}
 		}
+		else {
+			// Join success
+			xmlString = Message.responseHeader(request.id()) + 
+					"<boardResponse gameId='" + gameId + "' managingUser='player2' bonus='4,3' contents='ABCGBCJDH...HDJHJD'>" +
+				      otherPlayers +
+				  "</boardResponse>" +
+				"</response>";
+		}
+
+		message = new Message (xmlString);
 		
 		// all other players on game (excepting this particular client) need to be told of this
 		// same response. Note this is inefficient and should be replaced by more elegant functioning

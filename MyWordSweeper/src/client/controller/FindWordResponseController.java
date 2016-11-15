@@ -20,7 +20,7 @@ public class FindWordResponseController extends ControllerChain {
 	 * @param app  	 initialize the reference of application
 	 * @param model  initialize the reference of model
 	 */
-	public FindWordResponseController(Application app, Model model) {
+	public FindWordResponseController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}

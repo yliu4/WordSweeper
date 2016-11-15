@@ -18,17 +18,17 @@ public class RepositionBoardController {
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 	
-	public RepositionBoardController(Model model, Application app) {
-		this.app = app;
-		this.model = model;
-	}
-	
 	public enum ShiftDirection
 	{
 		Left,
 		Right,
 		Up,
 		Down
+	}
+	
+	public RepositionBoardController(Model model, Application app) {
+		this.app = app;
+		this.model = model;
 	}
 
 	/**

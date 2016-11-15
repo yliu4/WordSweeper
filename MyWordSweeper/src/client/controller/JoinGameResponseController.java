@@ -1,7 +1,15 @@
 package client.controller;
 
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 
 import xml.Message;
 import client.model.Model;
@@ -20,7 +28,7 @@ public class JoinGameResponseController extends ControllerChain {
 	 * @param app  	 initialize the reference of application
 	 * @param model  initialize the reference of model
 	 */
-	public JoinGameResponseController(Application app, Model model) {
+	public JoinGameResponseController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}
@@ -31,29 +39,31 @@ public class JoinGameResponseController extends ControllerChain {
 	 * @param Message  join game response message from server in xml format
 	 */
 	public boolean process(Message response) {
-		Node joinGameResponse = response.contents.getFirstChild();
-		if (!joinGameResponse.getLocalName().equals ("joinGameResponse")) {
+		String type = response.contents.getFirstChild().getLocalName();
+		if (!type.equals ("joinGameResponse")) {
 			return next.process(response);
 		}
 		
-		//Node boardResponse = response.contents.getFirstChild();
-		NamedNodeMap map = joinGameResponse.getAttributes();
+		String reason = response.reason();
 		
-		String gameId = map.getNamedItem("gameId").getNodeValue();
-		
-		if (gameId.equals("-1"))
-		{
-			app.getJoinGamePanel().PopUpLocked();
+		//Show warning message
+		if ("private".equals(reason)) {
+		    String password = app.getJoinGamePanel().popupNeedPassword();
+		    
+		    if (password.length() > 0){
+		    	String nickname = app.getJoinGamePanel().getTextFieldNickname().getText();
+				String gameId = app.getJoinGamePanel().getTextFieldGameID().getText();
+				String joinGameRequest = "<joinGameRequest gameId='" + gameId
+						+ "' name='" + nickname + "' password='" + password
+						+ "'/></request>";
+				String xmlString = Message.requestHeader() + joinGameRequest;
+				Message m = new Message (xmlString);
+
+				app.getServerAccess().sendRequest(m);
+		    }
 		}
-		else if (gameId.equals("-2"))
-		{
-			app.getJoinGamePanel().PopUpPassword();
-		}
-		else
-		{
-			// TODO: successfully joined the game, change panel to online
-			// and get board response to draw board
-			app.getJoinGamePanel().PopUpJoinSuccess();
+		else {
+			app.popupWarnig("This game is locked or doesn't exist!");
 		}
 		
 		return true;

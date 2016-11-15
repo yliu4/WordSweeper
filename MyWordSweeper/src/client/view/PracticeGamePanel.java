@@ -134,8 +134,12 @@ public class PracticeGamePanel extends JPanel{
 		}
 	}
 	
-   /* get the BordPanel object */
-	public Object getBoardPanel() {
+	/**
+	 * Get the BoardPanel object.
+	 * 
+	 * @return The BoardPanel.
+	 */
+	public JPanel getBoardPanel() {
 		return this.boardPanel;
 	}
 }
