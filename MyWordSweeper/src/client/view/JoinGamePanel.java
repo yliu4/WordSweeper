@@ -10,9 +10,13 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 
 import client.controller.JoinGameController;
 import client.controller.ReturnToMenuController;
@@ -43,6 +47,12 @@ public class JoinGamePanel extends JPanel {
 	
 	/**	<code>JTextField</code> for the gameID. */
 	JTextField textFieldGameID;
+	
+	JPanel popupPanel;
+	JPasswordField password;
+	
+	int screenHeight;
+	int screenWidth;
 
 	/**
 	 * Create the panel for collecting information for join game request.
@@ -57,6 +67,9 @@ public class JoinGamePanel extends JPanel {
 		setLayout(new GroupLayout(this));
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		screenHeight = d.height;
+		screenWidth = d.width;
+		
 		int height = d.height / 180;
 		int width = d.width / 320;
 
@@ -107,6 +120,84 @@ public class JoinGamePanel extends JPanel {
 				new ReturnToMenuController(model, app).process();
 			}
 		});
+	}
+	
+	/** missing nick name warning function */
+    public void PopUpNeedNickname()
+    {
+		Object[] options = {"OK"};
+		UIManager.put("OptionPane.buttonFont", 
+				new FontUIResource(new Font("Tahoma", Font.PLAIN, screenHeight/36)));
+		UIManager.put("OptionPane.messageFont", 
+				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*screenHeight/45)));
+		
+		JOptionPane.showOptionDialog(app.getJoinGamePanel(),
+				"Please enter a nickname!", "Warning", 
+				JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
+				null, options, options[0]);
+    }
+    
+    /** missing gameID popup */
+    public void PopUpNeedGameID()
+    {
+		// If server supports randomly assign game, the following will be removed
+		Object[] options = {"OK"};
+		UIManager.put("OptionPane.buttonFont", 
+				new FontUIResource(new Font("Tahoma", Font.PLAIN, screenHeight/36)));
+		UIManager.put("OptionPane.messageFont", 
+				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*screenHeight/45)));
+		
+		JOptionPane.showOptionDialog(app.getJoinGamePanel(),
+				"Please enter a gameID!", "Warning", 
+				JOptionPane.OK_OPTION, JOptionPane.WARNING_MESSAGE,
+				null, options, options[0]);
+    }
+	
+    /** missing password popup */
+	public void PopUpPassword()
+	{
+		// password Popup
+		this.popupPanel = new JPanel();
+		JLabel label = new JLabel("Please enter a password to join the game:");
+		this.password = new JPasswordField(10);
+		popupPanel.add(label);
+		popupPanel.add(this.password);
+		String[] options = new String[]{"OK", "Cancel"};
+	
+		int option = JOptionPane.showOptionDialog(app.getJoinGamePanel(), this.popupPanel,
+				"Warning", JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE,
+				null, options, options[1]);
+		if(option == 0) {
+			// pressing OK button
+			char[] pass = this.password.getPassword();
+			System.out.println("Your password is: " + new String(pass));
+		}
+	}
+	
+	/** game lock popup */
+	public void PopUpLocked()
+	{
+		// Popup for the lock game
+		UIManager.put("OptionPane.buttonFont", 
+				new FontUIResource(new Font("Tahoma", Font.PLAIN, screenHeight/36)));
+		UIManager.put("OptionPane.messageFont", 
+				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*screenHeight/45)));
+		String message = "The game is locked! please click \"ok\" to go back.";
+		JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
+        JOptionPane.ERROR_MESSAGE);
+	}
+	
+	/** join game successful pop up */
+	public void PopUpJoinSuccess()
+	{
+		// Popup for the lock game
+		UIManager.put("OptionPane.buttonFont", 
+				new FontUIResource(new Font("Tahoma", Font.PLAIN, screenHeight/36)));
+		UIManager.put("OptionPane.messageFont", 
+				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*screenHeight/45)));
+		String message = "You successfully joined the game (TODO show game board view)";
+		JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "OK!",
+        JOptionPane.OK_OPTION);
 	}
 
 	/**
