@@ -55,7 +55,7 @@ public class BoardPanel extends JPanel {
 		int height = d.height / 360;
 		int width = d.width / 640;
 		
-		setBounds(10*width, 68*height, 104*width, 124*height);
+		setBounds(10*width, 80*height, 104*width, 124*height);
 		currentWord = new StringBuilder();
 		
 		this.boardController = new BoardController(model, this);
@@ -197,7 +197,7 @@ public class BoardPanel extends JPanel {
 						, cell.getWidth(), cell.getHeight());
 				
 				currentWord.append(this.cells.get(num).getLetter().getCharacter());
-				app.getPracticeGamePanel().getLblCurrentWord().setText(this.getCurrentWord());
+				app.getPracticeGamePanel().getLblCurrentWord().setText("Current Word: " + this.getCurrentWord());
 			}
 			
 			g.setColor(Color.black);
