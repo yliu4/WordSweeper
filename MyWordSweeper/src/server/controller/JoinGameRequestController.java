@@ -32,10 +32,10 @@ public class JoinGameRequestController implements IProtocolHandler {
 		NamedNodeMap map = joinRequest.getAttributes();
 		
 		String pname = map.getNamedItem("name").getNodeValue();
-		String otherPlayers = "<player name='" + pname + "' score='38974' position='2,2' board='ECDRFTGOUIGERPRT'/>";
+		String otherPlayers = "<player name='" + pname + "' score='38974' position='2,2' board='E,C,D,R,F,T,G,O,U,I,G,E,R,P,R,T'/>";
 		
 		for (int i = 0; i < model.getNumPlayers(); i++) {
-			otherPlayers += "<player name='player" + i + "' score='38974' position='2,2' board='ECDRFTGOUIGERPRT'/>";
+			otherPlayers += "<player name='player" + i + "' score='38974' position='2,2' board='E,C,D,R,F,T,G,O,U,I,G,E,R,P,R,T'/>";
 		}
 		
 		String gameId = map.getNamedItem("gameId").getNodeValue();

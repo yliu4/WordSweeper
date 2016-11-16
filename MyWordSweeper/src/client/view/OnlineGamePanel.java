@@ -46,8 +46,6 @@ public class OnlineGamePanel extends JPanel {
 	
 	/** <code>JLabel</code> for displaying the total score of the current player. */
 	JLabel lblTotalScore;
-
-	String currentWord;
 	
 	/**
 	 * Create the panel for online game view.
@@ -58,7 +56,6 @@ public class OnlineGamePanel extends JPanel {
 	public OnlineGamePanel(Model m, Application application) {
 		this.model = m;
 		this.app = application;
-		this.currentWord = "";
 
 		setLayout(new GroupLayout(this));
 		
@@ -66,9 +63,9 @@ public class OnlineGamePanel extends JPanel {
 		int height = d.height / 180;
 		int width = d.width / 320;
 		
-		lblCurrentWord = new JLabel("Current Word: " + currentWord);
+		lblCurrentWord = new JLabel("Current Word: ");
 		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, 3*height));
-		lblCurrentWord.setBounds(5*width, 24*height, 53*width, 4*height);
+		lblCurrentWord.setBounds(5*width, 24*height, 70*width, 4*height);
 		add(lblCurrentWord);
 		
 		lblScore = new JLabel("Score: " + "\r\n");
@@ -169,10 +166,6 @@ public class OnlineGamePanel extends JPanel {
 		return this.game;
 	}
 
-	public void setCurrentWord(String word) {
-		this.currentWord = word;
-	}
-
 	/**
 	 * Set the current game.
 	 * 
@@ -191,7 +184,7 @@ public class OnlineGamePanel extends JPanel {
 
 		lblRoom.setText("Room " + game.getGameId());
 		lblYourName.setText("Your Name: " + game.getCurrentPlayer().getName());
-		lblCurrentWord.setText("Current Word: " + currentWord);
+		lblCurrentWord.setText("Current Word: ");
 		lblScore.setText("Score: " + "\r\n");
 
 		ArrayList<Cell> cells = this.game.getBoard().getCells();
