@@ -1,17 +1,5 @@
 package client.controller;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
-
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.plaf.FontUIResource;
-
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import xml.Message;
 import client.model.Model;
 import client.view.Application;
@@ -43,31 +31,6 @@ public class LockGameResponseController extends ControllerChain {
 		String type = response.contents.getFirstChild().getLocalName();
 		if (!type.equals ("lockGameResponse")) {
 			return next.process(response);
-		}
-		
-		boolean success = response.success();
-		
-		if(success) {
-			
-		} else {
-			String reason = response.reason();
-			
-			Node boardResponse = response.contents.getFirstChild();
-			NamedNodeMap map = boardResponse.getAttributes();
-			
-			String gameId = map.getNamedItem("gameId").getNodeValue();
-			
-			Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-			int height = d.height;
-			
-			//Show warning message
-			UIManager.put("OptionPane.buttonFont", 
-					new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
-			UIManager.put("OptionPane.messageFont", 
-					new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
-			String message = "The game" + gameId + "can't be locked because of " + reason;
-			JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
-	        JOptionPane.ERROR_MESSAGE);
 		}
 		
 		return true;
