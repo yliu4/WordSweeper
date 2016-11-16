@@ -129,13 +129,10 @@ public class PracticeGamePanel extends JPanel{
 		super.paintComponent(g);
 
 		ArrayList<Cell> cells = this.game.getBoard().getCells();
-		if (this.boardPanel == null)
-		{
+		if (this.boardPanel == null) {
 			this.boardPanel = new BoardPanel(model, app, cells);
 			add(boardPanel);
-		}
-		else
-		{
+		} else {
 			this.boardPanel.updateCells(cells);
 			this.boardPanel.repaint();
 		}
