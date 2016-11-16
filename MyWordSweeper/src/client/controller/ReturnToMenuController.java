@@ -1,8 +1,5 @@
 package client.controller;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import client.model.Model;
 import client.view.Application;
 
@@ -15,12 +12,21 @@ import client.view.Application;
  *
  */
 public class ReturnToMenuController {
-	Model model;
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
+	
+	/** Reference <code>Model</code> for easy navigation. */
+	Model model;
 
-	public ReturnToMenuController(Model m, Application app) {
-		this.model = m;
-		this.app = app;
+	/**
+	 * Construct the ReturnToMenuController.
+	 * 
+	 * @param model The model.
+	 * @param application The application.
+	 */
+	public ReturnToMenuController(Model model, Application application) {
+		this.model = model;
+		this.app = application;
 	}
 
 	public void process() {

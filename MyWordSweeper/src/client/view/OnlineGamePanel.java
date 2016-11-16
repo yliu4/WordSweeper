@@ -94,7 +94,7 @@ public class OnlineGamePanel extends JPanel {
 		add(btnReturn);
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ReturnToMenuController(model, app).process();
+				new ExitGameController(model, app).process();
 			}
 		});
 		
