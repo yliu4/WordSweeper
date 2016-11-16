@@ -3,6 +3,7 @@ package client.controller;
 import java.util.ArrayList;
 
 import client.MockServerAccess;
+import client.controller.RepositionBoardController.ShiftDirection;
 import client.model.Model;
 import client.view.Application;
 import xml.Message;
@@ -112,6 +113,18 @@ public class TestCreateGameController extends TestCase {
 		r = reqs.get(0);
 		assertEquals("resetGameRequest", r.contents.getFirstChild()
 				.getLocalName());
+		
+		reqs = mockServer.getAndClearMessages();
+		new RepositionBoardController(model, client).process(ShiftDirection.Up);
+		new RepositionBoardController(model, client).process(ShiftDirection.Down);
+		new RepositionBoardController(model, client).process(ShiftDirection.Left);
+		new RepositionBoardController(model, client).process(ShiftDirection.Right);
+		reqs = mockServer.getAndClearMessages();
+		assertEquals(4, reqs.size());
+		r = reqs.get(0);
+		assertEquals("repositionBoardRequest", r.contents.getFirstChild()
+				.getLocalName());
+		
 		
 	}
 }
