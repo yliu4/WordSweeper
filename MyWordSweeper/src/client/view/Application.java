@@ -68,7 +68,7 @@ public class Application extends JFrame {
 		int height = d.height;
 		int width = d.width;
 
-		setBounds(100, 100, 25*width/64, 5*height/9);
+		setBounds(100, 100, 25*width/64, 6*height/9);
 
 		menuPanel = new MenuPanel(model, this);
 		joinGamePanel = new JoinGamePanel(model, this);

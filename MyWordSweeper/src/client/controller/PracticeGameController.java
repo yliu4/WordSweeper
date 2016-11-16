@@ -55,7 +55,7 @@ public class PracticeGameController {
 		ArrayList<Cell> cells = new ArrayList<Cell>(16);
 		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "P", "Qu","R","S","T","U","V","W","X","Y","Z"};
 		int l = alp.length;
-		Random r = new Random(System.currentTimeMillis());
+		Random r = new Random();
 		for (int y = 0; y <= 3; y++) {
 			for (int x = 0; x <= 3; x++) {
 				String s = alp[r.nextInt(l)];

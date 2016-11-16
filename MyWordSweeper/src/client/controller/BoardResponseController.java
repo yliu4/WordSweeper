@@ -118,22 +118,13 @@ public class BoardResponseController extends ControllerChain {
 	}
 	
 	public void generateCells(String cellString, ArrayList<Cell> cells) {
-		if(cellString.length() != 16 + 15) {
-			System.err.println("Wrong cell string length");
-			return;
-		}
-		
 		cells.clear();
 		
 		String[] arr = cellString.split(",");
 	
 		for(int i = 0; i < 16; i++) {
 			Location cellLocation = new Location(i/4, i%4);
-			String letter = String.valueOf(arr[i]);
-			
-			if("Q".equals(letter)) letter = "Qu";
-			
-			Letter cellLetter = new Letter(letter);
+			Letter cellLetter = new Letter(arr[i]);
 			
 			cells.add(new Cell(cellLocation, cellLetter));
 		}

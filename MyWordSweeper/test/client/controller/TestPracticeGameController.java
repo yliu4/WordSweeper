@@ -1,10 +1,11 @@
-package client.controller;
+ package client.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import client.MockServerAccess;
 import client.model.Board;
+import client.model.Cell;
 import client.model.Game;
 import client.model.Model;
 import client.view.Application;

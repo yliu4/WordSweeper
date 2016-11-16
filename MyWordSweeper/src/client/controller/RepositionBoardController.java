@@ -44,16 +44,16 @@ public class RepositionBoardController {
 		switch(shiftDirection)
 		{
 		case Left:
-			rowChange = -1;
+			colChange = -1;
 			break;
 		case Right:
-			rowChange = 1;
-			break;
-		case Up:
 			colChange = 1;
 			break;
+		case Up:
+			rowChange = 1;
+			break;
 		case Down:
-			colChange = -1;
+			rowChange = -1;
 			break;
 		
 		}
