@@ -32,10 +32,10 @@ public class BoardPanel extends JPanel {
 	/** For building the current selected word. */
 	StringBuilder currentWord;
 	
-	/** */
+	/** For recording the previous dragged cell */
 	int prev;
 	
-	/** */
+	/** Mark if you dragged the same cell two times */
 	boolean stop = false;
 	
 	BoardController boardController = null;
@@ -52,10 +52,10 @@ public class BoardPanel extends JPanel {
 		this.app = app;
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height;
-		int width = d.width;
+		int height = d.height / 360;
+		int width = d.width / 640;
 		
-		setBounds(width/64, 17*height/90, 13*height/45, 13*height/45);
+		setBounds(10*width, 68*height, 104*width, 124*height);
 		currentWord = new StringBuilder();
 		
 		this.boardController = new BoardController(model, this);
@@ -79,7 +79,7 @@ public class BoardPanel extends JPanel {
 	 * @return A <code>String</code> represents the current selected word.
 	 */
 	public String getCurrentWord() {
-		return this.currentWord.toString();
+		return this.currentWord.toString().toUpperCase();
 	}
 	
 	/**
@@ -187,12 +187,17 @@ public class BoardPanel extends JPanel {
 							list.add(i);
 					}
 			} 
-			
-			// fill the dragged cells
+
+			// Fill the dragged cells and form the word
+			currentWord.delete(0, currentWord.length());
 			for(Integer num : list) {
 				Location cell = this.cells.get(num).getLocation();
-				g.setColor(Color.blue);
-				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
+				g.setColor(Color.red);
+				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY()
+						, cell.getWidth(), cell.getHeight());
+				
+				currentWord.append(this.cells.get(num).getLetter().getCharacter());
+				app.getPracticeGamePanel().getLblCurrentWord().setText(this.getCurrentWord());
 			}
 			
 			g.setColor(Color.black);
@@ -212,18 +217,7 @@ public class BoardPanel extends JPanel {
 			g.drawString(s13, 37*width, 93*height);
 			g.drawString(s14, 63*width, 93*height);
 			g.drawString(s15, 89*width, 93*height);
-		} else {
-			currentWord.delete(0, currentWord.length());
-			for(Integer num : list) {
-				Location cell = this.cells.get(num).getLocation();
-				currentWord.append(this.cells.get(num).getLetter().getCharacter());
-				g.setColor(Color.blue);
-				g.fillRect(cell.getCoordinateX(), cell.getCoordinateY(), cell.getWidth(), cell.getHeight());
-			}
-			
-			OnlineGamePanel onlinePanel = this.app.getOnlineGamePanel();
-			onlinePanel.setCurrentWord(currentWord.toString());
-			
+		} else {						
 			g.setColor(Color.black);
 			g.drawString(s0, 11*width, 15*height);
 			g.drawString(s1, 37*width, 15*height);

@@ -66,7 +66,7 @@ public class PracticeGamePanel extends JPanel{
 		
 		lblCurrentWord = new JLabel("Current Word: ");
 		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, 3*height));
-		lblCurrentWord.setBounds(5*width, 24*height, 53*width, 4*height);
+		lblCurrentWord.setBounds(5*width, 24*height, 70*width, 4*height);
 		add(lblCurrentWord);
 
 		lblScore = new JLabel("Score: \r\n");
@@ -132,6 +132,8 @@ public class PracticeGamePanel extends JPanel{
 			this.boardPanel.updateCells(cells);
 			this.boardPanel.repaint();
 		}
+		
+		lblCurrentWord.setText("Current Word: "+boardPanel.getCurrentWord());
 	}
 	
 	/**
@@ -141,5 +143,14 @@ public class PracticeGamePanel extends JPanel{
 	 */
 	public JPanel getBoardPanel() {
 		return this.boardPanel;
+	}
+
+	/**
+	 * Get the JLabel that displays the word.
+	 * 
+	 * @return The JLabel that displays the word.
+	 */
+	public JLabel getLblCurrentWord() {
+		return lblCurrentWord;
 	}
 }

@@ -1,7 +1,6 @@
 package client.controller;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -104,11 +103,10 @@ public class BoardResponseController extends ControllerChain {
 		// Set game board
 		generateCells(pboard, cells);
 		game.setBoard(cells, bonusLoc);
-		
+
 		// Set managing user
-		if(model.getGame().getCurrentPlayer().getName().equals(managingUser)) {
+		if(model.getGame().getCurrentPlayer().getName().equals(managingUser))
 			game.setManagingPlayer(model.getGame().getCurrentPlayer());
-		}
 		
 		// Go to online panel
 		onlinePanel.setGame(game);
@@ -120,16 +118,18 @@ public class BoardResponseController extends ControllerChain {
 	}
 	
 	public void generateCells(String cellString, ArrayList<Cell> cells) {
-		if(cellString.length() != 16) {
+		if(cellString.length() != 16 + 15) {
 			System.err.println("Wrong cell string length");
 			return;
 		}
 		
 		cells.clear();
+		
+		String[] arr = cellString.split(",");
 	
-		for(int i = 0; i < cellString.length(); i++) {
+		for(int i = 0; i < 16; i++) {
 			Location cellLocation = new Location(i/4, i%4);
-			String letter = String.valueOf(cellString.charAt(i));
+			String letter = String.valueOf(arr[i]);
 			
 			if("Q".equals(letter)) letter = "Qu";
 			
