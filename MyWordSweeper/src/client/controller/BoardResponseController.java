@@ -50,7 +50,6 @@ public class BoardResponseController extends ControllerChain {
 	 */
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
-		
 		if (!type.equals("boardResponse")) {
 			return next.process(response);
 		}
