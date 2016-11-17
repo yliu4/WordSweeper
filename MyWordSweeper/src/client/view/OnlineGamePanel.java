@@ -185,6 +185,7 @@ public class OnlineGamePanel extends JPanel {
 		lblRoom.setText("Room " + game.getGameId());
 		lblYourName.setText("Your Name: " + game.getCurrentPlayer().getName());
 		lblScore.setText("Score: " + "\r\n");
+		//lblScore.setText("Score: "+ boardPanel.getScore());
 
 		ArrayList<Cell> cells = this.game.getBoard().getCells();
 		
@@ -198,6 +199,7 @@ public class OnlineGamePanel extends JPanel {
 		}
 
 		lblCurrentWord.setText("Current Word: "+boardPanel.getCurrentWord());
+		lblScore.setText("Score: " + boardPanel.getScoreForSelectedWord()) ;
 	}
 
 	/**
@@ -207,5 +209,14 @@ public class OnlineGamePanel extends JPanel {
 	 */
 	public JLabel getLblCurrentWord() {
 		return lblCurrentWord;
+	}
+	
+	/**
+	 * Get the JLabel that displays the score of word.
+	 * 
+	 * @return The JLabel that displays the score of word.
+	 */
+	public JLabel getLblWordScore(){
+		return lblScore;
 	}
 }

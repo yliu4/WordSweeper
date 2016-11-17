@@ -130,7 +130,8 @@ public class PracticeGamePanel extends JPanel{
 			this.boardPanel.repaint();
 		}
 		
-		lblCurrentWord.setText("Current Word: "+boardPanel.getCurrentWord());
+		lblCurrentWord.setText("Current Word: " + boardPanel.getCurrentWord());
+		lblScore.setText("Score: " + boardPanel.getScoreForSelectedWord()) ;
 	}
 	
 	/**
@@ -149,5 +150,15 @@ public class PracticeGamePanel extends JPanel{
 	 */
 	public JLabel getLblCurrentWord() {
 		return lblCurrentWord;
+	}
+	
+	/**
+	 * Get the JLabel that displays the score of word.
+	 * 
+	 * @return The JLabel that displays the score of word.
+	 */
+	public JLabel getLblWordScore()
+	{
+		return lblScore;
 	}
 }

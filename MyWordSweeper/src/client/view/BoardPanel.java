@@ -38,7 +38,11 @@ public class BoardPanel extends JPanel {
 	/** Mark if you dragged the same cell two times */
 	boolean stop = false;
 	
+	/** Reference for easy navigation */
 	BoardController boardController = null;
+	
+	/** The score for the selected word */
+	long wordScore = 0;
 
 	/**
 	 * Construct the panel for the board according to the cells. 
@@ -58,7 +62,7 @@ public class BoardPanel extends JPanel {
 		setBounds(10*width, 80*height, 104*width, 104*height);
 		currentWord = new StringBuilder();
 		
-		this.boardController = new BoardController(model, this);
+		this.boardController = new BoardController(app, model, this);
 		
 		this.addMouseListener(boardController);
 		this.addMouseMotionListener(boardController);
@@ -83,6 +87,16 @@ public class BoardPanel extends JPanel {
 	}
 	
 	/**
+	 * Get the score of current selected word.
+	 * 
+	 * @return A <code>String</code> represents the score of current selected word.
+	 */
+	public String getScoreForSelectedWord()
+	{
+		return Long.toString(this.wordScore);
+	}
+	
+	/**
 	 * Update the board with a list of new cells.
 	 * 
 	 * @param cells A new list of cells assigned to this board.
@@ -90,7 +104,24 @@ public class BoardPanel extends JPanel {
 	public void updateCells(ArrayList<Cell> cells) {
 		this.cells = cells;
 	}
-
+	
+	/**
+	 * Calculate the score of the current selected word
+	 * 
+	 *  @returnA 
+	 */
+	public void calculateScoreForSelectedWord()
+	{
+		ArrayList<Cell> selectedCells = new ArrayList<Cell>();
+		for (Integer num: list)
+		{
+			selectedCells.add(this.cells.get(num));
+		}
+		
+		Word selectedWord = new Word(selectedCells);
+		this.wordScore = model.getGame().calculate(selectedWord);
+	}
+	
 	/* (non-Javadoc)
 	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
 	 */
@@ -197,8 +228,8 @@ public class BoardPanel extends JPanel {
 						, cell.getWidth(), cell.getHeight());
 				
 				currentWord.append(this.cells.get(num).getLetter().getCharacter());
-				app.getPracticeGamePanel().getLblCurrentWord().setText(this.getCurrentWord());
-				app.getOnlineGamePanel().getLblCurrentWord().setText(this.getCurrentWord());
+				//app.getPracticeGamePanel().getLblCurrentWord().setText(this.getCurrentWord());
+				//app.getOnlineGamePanel().getLblCurrentWord().setText(this.getCurrentWord());
 			}
 			
 			g.setColor(Color.black);
