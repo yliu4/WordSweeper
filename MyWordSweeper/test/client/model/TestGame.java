@@ -83,29 +83,29 @@ public class TestGame extends TestCase {
 		assertEquals(2240, game.calculate(word));
 	}
 
-	/** Test the calculate method with invalid word. */
-	public void testCalculateNotValid() {
-		Game game = new Game();
-		Location locationOfPlayer = new Location(1, 2);
-		Player player = new Player("Ann", 10, locationOfPlayer);
-		ArrayList<Cell> cells = new ArrayList<Cell>();
-		Location location1 = new Location(1, 2);
-		Letter letter1 = new Letter("A");
-		Location location2 = new Location(1, 3);
-		Letter letter2 = new Letter("Qu");
-		Location location3 = new Location(1, 4);
-		Letter letter3 = new Letter("L");
-		
-		game.addPlayer(player);
-		game.currentPlayer = player;
-		cells.add(new Cell(location1, letter1));
-		cells.add(new Cell(location2, letter2));
-		cells.add(new Cell(location3, letter3));
-
-		Word word = new Word(cells);
-		
-		assertEquals(0, game.calculate(word));
-	}
+//	/** Test the calculate method with invalid word. */
+//	public void testCalculateNotValid() {
+//		Game game = new Game();
+//		Location locationOfPlayer = new Location(1, 2);
+//		Player player = new Player("Ann", 10, locationOfPlayer);
+//		ArrayList<Cell> cells = new ArrayList<Cell>();
+//		Location location1 = new Location(1, 2);
+//		Letter letter1 = new Letter("A");
+//		Location location2 = new Location(1, 3);
+//		Letter letter2 = new Letter("Qu");
+//		Location location3 = new Location(1, 4);
+//		Letter letter3 = new Letter("L");
+//		
+//		game.addPlayer(player);
+//		game.currentPlayer = player;
+//		cells.add(new Cell(location1, letter1));
+//		cells.add(new Cell(location2, letter2));
+//		cells.add(new Cell(location3, letter3));
+//
+//		Word word = new Word(cells);
+//		
+//		assertEquals(0, game.calculate(word));
+//	}
 
 	/** Test the calculate method with word that contains "Qu". */
 	public void testCalculateQu() {

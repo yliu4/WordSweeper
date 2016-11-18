@@ -49,15 +49,18 @@ public class Game {
 	 * @return The score of the Word.
 	 */
 	public long calculate(Word word) {
+		HashMap<Integer, Integer> overlapcheck = null;
+		
+		if (players.size() != 0) 
+			overlapcheck = overlapCheck();
+		
+		ArrayList<Cell> cells = word.getCells();
+		Iterator<Cell> i = cells.iterator();
 		double score = 0;
 		double tempscore = 0;
-		long total = 0;
 		boolean hasMulti = false;
 		int length = 0;
 		int m = 1;
-		HashMap<Integer, Integer> overlapcheck = overlapCheck();
-		ArrayList<Cell> cells = word.getCells();
-		Iterator<Cell> i = cells.iterator();
 		
 		if (!WordTable.isWord(word.word)) {
 			return 0;
@@ -73,7 +76,8 @@ public class Game {
 			length++;
 			m = 1;
 			
-			if (overlapcheck.containsKey(c.getLocation().getColumn() * 4 +
+			if (overlapcheck != null && 
+					overlapcheck.containsKey(c.getLocation().getColumn() * 4 +
 					c.getLocation().getRow())) {
 				m = overlapcheck.get(c.getLocation().getColumn() * 4
 						+ c.getLocation().getRow());
@@ -94,9 +98,7 @@ public class Game {
 			score *= 10;
 		}
 		
-		total = (long) score;
-		
-		return total;
+		return (long) score;
 	}
 		
 	/**

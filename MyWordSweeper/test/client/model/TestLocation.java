@@ -17,18 +17,6 @@ public class TestLocation extends TestCase {
 		assertEquals(2, location.getColumn());
 	}
 
-	/** Test the setPanelLocation method. */
-	public void testSetPanelLocation() {
-		Location location = new Location(1, 2);
-		
-		location.setPanelLocation(1, 2, 3, 4);
-		
-		assertEquals(1, location.getCoordinateX());
-		assertEquals(2, location.getCoordinateY());
-		assertEquals(3, location.width);
-		assertEquals(4, location.height);
-	}
-
 	/** Test the equals method. */
 	public void testEquals() {
 		Location location1 = new Location(1, 2);

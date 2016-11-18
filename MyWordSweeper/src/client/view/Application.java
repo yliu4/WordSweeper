@@ -73,7 +73,7 @@ public class Application extends JFrame {
 		menuPanel = new MenuPanel(model, this);
 		joinGamePanel = new JoinGamePanel(model, this);
 		onlineGamePanel = new OnlineGamePanel(model,this);
-		practiceGamePanel = new PracticeGamePanel(model, this);
+//		practiceGamePanel = new PracticeGamePanel(model, this);
 		
 		add(menuPanel);
 	}
@@ -146,7 +146,8 @@ public class Application extends JFrame {
 	public void gotoPraticeGamePanel() {
 		menuPanel.setVisible(false);
 		remove(menuPanel);
-		
+
+		practiceGamePanel = new PracticeGamePanel(model, this);
 		practiceGamePanel.setVisible(true);
 		add(practiceGamePanel);
 	}
@@ -168,12 +169,16 @@ public class Application extends JFrame {
 			createGamePanel.setVisible(false);
 			remove(createGamePanel);
 		}
-		
-    	joinGamePanel.setVisible(false);
-		remove(joinGamePanel);
+
+		if (joinGamePanel != null) {
+	    	joinGamePanel.setVisible(false);
+			remove(joinGamePanel);
+		}
 		
 		onlineGamePanel.setVisible(true);
 		add(onlineGamePanel);
+		onlineGamePanel.repaint();
+		onlineGamePanel.revalidate();
     }
 	
 	/** Go to main menu. */
@@ -181,6 +186,7 @@ public class Application extends JFrame {
 		if (practiceGamePanel != null) {
 			practiceGamePanel.setVisible(false);
 			remove(practiceGamePanel);
+			practiceGamePanel = null;
 		}
 
 		if (createGamePanel != null) {
@@ -223,7 +229,7 @@ public class Application extends JFrame {
 	 * @param practiceController Controller for creating a practice game.
 	 */
 	public void setPracticeGameController(PracticeGameController practiceController) {
-		this.practiceGamePanel.setGame(practiceController.getGame());
+//		this.practiceGamePanel.setGame(model.getGame());
 		this.practiceGameController = practiceController;
 	}
 	

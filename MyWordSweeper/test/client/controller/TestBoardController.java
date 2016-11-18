@@ -58,7 +58,7 @@ public class TestBoardController extends TestCase{
 	{
 		PracticeGameController practiceController = new PracticeGameController(model, client);
 		practiceController.process();
-		Game game = practiceController.getGame();
+		Game game = model.getGame();
 		
 		ArrayList<Cell> cells = game.getBoard().getCells();
 
