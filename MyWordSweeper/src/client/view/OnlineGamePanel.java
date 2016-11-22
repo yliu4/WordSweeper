@@ -44,6 +44,12 @@ public class OnlineGamePanel extends JPanel {
 	/** <code>JLabel</code> for displaying the total score of the current player. */
 	JLabel lblTotalScore;
 	
+	/** <code>JButton</code> for providing reset game feature to managing user. */
+	JButton btnResetGame;
+	
+	/** <code>JButton</code> for providing lock game feature to managing user. */
+	JButton btnLockGame;
+	
 	/**
 	 * Create the panel for online game view.
 	 * 
@@ -142,13 +148,23 @@ public class OnlineGamePanel extends JPanel {
 			}
 		});
 
-		JButton btnResetGame = new JButton("Reset Game");
+		btnResetGame = new JButton("Reset Game");
 		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
 		btnResetGame.setBounds(96*width, 9*height, 22*width, 5*height);
 		add(btnResetGame);
 		btnResetGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ResetGameController(model, app).process();
+			}
+		});
+		
+		btnLockGame = new JButton("Lock Game");
+		btnLockGame.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		btnLockGame.setBounds(96*width, 15*height, 22*width, 5*height);
+		add(btnLockGame);
+		btnLockGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new LockGameController(model, app).process();
 			}
 		});
 	}
@@ -173,6 +189,15 @@ public class OnlineGamePanel extends JPanel {
 
 		lblRoom.setText("Room " + model.getGame().getGameId());
 		lblYourName.setText("Your Name: " + model.getGame().getCurrentPlayer().getName());
+		
+
+		if(!model.getGame().getCurrentPlayer().equals(model.getGame().getManagingPlayer())) {
+			btnResetGame.setVisible(false);
+			btnLockGame.setVisible(false);
+		} else {
+			btnResetGame.setVisible(true);
+			btnLockGame.setVisible(true);
+		}
 	}
 
 	/**

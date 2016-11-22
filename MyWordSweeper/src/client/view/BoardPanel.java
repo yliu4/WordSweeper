@@ -219,8 +219,7 @@ public class BoardPanel extends JPanel {
 			for (int i = 0; i < 16; i++) 
 				g.drawString(letters[i], 
 						11*width + (i%4)*cellWidth, 15*height + (i/4)*cellHeight);
-		} 
-		else {						
+		} else {						
 			g.setColor(Color.black);
 
 			for (int i = 0; i < 16; i++) 
