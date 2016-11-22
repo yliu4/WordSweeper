@@ -1,19 +1,10 @@
 package client.controller;
 
-import xml.Message;
-import client.model.Game;
-import client.model.Location;
 import client.model.Model;
-import client.model.Player;
 import client.view.Application;
+import xml.Message;
 
-/**
- * This class sends the reset game request to the server.
- * 
- * @author Team Pisces
- *
- */
-public class ResetGameController {
+public class LockGameController {
 	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
@@ -26,16 +17,16 @@ public class ResetGameController {
 	 * @param model  The model.
 	 * @param app    The application.
 	 */
-	public ResetGameController(Model model, Application app) {
+	public LockGameController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}
 	
 	public void process() {
 		String gameId = model.getGame().getGameId();
-		String resetGameRequest = "<resetGameRequest gameId='" + gameId
+		String lockGameRequest = "<lockGameRequest gameId='" + gameId
 				+ "'/></request>";
-		String xmlString = Message.requestHeader() + resetGameRequest;
+		String xmlString = Message.requestHeader() + lockGameRequest;
 		Message m = new Message (xmlString);
 
 		app.getServerAccess().sendRequest(m);
