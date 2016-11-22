@@ -41,7 +41,7 @@ public class TestPracticeGameController extends TestCase {
 	public void testPracticeGame() {
 		PracticeGameController practiceController = new PracticeGameController(model, app);
 		practiceController.process();
-		Game game = practiceController.getGame();
+		Game game = model.getGame();
 		
 		assertNotNull(game.getBoard());
 
@@ -54,9 +54,9 @@ public class TestPracticeGameController extends TestCase {
 	public void testResetPracticeGame(){
 		PracticeGameController practiceController = new PracticeGameController(model, app);
 		practiceController.process();
-		Board b1 = practiceController.getGame().getBoard();
+		Board b1 = model.getGame().getBoard();
 		new ResetPracticeGameController (model, app).process();
-		Board b2 = practiceController.getGame().getBoard();
+		Board b2 = model.getGame().getBoard();
 		assertFalse(b1.equals(b2));
 	}
 	

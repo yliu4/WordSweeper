@@ -57,9 +57,11 @@ public class ExitGameResponseController extends ControllerChain {
 				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
 		UIManager.put("OptionPane.messageFont", 
 				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
-		String message = "The game " + gameId + " is ";
-		JOptionPane.showMessageDialog(app.getJoinGamePanel(), message, "Error!",
-        JOptionPane.ERROR_MESSAGE);
+		String message = "You have successfully exited from game '" + gameId + "'!";
+		JOptionPane.showMessageDialog(app, message, "Exit Game!",
+        JOptionPane.PLAIN_MESSAGE);
+		
+		app.gotoMainMenu();
 		
 		return true;
 	}

@@ -1,8 +1,5 @@
 package client.controller;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import client.model.Model;
 import client.view.Application;
 
@@ -13,7 +10,10 @@ import client.view.Application;
  *
  */
 public class ResetPracticeGameController {
+	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
+	
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 
 	public ResetPracticeGameController(Model m, Application app) {
@@ -23,5 +23,9 @@ public class ResetPracticeGameController {
 
 	public void process() {
 		app.resetGame();
+		app.getPracticeGamePanel().repaint();
+		app.getPracticeGamePanel().revalidate();
+		app.getPracticeGamePanel().getLblCurrentWord().setText("Current Word: ");
+		app.getPracticeGamePanel().getLblScore().setText("Score: ");
 	}
 }

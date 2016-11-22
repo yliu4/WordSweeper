@@ -55,9 +55,8 @@ public class BoardResponseController extends ControllerChain {
 			return next.process(response);
 		}
 
-		// at this point, you would normally start processing this...
-		OnlineGamePanel onlinePanel = app.getOnlineGamePanel();
 		Game game = model.getGame();
+		
 		game.getPlayers().clear();
 
 		Node boardResponse = response.contents.getFirstChild();
@@ -74,7 +73,6 @@ public class BoardResponseController extends ControllerChain {
 		ArrayList<Cell> cells = new ArrayList<Cell>();
 		String[] bonusLocation = bonus.split(",");
 		Location bonusLoc = null;
-
 		NodeList list = boardResponse.getChildNodes();
 		
 		for (int i = 0; i < list.getLength(); i++) {
@@ -92,7 +90,8 @@ public class BoardResponseController extends ControllerChain {
 						Integer.valueOf(bonusLocation[1])-Integer.valueOf(cellLocation[1]));
 			}
 			
-			Player player = new Player(pname, Long.valueOf(pscore), new Location(Integer.valueOf(cellLocation[0]), Integer.valueOf(cellLocation[1])));
+			Player player = new Player(pname, Long.valueOf(pscore)
+					, new Location(Integer.valueOf(cellLocation[0]), Integer.valueOf(cellLocation[1])));
 			
 			game.getPlayers().add(player);
 		}
@@ -107,12 +106,12 @@ public class BoardResponseController extends ControllerChain {
 		// Set managing user
 		if(model.getGame().getCurrentPlayer().getName().equals(managingUser))
 			game.setManagingPlayer(model.getGame().getCurrentPlayer());
+
+		app.getOnlineGamePanel().getLblCurrentWord().setText("Current Word: ");
+		app.getOnlineGamePanel().getLblScore().setText("Score: ");
 		
 		// Go to online panel
-		onlinePanel.setGame(game);
 		app.gotoOnlineGamePanel();
-		onlinePanel.repaint();
-		onlinePanel.revalidate();
 		
 		return true;
 	}
