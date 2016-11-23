@@ -103,9 +103,18 @@ public class BoardPanel extends JPanel {
 	 * 
 	 * @return A <code>String</code> represents the score of current selected word.
 	 */
-	public long getWordScore()
-	{
+	public long getWordScore(){
 		return this.wordScore;
+	}
+	
+	/**
+	 * Get the list of cells of the selected word
+	 * 
+	 * @return a list of cells
+	 */
+	public ArrayList<Cell> getWordCells()
+	{
+		return this.word;
 	}
 	
 	/**
