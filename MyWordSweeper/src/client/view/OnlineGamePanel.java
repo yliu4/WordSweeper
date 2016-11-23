@@ -26,9 +26,6 @@ public class OnlineGamePanel extends JPanel {
 	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
-	/** Current game. */
-	Game game;
-	
 	/** <code>JPanel</code> for the <code>Board</code> in this <code>Game</code>.*/
 	BoardPanel boardPanel = null;
 
@@ -46,6 +43,12 @@ public class OnlineGamePanel extends JPanel {
 	
 	/** <code>JLabel</code> for displaying the total score of the current player. */
 	JLabel lblTotalScore;
+	
+	/** <code>JButton</code> for providing reset game feature to managing user. */
+	JButton btnResetGame;
+	
+	/** <code>JButton</code> for providing lock game feature to managing user. */
+	JButton btnLockGame;
 	
 	/**
 	 * Create the panel for online game view.
@@ -68,14 +71,15 @@ public class OnlineGamePanel extends JPanel {
 		lblCurrentWord.setBounds(5*width, 24*height, 70*width, 4*height);
 		add(lblCurrentWord);
 		
-		lblScore = new JLabel("Score: " + "\r\n");
+		lblScore = new JLabel("Score: 0");
 		lblScore.setFont(new Font("Arial", Font.BOLD, 3*height));
 		lblScore.setBounds(5*width, 28*height, 53*width, 4*height);
 		add(lblScore);
 		
 		lblRoom = new JLabel("Room ");
+		lblRoom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRoom.setFont(new Font("Arial", Font.BOLD, 6*height));
-		lblRoom.setBounds(45*width, 8*height, 28*width, 5*height);
+		lblRoom.setBounds(30*width, 8*height, 40*width, 5*height);
 		add(lblRoom);
 
 		lblYourName = new JLabel("Your Name: ");
@@ -144,7 +148,7 @@ public class OnlineGamePanel extends JPanel {
 			}
 		});
 
-		JButton btnResetGame = new JButton("Reset Game");
+		btnResetGame = new JButton("Reset Game");
 		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
 		btnResetGame.setBounds(96*width, 9*height, 22*width, 5*height);
 		add(btnResetGame);
@@ -153,26 +157,16 @@ public class OnlineGamePanel extends JPanel {
 				new ResetGameController(model, app).process();
 			}
 		});
-	}
-
-
-	/**
-	 * Get the current <code>Game> object.
-	 * 
-	 * @return A <code>Game</code> object for the current game.
-	 */
-
-	public Game getGame() {
-		return this.game;
-	}
-
-	/**
-	 * Set the current game.
-	 * 
-	 * @param game A <code>Game</code> object for the current game.
-	 */
-	public void setGame(Game game) {
-		this.game = game;
+		
+		btnLockGame = new JButton("Lock Game");
+		btnLockGame.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		btnLockGame.setBounds(96*width, 15*height, 22*width, 5*height);
+		add(btnLockGame);
+		btnLockGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new LockGameController(model, app).process();
+			}
+		});
 	}
 
 	/* (non-Javadoc)
@@ -182,24 +176,28 @@ public class OnlineGamePanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		lblRoom.setText("Room " + game.getGameId());
-		lblYourName.setText("Your Name: " + game.getCurrentPlayer().getName());
-		lblScore.setText("Score: " + "\r\n");
-		//lblScore.setText("Score: "+ boardPanel.getScore());
-
-		ArrayList<Cell> cells = this.game.getBoard().getCells();
+		ArrayList<Cell> cells = model.getGame().getBoard().getCells();
 		
 		if (this.boardPanel == null) {
 			this.boardPanel = new BoardPanel(model, app, cells);
 			add(boardPanel);
 		}
 		else {
-			this.boardPanel.updateCells(cells);
+			this.boardPanel.setCells(cells);
 			this.boardPanel.repaint();
 		}
 
-		lblCurrentWord.setText("Current Word: "+boardPanel.getCurrentWord());
-		lblScore.setText("Score: " + boardPanel.getScoreForSelectedWord()) ;
+		lblRoom.setText("Room " + model.getGame().getGameId());
+		lblYourName.setText("Your Name: " + model.getGame().getCurrentPlayer().getName());
+		
+
+		if(!model.getGame().getCurrentPlayer().equals(model.getGame().getManagingPlayer())) {
+			btnResetGame.setVisible(false);
+			btnLockGame.setVisible(false);
+		} else {
+			btnResetGame.setVisible(true);
+			btnLockGame.setVisible(true);
+		}
 	}
 
 	/**
@@ -216,7 +214,7 @@ public class OnlineGamePanel extends JPanel {
 	 * 
 	 * @return The JLabel that displays the score of word.
 	 */
-	public JLabel getLblWordScore(){
+	public JLabel getLblScore(){
 		return lblScore;
 	}
 }

@@ -21,27 +21,35 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 	
-	/** Reference <code>BoardPanel</code> for easy navigation. */
-	BoardPanel panel;
-	
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
-	/** For recording the start coordinate in X-axle */
-	private int x;
+	/** Reference <code>BoardPanel</code> for easy navigation. */
+	BoardPanel panel;
+
+	/** For recording the start coordinate in X-axle. */
+	private int x = -1;
 	
-	/** For recording the start coordinate in Y-axle */
-	private int y;
+	/** For recording the start coordinate in Y-axle. */
+	private int y = -1;
 	
-	/** For avoiding sending repeated released event */
+	/** For recording the relative dragged coordinate in X-axle. */
+	private int deltaX;
+	
+	/** For recording the relative dragded coordinate in Y-axle. */
+	private int deltaY;
+	
+	/** For avoiding sending repeated released event. */
 	boolean press = false;
 	
 	/**
 	 * BoardController constructor
 	 *
-	 * @param model  initialize the reference of model
-	 * @param panel  initialize the reference of panel
+	 * @param model  Current model.
+	 * @param application Current application.
+	 * @param panel  Current panel.
 	 */
-	public BoardController(Application app, Model model, BoardPanel panel) {
+	public BoardController(Model model, Application app, BoardPanel panel) {
 		this.app = app;
 		this.model = model;
 		this.panel = panel;
@@ -66,9 +74,8 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	 */
 	@Override
 	public void mouseDragged(MouseEvent me) {
-		int deltaX = me.getX() - this.x;
-		int deltaY = me.getY() - this.y;
-		model.setFilledBoard(this.x, this.y, deltaX, deltaY);
+		this.deltaX = me.getX() - this.x;
+		this.deltaY = me.getY() - this.y;
 		panel.repaint();
 	}
 	
@@ -80,10 +87,33 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	@Override
 	public void mouseReleased(MouseEvent me) {
 		if(press == true) {
-			panel.calculateScoreForSelectedWord();
-			model.setFilledBoard(-1, -1, 0, 0);
+//			panel.calculateScoreForSelectedWord();
+			this.x = -1;
+			this.y = -1;
+			this.deltaX = 0;
+			this.deltaY = 0;
 			panel.repaint();
 			press = false;
+
+			model.getGame().getCurrentPlayer().setScore(
+					model.getGame().getCurrentPlayer().getScore() + 
+					panel.getWordScore());
 		}
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getDeltaX() {
+		return deltaX;
+	}
+
+	public int getDeltaY() {
+		return deltaY;
 	}
 }

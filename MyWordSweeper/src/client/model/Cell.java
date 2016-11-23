@@ -32,19 +32,6 @@ public class Cell {
 		return this.location;
 	}
 	
-	/**
-	 * Use the row, column, width and height parameters to set the 
-	 * Location of the Board.
-	 * 
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 */
-	public void setCoordinateLocation(int x, int y, int width, int height) {
-		this.location.setPanelLocation(x, y, width, height);
-	}
-	
 	/** 
 	 * Get the Letter object.
 	 * 

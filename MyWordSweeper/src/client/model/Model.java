@@ -9,9 +9,6 @@ package client.model;
 public class Model {
 	/**  Reference Game for easy navigation. */
 	Game game = null;
-	
-	/** Reference Location for easy navigation. */ 
-	Location location = null;
 
 	/** Constructor for the Model. */
 	public Model() {
@@ -34,32 +31,5 @@ public class Model {
 	 */
 	public Game getGame() {
 		return this.game;
-	}
-	
-	/** 
-	 * Set the board with the given x, y, width and height. 
-	 * 
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 */
-	public void setFilledBoard(int x, int y, int width, int height) {
-		if(x == -1 && y == -1) {
-			this.location = null;
-		} 
-		else {
-			this.location = new Location(0,0);
-			this.location.setPanelLocation(x, y, width, height);
-		}	
-	}
-	
-	/** 
-	 * Get the Location of the Board?
-	 * 
-	 * @return
-	 */
-	public Location getFilledBoard() {
-		return location;
 	}
 }

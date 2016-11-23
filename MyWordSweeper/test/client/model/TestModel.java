@@ -35,34 +35,4 @@ public class TestModel extends TestCase {
 		
 		assertEquals(2, model.getGame().getPlayers().size());
 	}
-
-	/** Test the setFilledBoard method. */
-	public void testSetFilledBoard() {
-		Model model = new Model();
-		
-		model.setFilledBoard(1, 2, 3, 4);
-		
-		assertEquals(3, model.getFilledBoard().width);
-		assertEquals(4, model.getFilledBoard().height);
-	}
-
-	/** Test the setFilledBoard method with special param. */
-	public void testSetFilledBoardWrongXY() {
-		Model model = new Model();
-		
-		model.setFilledBoard(-1, -1, 3, 4);
-		
-		assertNull(model.getFilledBoard());
-	}
-
-	/** Test the getFilledBoard method. */
-	public void testGetFilledBoard() {
-		Model model = new Model();
-		
-		model.setFilledBoard(1, 2, 3, 4);
-		
-		assertEquals(0, model.getFilledBoard().getColumn());
-		assertEquals(0, model.getFilledBoard().getRow());
-	}
-
 }

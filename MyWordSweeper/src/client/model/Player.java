@@ -77,4 +77,20 @@ public class Player {
 	public String getName() {
 		return name;
 	}
+	
+	/** 
+	 * Check if it is the same player.
+	 * 
+	 * @return A boolean value representing the result.
+	 */
+	@Override
+	public boolean equals(Object object) {
+		if(!(object instanceof Player))
+			return false;
+		if(object == this)
+			return true;
+		
+		Player player = (Player) object;
+		return this.name.equals(player.name);
+	}
 }
