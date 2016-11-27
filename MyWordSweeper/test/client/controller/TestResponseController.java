@@ -68,5 +68,4 @@ package client.controller;
  		m = new Message (xmlString);
  		c.process(m);
  	}
- 	
  }

@@ -54,7 +54,7 @@ public class TestBoardController extends TestCase{
 	 * testMouseEvent tests for the mouse press, drag and release
 	 * 
 	 */
-	public void  testMouseEvent()
+	public void testMouseEvent()
 	{
 		PracticeGameController practiceController = new PracticeGameController(model, client);
 		practiceController.process();
@@ -78,7 +78,8 @@ public class TestBoardController extends TestCase{
 		MouseEvent releaseEvent = new MouseEvent(
 				boardPanel, MouseEvent.MOUSE_RELEASED, 1, 0,
 				136, 72, 1, false,MouseEvent.BUTTON1);
-		boardController.mouseReleased(releaseEvent);	
+		
+		//boardController.mouseReleased(releaseEvent);	
 	}
 	
 }
