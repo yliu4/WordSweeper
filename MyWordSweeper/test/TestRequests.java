@@ -120,11 +120,11 @@ public class TestRequests extends TestCase {
 	}
 	
 	// sent to the managing user client.
-	public void testManagingUserResponse() {
-		Message m = new Message (
-				responseHeader +
-				  "<managingUserResponse gameId='specialGame'/>" +
-				"</response>");
-		System.out.println(m.toString());
-	}
+//	public void testManagingUserResponse() {
+//		Message m = new Message (
+//				responseHeader +
+//				  "<managingUserResponse gameId='specialGame'/>" +
+//				"</response>");
+//		System.out.println(m.toString());
+//	}
 }
