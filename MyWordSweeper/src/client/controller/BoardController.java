@@ -6,6 +6,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import xml.Message;
+import client.model.Game;
 import client.model.Cell;
 import client.model.Model;
 import client.view.Application;
@@ -116,19 +117,25 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	{
 		StringBuilder requestMessage = new StringBuilder();
 		ArrayList<Cell> wordCells = panel.getWordCells();
-
-		String gameId = model.getGame().getGameId();
-		String playerName = model.getGame().getCurrentPlayer().getName();
-		String word = panel.getCurrentWord().toLowerCase();
+		Game game = model.getGame();
+		String gameId = game.getGameId();
+		String playerName = game.getCurrentPlayer().getName();
+		String word = panel.getCurrentWord().toUpperCase();
 		requestMessage.append(String.format("<findWordRequest gameId='%s' name='%s' word='%s'>",
 				gameId, playerName, word));
 		for (int i = 0; i < wordCells.size(); ++i)
 		{
 			Cell cell = wordCells.get(i);
+
+			int col = cell.getLocation().getColumn() + 
+					game.getCurrentPlayer().getOriginPosition().getColumn();
+			
+			int row = cell.getLocation().getRow() + 
+					game.getCurrentPlayer().getOriginPosition().getRow();
 			
 			String cellStr = String.format("<cell position='%d,%d' letter='%s'/>",
-					cell.getLocation().getRow(),
-					cell.getLocation().getColumn(),
+					col,
+					row,
 					cell.getLetter().getCharacter());
 
 			requestMessage.append(cellStr);
