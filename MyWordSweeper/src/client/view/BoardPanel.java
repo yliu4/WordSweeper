@@ -205,8 +205,7 @@ public class BoardPanel extends JPanel {
 				// Show the word.
 				if (app.getPracticeGamePanel() != null) 
 					app.getPracticeGamePanel().getLblCurrentWord().setText("Current Word: "+this.getCurrentWord());
-				
-				if (app.getOnlineGamePanel() != null) 
+				else 
 					app.getOnlineGamePanel().getLblCurrentWord().setText("Current Word: "+this.getCurrentWord());
 			}
 			
@@ -219,8 +218,7 @@ public class BoardPanel extends JPanel {
 			// Show the score.
 			if (app.getPracticeGamePanel() != null) 
 				app.getPracticeGamePanel().getLblScore().setText("Score :"+this.wordScore);
-			
-			if (app.getOnlineGamePanel() != null) 
+			else
 				app.getOnlineGamePanel().getLblScore().setText("Score :"+this.wordScore);
 			
 			g.setColor(Color.black);
