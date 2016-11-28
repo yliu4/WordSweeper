@@ -67,10 +67,10 @@ public class BoardPanel extends JPanel {
 		}
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height / 360;
-		int width = d.width / 640;
+		int height = d.height / 180;
+		int width = d.width / 320;
 		
-		setBounds(30*width, 110*height, 104*width+1, 104*height+1);
+		setBounds(15*width, 55*height, 52*width+1, 52*height+1);
 		currentWord = new StringBuilder();
 		
 		this.boardController = new BoardController(model, app, this);
