@@ -70,7 +70,7 @@ public class BoardPanel extends JPanel {
 		int height = d.height / 360;
 		int width = d.width / 640;
 		
-		setBounds(10*width, 80*height, 104*width+1, 104*height+1);
+		setBounds(30*width, 110*height, 104*width+1, 104*height+1);
 		currentWord = new StringBuilder();
 		
 		this.boardController = new BoardController(model, app, this);
