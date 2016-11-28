@@ -120,16 +120,16 @@ public class JoinGamePanel extends JPanel {
 	 * 
 	 * @return
 	 */
-	public String popupNeedPassword() {
+	public String popupNeedPassword(String reason) {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		JPanel panel = new JPanel();
-		JLabel label = new JLabel("Enter a password:");
+		JLabel label = new JLabel(reason + ". Enter a password when needed:");
 		JPasswordField pass = new JPasswordField(10);
 
-		label.setFont(new Font("Times New Roman", Font.PLAIN, 2*height/45));
+		label.setFont(new Font("Times New Roman", Font.PLAIN, 1*height/45));
 		panel.add(label);
-		pass.setFont(new Font("Times New Roman", Font.PLAIN, 2*height/45));
+		pass.setFont(new Font("Times New Roman", Font.PLAIN, 1*height/45));
 		panel.add(pass);
 		
 		String[] options = new String[]{"OK", "Cancel"};

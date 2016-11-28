@@ -55,9 +55,8 @@ public class BoardResponseController extends ControllerChain {
 			return next.process(response);
 		}
 
-		// at this point, you would normally start processing this...
-		OnlineGamePanel onlinePanel = app.getOnlineGamePanel();
 		Game game = model.getGame();
+		
 		game.getPlayers().clear();
 
 		Node boardResponse = response.contents.getFirstChild();
@@ -74,7 +73,6 @@ public class BoardResponseController extends ControllerChain {
 		ArrayList<Cell> cells = new ArrayList<Cell>();
 		String[] bonusLocation = bonus.split(",");
 		Location bonusLoc = null;
-
 		NodeList list = boardResponse.getChildNodes();
 		
 		for (int i = 0; i < list.getLength(); i++) {
@@ -92,7 +90,8 @@ public class BoardResponseController extends ControllerChain {
 						Integer.valueOf(bonusLocation[1])-Integer.valueOf(cellLocation[1]));
 			}
 			
-			Player player = new Player(pname, Long.valueOf(pscore), new Location(Integer.valueOf(cellLocation[0]), Integer.valueOf(cellLocation[1])));
+			Player player = new Player(pname, Long.valueOf(pscore)
+					, new Location(Integer.valueOf(cellLocation[0]), Integer.valueOf(cellLocation[1])));
 			
 			game.getPlayers().add(player);
 		}
@@ -107,31 +106,24 @@ public class BoardResponseController extends ControllerChain {
 		// Set managing user
 		if(model.getGame().getCurrentPlayer().getName().equals(managingUser))
 			game.setManagingPlayer(model.getGame().getCurrentPlayer());
+
+		app.getOnlineGamePanel().getLblCurrentWord().setText("Current Word: ");
+		app.getOnlineGamePanel().getLblScore().setText("Score: ");
 		
 		// Go to online panel
-		onlinePanel.setGame(game);
 		app.gotoOnlineGamePanel();
-		onlinePanel.repaint();
-		onlinePanel.revalidate();
 		
 		return true;
 	}
 	
 	public void generateCells(String cellString, ArrayList<Cell> cells) {
-		if(cellString.length() != 16) {
-			System.err.println("Wrong cell string length");
-			return;
-		}
-		
 		cells.clear();
+		
+		String[] arr = cellString.split(",");
 	
-		for(int i = 0; i < cellString.length(); i++) {
+		for(int i = 0; i < 16; i++) {
 			Location cellLocation = new Location(i/4, i%4);
-			String letter = String.valueOf(cellString.charAt(i));
-			
-			if("Q".equals(letter)) letter = "Qu";
-			
-			Letter cellLetter = new Letter(letter);
+			Letter cellLetter = new Letter(arr[i]);
 			
 			cells.add(new Cell(cellLocation, cellLetter));
 		}

@@ -25,9 +25,6 @@ public class PracticeGamePanel extends JPanel{
 	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
-	/** Current game. */
-	Game game;
-	
 	/** <code>JPanel</code> for the <code>Board</code> in this <code>Game</code>.*/
 	BoardPanel boardPanel = null;
 	
@@ -37,8 +34,8 @@ public class PracticeGamePanel extends JPanel{
 	/** <code>JLabel</code> for displaying the total score of the current player. */
 	JLabel lblTotalScore;
 	
-	/** <code>JTextField</code> for displaying the current selected word. */
-	JTextField textFieldWord;
+	/** <code>JLabel</code> for displaying the current selected word. */
+	JLabel lblCurrentWord;
 	
 	/** <code>JLabel</code> for displaying the score of the current selected word. */
 	JLabel lblScore;
@@ -60,21 +57,15 @@ public class PracticeGamePanel extends JPanel{
 		int width = d.width / 320;
 
 		lblRoom = new JLabel("Practice");
+		lblRoom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRoom.setFont(new Font("Arial", Font.BOLD, 6*height));
-		lblRoom.setBounds(45*width, 8*height, 28*width, 5*height);
+		lblRoom.setBounds(45*width, 8*height, 34*width, 5*height);
 		add(lblRoom);
 		
-		JLabel lblCurrentWord = new JLabel("Current Word: ");
+		lblCurrentWord = new JLabel("Current Word: ");
 		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, 3*height));
-		lblCurrentWord.setBounds(5*width, 24*height, 22*width, 4*height);
+		lblCurrentWord.setBounds(5*width, 24*height, 70*width, 4*height);
 		add(lblCurrentWord);
-
-		textFieldWord = new JTextField();
-		textFieldWord.setEditable(false);
-		textFieldWord.setBorder(null);
-		textFieldWord.setFont(new Font("Arial", Font.PLAIN, 3*height));
-		textFieldWord.setBounds(27*width, 24*height, 40*width, 4*height);
-		add(textFieldWord);
 
 		lblScore = new JLabel("Score: \r\n");
 		lblScore.setFont(new Font("Arial", Font.BOLD, 3*height));
@@ -83,7 +74,7 @@ public class PracticeGamePanel extends JPanel{
 
 		JLabel lblYourName = new JLabel("Your Name: Practicer");
 		lblYourName.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		lblYourName.setBounds(83*width, 20*height, 30*width, 4*height);
+		lblYourName.setBounds(83*width, 20*height, 34*width, 4*height);
 		add(lblYourName);
 
 		lblTotalScore = new JLabel("Total Score: 0.");
@@ -112,15 +103,6 @@ public class PracticeGamePanel extends JPanel{
 		});
 	}
 
-	/**
-	 * Set the current game.
-	 * 
-	 * @param game A <code>Game</code> object for the current game.
-	 */
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
 	/* (non-Javadoc)
 	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
 	 */
@@ -128,19 +110,17 @@ public class PracticeGamePanel extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		ArrayList<Cell> cells = this.game.getBoard().getCells();
-		if (this.boardPanel == null)
-		{
+		ArrayList<Cell> cells = model.getGame().getBoard().getCells();
+		if (this.boardPanel == null) {
 			this.boardPanel = new BoardPanel(model, app, cells);
 			add(boardPanel);
-		}
-		else
-		{
-			this.boardPanel.updateCells(cells);
+		} else {
+			this.boardPanel.setCells(cells);
 			this.boardPanel.repaint();
 		}
 		
-		textFieldWord.setText(boardPanel.getCurrentWord());
+		lblTotalScore.setText("Total Score: " + 
+				model.getGame().getCurrentPlayer().getScore());
 	}
 	
 	/**
@@ -153,11 +133,30 @@ public class PracticeGamePanel extends JPanel{
 	}
 
 	/**
-	 * Get the JTextField that displays the word.
+	 * Get the JLabel that displays the word.
 	 * 
-	 * @return The JTextField that displays the word.
+	 * @return The JLabel that displays the word.
 	 */
-	public JTextField getTextFieldWord() {
-		return textFieldWord;
+	public JLabel getLblCurrentWord() {
+		return lblCurrentWord;
+	}
+	
+	/**
+	 * Get the JLabel that displays the score of word.
+	 * 
+	 * @return The JLabel that displays the score of word.
+	 */
+	public JLabel getLblScore()
+	{
+		return lblScore;
+	}
+
+	/**
+	 * Get the JLabel that displays the total score.
+	 * 
+	 * @return The JLabel that displays total score.
+	 */
+	public JLabel getLblTotalScore() {
+		return lblTotalScore;
 	}
 }

@@ -33,6 +33,9 @@ public class FindWordResponseController extends ControllerChain {
 	 */
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
+		System.out.println("Response type : " + type);
+		System.out.println("Response body : " + response.toString());
+		
 		if (!type.equals ("findWordResponse")) {
 			return next.process(response);
 		}
@@ -46,6 +49,7 @@ public class FindWordResponseController extends ControllerChain {
 			String gameId = map.getNamedItem("gameId").getNodeValue();
 			String name = map.getNamedItem("name").getNodeValue();
 			String score = map.getNamedItem("score").getNodeValue();
+			System.out.println(String.format("gamdId %1, name %2, score %3", gameId, name, score));
 		
 		} else {
 			

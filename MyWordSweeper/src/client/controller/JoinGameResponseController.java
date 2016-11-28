@@ -45,26 +45,21 @@ public class JoinGameResponseController extends ControllerChain {
 		}
 		
 		String reason = response.reason();
-		
-		//Show warning message
-		if ("private".equals(reason)) {
-		    String password = app.getJoinGamePanel().popupNeedPassword();
-		    
-		    if (password.length() > 0){
-		    	String nickname = app.getJoinGamePanel().getTextFieldNickname().getText();
-				String gameId = app.getJoinGamePanel().getTextFieldGameID().getText();
-				String joinGameRequest = "<joinGameRequest gameId='" + gameId
-						+ "' name='" + nickname + "' password='" + password
-						+ "'/></request>";
-				String xmlString = Message.requestHeader() + joinGameRequest;
-				Message m = new Message (xmlString);
 
-				app.getServerAccess().sendRequest(m);
-		    }
-		}
-		else {
-			app.popupWarnig("This game is locked or doesn't exist!");
-		}
+		//Show warning message and get password.
+	    String password = app.getJoinGamePanel().popupNeedPassword(reason);
+	    
+	    if (password.length() > 0){
+	    	String nickname = app.getJoinGamePanel().getTextFieldNickname().getText();
+			String gameId = app.getJoinGamePanel().getTextFieldGameID().getText();
+			String joinGameRequest = "<joinGameRequest gameId='" + gameId
+					+ "' name='" + nickname + "' password='" + password
+					+ "'/></request>";
+			String xmlString = Message.requestHeader() + joinGameRequest;
+			Message m = new Message (xmlString);
+
+			app.getServerAccess().sendRequest(m);
+	    }
 		
 		return true;
 	}
