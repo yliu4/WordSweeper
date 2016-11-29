@@ -104,8 +104,16 @@ public class BoardResponseController extends ControllerChain {
 		game.setBoard(cells, bonusLoc);
 
 		// Set managing user
-		if(model.getGame().getCurrentPlayer().getName().equals(managingUser))
+		if(model.getGame().getCurrentPlayer().getName().equals(managingUser)) {
 			game.setManagingPlayer(model.getGame().getCurrentPlayer());
+			app.getOnlineGamePanel().getBtnLockGame().setVisible(true);
+			app.getOnlineGamePanel().getBtnResetGame().setVisible(true);
+		}
+		else {
+//			game.setManagingPlayer(managingUser);
+			app.getOnlineGamePanel().getBtnLockGame().setVisible(false);
+			app.getOnlineGamePanel().getBtnResetGame().setVisible(false);
+		}
 
 		app.getOnlineGamePanel().getLblCurrentWord().setText("Current Word: ");
 		app.getOnlineGamePanel().getLblScore().setText("Score: ");

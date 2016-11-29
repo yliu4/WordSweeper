@@ -66,35 +66,35 @@ public class OnlineGamePanel extends JPanel {
 		int height = d.height / 180;
 		int width = d.width / 320;
 		
+		lblRoom = new JLabel("Room ");
+		lblRoom.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRoom.setFont(new Font("Arial", Font.BOLD, 6*height));
+		lblRoom.setBounds(40*width, 10*height, 70*width, 10*height);
+		add(lblRoom);
+		
 		lblCurrentWord = new JLabel("Current Word: ");
 		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, 3*height));
-		lblCurrentWord.setBounds(5*width, 24*height, 70*width, 4*height);
+		lblCurrentWord.setBounds(15*width, 30*height, 70*width, 10*height);
 		add(lblCurrentWord);
 		
 		lblScore = new JLabel("Score: 0");
 		lblScore.setFont(new Font("Arial", Font.BOLD, 3*height));
-		lblScore.setBounds(5*width, 28*height, 53*width, 4*height);
+		lblScore.setBounds(15*width, 40*height, 70*width, 10*height);
 		add(lblScore);
-		
-		lblRoom = new JLabel("Room ");
-		lblRoom.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRoom.setFont(new Font("Arial", Font.BOLD, 6*height));
-		lblRoom.setBounds(30*width, 8*height, 40*width, 5*height);
-		add(lblRoom);
 
 		lblYourName = new JLabel("Your Name: ");
 		lblYourName.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		lblYourName.setBounds(83*width, 20*height, 30*width, 4*height);
+		lblYourName.setBounds(100*width, 30*height, 70*width, 10*height);
 		add(lblYourName);
 		
 		lblTotalScore = new JLabel("Total Score: 0.");
 		lblTotalScore.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		lblTotalScore.setBounds(83*width, 24*height, 30*width, 4*height);
+		lblTotalScore.setBounds(100*width, 40*height, 70*width, 10*height);
 		add(lblTotalScore);
 
 		JButton btnReturn = new JButton("Return");
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		btnReturn.setBounds(width, height, 20*width, 5*height);
+		btnReturn.setBounds(width, height, 30*width, 10*height);
 		add(btnReturn);
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -105,12 +105,12 @@ public class OnlineGamePanel extends JPanel {
 		JLabel lblShift = new JLabel("Shift");
 		lblShift.setHorizontalAlignment(SwingConstants.CENTER);
 		lblShift.setFont(new Font("Arial", Font.PLAIN, 3*height));
-		lblShift.setBounds(64*width, 26*height, 12*width, 8*height);
+		lblShift.setBounds(75*width, 36*height, 15*width, 10*height);
 		add(lblShift);
 
 		JButton btnUp = new JButton("\u2191"); // Up
 		btnUp.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		btnUp.setBounds(64*width, 35*height, 12*width, 12*height);
+		btnUp.setBounds(75*width, 48*height, 15*width, 15*height);
 		add(btnUp);
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,7 +120,7 @@ public class OnlineGamePanel extends JPanel {
 		
 		JButton btnDown = new JButton("\u2193"); // Down
 		btnDown.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		btnDown.setBounds(64*width, 48*height, 12*width, 12*height);
+		btnDown.setBounds(75*width, 65*height, 15*width, 15*height);
 		add(btnDown);
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -130,7 +130,7 @@ public class OnlineGamePanel extends JPanel {
 		
 		JButton btnLeft = new JButton("\u2190"); //Left
 		btnLeft.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		btnLeft.setBounds(64*width, 61*height, 12*width, 12*height);
+		btnLeft.setBounds(75*width, 82*height, 15*width, 15*height);
 		add(btnLeft);
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -140,7 +140,7 @@ public class OnlineGamePanel extends JPanel {
 
 		JButton btnRight = new JButton("\u2192"); //Right
 		btnRight.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		btnRight.setBounds(64*width, 74*height, 12*width, 12*height);
+		btnRight.setBounds(75*width, 99*height, 15*width, 15*height);
 		add(btnRight);
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -150,7 +150,7 @@ public class OnlineGamePanel extends JPanel {
 
 		btnResetGame = new JButton("Reset Game");
 		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		btnResetGame.setBounds(96*width, 9*height, 22*width, 5*height);
+		btnResetGame.setBounds(120*width, 15*height, 30*width, 10*height);
 		add(btnResetGame);
 		btnResetGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -160,7 +160,7 @@ public class OnlineGamePanel extends JPanel {
 		
 		btnLockGame = new JButton("Lock Game");
 		btnLockGame.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		btnLockGame.setBounds(96*width, 15*height, 22*width, 5*height);
+		btnLockGame.setBounds(120*width, height, 30*width, 10*height);
 		add(btnLockGame);
 		btnLockGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -189,15 +189,8 @@ public class OnlineGamePanel extends JPanel {
 
 		lblRoom.setText("Room " + model.getGame().getGameId());
 		lblYourName.setText("Your Name: " + model.getGame().getCurrentPlayer().getName());
-		
-
-		if(!model.getGame().getCurrentPlayer().equals(model.getGame().getManagingPlayer())) {
-			btnResetGame.setVisible(false);
-			btnLockGame.setVisible(false);
-		} else {
-			btnResetGame.setVisible(true);
-			btnLockGame.setVisible(true);
-		}
+		lblTotalScore.setText("Total Score: " + 
+				model.getGame().getCurrentPlayer().getScore());
 	}
 
 	/**
@@ -216,5 +209,23 @@ public class OnlineGamePanel extends JPanel {
 	 */
 	public JLabel getLblScore(){
 		return lblScore;
+	}
+	
+	/**
+	 * Get the reset game button.
+	 * 
+	 * @return The reset game button.
+	 */
+	public JButton getBtnResetGame() {
+		return btnResetGame;
+	}
+
+	/**
+	 * Get the lock game button.
+	 * 
+	 * @return The lock game button.
+	 */
+	public JButton getBtnLockGame() {
+		return btnLockGame;
 	}
 }

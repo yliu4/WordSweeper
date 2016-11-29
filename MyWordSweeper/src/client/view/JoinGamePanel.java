@@ -65,38 +65,38 @@ public class JoinGamePanel extends JPanel {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height / 180;
 		int width = d.width / 320;
-
-		textFieldNickname = new JTextField();
-		textFieldNickname.setFont(new Font("Times New Roman", Font.PLAIN, 5*height));
-		textFieldNickname.setBounds(42*width, 27*height, 60*width, 9*height);
-		add(textFieldNickname);
-		
-		textFieldGameID = new JTextField();
-		textFieldGameID.setFont(new Font("Times New Roman", Font.PLAIN, 5*height));
-		textFieldGameID.setBounds(42*width, 55*height, 60*width, 9*height);
-		add(textFieldGameID);
 		
 		JLabel lblJoinNewGame = new JLabel("Join Game");
 		lblJoinNewGame.setHorizontalAlignment(SwingConstants.CENTER);
 		lblJoinNewGame.setFont(new Font("Times New Roman", Font.BOLD, 7*height));
-		lblJoinNewGame.setBounds(30*width, 5*height, 60*width, 10*height);
+		lblJoinNewGame.setBounds(40*width, 10*height, 80*width, 15*height);
 		add(lblJoinNewGame);
 		
 		JLabel lblNickname = new JLabel("Nickname:");
 		lblNickname.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNickname.setFont(new Font("Tahoma", Font.PLAIN, 5*height));
-		lblNickname.setBounds(12*width, 27*height, 32*width, 9*height);
+		lblNickname.setBounds(25*width, 35*height, 40*width, 10*height);
 		add(lblNickname);
+
+		textFieldNickname = new JTextField();
+		textFieldNickname.setFont(new Font("Times New Roman", Font.PLAIN, 5*height));
+		textFieldNickname.setBounds(70*width, 35*height, 60*width, 10*height);
+		add(textFieldNickname);
 
 		JLabel lbGameID = new JLabel("GameID:");
 		lbGameID.setHorizontalAlignment(SwingConstants.CENTER);
 		lbGameID.setFont(new Font("Tahoma", Font.PLAIN, 5*height));
-		lbGameID.setBounds(12*width, 55*height, 32*width, 9*height);
+		lbGameID.setBounds(25*width, 75*height, 40*width, 10*height);
 		add(lbGameID);	
+		
+		textFieldGameID = new JTextField();
+		textFieldGameID.setFont(new Font("Times New Roman", Font.PLAIN, 5*height));
+		textFieldGameID.setBounds(70*width, 75*height, 60*width, 10*height);
+		add(textFieldGameID);
 		
 		JButton btnGo = new JButton("GO!");
 		btnGo.setFont(new Font("Tahoma", Font.BOLD, 5*height));
-		btnGo.setBounds(25*width, 76*height, 30*width, 9*height);
+		btnGo.setBounds(40*width, 100*height, 30*width, 10*height);
 		add(btnGo);
 		btnGo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -106,7 +106,7 @@ public class JoinGamePanel extends JPanel {
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 5*height));
-		btnCancel.setBounds(68*width, 76*height, 30*width, 9*height);
+		btnCancel.setBounds(90*width, 100*height, 30*width, 10*height);
 		add(btnCancel);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
