@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import client.controller.*;
 import client.controller.RepositionBoardController.ShiftDirection;
@@ -43,18 +44,27 @@ public class OnlineGamePanel extends JPanel {
 	
 	/** <code>JLabel</code> for displaying the total score of the current player. */
 	JLabel lblTotalScore;
+
+	/** <code>JLabel</code> for displaying rank of the current player. */
+	JLabel lblRank;
 	
 	/** <code>JButton</code> for providing reset game feature to managing user. */
 	JButton btnResetGame;
 	
 	/** <code>JButton</code> for providing lock game feature to managing user. */
 	JButton btnLockGame;
+
+	Vector<Vector> rowData = new Vector<Vector>();
 	
 	/**
 	 * Create the panel for online game view.
 	 * 
 	 * @param m <code>Model</code> for current application.
 	 * @param application Current <code>Application</code>.
+	 */
+	/**
+	 * @param m
+	 * @param application
 	 */
 	public OnlineGamePanel(Model m, Application application) {
 		this.model = m;
@@ -91,6 +101,11 @@ public class OnlineGamePanel extends JPanel {
 		lblTotalScore.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
 		lblTotalScore.setBounds(100*width, 40*height, 70*width, 10*height);
 		add(lblTotalScore);
+
+		lblRank = new JLabel("You are at.");
+		lblRank.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		lblRank.setBounds(100*width, 50*height, 70*width, 10*height);
+		add(lblRank);
 
 		JButton btnReturn = new JButton("Return");
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
@@ -167,6 +182,27 @@ public class OnlineGamePanel extends JPanel {
 				new LockGameController(model, app).process();
 			}
 		});
+		
+		Vector<String> col = new Vector<String>();
+		col.add("Rank"); col.add("Nickname"); col.add("Score");
+		JTable table = new JTable();
+		table.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
+		table.setPreferredScrollableViewportSize(new Dimension(35*width, 50*height));
+		table.setRowHeight(4*height);
+		DefaultTableModel t = new DefaultTableModel(rowData, col) {
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		table.setModel(t);
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setBounds(105*width, 60*height, 35*width, 50*height);
+		table.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 2*height));
+		add(scrollPane, BorderLayout.CENTER);
 	}
 
 	/* (non-Javadoc)
@@ -227,5 +263,23 @@ public class OnlineGamePanel extends JPanel {
 	 */
 	public JButton getBtnLockGame() {
 		return btnLockGame;
+	}
+
+	/**
+	 * Get the rowData vector for JTable.
+	 * 
+	 * @return The rowData vector.
+	 */
+	public Vector<Vector> getRowData() {
+		return rowData;
+	}
+
+	/**
+	 * Get the JLabel displaying the rank.
+	 * 
+	 * @return The JLabel displaying the rank.
+	 */
+	public JLabel getLblRank() {
+		return lblRank;
 	}
 }

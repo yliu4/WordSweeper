@@ -1,6 +1,7 @@
 package client.controller;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -75,12 +76,19 @@ public class BoardResponseController extends ControllerChain {
 		Location bonusLoc = null;
 		NodeList list = boardResponse.getChildNodes();
 		
+		app.getOnlineGamePanel().getRowData().clear();
+		
 		for (int i = 0; i < list.getLength(); i++) {
 			Node n = list.item(i);
+			Vector tmp = new Vector();
 			
+			tmp.add(i);
 			pname = n.getAttributes().getNamedItem("name").getNodeValue();
+			tmp.add(pname);
 			pposition = n.getAttributes().getNamedItem("position").getNodeValue();
 			pscore = n.getAttributes().getNamedItem("score").getNodeValue();
+			tmp.add(pscore);
+			app.getOnlineGamePanel().getRowData().add(tmp);
 			
 			String[] cellLocation = pposition.split(",");
 			
@@ -88,6 +96,8 @@ public class BoardResponseController extends ControllerChain {
 				pboard = n.getAttributes().getNamedItem("board").getNodeValue();
 				bonusLoc = new Location(Integer.valueOf(bonusLocation[0])-Integer.valueOf(cellLocation[0]), 
 						Integer.valueOf(bonusLocation[1])-Integer.valueOf(cellLocation[1]));
+				app.getOnlineGamePanel().getLblRank().setText("You are at "
+						+ (i+1) +"/" + list.getLength() + ".");
 			}
 			
 			Player player = new Player(pname, Long.valueOf(pscore)
