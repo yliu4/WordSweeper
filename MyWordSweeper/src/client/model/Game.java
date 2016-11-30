@@ -230,4 +230,16 @@ public class Game {
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
+	
+	public void sortPlayers() {
+		if (players.size() <= 1) return;
+		Comparator<Player> sortingMethod = new Comparator<Player>() {
+			@Override
+			public int compare(Player p1, Player p2) {
+				return (int) (p1.getScore() - p2.getScore());
+			}
+		};
+		
+		Collections.sort(players, sortingMethod);
+	}
 }

@@ -98,6 +98,8 @@ public class BoardResponseController extends ControllerChain {
 						Integer.valueOf(bonusLocation[1])-Integer.valueOf(cellLocation[1]));
 				app.getOnlineGamePanel().getLblRank().setText("You are at "
 						+ (i+1) +"/" + list.getLength() + ".");
+				model.getGame().getCurrentPlayer().setScore(Long.valueOf(pscore));
+				model.getGame().getCurrentPlayer().setOriginPosition(new Location(Integer.valueOf(cellLocation[0]), Integer.valueOf(cellLocation[1])));
 			}
 			
 			Player player = new Player(pname, Long.valueOf(pscore)
@@ -116,7 +118,7 @@ public class BoardResponseController extends ControllerChain {
 		// Set managing user
 		if(model.getGame().getCurrentPlayer().getName().equals(managingUser)) {
 			game.setManagingPlayer(model.getGame().getCurrentPlayer());
-			app.getOnlineGamePanel().getBtnLockGame().setVisible(true);
+//			app.getOnlineGamePanel().getBtnLockGame().setVisible(true);
 			app.getOnlineGamePanel().getBtnResetGame().setVisible(true);
 		}
 		else {
