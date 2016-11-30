@@ -31,7 +31,7 @@ public class ClientLauncher {
 		
 		// select dedicated server with '-server' options
 		String host = "cccwork3.wpi.edu";
-		host = "Cs509.frankgh.com";
+		host = "Cs509.frankgh.com"; 
 		if (args.length > 0 && args[0].equals("-server")) {
 			host = serverHost;
 		}
