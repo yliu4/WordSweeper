@@ -23,6 +23,15 @@ public class JoinGameController {
 	Model model;
 	Application app;
 	
+	/** Use <code>boolean</code> to track missing nickname for automated test. */
+	boolean isMissingNickName = false;
+	
+	/** Use <code>boolean</code> to track missing password for automated test. */
+	boolean isMissingPassword = false;
+	
+	/** Set <code>boolean</code> to skip pop up windows in automated tests. */
+	boolean skipPopupWindow = false;
+	
 	public JoinGameController(Model model, Application app) {
 		this.model = model;
 		this.app = app;
@@ -34,10 +43,18 @@ public class JoinGameController {
 		String gameId = app.getJoinGamePanel().getTextFieldGameID().getText();
 
 		if (nickname.isEmpty()) {
-			app.popupWarnig("Please enter a nickname!");
-		} 
+			this.isMissingNickName = true;
+			if (!this.skipPopupWindow)
+			{
+				app.popupWarnig("Please enter a nickname!");
+			} 
+		}
 		else if (gameId.isEmpty()) {
-			app.popupWarnig("Please enter a gameId!");
+			this.isMissingPassword = true;
+			if (!this.skipPopupWindow)
+			{
+				app.popupWarnig("Please enter a gameId!");
+			}
 		} 
 		else {
 			String joinGameRequest = "<joinGameRequest gameId='" + gameId
@@ -49,6 +66,32 @@ public class JoinGameController {
 			model.setGame(game);
 			app.getServerAccess().sendRequest(m);
 		}	
+	}
+	
+	/**
+	 * Allow skip pop up window in automated tests
+	 */
+	public void setSkipPopupWindow()
+	{
+		this.skipPopupWindow = true;
+	}
+	
+	/**
+	 * Return whether input is missing nick name for automated tests
+	 * @return The boolean of whether missing nick name
+	 */
+	public boolean getIsMissingNickName()
+	{
+		return this.isMissingNickName;
+	}
+	
+	/**
+	 * Return whether input is missing password for automated tests
+	 * @return The boolean of whether missing password
+	 */
+	public boolean getIsMissingPassword()
+	{
+		return this.isMissingPassword;
 	}
 }
 
