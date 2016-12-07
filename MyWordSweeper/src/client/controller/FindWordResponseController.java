@@ -41,7 +41,12 @@ public class FindWordResponseController extends ControllerChain {
 		boolean success = response.success();
 		
 		if(success) {
-
+			Node boardResponse = response.contents.getFirstChild();
+			NamedNodeMap map = boardResponse.getAttributes();
+		
+			String gameId = map.getNamedItem("gameId").getNodeValue();
+			String name = map.getNamedItem("name").getNodeValue();
+			String score = map.getNamedItem("score").getNodeValue();
 		} else {
 			
 		}
