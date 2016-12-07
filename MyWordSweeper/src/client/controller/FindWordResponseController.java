@@ -49,6 +49,8 @@ public class FindWordResponseController extends ControllerChain {
 			String gameId = map.getNamedItem("gameId").getNodeValue();
 			String name = map.getNamedItem("name").getNodeValue();
 			String score = map.getNamedItem("score").getNodeValue();
+			System.out.println(String.format("gamdId %1, name %2, score %3", gameId, name, score));
+		
 		} else {
 			
 		}

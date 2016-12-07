@@ -33,8 +33,6 @@ public class LockGameResponseController extends ControllerChain {
 			return next.process(response);
 		}
 		
-		app.getOnlineGamePanel().getBtnLockGame().setVisible(false);
-		
 		return true;
 	}
 }
