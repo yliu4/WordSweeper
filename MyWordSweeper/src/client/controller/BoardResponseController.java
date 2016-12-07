@@ -94,14 +94,16 @@ public class BoardResponseController extends ControllerChain {
 			
 			if(pname.equals(model.getGame().getCurrentPlayer().getName())) {
 				pboard = n.getAttributes().getNamedItem("board").getNodeValue();
-				bonusLoc = new Location(Integer.valueOf(bonusLocation[0])-Integer.valueOf(cellLocation[0]), 
-						Integer.valueOf(bonusLocation[1])-Integer.valueOf(cellLocation[1]));
+				bonusLoc = new Location(Integer.valueOf(bonusLocation[1])-Integer.valueOf(cellLocation[1]), 
+						Integer.valueOf(bonusLocation[0])-Integer.valueOf(cellLocation[0]));
 				app.getOnlineGamePanel().getLblRank().setText("You are at "
 						+ (i+1) +"/" + list.getLength() + ".");
+				model.getGame().getCurrentPlayer().setScore(Long.valueOf(pscore));
+				model.getGame().getCurrentPlayer().setOriginPosition(new Location(Integer.valueOf(cellLocation[1]), Integer.valueOf(cellLocation[0])));
 			}
 			
 			Player player = new Player(pname, Long.valueOf(pscore)
-					, new Location(Integer.valueOf(cellLocation[0]), Integer.valueOf(cellLocation[1])));
+					, new Location(Integer.valueOf(cellLocation[1]), Integer.valueOf(cellLocation[0])));
 			
 			game.getPlayers().add(player);
 		}
@@ -116,7 +118,7 @@ public class BoardResponseController extends ControllerChain {
 		// Set managing user
 		if(model.getGame().getCurrentPlayer().getName().equals(managingUser)) {
 			game.setManagingPlayer(model.getGame().getCurrentPlayer());
-			app.getOnlineGamePanel().getBtnLockGame().setVisible(true);
+//			app.getOnlineGamePanel().getBtnLockGame().setVisible(true);
 			app.getOnlineGamePanel().getBtnResetGame().setVisible(true);
 		}
 		else {
