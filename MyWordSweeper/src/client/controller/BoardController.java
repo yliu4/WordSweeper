@@ -6,6 +6,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import xml.Message;
+import client.model.Game;
 import client.model.Cell;
 import client.model.Model;
 import client.view.Application;
@@ -36,14 +37,14 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	/** For recording the relative dragged coordinate in X-axle. */
 	private int deltaX;
 	
-	/** For recording the relative dragded coordinate in Y-axle. */
+	/** For recording the relative dragged coordinate in Y-axle. */
 	private int deltaY;
 	
 	/** For avoiding sending repeated released event. */
 	boolean press = false;
 	
 	/**
-	 * BoardController constructor
+	 * BoardController constructor.
 	 *
 	 * @param model  Current model.
 	 * @param application Current application.
@@ -56,9 +57,9 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	}
 	
 	/**
-	 * mousePressed get mouse event when mouse pressed
+	 * MousePressed get mouse event when mouse pressed.
 	 *
-	 * @param me  mouse event when pressing
+	 * @param me Mouse event when pressing.
 	 */
 	@Override
 	public void mousePressed(MouseEvent me) {
@@ -68,9 +69,9 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	}
 	
 	/**
-	 * mouseDragged get mouse event when mouse dragged
+	 * MouseDragged get mouse event when mouse dragged.
 	 *
-	 * @param me mouse event when dragging
+	 * @param me Mouse event when dragging.
 	 */
 	@Override
 	public void mouseDragged(MouseEvent me) {
@@ -80,14 +81,13 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	}
 	
 	/**
-	 * mouseDragged get mouse event when mouse released
+	 * MouseDragged get mouse event when mouse released.
 	 *
-	 * @param me  mouse event when releasing
+	 * @param me Mouse event when releasing.
 	 */
 	@Override
 	public void mouseReleased(MouseEvent me) {
 		if(press == true) {
-//			panel.calculateScoreForSelectedWord();
 			this.x = -1;
 			this.y = -1;
 			this.deltaX = 0;
@@ -95,45 +95,50 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 			panel.repaint();
 			press = false;
 
-			model.getGame().getCurrentPlayer().setScore(
-					model.getGame().getCurrentPlayer().getScore() + 
-					panel.getWordScore());
-			
-			if (app.getOnlineGamePanel() != null)
-			{
+			if (app.getPracticeGamePanel() == null) {
 				Message msg = generateFindWordRequest();
 				app.getServerAccess().sendRequest(msg);
 			}
+			else 
+				model.getGame().getCurrentPlayer().setScore(
+						model.getGame().getCurrentPlayer().getScore() + 
+						panel.getWordScore());
 		}
 	}
 	
 	/**
-	 * generate a message for sending findWordRequest to server
+	 * Generate a message for sending findWordRequest to server.
 	 *
-	 * @param  a message for findWordReques
+	 * @return A message for findWordRequest.
 	 */
 	private Message generateFindWordRequest()
 	{
 		StringBuilder requestMessage = new StringBuilder();
 		ArrayList<Cell> wordCells = panel.getWordCells();
-
-		String gameId = model.getGame().getGameId();
-		String playerName = model.getGame().getCurrentPlayer().getName();
-		String word = panel.getCurrentWord().toLowerCase();
+		Game game = model.getGame();
+		String gameId = game.getGameId();
+		String playerName = game.getCurrentPlayer().getName();
+		String word = panel.getCurrentWord().toUpperCase();
+		
 		requestMessage.append(String.format("<findWordRequest gameId='%s' name='%s' word='%s'>",
 				gameId, playerName, word));
-		for (int i = 0; i < wordCells.size(); ++i)
-		{
+		
+		for (int i = 0; i < wordCells.size(); ++i) {
 			Cell cell = wordCells.get(i);
-			
+			int col = cell.getLocation().getColumn() + 
+					game.getCurrentPlayer().getOriginPosition().getColumn();
+			int row = cell.getLocation().getRow() + 
+					game.getCurrentPlayer().getOriginPosition().getRow();
 			String cellStr = String.format("<cell position='%d,%d' letter='%s'/>",
-					cell.getLocation().getRow(),
-					cell.getLocation().getColumn(),
+					col,
+					row,
 					cell.getLetter().getCharacter());
 
 			requestMessage.append(cellStr);
 		}
+		
 		requestMessage.append("</findWordRequest></request>");
+		
 		return new Message (Message.requestHeader() + requestMessage.toString());
 	}
 
