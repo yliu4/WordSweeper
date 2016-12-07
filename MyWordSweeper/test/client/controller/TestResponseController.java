@@ -1,11 +1,17 @@
 package client.controller;
  
- import xml.Message;
+ import java.awt.Container;
+import java.awt.event.MouseEvent;
+
+import xml.Message;
 
  import junit.framework.TestCase;
- import client.controller.JoinGameResponseController;
- import client.model.Model;
- import client.view.Application;
+import client.controller.JoinGameResponseController;
+import client.model.Game;
+import client.model.Location;
+import client.model.Model;
+import client.model.Player;
+import client.view.Application;
  
 
 /**
@@ -127,6 +133,27 @@ package client.controller;
  		m = new Message (xmlString);
  		s.process(m);
  		
+ 	}
+ 	
+ 	public void testBoardResponseController(){
+ 		Message.configure("wordsweeper.xsd");
+ 		
+ 		Model model = new Model();
+ 		Application app = new Application(model);
+ 		BoardResponseController b = new BoardResponseController(model, app);
+ 		
+ 		String response = "<boardResponse bonus=\"6,3\" gameId=\"4kvpfqi5tqiepqnlravj7mssqr\" managingUser=\"a\" size=\"7\"><player board=\"B,R,Y,X,D,O,L,S,H,J,G,R,Z,P,U,I\" name=\"Peter\" position=\"4,1\" score=\"0\"/></boardResponse></response>";
+ 		String xmlString = Message.responseHeader("id","reson") + response; 
+ 		Message m = new Message (xmlString);
+ 		
+ 		Location location = new Location(1, 2);
+		Player player = new Player("Ann", 10, location);
+		Location location1 = new Location(1, 3);
+		Player player1 = new Player("Peter", 10, location);
+		Game game = new Game(player1);
+		model.setGame(game);
+		model.getGame().addPlayer(player);
+ 		b.process(m);
  		
  	}
  }
