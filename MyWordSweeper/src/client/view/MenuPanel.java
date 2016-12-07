@@ -51,12 +51,13 @@ public class MenuPanel extends JPanel {
 		JLabel lblWordswepper = new JLabel("WordSwepper");
 		lblWordswepper.setFont(new Font("Times New Roman", Font.BOLD, 8*height));
 		lblWordswepper.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWordswepper.setBounds(3*width, 5*height, 6*width, 14*height);
+		lblWordswepper.setVerticalAlignment(SwingConstants.CENTER);
+		lblWordswepper.setBounds(4*width, 6*height, 8*width, 20*height);
 		add(lblWordswepper);
 		
 		JButton btnCreate = new JButton("CREATE");
 		btnCreate.setFont(new Font("Tahoma", Font.PLAIN, 6*height));
-		btnCreate.setBounds(4*width, 24*height, 4*width, 14*height);
+		btnCreate.setBounds(6*width, 32*height, 4*width, 14*height);
 		add(btnCreate);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -66,7 +67,7 @@ public class MenuPanel extends JPanel {
 		
 		JButton btnJoin = new JButton("JOIN");
 		btnJoin.setFont(new Font("Tahoma", Font.PLAIN, 6*height));
-		btnJoin.setBounds(4*width, 44*height, 4*width, 14*height);
+		btnJoin.setBounds(6*width, 58*height, 4*width, 14*height);
 		add(btnJoin);
 		btnJoin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -76,7 +77,7 @@ public class MenuPanel extends JPanel {
 		
 		JButton btnPractice = new JButton("PRACTICE");
 		btnPractice.setFont(new Font("Tahoma", Font.PLAIN, 6*height));
-		btnPractice.setBounds(4*width, 64*height, 4*width, 14*height);
+		btnPractice.setBounds(6*width, 84*height, 4*width, 14*height);
 		add(btnPractice);
 		btnPractice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -59,32 +59,32 @@ public class PracticeGamePanel extends JPanel{
 		lblRoom = new JLabel("Practice");
 		lblRoom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRoom.setFont(new Font("Arial", Font.BOLD, 6*height));
-		lblRoom.setBounds(45*width, 8*height, 34*width, 5*height);
+		lblRoom.setBounds(60*width, 10*height, 40*width, 10*height);
 		add(lblRoom);
 		
 		lblCurrentWord = new JLabel("Current Word: ");
 		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, 3*height));
-		lblCurrentWord.setBounds(5*width, 24*height, 70*width, 4*height);
+		lblCurrentWord.setBounds(15*width, 30*height, 70*width, 10*height);
 		add(lblCurrentWord);
 
 		lblScore = new JLabel("Score: \r\n");
 		lblScore.setFont(new Font("Arial", Font.BOLD, 3*height));
-		lblScore.setBounds(5*width, 28*height, 53*width, 4*height);
+		lblScore.setBounds(15*width, 40*height, 70*width, 10*height);
 		add(lblScore);
 
-		JLabel lblYourName = new JLabel("Your Name: Practicer");
+		JLabel lblYourName = new JLabel("Your Name: PracticerPracticerPracticer");
 		lblYourName.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		lblYourName.setBounds(83*width, 20*height, 34*width, 4*height);
+		lblYourName.setBounds(100*width, 30*height, 70*width, 10*height);
 		add(lblYourName);
 
 		lblTotalScore = new JLabel("Total Score: 0.");
 		lblTotalScore.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		lblTotalScore.setBounds(83*width, 24*height, 30*width, 4*height);
+		lblTotalScore.setBounds(100*width, 40*height, 70*width, 10*height);
 		add(lblTotalScore);
 
 		JButton btnReturn = new JButton("Return");
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		btnReturn.setBounds(width, height, 20*width, 5*height);
+		btnReturn.setBounds(width, height, 30*width, 10*height);
 		add(btnReturn);
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -94,7 +94,7 @@ public class PracticeGamePanel extends JPanel{
 
 		JButton btnResetGame = new JButton("Reset Game");
 		btnResetGame.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
-		btnResetGame.setBounds(96*width, 9*height, 22*width, 5*height);
+		btnResetGame.setBounds(120*width, 15*height, 30*width, 10*height);
 		add(btnResetGame);
 		btnResetGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
