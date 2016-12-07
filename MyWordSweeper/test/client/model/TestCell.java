@@ -31,4 +31,16 @@ public class TestCell extends TestCase {
 		assertEquals(newLetter, cell.getLetter());
 		assertEquals(false, letter.equals(cell.getLetter()));
 	}
+	
+	public void testEquals() {
+		Location location1 = new Location(1, 2);
+		Letter letter1 = new Letter("A");
+		Cell cell1 = new Cell(location1, letter1);
+		
+		Location location2 = new Location(1, 2);
+		Letter letter2 = new Letter("A");
+		Cell cell2 = new Cell(location2, letter2);
+		
+		assertEquals(true, cell1.equals(cell2));
+	}
 }

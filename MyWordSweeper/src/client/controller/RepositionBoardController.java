@@ -50,10 +50,10 @@ public class RepositionBoardController {
 			colChange = 1;
 			break;
 		case Up:
-			rowChange = 1;
+			rowChange = -1;
 			break;
 		case Down:
-			rowChange = -1;
+			rowChange = 1;
 			break;
 		
 		}
