@@ -77,4 +77,3 @@ public class RepositionBoardController {
 //		// The response is handled in BoardResponseController to update the existing game
 //	}
 }
-
