@@ -54,4 +54,14 @@ public class TestPlayer extends TestCase {
 		
 		assertEquals("Ann", player.getName());
 	}
+	
+	/** Test the Equals method. */
+	public void testEquals(){
+		Location location = new Location(1, 2);
+		Player player1 = new Player("Ann", 10, location);
+		Player player2 = new Player("Ann", 10, location);
+		Player player3 = new Player("Peter", 10, location);
+		assertTrue(player1.equals(player2));
+		assertFalse(player1.equals(player3));
+	}
 }
