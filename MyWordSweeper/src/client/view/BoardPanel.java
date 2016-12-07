@@ -67,10 +67,10 @@ public class BoardPanel extends JPanel {
 		}
 		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = d.height / 180;
-		int width = d.width / 320;
+		int height = d.height / 360;
+		int width = d.width / 640;
 		
-		setBounds(15*width, 55*height, 52*width+1, 52*height+1);
+		setBounds(10*width, 80*height, 104*width+1, 104*height+1);
 		currentWord = new StringBuilder();
 		
 		this.boardController = new BoardController(model, app, this);
@@ -205,7 +205,8 @@ public class BoardPanel extends JPanel {
 				// Show the word.
 				if (app.getPracticeGamePanel() != null) 
 					app.getPracticeGamePanel().getLblCurrentWord().setText("Current Word: "+this.getCurrentWord());
-				else 
+				
+				if (app.getOnlineGamePanel() != null) 
 					app.getOnlineGamePanel().getLblCurrentWord().setText("Current Word: "+this.getCurrentWord());
 			}
 			
@@ -218,7 +219,8 @@ public class BoardPanel extends JPanel {
 			// Show the score.
 			if (app.getPracticeGamePanel() != null) 
 				app.getPracticeGamePanel().getLblScore().setText("Score :"+this.wordScore);
-			else
+			
+			if (app.getOnlineGamePanel() != null) 
 				app.getOnlineGamePanel().getLblScore().setText("Score :"+this.wordScore);
 			
 			g.setColor(Color.black);
