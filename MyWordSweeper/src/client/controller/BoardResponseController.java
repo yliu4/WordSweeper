@@ -80,15 +80,10 @@ public class BoardResponseController extends ControllerChain {
 		
 		for (int i = 0; i < list.getLength(); i++) {
 			Node n = list.item(i);
-			Vector tmp = new Vector();
-			
-			tmp.add(i);
+
 			pname = n.getAttributes().getNamedItem("name").getNodeValue();
-			tmp.add(pname);
 			pposition = n.getAttributes().getNamedItem("position").getNodeValue();
 			pscore = n.getAttributes().getNamedItem("score").getNodeValue();
-			tmp.add(pscore);
-			app.getOnlineGamePanel().getRowData().add(tmp);
 			
 			String[] cellLocation = pposition.split(",");
 			
@@ -106,6 +101,22 @@ public class BoardResponseController extends ControllerChain {
 					, new Location(Integer.valueOf(cellLocation[1]), Integer.valueOf(cellLocation[0])));
 			
 			game.getPlayers().add(player);
+		}
+		
+		game.sortPlayers();
+		for (int i = 1; i <= game.getPlayers().size(); i++) {
+			Player p = game.getPlayers().get(i-1);
+			Vector tmp = new Vector();
+			
+			tmp.add(i);
+			tmp.add(p.getName());
+			tmp.add(p.getScore());
+			app.getOnlineGamePanel().getRowData().add(tmp);
+			
+			if(p.getName().equals(model.getGame().getCurrentPlayer().getName())) {
+				app.getOnlineGamePanel().getLblRank().setText("You are at "
+						+ i +"/" + list.getLength() + ".");
+			}
 		}
 
 		// Set game id 

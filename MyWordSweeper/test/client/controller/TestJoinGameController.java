@@ -65,13 +65,17 @@ public class TestJoinGameController extends TestCase {
 			JoinGameController j2 = new JoinGameController(model, client);
 			client.getJoinGamePanel().getTextFieldNickname().setText("");
 			client.getJoinGamePanel().getTextFieldGameID().setText("123");
+			j2.setSkipPopupWindow();
 			j2.process();
+			assertEquals(j2.getIsMissingNickName(), true);
 			
 			//expect a pop up warning asking for game id
 			JoinGameController j3 = new JoinGameController(model, client);
 			client.getJoinGamePanel().getTextFieldNickname().setText("yuchen");
 			client.getJoinGamePanel().getTextFieldGameID().setText("");
+			j3.setSkipPopupWindow();
 			j3.process();
+			assertEquals(j3.getIsMissingPassword(), true);
 			
 			//test Generate Board
 //			j1.game = new Game();

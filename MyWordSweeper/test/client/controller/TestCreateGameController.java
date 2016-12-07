@@ -88,7 +88,9 @@ public class TestCreateGameController extends TestCase {
 		client.getCreateGamePanel().getTextFieldNickname().setText("");
 		client.getCreateGamePanel().getTextFieldPassword().setText("123");
 		client.getCreateGamePanel().getRdbtnPrivate().setSelected(true);
+		c3.setSkipPopupWindow();
 		c3.process();
+		assertEquals(c3.getIsMissingNickName(), true);
 
 		// create a private game without password and with user name
 		// expect pop up warning
@@ -96,7 +98,9 @@ public class TestCreateGameController extends TestCase {
 		client.getCreateGamePanel().getTextFieldNickname().setText("yuchen");
 		client.getCreateGamePanel().getTextFieldPassword().setText("");
 		client.getCreateGamePanel().getRdbtnPrivate().setSelected(true);
+		c4.setSkipPopupWindow();
 		c4.process();
+		assertEquals(c4.getIsMissingPassword(), true);
 
 		new ChoosePrivateController(client).process();
 		assertTrue(client.getCreateGamePanel().getTextFieldPassword()

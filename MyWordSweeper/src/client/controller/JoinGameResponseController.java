@@ -22,6 +22,12 @@ public class JoinGameResponseController extends ControllerChain {
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 	
+	/** Set <code>boolean</code> to skip pop up window in tests */
+	boolean skipWarningDialog = false;
+	
+	/** Store <code>String</code> to indicate the join failed reason for testing */
+	String failReason = "";
+	
 	/**
 	 * JoinGameResponseController constructor
 	 *
@@ -46,8 +52,21 @@ public class JoinGameResponseController extends ControllerChain {
 		
 		String reason = response.reason();
 
+		if (reason.contains("lock"))
+		{
+			this.failReason = "locked";
+		}
+		else if (reason.contains("does not exist"))
+		{
+			this.failReason = "does not exist";
+		}
+		
 		//Show warning message and get password.
-	    String password = app.getJoinGamePanel().popupNeedPassword(reason);
+		String password = "";
+		if (!this.skipWarningDialog)
+		{	
+			password = app.getJoinGamePanel().popupNeedPassword(reason);
+		}
 	    
 	    if (password.length() > 0){
 	    	String nickname = app.getJoinGamePanel().getTextFieldNickname().getText();
@@ -62,5 +81,22 @@ public class JoinGameResponseController extends ControllerChain {
 	    }
 		
 		return true;
+	}
+	
+	/**
+	 * Get failed reason string to verify in tests
+	 * @return The join failed reason
+	 */
+	public String getFailReason()
+	{
+		return this.failReason;
+	}
+
+	/**
+	 * Set to skip warning dialog for automated tests
+	 */
+	public void setSkipWarningDialog()
+	{
+		this.skipWarningDialog = true;
 	}
 }

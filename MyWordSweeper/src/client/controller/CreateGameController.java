@@ -20,6 +20,15 @@ public class CreateGameController {
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 	
+	/** Use <code>boolean</code> to track missing nickname for automated test. */
+	boolean isMissingNickName = false;
+	
+	/** Use <code>boolean</code> to track missing password for automated test. */
+	boolean isMissingPassword = false;
+	
+	/** Set <code>boolean</code> to skip pop up windows in automated tests. */
+	boolean skipPopupWindow = false;
+	
 	/**
 	 * CreateGameController constructor.
 	 * 
@@ -40,9 +49,17 @@ public class CreateGameController {
 		boolean isPrivate = app.getCreateGamePanel().getRdbtnPrivate().isSelected();
 		
 		if (nickname.isEmpty()) {
-			app.popupWarnig("Please enter a nickname!");
+			this.isMissingNickName = true;
+			if (!this.skipPopupWindow)
+			{
+				app.popupWarnig("Please enter a nickname!");
+			}
 		} else if (isPrivate && password.length == 0) {
-			app.popupWarnig("Please enter a password!");
+			this.isMissingPassword = true;
+			if (!this.skipPopupWindow)
+			{
+				app.popupWarnig("Please enter a password!");
+			}
 		} else {
 			String createGameRequest = "<createGameRequest name='" + nickname + "'" 
 					+ ((password.length == 0)? "":(" password='" + new String(password) + "'"))
@@ -54,5 +71,31 @@ public class CreateGameController {
 			model.setGame(game);
 			app.getServerAccess().sendRequest(m);
 		}
+	}
+	
+	/**
+	 * Allow skip pop up window in automated tests
+	 */
+	public void setSkipPopupWindow()
+	{
+		this.skipPopupWindow = true;
+	}
+	
+	/**
+	 * Return whether input is missing nick name for automated tests
+	 * @return The boolean of whether missing nick name
+	 */
+	public boolean getIsMissingNickName()
+	{
+		return this.isMissingNickName;
+	}
+	
+	/**
+	 * Return whether input is missing password for automated tests
+	 * @return The boolean of whether missing password
+	 */
+	public boolean getIsMissingPassword()
+	{
+		return this.isMissingPassword;
 	}
 }
