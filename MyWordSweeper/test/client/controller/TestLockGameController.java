@@ -39,7 +39,7 @@ public class TestLockGameController extends TestCase {
 		client.setServerAccess(mockServer);
 	}
 	/**
-	 * The real test case whose purpose is to validate that send exit request to
+	 * The real test case whose purpose is to validate that send lock game request to
 	 * the server.
 	 */
 	public void testLockGameProcess() {
