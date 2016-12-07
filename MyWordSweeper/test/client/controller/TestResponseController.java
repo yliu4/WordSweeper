@@ -105,4 +105,28 @@ package client.controller;
  		Message m = new Message (xmlString);
  		c.process(m);
  	}
+ 	
+ 	public void testControllerChain(){
+ 		Message.configure("wordsweeper.xsd");
+ 		
+ 		Model model = new Model();
+ 		Application app = new Application(model);
+ 		SampleClientMessageHandler s = new SampleClientMessageHandler(app);
+ 		ConnectResponseController c = new ConnectResponseController(model, app);
+ 		FindWordResponseController f = new FindWordResponseController(model, app);
+ 		s.registerHandler(c);
+ 		s.registerHandler(f);
+ 		
+ 		String response = "<connectResponse id=\"89509f93-42a8-4e5a-bce5-5fd6c540e5ad\"/></response>";
+ 		String xmlString = Message.responseHeader("id","reson") + response; 
+ 		Message m = new Message (xmlString);
+ 		s.process(m);
+ 		
+ 		response = "<resetGameResponse gameId='TEST'/></response>";
+ 		xmlString = Message.responseHeader("id") + response; 
+ 		m = new Message (xmlString);
+ 		s.process(m);
+ 		
+ 		
+ 	}
  }
