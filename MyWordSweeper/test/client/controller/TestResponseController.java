@@ -1,12 +1,7 @@
 package client.controller;
  
- import java.awt.Container;
-import java.awt.event.MouseEvent;
-
-import xml.Message;
-
  import junit.framework.TestCase;
-import client.controller.JoinGameResponseController;
+import xml.Message;
 import client.model.Game;
 import client.model.Location;
 import client.model.Model;
@@ -34,9 +29,13 @@ import client.view.Application;
  		String response = "<joinGameResponse gameId='TEST'/></response>";
  		String xmlString = Message.responseHeader("id", "lock") + response;
  		Message m = new Message (xmlString);
+ 		controller.setSkipWarningDialog();
  		controller.process(m);
+ 		assertEquals(controller.getFailReason(), "locked");
+ 		
  		m = new Message("<response id=\"b046e830-308f-4ca8-8427-11406207c077\" reason=\"The game does not exist\" success=\"false\" version=\"1.0\"><joinGameResponse gameId=\"1\"/></response>");
  		controller.process(m);
+ 		assertEquals(controller.getFailReason(), "does not exist");
  	}
  	
  	public void testLockGameResponseController(){
@@ -62,6 +61,7 @@ import client.view.Application;
  		Model model = new Model();
  		Application app = new Application(model);
  		ExitGameResponseController c = new ExitGameResponseController(model, app);
+ 		c.SetSkipDialogWindow();
  		
  		String response = "<exitGameResponse gameId='TEST'/></response>";
  		String xmlString = Message.responseHeader("id") + response; 

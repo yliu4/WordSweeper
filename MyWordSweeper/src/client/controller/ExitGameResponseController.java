@@ -21,6 +21,9 @@ public class ExitGameResponseController extends ControllerChain {
 	
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
+	
+	/** Set <code>boolean</code> to skip dialog window popup when during automated test. */
+	boolean skipDialogWindow = false;
 
 	/**
 	 * ExitGameResponseController constructor
@@ -31,6 +34,11 @@ public class ExitGameResponseController extends ControllerChain {
 	public ExitGameResponseController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
+	}
+	
+	public void SetSkipDialogWindow()
+	{
+		this.skipDialogWindow = true;
 	}
 	
 	/**
@@ -58,11 +66,18 @@ public class ExitGameResponseController extends ControllerChain {
 		UIManager.put("OptionPane.messageFont", 
 				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
 		String message = "You have successfully exited from game '" + gameId + "'!";
-		JOptionPane.showMessageDialog(app, message, "Exit Game!",
-        JOptionPane.PLAIN_MESSAGE);
+		
+		// allow skip dialog window in automated tests
+		if (!this.skipDialogWindow)
+		{
+			JOptionPane.showMessageDialog(app, message, "Exit Game!",
+					JOptionPane.PLAIN_MESSAGE);
+		}
 		
 		app.gotoMainMenu();
 		
 		return true;
 	}
+	
+	
 }
