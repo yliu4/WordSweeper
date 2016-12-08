@@ -79,7 +79,13 @@ public class TestBoardController extends TestCase{
 				boardPanel, MouseEvent.MOUSE_RELEASED, 1, 0,
 				136, 72, 1, false,MouseEvent.BUTTON1);
 		
-		boardController.mouseReleased(releaseEvent);	
+		boardController.mouseReleased(releaseEvent);
+		
+		model = new Model();
+		client = new Application(model);
+		client.setVisible(true);
+		boardController.mouseReleased(releaseEvent);
+		
 	}
 	
 }
