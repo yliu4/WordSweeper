@@ -104,7 +104,6 @@ public class Cell {
 		Cell cell = (Cell) obj;
 		
 		return (location.equals(cell.getLocation()) && 
-				letter.equals(cell.getLetter()) &&
-				drawer.equals(cell.getDrawer()));
+				letter.equals(cell.getLetter()));
 	}
 }
