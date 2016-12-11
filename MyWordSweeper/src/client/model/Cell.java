@@ -1,5 +1,7 @@
 package client.model;
 
+import client.view.CellDrawer;
+
 /**
  * Each Cell has Location and Letter.
  * 
@@ -11,6 +13,9 @@ public class Cell {
 	
 	/** The Letter in this Cell. */
 	Letter letter = null;
+	
+	/** The drawer that draws this cell. */
+	CellDrawer drawer;
 	
 	/** 
 	 * Construct the Cell base on the Location and Letter.
@@ -50,14 +55,35 @@ public class Cell {
 		this.letter = letter;
 	}
 	
+	/**
+	 * Get the celldrawer.
+	 * 
+	 * @return The celldrawer.
+	 */
+	public CellDrawer getDrawer() {
+		return drawer;
+	}
+
+	/**
+	 * Set the celldrawer.
+	 * 
+	 * @param drawer The celldrawer.
+	 */
+	public void setDrawer(CellDrawer drawer) {
+		this.drawer = drawer;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		if (obj == null) return false;
+		
 		Cell cell = (Cell) obj;
 		
 		return (location.equals(cell.getLocation()) && 
-				letter.equals(cell.getLetter()));
+				letter.equals(cell.getLetter()) &&
+				drawer.equals(cell.getDrawer()));
 	}
 }
