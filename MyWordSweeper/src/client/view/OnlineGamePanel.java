@@ -36,8 +36,8 @@ public class OnlineGamePanel extends JPanel {
 	/** <code>JLabel</code> for displaying the score of the current selected word. */
 	JLabel lblScore;
 	
-	/** <code>JLabel</code> for displaying the gameID. */
-	JLabel lblRoom;
+	/** <code>JTextField</code> for displaying the gameID. */
+	JTextField textFieldGameId;
 	
 	/** <code>JLabel</code> for displaying the current player's name. */
 	JLabel lblYourName;
@@ -54,17 +54,14 @@ public class OnlineGamePanel extends JPanel {
 	/** <code>JButton</code> for providing lock game feature to managing user. */
 	JButton btnLockGame;
 
-	Vector<Vector> rowData = new Vector<Vector>();
+	/** The rowdata for the jtable that dispalys all players' information. */
+	Vector<Vector<String>> rowData = new Vector<Vector<String>>();
 	
 	/**
 	 * Create the panel for online game view.
 	 * 
 	 * @param m <code>Model</code> for current application.
 	 * @param application Current <code>Application</code>.
-	 */
-	/**
-	 * @param m
-	 * @param application
 	 */
 	public OnlineGamePanel(Model m, Application application) {
 		this.model = m;
@@ -76,11 +73,20 @@ public class OnlineGamePanel extends JPanel {
 		int height = d.height / 180;
 		int width = d.width / 320;
 		
-		lblRoom = new JLabel("Room ");
+		JLabel lblRoom = new JLabel("Room");
 		lblRoom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRoom.setFont(new Font("Arial", Font.BOLD, 6*height));
-		lblRoom.setBounds(40*width, 10*height, 70*width, 10*height);
+		lblRoom.setBounds(60*width, height, 30*width, 10*height);
 		add(lblRoom);
+		
+		textFieldGameId = new JTextField();
+		textFieldGameId.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldGameId.setFont(new Font("Arial", Font.BOLD, 6*height));
+		textFieldGameId.setBounds(40*width, 15*height, 70*width, 10*height);
+		textFieldGameId.setBorder(null);
+		textFieldGameId.setEditable(false);
+		
+		add(textFieldGameId);
 		
 		lblCurrentWord = new JLabel("Current Word: ");
 		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, 3*height));
@@ -184,11 +190,15 @@ public class OnlineGamePanel extends JPanel {
 		});
 		
 		Vector<String> col = new Vector<String>();
+		
 		col.add("Rank"); col.add("Nickname"); col.add("Score");
+		
 		JTable table = new JTable();
+		
 		table.setFont(new Font("Tahoma", Font.PLAIN, 3*height));
 		table.setPreferredScrollableViewportSize(new Dimension(35*width, 50*height));
 		table.setRowHeight(4*height);
+		
 		DefaultTableModel t = new DefaultTableModel(rowData, col) {
 			private static final long serialVersionUID = 1L;
 
@@ -196,8 +206,11 @@ public class OnlineGamePanel extends JPanel {
 				return false;
 			}
 		};
+		
 		table.setModel(t);
+		
 		JScrollPane scrollPane = new JScrollPane(table);
+		
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setBounds(105*width, 60*height, 35*width, 50*height);
@@ -223,7 +236,7 @@ public class OnlineGamePanel extends JPanel {
 			this.boardPanel.repaint();
 		}
 
-		lblRoom.setText("Room " + model.getGame().getGameId());
+		textFieldGameId.setText(model.getGame().getGameId());
 		lblYourName.setText("Your Name: " + model.getGame().getCurrentPlayer().getName());
 		lblTotalScore.setText("Total Score: " + 
 				model.getGame().getCurrentPlayer().getScore());
@@ -270,7 +283,7 @@ public class OnlineGamePanel extends JPanel {
 	 * 
 	 * @return The rowData vector.
 	 */
-	public Vector<Vector> getRowData() {
+	public Vector<Vector<String>> getRowData() {
 		return rowData;
 	}
 
