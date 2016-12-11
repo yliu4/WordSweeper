@@ -91,6 +91,8 @@ public class Player {
 			return true;
 		
 		Player player = (Player) object;
-		return this.name.equals(player.name);
+		return name.equals(player.getName()) &&
+				score == player.getScore() &&
+				originPosition.equals(player.getOriginPosition());
 	}
 }

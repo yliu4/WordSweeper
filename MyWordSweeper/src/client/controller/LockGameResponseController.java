@@ -33,7 +33,10 @@ public class LockGameResponseController extends ControllerChain {
 			return next.process(response);
 		}
 		
-		app.getOnlineGamePanel().getBtnLockGame().setVisible(false);
+		if (response.success()) 
+			app.popupWarnig("This game is locked!");
+		else
+			app.popupWarnig(response.reason());
 		
 		return true;
 	}

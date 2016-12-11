@@ -15,7 +15,7 @@ import client.model.Location;
 import client.model.Model;
 import client.model.Player;
 import client.view.Application;
-import client.view.OnlineGamePanel;
+import client.view.CellDrawer;
 
 /**
  * The board response controller is used to process board response from server.
@@ -65,12 +65,12 @@ public class BoardResponseController extends ControllerChain {
 		String gameId = null, managingUser = null, bonus = null;
 		String pname = null, pboard = null, pposition = null, pscore = null;
 		
-		// get global game board information
+		// Get game board information.
 		gameId = map.getNamedItem("gameId").getNodeValue();
 		managingUser = map.getNamedItem("managingUser").getNodeValue();
 		bonus = map.getNamedItem("bonus").getNodeValue();
 		
-		// get game board information for the managing user
+		// Get game board information for the managing user.
 		ArrayList<Cell> cells = new ArrayList<Cell>();
 		String[] bonusLocation = bonus.split(",");
 		Location bonusLoc = null;
@@ -106,11 +106,11 @@ public class BoardResponseController extends ControllerChain {
 		game.sortPlayers();
 		for (int i = 1; i <= game.getPlayers().size(); i++) {
 			Player p = game.getPlayers().get(i-1);
-			Vector tmp = new Vector();
+			Vector<String> tmp = new Vector<String>();
 			
-			tmp.add(i);
+			tmp.add(Integer.toString(i));
 			tmp.add(p.getName());
-			tmp.add(p.getScore());
+			tmp.add(Long.toString(p.getScore()));
 			app.getOnlineGamePanel().getRowData().add(tmp);
 			
 			if(p.getName().equals(model.getGame().getCurrentPlayer().getName())) {
@@ -119,21 +119,22 @@ public class BoardResponseController extends ControllerChain {
 			}
 		}
 
-		// Set game id 
+		// Set game id. 
 		game.setGameId(gameId);
 		
-		// Set game board
+		// Set game board.
 		generateCells(pboard, cells);
 		game.setBoard(cells, bonusLoc);
+		
+		// Overlap check.
+		game.overlapCheck();
 
-		// Set managing user
+		// Managing user settings.
 		if(model.getGame().getCurrentPlayer().getName().equals(managingUser)) {
-			game.setManagingPlayer(model.getGame().getCurrentPlayer());
-//			app.getOnlineGamePanel().getBtnLockGame().setVisible(true);
+			app.getOnlineGamePanel().getBtnLockGame().setVisible(true);
 			app.getOnlineGamePanel().getBtnResetGame().setVisible(true);
 		}
 		else {
-//			game.setManagingPlayer(managingUser);
 			app.getOnlineGamePanel().getBtnLockGame().setVisible(false);
 			app.getOnlineGamePanel().getBtnResetGame().setVisible(false);
 		}
@@ -157,6 +158,7 @@ public class BoardResponseController extends ControllerChain {
 			Letter cellLetter = new Letter(arr[i]);
 			
 			cells.add(new Cell(cellLocation, cellLetter));
+			cells.get(i).setDrawer(new CellDrawer());
 		}
 	}
 }

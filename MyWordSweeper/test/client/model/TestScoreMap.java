@@ -9,7 +9,7 @@ import junit.framework.TestCase;
  * @author Team Pisces
  *
  */
-public class TestScoremap extends TestCase {
+public class TestScoreMap extends TestCase {
 	/** Test the findLetterScore method. */
 	public void testFindLetterScore() {
 		ScoreMap scoremap = new ScoreMap();

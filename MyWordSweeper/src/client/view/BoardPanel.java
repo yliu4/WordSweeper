@@ -128,12 +128,15 @@ public class BoardPanel extends JPanel {
 	public void resetDrawerState() {
 		for (int i = 0; i < 16; i++) {
 			Cell cell = cells.get(i);
+			CellDrawer drawer = cell.getDrawer();
 			int counter = cell.getCounter();
 			
-			if (counter == 1)
-				cell.getDrawer().resetState();
+			if (cell.getLetter().isMultiplier())
+				drawer.setState(CellDrawer.StateBonus);
+			else if (counter == 1)
+				drawer.resetState();
 			else 
-				cell.getDrawer().setState(counter);
+				drawer.setState(counter);
 		}
 	}
 	
