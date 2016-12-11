@@ -64,6 +64,7 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
     		cell.getDrawer().setState(CellDrawer.StateSelected);
         	word.add(cell);
         	press = true;
+    		panel.repaint();
         }
 	}
 	
@@ -96,20 +97,20 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	        	else 
 	        		press = false;
 
-			if (app.getPracticeGamePanel() == null) {
-				app.getOnlineGamePanel().getLblCurrentWord().setText("Current Word: "
-						+ panel.getWord().getWord());
-				app.getOnlineGamePanel().getLblScore().setText("Score :"
-						+ model.getGame().calculate(panel.getWord()));
-			}
-			else {
-				app.getPracticeGamePanel().getLblCurrentWord().setText("Current Word: "
-						+ panel.getWord().getWord());
-				app.getPracticeGamePanel().getLblScore().setText("Score :"
-						+ model.getGame().calculate(panel.getWord()));
-			}
-	        
-			panel.repaint();
+				if (app.getPracticeGamePanel() == null) {
+					app.getOnlineGamePanel().getLblCurrentWord().setText("Current Word: "
+							+ panel.getWord().getWord());
+					app.getOnlineGamePanel().getLblScore().setText("Score :"
+							+ model.getGame().calculate(panel.getWord()));
+				}
+				else {
+					app.getPracticeGamePanel().getLblCurrentWord().setText("Current Word: "
+							+ panel.getWord().getWord());
+					app.getPracticeGamePanel().getLblScore().setText("Score :"
+							+ model.getGame().calculate(panel.getWord()));
+				}
+		        
+				panel.repaint();
 	        }
 		}
 	}
@@ -130,10 +131,13 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 				app.getServerAccess().sendRequest(msg);
 			}
 		}
-		else 
+		else {
 			model.getGame().getCurrentPlayer().setScore(
 					model.getGame().getCurrentPlayer().getScore() + 
 					model.getGame().calculate(panel.getWord()));
+			app.getPracticeGamePanel().revalidate();
+			app.getPracticeGamePanel().repaint();
+		}
 		
 		panel.resetDrawerState();
 		panel.repaint();

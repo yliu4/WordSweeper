@@ -23,9 +23,11 @@ public class ResetPracticeGameController {
 
 	public void process() {
 		app.resetGame();
-		app.getPracticeGamePanel().repaint();
-		app.getPracticeGamePanel().revalidate();
 		app.getPracticeGamePanel().getLblCurrentWord().setText("Current Word: ");
 		app.getPracticeGamePanel().getLblScore().setText("Score: ");
+		model.getGame().getCurrentPlayer().setScore(0);
+		app.getPracticeGamePanel().getBoardPanel().getWord().clear();
+		app.getPracticeGamePanel().repaint();
+		app.getPracticeGamePanel().revalidate();
 	}
 }
