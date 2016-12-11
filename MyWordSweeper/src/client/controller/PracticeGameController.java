@@ -10,6 +10,7 @@ import client.model.Location;
 import client.model.Model;
 import client.model.Player;
 import client.view.Application;
+import client.view.CellDrawer;
 
 /**
  * Controller for creating practice game.
@@ -63,6 +64,8 @@ public class PracticeGameController {
 				Letter le = new Letter(s);
 				Location lo = new Location(x, y);
 				Cell ce = new Cell(lo, le);
+				
+				ce.setDrawer(new CellDrawer());
 				cells.add(ce);
 			}
 		}

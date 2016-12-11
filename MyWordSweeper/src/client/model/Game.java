@@ -62,7 +62,7 @@ public class Game {
 		int length = 0;
 		int m = 1;
 		
-		if (!WordTable.isWord(word.word)) {
+		if (!WordTable.isWord(word.getWord())) {
 			return 0;
 		}
 		

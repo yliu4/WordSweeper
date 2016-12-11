@@ -50,8 +50,8 @@ public class TestPracticeGame extends TestCase{
 		g2.dispose();
 		
 		BoardPanel boardPanel = (BoardPanel) practicePanel.getBoardPanel();
-		boardPanel.enableMouseDataFromTest();
-		boardPanel.setMouseData(10, 10);
+//		boardPanel.enableMouseDataFromTest();
+//		boardPanel.setMouseData(10, 10);
 		
 		assertNotNull(boardPanel);
 	}

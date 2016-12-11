@@ -1,6 +1,6 @@
 package client.model;
 
-import util.Scoremap;
+import util.ScoreMap;
 import junit.framework.TestCase;
 
 /**
@@ -12,7 +12,7 @@ import junit.framework.TestCase;
 public class TestScoremap extends TestCase {
 	/** Test the findLetterScore method. */
 	public void testFindLetterScore() {
-		Scoremap scoremap = new Scoremap();
+		ScoreMap scoremap = new ScoreMap();
 		
 		assertEquals(1, scoremap.findLetterScore("E"));
 		assertEquals(11, scoremap.findLetterScore("Qu"));

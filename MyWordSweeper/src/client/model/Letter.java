@@ -2,7 +2,7 @@ package client.model;
 
 import java.util.HashMap;
 
-import util.Scoremap;
+import util.ScoreMap;
 
 /**
  * This class contains the points of the Letter and a flag to identify whether 
@@ -27,7 +27,7 @@ public class Letter {
 	final int points; 
 	
 	/** A Scoremap for getting the score of a Letter. */
-	final Scoremap SMap = new Scoremap(); 
+	final ScoreMap SMap = new ScoreMap(); 
 	
 	/** 
 	 * Construct a Letter with a given character.

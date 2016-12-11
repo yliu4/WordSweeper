@@ -1,5 +1,6 @@
 package client.controller;
 
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -9,8 +10,10 @@ import xml.Message;
 import client.model.Game;
 import client.model.Cell;
 import client.model.Model;
+import client.model.Word;
 import client.view.Application;
 import client.view.BoardPanel;
+import client.view.CellDrawer;
 
 /**
  * The board controller is used to record the mouse motion on the board.
@@ -27,18 +30,6 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	
 	/** Reference <code>BoardPanel</code> for easy navigation. */
 	BoardPanel panel;
-
-	/** For recording the start coordinate in X-axle. */
-	private int x = -1;
-	
-	/** For recording the start coordinate in Y-axle. */
-	private int y = -1;
-	
-	/** For recording the relative dragged coordinate in X-axle. */
-	private int deltaX;
-	
-	/** For recording the relative dragged coordinate in Y-axle. */
-	private int deltaY;
 	
 	/** For avoiding sending repeated released event. */
 	boolean press = false;
@@ -63,9 +54,17 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	 */
 	@Override
 	public void mousePressed(MouseEvent me) {
-        this.x = me.getX();
-        this.y = me.getY();
-        press = true;
+        Word word= panel.getWord();        
+        Cell cell = panel.getCell(me.getX(), me.getY());
+        
+        word.clear();
+        
+        // If the cell is valid, set state and store it. 
+        if (cell != null) {
+    		cell.getDrawer().setState(CellDrawer.StateSelected);
+        	word.add(cell);
+        	press = true;
+        }
 	}
 	
 	/**
@@ -75,9 +74,44 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	 */
 	@Override
 	public void mouseDragged(MouseEvent me) {
-		this.deltaX = me.getX() - this.x;
-		this.deltaY = me.getY() - this.y;
-		panel.repaint();
+		if (press) { // Process only when the mouse is pressed.
+	        Word word= panel.getWord();  
+	        Cell cell = panel.getCell(me.getX(), me.getY());
+	        
+	        if (cell != null) {
+	        	// We may store the cell only if it's the 
+	        	// neighbor of the previous cell.
+	        	if (word.isClose2Pre(cell)) {
+	        		// If word contains the cell and the cell is not a
+	        		// newly added cell, we stop recording.
+	        		// Otherwise, set state and store it. 
+		        	if (word.contains(cell) && !word.isNew(cell)) {
+		        		press = false;
+		        	}
+		        	else {
+		        		cell.getDrawer().setState(CellDrawer.StateSelected);
+		        		word.add(cell);
+		        	}
+	        	}
+	        	else 
+	        		press = false;
+
+			if (app.getPracticeGamePanel() == null) {
+				app.getOnlineGamePanel().getLblCurrentWord().setText("Current Word: "
+						+ panel.getWord().getWord());
+				app.getOnlineGamePanel().getLblScore().setText("Score :"
+						+ model.getGame().calculate(panel.getWord()));
+			}
+			else {
+				app.getPracticeGamePanel().getLblCurrentWord().setText("Current Word: "
+						+ panel.getWord().getWord());
+				app.getPracticeGamePanel().getLblScore().setText("Score :"
+						+ model.getGame().calculate(panel.getWord()));
+			}
+	        
+			panel.repaint();
+	        }
+		}
 	}
 	
 	/**
@@ -87,23 +121,22 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	 */
 	@Override
 	public void mouseReleased(MouseEvent me) {
-		if(press == true) {
-			this.x = -1;
-			this.y = -1;
-			this.deltaX = 0;
-			this.deltaY = 0;
-			panel.repaint();
-			press = false;
-
-			if (app.getPracticeGamePanel() == null) {
+		press = false;
+		
+		if (app.getPracticeGamePanel() == null) {
+			// If word is empty, we do not send the request.
+			if (panel.getWord().getWord().length() > 0) {
 				Message msg = generateFindWordRequest();
 				app.getServerAccess().sendRequest(msg);
 			}
-			else 
-				model.getGame().getCurrentPlayer().setScore(
-						model.getGame().getCurrentPlayer().getScore() + 
-						panel.getWordScore());
 		}
+		else 
+			model.getGame().getCurrentPlayer().setScore(
+					model.getGame().getCurrentPlayer().getScore() + 
+					model.getGame().calculate(panel.getWord()));
+		
+		panel.resetDrawerState();
+		panel.repaint();
 	}
 	
 	/**
@@ -114,11 +147,11 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	private Message generateFindWordRequest()
 	{
 		StringBuilder requestMessage = new StringBuilder();
-		ArrayList<Cell> wordCells = panel.getWordCells();
+		ArrayList<Cell> wordCells = panel.getWord().getCells();
 		Game game = model.getGame();
 		String gameId = game.getGameId();
 		String playerName = game.getCurrentPlayer().getName();
-		String word = panel.getCurrentWord().toUpperCase();
+		String word = panel.getWord().getWord();
 		
 		requestMessage.append(String.format("<findWordRequest gameId='%s' name='%s' word='%s'>",
 				gameId, playerName, word));
@@ -140,21 +173,5 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 		requestMessage.append("</findWordRequest></request>");
 		
 		return new Message (Message.requestHeader() + requestMessage.toString());
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public int getDeltaX() {
-		return deltaX;
-	}
-
-	public int getDeltaY() {
-		return deltaY;
 	}
 }

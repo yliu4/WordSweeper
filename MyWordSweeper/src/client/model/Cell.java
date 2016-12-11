@@ -17,6 +17,9 @@ public class Cell {
 	/** The drawer that draws this cell. */
 	CellDrawer drawer;
 	
+	/** Number of overlapped players on this cell. Default is 1.  */
+	int counter = 1;
+	
 	/** 
 	 * Construct the Cell base on the Location and Letter.
 	 * 
@@ -71,6 +74,24 @@ public class Cell {
 	 */
 	public void setDrawer(CellDrawer drawer) {
 		this.drawer = drawer;
+	}
+
+	/**
+	 * Get the number of overlapped players.
+	 * 
+	 * @return The number. 
+	 */
+	public int getCounter() {
+		return counter;
+	}
+
+	/**
+	 * Set the number of overlapped players.
+	 * 
+	 * @param counter The number. 
+	 */
+	public void setCounter(int counter) {
+		this.counter = counter;
 	}
 
 	/* (non-Javadoc)
