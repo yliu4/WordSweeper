@@ -1,5 +1,7 @@
 package client.model;
 
+import client.view.CellDrawer;
+
 /**
  * Each Cell has Location and Letter.
  * 
@@ -11,6 +13,12 @@ public class Cell {
 	
 	/** The Letter in this Cell. */
 	Letter letter = null;
+	
+	/** The drawer that draws this cell. */
+	CellDrawer drawer;
+	
+	/** Number of overlapped players on this cell. Default is 1.  */
+	int counter = 1;
 	
 	/** 
 	 * Construct the Cell base on the Location and Letter.
@@ -50,11 +58,49 @@ public class Cell {
 		this.letter = letter;
 	}
 	
+	/**
+	 * Get the celldrawer.
+	 * 
+	 * @return The celldrawer.
+	 */
+	public CellDrawer getDrawer() {
+		return drawer;
+	}
+
+	/**
+	 * Set the celldrawer.
+	 * 
+	 * @param drawer The celldrawer.
+	 */
+	public void setDrawer(CellDrawer drawer) {
+		this.drawer = drawer;
+	}
+
+	/**
+	 * Get the number of overlapped players.
+	 * 
+	 * @return The number. 
+	 */
+	public int getCounter() {
+		return counter;
+	}
+
+	/**
+	 * Set the number of overlapped players.
+	 * 
+	 * @param counter The number. 
+	 */
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		if (obj == null) return false;
+		
 		Cell cell = (Cell) obj;
 		
 		return (location.equals(cell.getLocation()) && 
