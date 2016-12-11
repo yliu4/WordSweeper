@@ -49,6 +49,13 @@ public class BoardPanel extends JPanel {
 	
 	/** The score for the selected word */
 	long wordScore = 0;
+	
+	/** Coordinate <code>Integer</code> values used for testing */
+	int mouseX = 0;
+	int mouseY = 0;
+	
+	/** Set <code>boolean</code> to allow passing mouse data from tests*/
+	boolean getMouseDataFromTest = false;
 
 	/**
 	 * Construct the panel for the board according to the cells. 
@@ -158,12 +165,15 @@ public class BoardPanel extends JPanel {
 					11*width + (i%4)*cellWidth, 
 					15*height + (i/4)*cellHeight);
 
-		int x = boardController.getX();
-		int y = boardController.getY();
-
+		if (!this.getMouseDataFromTest)
+		{
+			this.mouseX = boardController.getX();
+			this.mouseY = boardController.getY();
+		}
+		
 		// Record the cells mouse dragged. 
 		// If mouse drags onto a dragged cell, stop recording.
-		if(x != -1 && y != -1) {
+		if(mouseX != -1 && mouseY != -1) {
 			int dragWidth = boardController.getDeltaX();
 			int dragHeight = boardController.getDeltaY();
 			
@@ -171,10 +181,10 @@ public class BoardPanel extends JPanel {
 				int cellX = (i%4)*cellWidth;
 				int cellY = (i/4)*cellHeight;
 				
-				if(x+dragWidth >= cellX+5 &&
-						x+dragWidth <= cellX+cellWidth-width &&
-						y+dragHeight >= cellY+5 && 
-						y+dragHeight <= cellY+cellHeight-height)
+				if(mouseX+dragWidth >= cellX+5 &&
+						mouseX+dragWidth <= cellX+cellWidth-width &&
+						mouseY+dragHeight >= cellY+5 && 
+						mouseY+dragHeight <= cellY+cellHeight-height)
 					if(stop == false) {
 						if(!list.isEmpty() && prev != i && list.contains(i)) {
 							stop = true;
@@ -236,5 +246,24 @@ public class BoardPanel extends JPanel {
 			list.clear();
 			stop = false;
 		}
+	}
+	
+	/**
+	 * Allow mouse data to pass in from test instead of from BoardController
+	 */
+	public void enableMouseDataFromTest()
+	{
+		this.getMouseDataFromTest = true;
+	}
+	
+	/**
+	 * Set mouse positional data from tests
+	 * @param x mouse X data
+	 * @param y mouse Y data
+	 */
+	public void setMouseData(int x, int y)
+	{
+		this.mouseX = x;
+		this.mouseY = y;
 	}
 }
