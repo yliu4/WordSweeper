@@ -1,5 +1,6 @@
 package client.model;
 
+import client.view.CellDrawer;
 import junit.framework.TestCase;
 
 /**
@@ -32,6 +33,7 @@ public class TestCell extends TestCase {
 		assertEquals(false, letter.equals(cell.getLetter()));
 	}
 	
+	/** Test the equals method. */
 	public void testEquals() {
 		Location location1 = new Location(1, 2);
 		Letter letter1 = new Letter("A");
@@ -41,6 +43,30 @@ public class TestCell extends TestCase {
 		Letter letter2 = new Letter("A");
 		Cell cell2 = new Cell(location2, letter2);
 		
-		assertEquals(true, cell1.equals(cell2));
+		assertEquals(cell1, cell2);
+	}
+	
+	/** Test the setDrawer and getDrawer method. */
+	public void testDrawer() {
+		Location location = new Location(1, 2);
+		Letter letter = new Letter("A");
+		Cell cell = new Cell(location, letter);
+		
+		CellDrawer setDrawer = new CellDrawer();
+		cell.setDrawer(setDrawer);
+	
+		assertEquals(setDrawer, cell.getDrawer());
+	}
+	
+	/** Test the setCounter and getCounter method. */
+	public void testCounter() {
+		Location location = new Location(1, 2);
+		Letter letter = new Letter("A");
+		Cell cell = new Cell(location, letter);
+		int counter = 10;
+
+		cell.setCounter(counter);
+		
+		assertEquals(counter, cell.getCounter());
 	}
 }
