@@ -231,4 +231,25 @@ public class TestGame extends TestCase {
 		
 		assertEquals(16, game.getBoard().getCells().size());
 	}
+	
+	/** Test the sortPlayers method */
+	public void testSortPlayers() {
+		Game game = new Game();
+		Location locationOfPlayer1 = new Location(1, 2);
+		Player player1 = new Player("Ann", 10, locationOfPlayer1);
+		Location locationOfPlayer2 = new Location(1, 2);
+		Player player2 = new Player("Tom", 10, locationOfPlayer2);
+		
+		game.addPlayer(player1);
+		game.addPlayer(player2);
+		
+		player1.setScore(100);
+		player2.setScore(200);
+		
+		game.sortPlayers();
+		
+		ArrayList<Player> list = game.getPlayers();
+		
+		assertEquals(true, list.get(0).name.equals("Tom") && list.get(1).name.equals("Ann"));
+	}
 }
