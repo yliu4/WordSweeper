@@ -50,14 +50,12 @@ public class CreateGameController {
 		
 		if (nickname.isEmpty()) {
 			this.isMissingNickName = true;
-			if (!this.skipPopupWindow)
-			{
+			if (!this.skipPopupWindow) {
 				app.popupWarnig("Please enter a nickname!");
 			}
 		} else if (isPrivate && password.length == 0) {
 			this.isMissingPassword = true;
-			if (!this.skipPopupWindow)
-			{
+			if (!this.skipPopupWindow) {
 				app.popupWarnig("Please enter a password!");
 			}
 		} else {
@@ -76,8 +74,7 @@ public class CreateGameController {
 	/**
 	 * Allow skip pop up window in automated tests
 	 */
-	public void setSkipPopupWindow()
-	{
+	public void setSkipPopupWindow() {
 		this.skipPopupWindow = true;
 	}
 	
@@ -85,8 +82,7 @@ public class CreateGameController {
 	 * Return whether input is missing nick name for automated tests
 	 * @return The boolean of whether missing nick name
 	 */
-	public boolean getIsMissingNickName()
-	{
+	public boolean getIsMissingNickName() {
 		return this.isMissingNickName;
 	}
 	
@@ -94,8 +90,7 @@ public class CreateGameController {
 	 * Return whether input is missing password for automated tests
 	 * @return The boolean of whether missing password
 	 */
-	public boolean getIsMissingPassword()
-	{
+	public boolean getIsMissingPassword() {
 		return this.isMissingPassword;
 	}
 }

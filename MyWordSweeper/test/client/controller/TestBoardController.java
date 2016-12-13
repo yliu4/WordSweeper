@@ -86,6 +86,5 @@ public class TestBoardController extends TestCase{
 		client.setVisible(true);
 		boardController.mouseReleased(releaseEvent);
 		
-	}
-	
+	}	
 }

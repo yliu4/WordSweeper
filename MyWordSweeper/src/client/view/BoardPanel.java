@@ -61,8 +61,7 @@ public class BoardPanel extends JPanel {
 	 * 
 	 * @return A <code>BoardController</code>. 
 	 */
-	public BoardController getBoardController()
-	{
+	public BoardController getBoardController() {
 		return this.boardController;
 	}
 	
@@ -71,8 +70,7 @@ public class BoardPanel extends JPanel {
 	 * 
 	 * @return A word.
 	 */
-	public Word getWord()
-	{
+	public Word getWord() {
 		return this.word;
 	}
 	
@@ -99,9 +97,10 @@ public class BoardPanel extends JPanel {
 		int cellHeight = 26 * height;
 		int cellWidth = 26 * width;
 		
-		if (x <= 1 || y <= 1 
-				|| x >= this.getWidth()-3
-				|| y >= this.getHeight()-3)
+		if (x <= 1 ||
+			y <= 1 ||
+			x >= this.getWidth()-3 ||
+			y >= this.getHeight()-3)
 			return null;
 		
 		int col = x/cellWidth;
@@ -168,7 +167,7 @@ public class BoardPanel extends JPanel {
 			Cell cell = cells.get(i);
 			CellDrawer drawer = cell.getDrawer();
 
-			// Draw the cells with celldrawers.
+			// Draw the cells by celldrawers.
 			drawer.drawCell(g, cell, cellWidth, cellHeight, i);
 		}
 	}

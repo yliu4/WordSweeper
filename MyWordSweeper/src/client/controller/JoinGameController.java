@@ -1,17 +1,11 @@
 package client.controller;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import xml.Message;
-import client.model.Cell;
 import client.model.Game;
-import client.model.Letter;
 import client.model.Location;
 import client.model.Model;
 import client.model.Player;
 import client.view.Application;
-import client.view.JoinGamePanel;
 
 /**
  * This class handle the join game request.
@@ -44,19 +38,16 @@ public class JoinGameController {
 
 		if (nickname.isEmpty()) {
 			this.isMissingNickName = true;
-			if (!this.skipPopupWindow)
-			{
+			if (!this.skipPopupWindow) {
 				app.popupWarnig("Please enter a nickname!");
 			} 
 		}
 		else if (gameId.isEmpty()) {
 			this.isMissingPassword = true;
-			if (!this.skipPopupWindow)
-			{
+			if (!this.skipPopupWindow) {
 				app.popupWarnig("Please enter a gameId!");
 			}
-		} 
-		else {
+		} else {
 			String joinGameRequest = "<joinGameRequest gameId='" + gameId
 					+ "' name='" + nickname + "'/></request>";
 			String xmlString = Message.requestHeader() + joinGameRequest;
@@ -71,8 +62,7 @@ public class JoinGameController {
 	/**
 	 * Allow skip pop up window in automated tests
 	 */
-	public void setSkipPopupWindow()
-	{
+	public void setSkipPopupWindow() {
 		this.skipPopupWindow = true;
 	}
 	
@@ -80,8 +70,7 @@ public class JoinGameController {
 	 * Return whether input is missing nick name for automated tests
 	 * @return The boolean of whether missing nick name
 	 */
-	public boolean getIsMissingNickName()
-	{
+	public boolean getIsMissingNickName() {
 		return this.isMissingNickName;
 	}
 	
@@ -89,8 +78,7 @@ public class JoinGameController {
 	 * Return whether input is missing password for automated tests
 	 * @return The boolean of whether missing password
 	 */
-	public boolean getIsMissingPassword()
-	{
+	public boolean getIsMissingPassword() {
 		return this.isMissingPassword;
 	}
 }

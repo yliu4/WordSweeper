@@ -36,8 +36,7 @@ public class ExitGameResponseController extends ControllerChain {
 		this.model = model;
 	}
 	
-	public void SetSkipDialogWindow()
-	{
+	public void SetSkipDialogWindow() {
 		this.skipDialogWindow = true;
 	}
 	
@@ -68,8 +67,7 @@ public class ExitGameResponseController extends ControllerChain {
 		String message = "You have successfully exited from game '" + gameId + "'!";
 		
 		// allow skip dialog window in automated tests
-		if (!this.skipDialogWindow)
-		{
+		if (!this.skipDialogWindow) {
 			JOptionPane.showMessageDialog(app, message, "Exit Game!",
 					JOptionPane.PLAIN_MESSAGE);
 		}

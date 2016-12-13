@@ -36,8 +36,7 @@ public class LockGameResponseController extends ControllerChain {
 			return next.process(response);
 		}
 		
-		if (!this.skipPopupWarning)
-		{	
+		if (!this.skipPopupWarning) {	
 			if (response.success()) 
 				app.popupWarnig("This game is locked!");
 			else
@@ -50,8 +49,7 @@ public class LockGameResponseController extends ControllerChain {
 	/**
 	 * Allow automated test to skip the pop up window
 	 */
-	public void SetSkipPopupWarning()
-	{
+	public void SetSkipPopupWarning() {
 		this.skipPopupWarning = true;
 	}
 }

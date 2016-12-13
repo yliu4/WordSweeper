@@ -56,7 +56,7 @@ public class TestPlayer extends TestCase {
 	}
 	
 	/** Test the Equals method. */
-	public void testEquals(){
+	public void testEquals() {
 		Location location = new Location(1, 2);
 		Player player1 = new Player("Ann", 10, location);
 		Player player2 = new Player("Ann", 10, location);
