@@ -39,8 +39,8 @@ public class OnlineGamePanel extends JPanel {
 	/** <code>JLabel</code> for displaying the score of the current selected word. */
 	JLabel lblScore;
 	
-	/** <code>JTextField</code> for displaying the gameID. */
-	JButton btnGameId;
+	/** <code>JLabel</code> for displaying the gameID. */
+	JLabel lblGameId;
 	
 	/** <code>JLabel</code> for displaying the current player's name. */
 	JLabel lblYourName;
@@ -82,21 +82,11 @@ public class OnlineGamePanel extends JPanel {
 		lblRoom.setBounds(60*width, height, 30*width, 10*height);
 		add(lblRoom);
 
-		btnGameId = new JButton();
-		btnGameId.setFont(new Font("Arial", Font.BOLD, 6*height));
-		btnGameId.setBounds(40*width, 15*height, 70*width, 10*height);
-		add(btnGameId);
-		btnGameId.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				StringSelection stringSelection = new StringSelection (btnGameId.getText());
-				Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
-				clpbrd.setContents(stringSelection, null);
-				
-				String test = "You successfully copy the gamd id (" + btnGameId.getText() + ")!";
-				JOptionPane.showMessageDialog(app, test, "Copy Game Id",
-						JOptionPane.PLAIN_MESSAGE);
-			}
-		});
+		lblGameId = new JLabel();
+		lblGameId.setFont(new Font("Arial", Font.BOLD, 6*height));
+		lblGameId.setBounds(40*width, 15*height, 70*width, 10*height);
+		add(lblGameId);
+		lblGameId.addMouseListener(new CopyGameIdController(model, app));
 		
 		lblCurrentWord = new JLabel("Current Word: ");
 		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, 3*height));
@@ -245,7 +235,7 @@ public class OnlineGamePanel extends JPanel {
 			this.boardPanel.repaint();
 		}
 
-		btnGameId.setText(model.getGame().getGameId());
+		lblGameId.setText(model.getGame().getGameId());
 		lblYourName.setText("Your Name: " + model.getGame().getCurrentPlayer().getName());
 		lblTotalScore.setText("Total Score: " + 
 				model.getGame().getCurrentPlayer().getScore());
