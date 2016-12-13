@@ -44,6 +44,7 @@ import client.view.Application;
  		Model model = new Model();
  		Application app = new Application(model);
  		LockGameResponseController c = new LockGameResponseController(model, app);
+ 		c.SetSkipPopupWarning();
  		
  		String response = "<lockGameResponse gameId='TEST'/></response>";
  		String xmlString = Message.responseHeader("id") + response;
