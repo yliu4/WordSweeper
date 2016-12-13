@@ -10,6 +10,9 @@ public class LockGameResponseController extends ControllerChain {
 	
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
+	
+	/** Set <code>boolean</code>to allow skip the popup window in automated test */
+	boolean skipPopupWarning = false;
 
 	/**
 	 * LockGameResponseController constructor
@@ -33,11 +36,22 @@ public class LockGameResponseController extends ControllerChain {
 			return next.process(response);
 		}
 		
-		if (response.success()) 
-			app.popupWarnig("This game is locked!");
-		else
-			app.popupWarnig(response.reason());
+		if (!this.skipPopupWarning)
+		{	
+			if (response.success()) 
+				app.popupWarnig("This game is locked!");
+			else
+				app.popupWarnig(response.reason());
+		}
 		
 		return true;
+	}
+	
+	/**
+	 * Allow automated test to skip the pop up window
+	 */
+	public void SetSkipPopupWarning()
+	{
+		this.skipPopupWarning = true;
 	}
 }
