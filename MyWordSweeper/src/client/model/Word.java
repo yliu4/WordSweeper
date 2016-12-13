@@ -16,19 +16,6 @@ public class Word {
 	
 	/** A StringBuffer that builds the word. */
 	StringBuffer word = new StringBuffer();
-	
-//	/** 
-//	 * Construct a Word with a list of Cells.
-//	 * 
-//	 * @param cells The List of Cells
-//	 */
-//	public Word(ArrayList<Cell> cells) {
-//		this.cells = cells;
-//		
-//		for (Cell cell: cells) {
-//			word.append(cell.getLetter().getCharacter());
-//		}
-//	}
 
 	/** 
 	 * Get the object of the List of Cells.

@@ -1,6 +1,5 @@
 package client.controller;
 
-import xml.Message;
 import client.model.Game;
 import client.model.Model;
 import client.view.Application;

@@ -55,7 +55,7 @@ public class BoardResponseController extends ControllerChain {
 		if (!type.equals("boardResponse")) {
 			return next.process(response);
 		}
-
+		System.out.println(response);
 		Game game = model.getGame();
 		
 		game.getPlayers().clear();
@@ -133,8 +133,7 @@ public class BoardResponseController extends ControllerChain {
 		if(model.getGame().getCurrentPlayer().getName().equals(managingUser)) {
 			app.getOnlineGamePanel().getBtnLockGame().setVisible(true);
 			app.getOnlineGamePanel().getBtnResetGame().setVisible(true);
-		}
-		else {
+		} else {
 			app.getOnlineGamePanel().getBtnLockGame().setVisible(false);
 			app.getOnlineGamePanel().getBtnResetGame().setVisible(false);
 		}

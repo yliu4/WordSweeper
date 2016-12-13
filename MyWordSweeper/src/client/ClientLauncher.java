@@ -1,4 +1,5 @@
 package client;
+
 import client.ServerAccess;
 import client.controller.BoardResponseController;
 import client.controller.ConnectResponseController;
@@ -61,7 +62,6 @@ public class ClientLauncher {
 		}
 		System.out.println("Connected to " + host);
 		
-		
 		// Should we on the client ever need to communicate with the server, we need this ServerAccess
 		// object.
 		app.setServerAccess(sa);
@@ -71,7 +71,6 @@ public class ClientLauncher {
 		String xmlString = Message.requestHeader() + "<connectRequest/></request>";
 		Message m = new Message (xmlString);
 		sa.sendRequest(m);
-//		app.getRequestArea().append(m.toString() + "\n");
 		
 		// at this point, we need to make app visible, otherwise we would terminate application
 		app.setVisible(true);

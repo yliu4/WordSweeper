@@ -1,16 +1,5 @@
 package client.controller;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.UIManager;
-import javax.swing.plaf.FontUIResource;
-
 import xml.Message;
 import client.model.Model;
 import client.view.Application;
@@ -55,9 +44,7 @@ public class JoinGameResponseController extends ControllerChain {
 		if (reason.contains("lock"))
 		{
 			this.failReason = "locked";
-		}
-		else if (reason.contains("does not exist"))
-		{
+		} else if (reason.contains("does not exist")) {
 			this.failReason = "does not exist";
 		}
 		
