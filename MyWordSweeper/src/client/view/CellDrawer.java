@@ -12,6 +12,7 @@ public class CellDrawer implements Serializable {
 	private static final long serialVersionUID = -8733988017461506064L;
 	
 	/** State modes. */
+	public static final int StateBonus = -1;
 	public static final int StateNormal = 0;
 	public static final int StateSelected = 1;
 	public static final int StateOverlapped = 2;
@@ -21,6 +22,7 @@ public class CellDrawer implements Serializable {
 	private Color background = new Color(250, 250, 250);
 	private Color foreground = Color.black;
 	private Color selected   = Color.red;
+	private Color bonus = Color.yellow;
 	
 	/** 
 	 * Get foreground color.
@@ -37,6 +39,10 @@ public class CellDrawer implements Serializable {
 	 * @return The background color.
 	 */
 	public Color getBackground() {
+		if (mode == StateBonus) { 
+			return bonus; 
+		}
+		
 		if (mode == StateNormal) { 
 			return background; 
 		}
@@ -71,7 +77,7 @@ public class CellDrawer implements Serializable {
 	 * @param mode The state. 
 	 */
 	public void setState (int mode) {
-		if (mode >= StateNormal) {
+		if (mode >= StateBonus) {
 			this.mode = mode;
 		} 
 		else {

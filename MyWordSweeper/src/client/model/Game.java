@@ -2,6 +2,8 @@ package client.model;
 
 import java.util.*;
 
+import client.view.CellDrawer;
+
 import util.WordTable;
 
 /**
@@ -18,9 +20,6 @@ public class Game {
 	
 	/** Each game has a list of players */
 	ArrayList<Player> players = new ArrayList<Player>();
-	
-	/** Manager player for each game */
-	Player managingPlayer = null;
 	
 	/** A player who is playing the game */
 	Player currentPlayer = null;
@@ -49,13 +48,8 @@ public class Game {
 	 * @return The score of the Word.
 	 */
 	public long calculate(Word word) {
-		HashMap<Integer, Integer> overlapcheck = null;
-		
-		if (players.size() != 0) 
-			overlapcheck = overlapCheck();
-		
 		ArrayList<Cell> cells = word.getCells();
-		Iterator<Cell> i = cells.iterator();
+		Iterator<Cell> iterator = cells.iterator();
 		double score = 0;
 		double tempscore = 0;
 		boolean hasMulti = false;
@@ -66,26 +60,18 @@ public class Game {
 			return 0;
 		}
 		
-		while (i.hasNext()) {
-			Cell c = (Cell) i.next();
+		while (iterator.hasNext()) {
+			Cell cell = (Cell) iterator.next();
 			
-			if (c.getLetter().isMultiplier()) {
+			if (cell.getLetter().isMultiplier()) {
 				hasMulti = true;
 			}
 			
 			length++;
-			m = 1;
+			m = cell.getCounter();			
+			tempscore = cell.getLetter().getPoint();
 			
-			if (overlapcheck != null && 
-					overlapcheck.containsKey(c.getLocation().getColumn() * 4 +
-					c.getLocation().getRow())) {
-				m = overlapcheck.get(c.getLocation().getColumn() * 4
-						+ c.getLocation().getRow());
-			}
-			
-			tempscore = c.getLetter().getPoint();
-			
-			if (m!=1){
+			if (m != 1){
 				tempscore *= Math.pow(2, m);
 			}
 			
@@ -103,62 +89,53 @@ public class Game {
 		
 	/**
 	 * Check the overlapping status of each Cell on the current Board.
-	 * 
-	 * @return A HashMap&lt;Integer, Integer&gt; where the key is a Integer of 
-	 * representing the location of a Cell on the Board, and the value is the 
-	 * number of overlapped Players on that Cell.
 	 */
-	public HashMap<Integer, Integer> overlapCheck() {
+	public void overlapCheck() {
 		HashMap<Integer, Integer> positioncheck = new HashMap<Integer, Integer>();
-		Iterator<Player> i = players.iterator();
+		Iterator<Player> iterator = players.iterator();
 		int startx = this.currentPlayer.getOriginPosition().getColumn();
 		int starty = this.currentPlayer.getOriginPosition().getRow();
 		
-		for (int x = 0; x < 4; x++) {
-			for (int y = 0; y < 4; y++) {
-				positioncheck.put((startx + x) * 4 + (starty + y), 1);
-			}
+		for (int i = 0; i < 16; i++) {
+			positioncheck.put(i, 1);
 		}
 		
-		while (i.hasNext()) {
-			Player temp = (Player) i.next();
+		while (iterator.hasNext()) {
+			Player temp = (Player) iterator.next();
 			
-			startx = temp.getOriginPosition().getColumn();
-			starty = temp.getOriginPosition().getRow();
+			if (!temp.equals(currentPlayer)) {
+				int tmpx = temp.getOriginPosition().getColumn() - startx;
+				int tmpy = temp.getOriginPosition().getRow() - starty;
+				int beginx = (tmpx>0)?tmpx:0;
+				int beginy = (tmpy>0)?tmpy:0;
+				int endx = (tmpx>0)?4:(tmpx+4);
+				int endy = (tmpy>0)?4:(tmpy+4);
 			
-			for (int x = 0; x < 4; x++) {
-				for (int y = 0; y < 4; y++) { 
-					if (positioncheck.containsKey((startx + x) * 4
-							+ (starty + y))) {
-						int count = positioncheck.get((startx + x) * 4
-								+ (starty + y)) + 1;
+				for (tmpx = beginx; tmpx < endx; tmpx++) {
+					for (tmpy = beginy; tmpy < endy; tmpy++) { 
+						int count = positioncheck.get(tmpy * 4
+								+ tmpx) + 1;
 						
-						positioncheck.put((startx + x) * 4 + (starty + y),
+						positioncheck.put(tmpy * 4 + tmpx,
 								count);
 					}
 				}
 			}
 		}
 		
-		return positioncheck;
-	}
-	
-	/** 
-	 * Get the managing player.
-	 * 
-	 * @return A Player that is the managing player.
-	 */
-	public Player getManagingPlayer() {
-		return managingPlayer;
-	}
-
-	/** 
-	 * Set the managing player.
-	 * 
-	 * @param managingPlayer The managing Player.
-	 */
-	public void setManagingPlayer(Player managingPlayer) {
-		this.managingPlayer = managingPlayer;
+		ArrayList<Cell> cells = this.getBoard().getCells();
+		
+		for (int i = 0; i < 16; i ++) {
+			Cell cell = cells.get(i);
+			int cnt = positioncheck.get(i);
+			
+			if (cell.getLetter().isMultiplier())
+				cell.getDrawer().setState(CellDrawer.StateBonus);
+			else if (cnt > 1) 
+				cell.getDrawer().setState(cnt);
+			
+			cells.get(i).setCounter(cnt);
+		}
 	}
 
 	/** 
@@ -181,8 +158,8 @@ public class Game {
 		
 		if (bonus.column >= 0 && bonus.column <= 3 && bonus.row <= 3
 				&& bonus.row >= 0) {
-			this.board.getCells().get(bonus.row * 4 + bonus.column).getLetter()
-					.setMultiplier();
+			this.board.getCells().get(bonus.row * 4 + bonus.column)
+				.getLetter().setMultiplier();
 		}
 	}
 

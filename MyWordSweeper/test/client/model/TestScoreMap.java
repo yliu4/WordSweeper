@@ -9,12 +9,10 @@ import junit.framework.TestCase;
  * @author Team Pisces
  *
  */
-public class TestScoremap extends TestCase {
+public class TestScoreMap extends TestCase {
 	/** Test the findLetterScore method. */
 	public void testFindLetterScore() {
-		ScoreMap scoremap = new ScoreMap();
-		
-		assertEquals(1, scoremap.findLetterScore("E"));
-		assertEquals(11, scoremap.findLetterScore("Qu"));
+		assertEquals(1, ScoreMap.findLetterScore("E"));
+		assertEquals(11, ScoreMap.findLetterScore("Qu"));
 	}
 }

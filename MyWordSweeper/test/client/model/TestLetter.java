@@ -26,4 +26,18 @@ public class TestLetter extends TestCase {
 		
 		assertEquals(true, letter.isMultiplier());
 	}
+	
+	public void testEquals() {
+		String str1 = "B";
+		Letter letter1 = new Letter(str1);
+		
+		letter1.setMultiplier();
+		
+		String str2= "B";
+		Letter letter2 = new Letter(str2);
+		
+		letter2.setMultiplier();
+		
+		assertEquals(true, letter1.equals(letter2));
+	}
 }
