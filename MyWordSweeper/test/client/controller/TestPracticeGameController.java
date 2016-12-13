@@ -59,6 +59,4 @@ public class TestPracticeGameController extends TestCase {
 		Board b2 = model.getGame().getBoard();
 		assertFalse(b1.equals(b2));
 	}
-	
-	
 }

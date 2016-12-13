@@ -13,7 +13,6 @@ import junit.framework.TestCase;
 public class TestWord extends TestCase {
 	/** Test the getWord method. */
 	public void testGetWord() {
-//		ArrayList<Cell> cells = new ArrayList<Cell>();
 		Word word = new Word();
 		Location location1 = new Location(1, 2);
 		Letter letter1 = new Letter("A");
@@ -25,7 +24,6 @@ public class TestWord extends TestCase {
 		word.add(new Cell(location1, letter1));
 		word.add(new Cell(location2, letter2));
 		word.add(new Cell(location3, letter3));
-//		Word word = new Word(cells);
 		
 		assertTrue("AND".equals(word.getWord()));
 	}
@@ -47,7 +45,6 @@ public class TestWord extends TestCase {
 		word.add(new Cell(location1, letter1));
 		word.add(new Cell(location2, letter2));
 		word.add(new Cell(location3, letter3));
-//		Word word = new Word(cells);
 
 		ArrayList<Cell> testList = word.getCells();
 		
@@ -136,7 +133,6 @@ public class TestWord extends TestCase {
 		word.add(cell1);
 		word.add(cell2);
 
-		
 		assertEquals(true, word.isClose2Pre(cell1));
 	}
 }

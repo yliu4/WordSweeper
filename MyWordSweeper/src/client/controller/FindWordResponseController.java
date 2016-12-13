@@ -1,8 +1,5 @@
 package client.controller;
 
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-
 import client.model.Model;
 import client.view.Application;
 import xml.Message;
@@ -37,19 +34,7 @@ public class FindWordResponseController extends ControllerChain {
 		if (!type.equals ("findWordResponse")) {
 			return next.process(response);
 		}
-		
-		boolean success = response.success();
-		
-		if(success) {
-			Node boardResponse = response.contents.getFirstChild();
-			NamedNodeMap map = boardResponse.getAttributes();
-		
-			String gameId = map.getNamedItem("gameId").getNodeValue();
-			String name = map.getNamedItem("name").getNodeValue();
-			String score = map.getNamedItem("score").getNodeValue();
-		} else {
-			
-		}
+
 		return true;
 	}
 }

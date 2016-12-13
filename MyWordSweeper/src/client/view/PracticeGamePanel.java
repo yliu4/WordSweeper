@@ -146,8 +146,7 @@ public class PracticeGamePanel extends JPanel{
 	 * 
 	 * @return The JLabel that displays the score of word.
 	 */
-	public JLabel getLblScore()
-	{
+	public JLabel getLblScore() {
 		return lblScore;
 	}
 

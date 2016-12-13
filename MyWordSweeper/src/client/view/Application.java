@@ -73,8 +73,7 @@ public class Application extends JFrame {
 		menuPanel = new MenuPanel(model, this);
 		joinGamePanel = new JoinGamePanel(model, this);
 		onlineGamePanel = new OnlineGamePanel(model,this);
-//		practiceGamePanel = new PracticeGamePanel(model, this);
-		
+
 		add(menuPanel);
 	}
 
@@ -217,19 +216,21 @@ public class Application extends JFrame {
 		add(createGamePanel);
 	}
 
-	// Not needed?
+	/**
+	 * Set the <code>setJoinGameController</code> for the <code>JoinGamePanel</code>.
+	 * 
+	 * @param joinGameController Controller for joining a game.
+	 */
 	public void setJoinGameController(JoinGameController joinGameController) {
-//		this.onlineGamePanel.setGame(joinGameController.getGame());
 		this.joinGameController = joinGameController;
 	}
 
 	/**
-	 * Set the <code>PracticeGameController</code> for the <code>PracticeGamePanel</code>.
+	 * Set the <code>setPracticeGameController</code> for the <code>PracticeGamePanel</code>.
 	 * 
 	 * @param practiceController Controller for creating a practice game.
 	 */
 	public void setPracticeGameController(PracticeGameController practiceController) {
-//		this.practiceGamePanel.setGame(model.getGame());
 		this.practiceGameController = practiceController;
 	}
 	

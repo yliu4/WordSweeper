@@ -54,7 +54,7 @@ public class CellDrawer implements Serializable {
 		if (mode >= StateOverlapped) { 
 			int gray = 275 - 25 * mode;
 			
-			gray = (gray<5)?5:gray;
+			gray = (gray < 5)? 5:gray;
 			
 			return new Color(gray, gray, gray);
 		}
@@ -77,12 +77,7 @@ public class CellDrawer implements Serializable {
 	 * @param mode The state. 
 	 */
 	public void setState (int mode) {
-		if (mode >= StateBonus) {
-			this.mode = mode;
-		} 
-		else {
-			this.mode = StateNormal;
-		}
+		this.mode = (mode >= StateBonus)? mode:StateNormal;
 	}
 	
 	/**

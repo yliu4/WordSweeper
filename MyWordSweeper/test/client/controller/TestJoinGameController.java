@@ -77,11 +77,6 @@ public class TestJoinGameController extends TestCase {
 			j3.process();
 			assertEquals(j3.getIsMissingPassword(), true);
 			
-			//test Generate Board
-//			j1.game = new Game();
-//			j1.generateNewBoard();
-//			assertNotNull(j1.getGame().getBoard());
-			
 			//test Return to Menu
 			new ReturnToMenuController(model, client).process();
 			assertTrue(client.getMenuPanel().isVisible());

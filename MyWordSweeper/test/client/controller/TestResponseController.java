@@ -16,9 +16,7 @@ import client.view.Application;
  * @author Team Pisces
  *
  */
- public class TestResponseController extends TestCase{
- 	// TODO: use MockServer?
- 	
+ public class TestResponseController extends TestCase {
  	public void testJoinGameResponseController() {
  		Message.configure("wordsweeper.xsd");
  		
@@ -38,7 +36,7 @@ import client.view.Application;
  		assertEquals(controller.getFailReason(), "does not exist");
  	}
  	
- 	public void testLockGameResponseController(){
+ 	public void testLockGameResponseController() {
  		Message.configure("wordsweeper.xsd");
  		
  		Model model = new Model();
@@ -56,7 +54,7 @@ import client.view.Application;
  		c.process(m);
  	}
  	
- 	public void testExitGameResponseController(){
+ 	public void testExitGameResponseController() {
  		Message.configure("wordsweeper.xsd");
  		
  		Model model = new Model();
@@ -70,7 +68,7 @@ import client.view.Application;
  		c.process(m);
  	}
  	
- 	public void testResetGameResponseController(){
+ 	public void testResetGameResponseController() {
  		Message.configure("wordsweeper.xsd");
  		
  		Model model = new Model();
@@ -87,7 +85,7 @@ import client.view.Application;
  		c.process(m);
  	}
  	
- 	public void testFindWordResponseController(){
+ 	public void testFindWordResponseController() {
  		Message.configure("wordsweeper.xsd");
  		
  		Model model = new Model();
@@ -133,7 +131,6 @@ import client.view.Application;
  		xmlString = Message.responseHeader("id") + response; 
  		m = new Message (xmlString);
  		s.process(m);
- 		
  	}
  	
  	public void testBoardResponseController(){
@@ -150,11 +147,10 @@ import client.view.Application;
  		Location location = new Location(1, 2);
 		Player player = new Player("Ann", 10, location);
 		Location location1 = new Location(1, 3);
-		Player player1 = new Player("Peter", 10, location);
+		Player player1 = new Player("Peter", 10, location1);
 		Game game = new Game(player1);
 		model.setGame(game);
 		model.getGame().addPlayer(player);
  		b.process(m);
- 		
  	}
  }

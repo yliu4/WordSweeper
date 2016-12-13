@@ -42,7 +42,7 @@ public class Board {
 	public boolean equals(Object obj) {
 		Board other = (Board) obj;
 		for(int i=0;i<this.getCells().size();i++){
-			if (!this.getCells().get(i).equals(other.getCells().get(i))){
+			if (!this.getCells().get(i).equals(other.getCells().get(i))) {
 				return false;
 			}
 		}

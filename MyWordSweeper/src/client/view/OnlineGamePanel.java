@@ -1,11 +1,14 @@
 package client.view;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
 
 import client.controller.*;
@@ -37,7 +40,7 @@ public class OnlineGamePanel extends JPanel {
 	JLabel lblScore;
 	
 	/** <code>JTextField</code> for displaying the gameID. */
-	JTextField textFieldGameId;
+	JButton btnGameId;
 	
 	/** <code>JLabel</code> for displaying the current player's name. */
 	JLabel lblYourName;
@@ -54,7 +57,7 @@ public class OnlineGamePanel extends JPanel {
 	/** <code>JButton</code> for providing lock game feature to managing user. */
 	JButton btnLockGame;
 
-	/** The rowdata for the jtable that dispalys all players' information. */
+	/** The rowdata for the jtable that displays all players' information. */
 	Vector<Vector<String>> rowData = new Vector<Vector<String>>();
 	
 	/**
@@ -78,15 +81,22 @@ public class OnlineGamePanel extends JPanel {
 		lblRoom.setFont(new Font("Arial", Font.BOLD, 6*height));
 		lblRoom.setBounds(60*width, height, 30*width, 10*height);
 		add(lblRoom);
-		
-		textFieldGameId = new JTextField();
-		textFieldGameId.setHorizontalAlignment(SwingConstants.CENTER);
-		textFieldGameId.setFont(new Font("Arial", Font.BOLD, 6*height));
-		textFieldGameId.setBounds(40*width, 15*height, 70*width, 10*height);
-		textFieldGameId.setBorder(null);
-		textFieldGameId.setEditable(false);
-		
-		add(textFieldGameId);
+
+		btnGameId = new JButton();
+		btnGameId.setFont(new Font("Arial", Font.BOLD, 6*height));
+		btnGameId.setBounds(40*width, 15*height, 70*width, 10*height);
+		add(btnGameId);
+		btnGameId.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StringSelection stringSelection = new StringSelection (btnGameId.getText());
+				Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+				clpbrd.setContents(stringSelection, null);
+				
+				String test = "You successfully copy the gamd id (" + btnGameId.getText() + ")!";
+				JOptionPane.showMessageDialog(app, test, "Copy Game Id",
+						JOptionPane.PLAIN_MESSAGE);
+			}
+		});
 		
 		lblCurrentWord = new JLabel("Current Word: ");
 		lblCurrentWord.setFont(new Font("Arial", Font.BOLD, 3*height));
@@ -230,13 +240,12 @@ public class OnlineGamePanel extends JPanel {
 		if (this.boardPanel == null) {
 			this.boardPanel = new BoardPanel(model, app, cells);
 			add(boardPanel);
-		}
-		else {
+		} else {
 			this.boardPanel.setCells(cells);
 			this.boardPanel.repaint();
 		}
 
-		textFieldGameId.setText(model.getGame().getGameId());
+		btnGameId.setText(model.getGame().getGameId());
 		lblYourName.setText("Your Name: " + model.getGame().getCurrentPlayer().getName());
 		lblTotalScore.setText("Total Score: " + 
 				model.getGame().getCurrentPlayer().getScore());

@@ -1,6 +1,5 @@
 package client.controller;
 
-import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -88,13 +87,11 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 	        		// Otherwise, set state and store it. 
 		        	if (word.contains(cell) && !word.isNew(cell)) {
 		        		press = false;
-		        	}
-		        	else {
+		        	} else {
 		        		cell.getDrawer().setState(CellDrawer.StateSelected);
 		        		word.add(cell);
 		        	}
-	        	}
-	        	else 
+	        	} else 
 	        		press = false;
 
 				if (app.getPracticeGamePanel() == null) {
@@ -102,8 +99,7 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 							+ panel.getWord().getWord());
 					app.getOnlineGamePanel().getLblScore().setText("Score :"
 							+ model.getGame().calculate(panel.getWord()));
-				}
-				else {
+				} else {
 					app.getPracticeGamePanel().getLblCurrentWord().setText("Current Word: "
 							+ panel.getWord().getWord());
 					app.getPracticeGamePanel().getLblScore().setText("Score :"
@@ -130,8 +126,7 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
 				Message msg = generateFindWordRequest();
 				app.getServerAccess().sendRequest(msg);
 			}
-		}
-		else {
+		} else {
 			model.getGame().getCurrentPlayer().setScore(
 					model.getGame().getCurrentPlayer().getScore() + 
 					model.getGame().calculate(panel.getWord()));
