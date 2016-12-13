@@ -26,9 +26,6 @@ public class Letter {
 	/** Points of the Letter. */
 	final int points; 
 	
-	/** A Scoremap for getting the score of a Letter. */
-	final ScoreMap SMap = new ScoreMap(); 
-	
 	/** 
 	 * Construct a Letter with a given character.
 	 * 
@@ -36,7 +33,7 @@ public class Letter {
 	 */
 	public Letter(String character) {
 		this.character = character;
-		this.points = SMap.findLetterScore(character);
+		this.points = ScoreMap.findLetterScore(character);
 	}
 	
 	/** 
