@@ -19,6 +19,10 @@ public class OpenJoinGamePanelController {
 		app.gotoJoinGamePanel();
 	}
 
+	/**
+	 * get the game object
+	 * @return game object
+	 */
 	public Game getGame() {
 		return this.game;
 	}

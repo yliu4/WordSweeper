@@ -147,6 +147,11 @@ public class BoardResponseController extends ControllerChain {
 		return true;
 	}
 	
+	/**
+	 * generate cell by passing cell's letter and a list of cells
+	 * @param cellString
+	 * @param cells
+	 */
 	public void generateCells(String cellString, ArrayList<Cell> cells) {
 		cells.clear();
 		

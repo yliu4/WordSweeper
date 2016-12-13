@@ -31,6 +31,10 @@ public class ResetGameController {
 		this.model = model;
 	}
 	
+	/**
+	 * An entry point to send reset Game request
+	 * 
+	 */
 	public void process() {
 		String gameId = model.getGame().getGameId();
 		String resetGameRequest = "<resetGameRequest gameId='" + gameId

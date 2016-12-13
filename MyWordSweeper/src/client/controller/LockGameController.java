@@ -22,6 +22,10 @@ public class LockGameController {
 		this.model = model;
 	}
 	
+	/**
+	 * An entry point to process the lock game request
+	 * 
+	 */
 	public void process() {
 		String gameId = model.getGame().getGameId();
 		String lockGameRequest = "<lockGameRequest gameId='" + gameId

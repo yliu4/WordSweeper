@@ -21,6 +21,10 @@ public class OpenCreateGamePanelController {
 		this.model = model;
 	}
 
+	/**
+	 * send request to enter create game panel
+	 * 
+	 */
 	public void process() {
 		app.gotoCreateGamePanel();
 	}
