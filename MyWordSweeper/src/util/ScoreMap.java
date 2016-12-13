@@ -2,10 +2,10 @@ package util;
 
 import java.util.HashMap;
 
-public class Scoremap {
+public class ScoreMap {
 	HashMap<String, Integer> SMap = new HashMap<String, Integer>();
 
-	public Scoremap() {
+	public ScoreMap() {
 		SMap.put("E", 1);
 		SMap.put("T", 1);
 		SMap.put("A", 2);
