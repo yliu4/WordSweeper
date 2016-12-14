@@ -30,9 +30,7 @@ public class OpenCreateGamePanelController {
 		this.model = model;
 	}
 
-	/**
-	 * Open the CreateGamePanel. 
-	 */
+	/** Open the CreateGamePanel. */
 	public void process() {
 		app.gotoCreateGamePanel();
 	}

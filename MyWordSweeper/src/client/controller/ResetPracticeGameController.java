@@ -27,9 +27,7 @@ public class ResetPracticeGameController {
 		this.app = app;
 	}
 
-	/**
-	 * Reset the practice game. 
-	 */
+	/** Reset the practice game. */
 	public void process() {
 		app.resetGame();
 		app.getPracticeGamePanel().getLblCurrentWord().setText("Current Word: ");

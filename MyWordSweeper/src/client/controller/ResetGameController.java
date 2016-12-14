@@ -31,9 +31,7 @@ public class ResetGameController {
 		this.model = model;
 	}
 	
-	/**
-	 * Send the ResetGameRequest to server.
-	 */
+	/** Send the ResetGameRequest to server. */
 	public void process() {
 		String gameId = model.getGame().getGameId();
 		String resetGameRequest = "<resetGameRequest gameId='" + gameId
