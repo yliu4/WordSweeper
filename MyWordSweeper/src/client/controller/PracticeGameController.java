@@ -25,11 +25,22 @@ public class PracticeGameController {
 	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 
+	/**
+	 * Constructor for PracticeGameController.
+	 * 
+	 * @param m The Model.
+	 * @param app The Application.
+	 */
 	public PracticeGameController(Model m, Application app) {
 		this.model = m;
 		this.app = app;
 	}
 
+	/**
+	 * Randomly generate a board for practice game 
+	 * 
+	 * and open the practice game view. 
+	 */
 	public void process() {
 		model.setGame(new Game(new Player("Practicer", 0, new Location(1, 1))));
 		generateNewBoard();
@@ -40,24 +51,25 @@ public class PracticeGameController {
 	/**
 	 * Generate a new Board for practice game.
 	 * 
-	 * The location of bonus is set to be outside the range of a <code>Board</code>
+	 * The location of bonus is set to be outside the range of a <code>Board</code>.
 	 */
 	public void generateNewBoard() {
-		/** The location of bonus is set to be outside the range of a <code>Board</code> */
+		/** The location of bonus is set to be outside the range of a <code>Board</code>. */
 		Location nomulti = new Location(10, 10);
-		model.getGame().setBoard(this.generatecells(), nomulti);
+		model.getGame().setBoard(this.generateCells(), nomulti);
 	}
 	
 	/**
-	 * Randomly generate 16 Cells for the Board
+	 * Randomly generate 16 Cells for the Board.
 	 * 
-	 * @return A List of cells
+	 * @return A List of cells.
 	 */
-	public ArrayList<Cell> generatecells () {
+	public ArrayList<Cell> generateCells () {
 		ArrayList<Cell> cells = new ArrayList<Cell>(16);
 		String[] alp = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L","M", "N", "O", "P", "Qu","R","S","T","U","V","W","X","Y","Z"};
-		int l = alp.length;
 		Random r = new Random();
+		int l = alp.length;
+		
 		for (int y = 0; y <= 3; y++) {
 			for (int x = 0; x <= 3; x++) {
 				String s = alp[r.nextInt(l)];
@@ -69,6 +81,7 @@ public class PracticeGameController {
 				cells.add(ce);
 			}
 		}
+		
 		return cells;
 	}
 }

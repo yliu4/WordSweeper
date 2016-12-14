@@ -49,15 +49,6 @@ public class Cell {
 		return this.letter;
 	}
 	
-	/** 
-	 * Set the Letter.
-	 * 
-	 * @param letter The Letter.
-	 */
-	public void setLetter(Letter letter) {
-		this.letter = letter;
-	}
-	
 	/**
 	 * Get the celldrawer.
 	 * 

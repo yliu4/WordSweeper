@@ -11,6 +11,7 @@ import client.view.Application;
  *
  */
 public class ChoosePublicController {
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 
 	/**
@@ -23,7 +24,7 @@ public class ChoosePublicController {
 	}
 	
 	/**
-	 * set password's text field uneditable when choosing public mode
+	 * Set password's text field uneditable when choosing public mode.
 	 */
 	public void process() {
 		app.getCreateGamePanel().getTextFieldPassword().setEditable(false);

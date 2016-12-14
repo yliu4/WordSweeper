@@ -21,15 +21,6 @@ public class Board {
 	}
 	
 	/** 
-	 * Set the Cells with the given List of Cells. 
-	 * 
-	 * @param cells The List of Cells.
-	 */
-	public void setCells(ArrayList<Cell> cells) {
-		this.cells = new ArrayList<Cell>(cells);
-	}
-	
-	/** 
 	 * Get the object of the List of Cells.
 	 * 
 	 * @return A List of Cells.
@@ -38,15 +29,19 @@ public class Board {
 		return cells;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Board other = (Board) obj;
+		
 		for(int i=0;i<this.getCells().size();i++){
-			if (!this.getCells().get(i).equals(other.getCells().get(i))){
+			if (!this.getCells().get(i).equals(other.getCells().get(i))) {
 				return false;
 			}
 		}
+		
 		return true;
 	}
-	
 }

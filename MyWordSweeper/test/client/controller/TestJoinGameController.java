@@ -44,7 +44,6 @@ public class TestJoinGameController extends TestCase {
 			new OpenJoinGamePanelController(client, model).process();
 			assertFalse(client.getMenuPanel().isVisible());
 			assertTrue(client.getJoinGamePanel().isVisible());
-			new OpenJoinGamePanelController(client, model).getGame();
 			
 			
 			JoinGameController j1 = new JoinGameController(model, client);
@@ -76,11 +75,6 @@ public class TestJoinGameController extends TestCase {
 			j3.setSkipPopupWindow();
 			j3.process();
 			assertEquals(j3.getIsMissingPassword(), true);
-			
-			//test Generate Board
-//			j1.game = new Game();
-//			j1.generateNewBoard();
-//			assertNotNull(j1.getGame().getBoard());
 			
 			//test Return to Menu
 			new ReturnToMenuController(model, client).process();

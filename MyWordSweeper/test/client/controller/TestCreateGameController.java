@@ -127,8 +127,6 @@ public class TestCreateGameController extends TestCase {
 		assertEquals(4, reqs.size());
 		r = reqs.get(0);
 		assertEquals("repositionBoardRequest", r.contents.getFirstChild()
-				.getLocalName());
-		
-		
+				.getLocalName());	
 	}
 }

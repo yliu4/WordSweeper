@@ -14,16 +14,16 @@ public class ChoosePrivateController {
 	Application app;
 
 	/**
-	 * ChoosePrivateController constructor
+	 * ChoosePrivateController constructor.
 	 *
-	 * @param app  initialize the reference of application
+	 * @param app  initialize the reference of application.
 	 */
 	public ChoosePrivateController(Application app) {
 		this.app = app;
 	}
 	
 	/**
-	 * Set password's text field editable when choosing private mode
+	 * Set password's text field editable when choosing private mode.
 	 */
 	public void process() {
 		app.getCreateGamePanel().getTextFieldPassword().setEditable(true);

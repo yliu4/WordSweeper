@@ -18,14 +18,25 @@ public class RepositionBoardController {
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 	
-	public enum ShiftDirection
-	{
+	/**
+	 * An enum representing the shift direction.
+	 * 
+	 * @author Team Pisces
+	 *
+	 */
+	public enum ShiftDirection {
 		Left,
 		Right,
 		Up,
 		Down
 	}
 	
+	/**
+	 * Constructor for RepositionBoardController.
+	 * 
+	 * @param model The Model.
+	 * @param app The Application. 
+	 */
 	public RepositionBoardController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
@@ -40,22 +51,19 @@ public class RepositionBoardController {
 	{
 		int rowChange = 0, colChange = 0;
 		
-		// Not quite sure about this part.
-		switch(shiftDirection)
-		{
-		case Left:
-			colChange = -1;
-			break;
-		case Right:
-			colChange = 1;
-			break;
-		case Up:
-			rowChange = -1;
-			break;
-		case Down:
-			rowChange = 1;
-			break;
-		
+		switch(shiftDirection) {
+			case Left:
+				colChange = -1;
+				break;
+			case Right:
+				colChange = 1;
+				break;
+			case Up:
+				rowChange = -1;
+				break;
+			case Down:
+				rowChange = 1;
+				break;
 		}
 		
 		String nickname = model.getGame().getCurrentPlayer().getName();
@@ -69,11 +77,4 @@ public class RepositionBoardController {
 		
 		app.getServerAccess().sendRequest(m);
 	}
-	
-	// Should create another controller for this function
-//	public void processWordSelect(Word word)
-//	{
-//		//TODO: send word to server, server should respond with a board response
-//		// The response is handled in BoardResponseController to update the existing game
-//	}
 }

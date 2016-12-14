@@ -15,6 +15,12 @@ import client.model.Model;
 import client.view.Application;
 import xml.Message;
 
+/**
+ * This class is responsible for processing the exitGameResponse.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class ExitGameResponseController extends ControllerChain {
 	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
@@ -26,25 +32,27 @@ public class ExitGameResponseController extends ControllerChain {
 	boolean skipDialogWindow = false;
 
 	/**
-	 * ExitGameResponseController constructor
+	 * ExitGameResponseController constructor.
 	 *
-	 * @param app  	 initialize the reference of application
-	 * @param model  initialize the reference of model
+	 * @param app  	 initialize the reference of application.
+	 * @param model  initialize the reference of model.
 	 */
 	public ExitGameResponseController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}
 	
-	public void SetSkipDialogWindow()
-	{
+	/**
+	 * To skip the dialog window. 
+	 */
+	public void SetSkipDialogWindow() {
 		this.skipDialogWindow = true;
 	}
 	
 	/**
-	 * process exit game responses from server after exitGameRquest
+	 * Process exit game responses from server after exitGameRquest.
 	 *
-	 * @param Message  exit game response message from server in xml format
+	 * @param Message ExitGameResponse message from server in xml format.
 	 */
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
@@ -54,9 +62,7 @@ public class ExitGameResponseController extends ControllerChain {
 		
 		Node boardResponse = response.contents.getFirstChild();
 		NamedNodeMap map = boardResponse.getAttributes();
-		
 		String gameId = map.getNamedItem("gameId").getNodeValue();
-		
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = d.height;
 		
@@ -65,11 +71,11 @@ public class ExitGameResponseController extends ControllerChain {
 				new FontUIResource(new Font("Tahoma", Font.PLAIN, height/36)));
 		UIManager.put("OptionPane.messageFont", 
 				new FontUIResource(new Font("Times New Roman", Font.PLAIN, 2*height/45)));
+		
 		String message = "You have successfully exited from game '" + gameId + "'!";
 		
 		// allow skip dialog window in automated tests
-		if (!this.skipDialogWindow)
-		{
+		if (!this.skipDialogWindow) {
 			JOptionPane.showMessageDialog(app, message, "Exit Game!",
 					JOptionPane.PLAIN_MESSAGE);
 		}

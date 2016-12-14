@@ -21,16 +21,17 @@ public class ResetGameController {
 	Model model;
 	
 	/**
-	 * ResetGameController constructor
+	 * ResetGameController constructor.
 	 * 
-	 * @param model  The model.
-	 * @param app    The application.
+	 * @param model  The Model.
+	 * @param app    The Application.
 	 */
 	public ResetGameController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}
 	
+	/** Send the ResetGameRequest to server. */
 	public void process() {
 		String gameId = model.getGame().getGameId();
 		String resetGameRequest = "<resetGameRequest gameId='" + gameId

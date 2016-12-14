@@ -20,10 +20,10 @@ public class ConnectResponseController extends ControllerChain {
 	public Model model;
 	
 	/**
-	 * ChoosePublicController constructor
+	 * ChoosePublicController constructor.
 	 *
-	 * @param app  	 initialize the reference of application
-	 * @param model	 initialize the reference of model
+	 * @param app  	 initialize the reference of application.
+	 * @param model	 initialize the reference of model.
 	 */
 	public ConnectResponseController(Model model, Application app) {
 		super();
@@ -32,10 +32,10 @@ public class ConnectResponseController extends ControllerChain {
 	}
 	
 	/**
-	 * process connection response from server after client try to 
-	 * connect with server 
+	 * Process connection response from server after client try to 
+	 * connect with server.
 	 *
-	 * @param response  connection response from server in xml format
+	 * @param response Connection response from server in xml format.
 	 */
 	@Override
 	public boolean process(Message response) {

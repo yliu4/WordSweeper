@@ -19,6 +19,9 @@ import client.model.*;
  *
  */
 public class PracticeGamePanel extends JPanel{
+	/** Serializable key. */
+	private static final long serialVersionUID = 8451471174846495395L;
+
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 
@@ -111,6 +114,7 @@ public class PracticeGamePanel extends JPanel{
 		super.paintComponent(g);
 
 		ArrayList<Cell> cells = model.getGame().getBoard().getCells();
+		
 		if (this.boardPanel == null) {
 			this.boardPanel = new BoardPanel(model, app, cells);
 			add(boardPanel);
@@ -146,8 +150,7 @@ public class PracticeGamePanel extends JPanel{
 	 * 
 	 * @return The JLabel that displays the score of word.
 	 */
-	public JLabel getLblScore()
-	{
+	public JLabel getLblScore() {
 		return lblScore;
 	}
 

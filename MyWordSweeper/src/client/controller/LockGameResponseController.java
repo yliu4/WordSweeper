@@ -4,6 +4,12 @@ import xml.Message;
 import client.model.Model;
 import client.view.Application;
 
+/**
+ * This class is responsible for processing the LockGameResponse.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class LockGameResponseController extends ControllerChain {
 	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
@@ -11,14 +17,14 @@ public class LockGameResponseController extends ControllerChain {
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 	
-	/** Set <code>boolean</code>to allow skip the popup window in automated test */
+	/** Set <code>boolean</code>to allow skip the popup window in automated test. */
 	boolean skipPopupWarning = false;
 
 	/**
-	 * LockGameResponseController constructor
+	 * LockGameResponseController constructor.
 	 *
-	 * @param app  	 initialize the reference of application
-	 * @param model  initialize the reference of model
+	 * @param app  	 Initialize the reference of application.
+	 * @param model  Initialize the reference of model.
 	 */
 	public LockGameResponseController(Model model, Application app)  {
 		this.app = app;
@@ -26,9 +32,9 @@ public class LockGameResponseController extends ControllerChain {
 	}
 	
 	/**
-	 * process lock game responses from server
+	 * Process lock game responses from server.
 	 *
-	 * @param Message  lock game response message from server in xml format
+	 * @param Message Lock game response message from server in xml format.
 	 */
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
@@ -36,8 +42,7 @@ public class LockGameResponseController extends ControllerChain {
 			return next.process(response);
 		}
 		
-		if (!this.skipPopupWarning)
-		{	
+		if (!this.skipPopupWarning) {	
 			if (response.success()) 
 				app.popupWarnig("This game is locked!");
 			else
@@ -48,10 +53,9 @@ public class LockGameResponseController extends ControllerChain {
 	}
 	
 	/**
-	 * Allow automated test to skip the pop up window
+	 * Allow automated test to skip the pop up window.
 	 */
-	public void SetSkipPopupWarning()
-	{
+	public void SetSkipPopupWarning() {
 		this.skipPopupWarning = true;
 	}
 }

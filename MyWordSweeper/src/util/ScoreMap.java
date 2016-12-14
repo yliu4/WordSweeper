@@ -2,9 +2,19 @@ package util;
 
 import java.util.HashMap;
 
+/**
+ * This class finds score for each letter.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class ScoreMap {
+	/** A hashmap that maps a score to each letter. */
 	static HashMap<String, Integer> ScoreMap = new HashMap<String, Integer>();
 
+	/**
+	 * Load the letter-score pair into the hashmap.
+	 */
 	public static void loadScore() {
 		ScoreMap.put("E", 1);
 		ScoreMap.put("T", 1);
@@ -34,7 +44,13 @@ public class ScoreMap {
 		ScoreMap.put("Z", 8);
 	} 
 	
-	public static int findLetterScore (String c){
+	/**
+	 * Find the score of a letter.
+	 * 
+	 * @param c The letter.
+	 * @return The score of that letter.
+	 */
+	public static int findLetterScore(String c){
 		loadScore();
 		return ScoreMap.get(c);
 	}
