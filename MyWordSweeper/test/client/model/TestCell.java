@@ -31,6 +31,7 @@ public class TestCell extends TestCase {
 		Cell cell2 = new Cell(location2, letter2);
 		
 		assertEquals(cell1, cell2);
+		assertFalse(cell1.equals(null));
 	}
 	
 	/** Test the setDrawer and getDrawer method. */
