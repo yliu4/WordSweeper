@@ -17,6 +17,9 @@ import client.model.*;
  *
  */
 public class BoardPanel extends JPanel {
+	/** Serializable key. */
+	private static final long serialVersionUID = -5677865961656841955L;
+
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 	
@@ -29,7 +32,7 @@ public class BoardPanel extends JPanel {
 	/** The current selected word. */
 	Word word = new Word();
 	
-	/** Reference for easy navigation */
+	/** Reference for easy navigation. */
 	BoardController boardController = null;
 
 	/**

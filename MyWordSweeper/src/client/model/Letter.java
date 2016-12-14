@@ -27,7 +27,7 @@ public class Letter {
 	/** 
 	 * Construct a Letter with a given character.
 	 * 
-	 * @param character The character in this Letter
+	 * @param character The character in this Letter.
 	 */
 	public Letter(String character) {
 		this.character = character;

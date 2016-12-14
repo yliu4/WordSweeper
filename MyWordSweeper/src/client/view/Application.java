@@ -24,6 +24,9 @@ import client.model.Model;
  *
  */
 public class Application extends JFrame {
+	/** Serializable key. */
+	private static final long serialVersionUID = -3549944831653613811L;
+
 	/** GUI application maintains reference to Model for ease of navigation. */
 	Model model;
 

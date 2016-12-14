@@ -58,7 +58,7 @@ public class BoardController extends MouseAdapter implements MouseMotionListener
         
         word.clear();
         
-        // If the cell is valid, set state and store it. 
+        // If we get a valid cell, set state and store it. 
         if (cell != null) {
     		cell.getDrawer().setState(CellDrawer.StateSelected);
         	word.add(cell);

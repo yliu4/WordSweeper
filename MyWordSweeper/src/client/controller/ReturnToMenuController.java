@@ -29,10 +29,19 @@ public class ReturnToMenuController {
 		this.app = application;
 	}
 
+	/**
+	 * Open the MainMenuPanel.
+	 */
 	public void process() {
 		//clear the text field when go back to main menu
 		app.getJoinGamePanel().getTextFieldNickname().setText("");
 		app.getJoinGamePanel().getTextFieldGameID().setText("");
+		
+		if (app.getCreateGamePanel() != null) {
+			app.getCreateGamePanel().getTextFieldNickname().setText("");
+			app.getCreateGamePanel().getTextFieldPassword().setText("");
+		}
+		
 		app.gotoMainMenu();
 	}
 }

@@ -216,6 +216,7 @@ public class Game {
 	public void sortPlayers() {
 		if (players.size() <= 1) return;
 		
+		// Compare two players according to their scores.
 		Comparator<Player> sortingMethod = new Comparator<Player>() {
 			@Override
 			public int compare(Player p1, Player p2) {

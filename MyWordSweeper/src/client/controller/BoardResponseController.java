@@ -45,9 +45,9 @@ public class BoardResponseController extends ControllerChain {
 	}
 	
 	/**
-	 * Process board responses from server after createGameRquest or joinGameRequest
+	 * Process board responses from server after createGameRquest or joinGameRequest.
 	 *
-	 * @param Message board response message from server in xml format
+	 * @param Message board response message from server in xml format.
 	 */
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
@@ -55,7 +55,7 @@ public class BoardResponseController extends ControllerChain {
 		if (!type.equals("boardResponse")) {
 			return next.process(response);
 		}
-		System.out.println(response);
+		
 		Game game = model.getGame();
 		
 		game.getPlayers().clear();
@@ -87,6 +87,7 @@ public class BoardResponseController extends ControllerChain {
 			
 			String[] cellLocation = pposition.split(",");
 			
+			// Store the information of current player. 
 			if(pname.equals(model.getGame().getCurrentPlayer().getName())) {
 				pboard = n.getAttributes().getNamedItem("board").getNodeValue();
 				bonusLoc = new Location(Integer.valueOf(bonusLocation[1])-Integer.valueOf(cellLocation[1]), 
@@ -104,6 +105,7 @@ public class BoardResponseController extends ControllerChain {
 		}
 		
 		game.sortPlayers();
+		
 		for (int i = 1; i <= game.getPlayers().size(); i++) {
 			Player p = game.getPlayers().get(i-1);
 			Vector<String> tmp = new Vector<String>();
@@ -123,7 +125,7 @@ public class BoardResponseController extends ControllerChain {
 		game.setGameId(gameId);
 		
 		// Set game board.
-		generateCells(pboard, cells);
+		str2Cells(pboard, cells);
 		game.setBoard(cells, bonusLoc);
 		
 		// Overlap check.
@@ -147,7 +149,13 @@ public class BoardResponseController extends ControllerChain {
 		return true;
 	}
 	
-	public void generateCells(String cellString, ArrayList<Cell> cells) {
+	/**
+	 * Convert a string of cells into a list of Cells. 
+	 * 
+	 * @param cellString Cells represented as a string.
+	 * @param cells List of Cells to store the cell. 
+	 */
+	public void str2Cells(String cellString, ArrayList<Cell> cells) {
 		cells.clear();
 		
 		String[] arr = cellString.split(",");

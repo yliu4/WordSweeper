@@ -4,6 +4,12 @@ import client.model.Model;
 import client.view.Application;
 import xml.Message;
 
+/**
+ * This class is responsible for processing the findWordResponse.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class FindWordResponseController extends ControllerChain {
 	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
@@ -12,10 +18,10 @@ public class FindWordResponseController extends ControllerChain {
 	Model model;
 	
 	/**
-	 * FindWordResponseController constructor
+	 * FindWordResponseController constructor.
 	 *
-	 * @param app  	 initialize the reference of application
-	 * @param model  initialize the reference of model
+	 * @param app  	 initialize the reference of application.
+	 * @param model  initialize the reference of model.
 	 */
 	public FindWordResponseController(Model model, Application app) {
 		this.app = app;
@@ -24,9 +30,9 @@ public class FindWordResponseController extends ControllerChain {
 	
 	
 	/**
-	 * process find word game responses from server after submitting a word
+	 * Process find word game responses from server after submitting a word.
 	 *
-	 * @param Message  find word response message from server in xml format
+	 * @param Message FindWordResponse message from server in xml format.
 	 */
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();

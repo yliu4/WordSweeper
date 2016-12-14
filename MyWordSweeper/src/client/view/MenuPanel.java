@@ -26,6 +26,9 @@ import client.model.Model;
  *
  */
 public class MenuPanel extends JPanel {
+	/** Serializable key. */
+	private static final long serialVersionUID = -3432758190260173718L;
+
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 

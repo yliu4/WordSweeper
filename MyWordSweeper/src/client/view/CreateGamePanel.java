@@ -32,6 +32,9 @@ import client.model.Model;
  *
  */
 public class CreateGamePanel extends JPanel {
+	/** Serializable key. */
+	private static final long serialVersionUID = 977478906448026594L;
+
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 

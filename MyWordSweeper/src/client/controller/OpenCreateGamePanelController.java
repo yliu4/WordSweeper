@@ -13,14 +13,26 @@ import client.view.Application;
  *
  */
 public class OpenCreateGamePanelController {
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
+	
+	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 
+	/**
+	 * Constructor for OpenCreateGamePnaleController.
+	 * 
+	 * @param model The Model.
+	 * @param app The Application.
+	 */
 	public OpenCreateGamePanelController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
 	}
 
+	/**
+	 * Open the CreateGamePanel. 
+	 */
 	public void process() {
 		app.gotoCreateGamePanel();
 	}

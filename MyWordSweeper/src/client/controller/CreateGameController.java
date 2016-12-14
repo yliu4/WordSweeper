@@ -72,23 +72,25 @@ public class CreateGameController {
 	}
 	
 	/**
-	 * Allow skip pop up window in automated tests
+	 * Allow skip pop up window in automated tests.
 	 */
 	public void setSkipPopupWindow() {
 		this.skipPopupWindow = true;
 	}
 	
 	/**
-	 * Return whether input is missing nick name for automated tests
-	 * @return The boolean of whether missing nick name
+	 * Return whether input is missing nick name for automated tests.
+	 * 
+	 * @return The boolean indicating whether missing nick name.
 	 */
 	public boolean getIsMissingNickName() {
 		return this.isMissingNickName;
 	}
 	
 	/**
-	 * Return whether input is missing password for automated tests
-	 * @return The boolean of whether missing password
+	 * Return whether input is missing password for automated tests.
+	 * 
+	 * @return The boolean indicating whether missing password.
 	 */
 	public boolean getIsMissingPassword() {
 		return this.isMissingPassword;

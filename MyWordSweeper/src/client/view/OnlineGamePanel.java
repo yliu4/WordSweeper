@@ -24,6 +24,9 @@ import client.model.*;
  *
  */
 public class OnlineGamePanel extends JPanel {
+	/** Serializable key. */
+	private static final long serialVersionUID = -389068527822635030L;
+
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 

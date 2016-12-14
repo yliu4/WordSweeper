@@ -12,7 +12,7 @@ public class LockGameController {
 	Model model;
 	
 	/**
-	 * ResetGameController constructor
+	 * ResetGameController constructor.
 	 * 
 	 * @param model  The model.
 	 * @param app    The application.
@@ -22,6 +22,9 @@ public class LockGameController {
 		this.model = model;
 	}
 	
+	/**
+	 * Send the LockGameRequest to server. 
+	 */
 	public void process() {
 		String gameId = model.getGame().getGameId();
 		String lockGameRequest = "<lockGameRequest gameId='" + gameId

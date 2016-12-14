@@ -18,6 +18,12 @@ public class RepositionBoardController {
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 	
+	/**
+	 * An enum representing the shift direction.
+	 * 
+	 * @author Team Pisces
+	 *
+	 */
 	public enum ShiftDirection {
 		Left,
 		Right,
@@ -25,6 +31,12 @@ public class RepositionBoardController {
 		Down
 	}
 	
+	/**
+	 * Constructor for RepositionBoardController.
+	 * 
+	 * @param model The Model.
+	 * @param app The Application. 
+	 */
 	public RepositionBoardController(Model model, Application app) {
 		this.app = app;
 		this.model = model;
@@ -39,7 +51,6 @@ public class RepositionBoardController {
 	{
 		int rowChange = 0, colChange = 0;
 		
-		// Not quite sure about this part.
 		switch(shiftDirection) {
 			case Left:
 				colChange = -1;

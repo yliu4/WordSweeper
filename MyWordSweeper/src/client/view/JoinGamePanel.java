@@ -35,14 +35,14 @@ import client.model.Model;
 */
 
 public class JoinGamePanel extends JPanel {
+	/** Serializable key. */
+	private static final long serialVersionUID = 373430537076665396L;
+
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 
 	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
-	
-	/** Current game. */
-	Game game; // Do we need this?
 	
 	/**	<code>JTextField</code> for the nickname. */
 	JTextField textFieldNickname;
@@ -116,9 +116,11 @@ public class JoinGamePanel extends JPanel {
 	}
 	
     /** 
-     * Popup that asks for a password.
+     * Popup that shows the join failure reason,
+     * 
+     * if the game is private, it asks for a password.
 	 * 
-	 * @return
+	 * @return The password entered.
 	 */
 	public String popupNeedPassword(String reason) {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -138,8 +140,7 @@ public class JoinGamePanel extends JPanel {
 				, null, options, options[1]);
 		String password = "";
 		
-		if(option == 0) // Pressing OK button
-		{
+		if(option == 0) {// Pressing OK button
 		    password = new String(pass.getPassword());
 		}
 		

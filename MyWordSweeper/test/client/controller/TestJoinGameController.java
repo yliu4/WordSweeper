@@ -44,7 +44,6 @@ public class TestJoinGameController extends TestCase {
 			new OpenJoinGamePanelController(client, model).process();
 			assertFalse(client.getMenuPanel().isVisible());
 			assertTrue(client.getJoinGamePanel().isVisible());
-			new OpenJoinGamePanelController(client, model).getGame();
 			
 			
 			JoinGameController j1 = new JoinGameController(model, client);

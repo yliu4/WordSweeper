@@ -9,12 +9,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
-import client.model.Cell;
 import client.model.Model;
-import client.model.Word;
 import client.view.Application;
-import client.view.BoardPanel;
-import client.view.CellDrawer;
 
 /**
  * This class controls copying gameId in the OnlineGamePanel.

@@ -17,7 +17,7 @@ public class Location {
 	 * Construct the Location with the given row and column.
 	 * 
 	 * @param row The row number.
-	 * @param column The column number
+	 * @param column The column number.
 	 */
 	public Location(int row, int column) {
 		this.row = row;

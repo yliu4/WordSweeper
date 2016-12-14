@@ -4,6 +4,12 @@ import xml.Message;
 import client.model.Model;
 import client.view.Application;
 
+/**
+ * This class is responsible for processing JoinGameResponse.
+ * 
+ * @author Team Pisces
+ *
+ */
 public class JoinGameResponseController extends ControllerChain {
 	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
@@ -11,17 +17,17 @@ public class JoinGameResponseController extends ControllerChain {
 	/** Reference <code>Model</code> for easy navigation. */
 	Model model;
 	
-	/** Set <code>boolean</code> to skip pop up window in tests */
+	/** Set <code>boolean</code> to skip pop up window in tests. */
 	boolean skipWarningDialog = false;
 	
 	/** Store <code>String</code> to indicate the join failed reason for testing */
 	String failReason = "";
 	
 	/**
-	 * JoinGameResponseController constructor
+	 * JoinGameResponseController constructor.
 	 *
-	 * @param app  	 initialize the reference of application
-	 * @param model  initialize the reference of model
+	 * @param app Initialize the reference of application.
+	 * @param model Initialize the reference of model.
 	 */
 	public JoinGameResponseController(Model model, Application app) {
 		this.app = app;
@@ -29,9 +35,9 @@ public class JoinGameResponseController extends ControllerChain {
 	}
 	
 	/**
-	 * process join game responses from server if fail when join a specific game
+	 * Process join game responses from server if fail when join a specific game.
 	 *
-	 * @param Message  join game response message from server in xml format
+	 * @param Message Join game response message from server in xml format.
 	 */
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
@@ -41,8 +47,7 @@ public class JoinGameResponseController extends ControllerChain {
 		
 		String reason = response.reason();
 
-		if (reason.contains("lock"))
-		{
+		if (reason.contains("lock")) {
 			this.failReason = "locked";
 		} else if (reason.contains("does not exist")) {
 			this.failReason = "does not exist";
@@ -50,8 +55,8 @@ public class JoinGameResponseController extends ControllerChain {
 		
 		//Show warning message and get password.
 		String password = "";
-		if (!this.skipWarningDialog)
-		{	
+		
+		if (!this.skipWarningDialog) {	
 			password = app.getJoinGamePanel().popupNeedPassword(reason);
 		}
 	    
@@ -71,8 +76,9 @@ public class JoinGameResponseController extends ControllerChain {
 	}
 	
 	/**
-	 * Get failed reason string to verify in tests
-	 * @return The join failed reason
+	 * Get failed reason string to verify in tests.
+	 * 
+	 * @return The join failed reason.
 	 */
 	public String getFailReason()
 	{
@@ -80,7 +86,7 @@ public class JoinGameResponseController extends ControllerChain {
 	}
 
 	/**
-	 * Set to skip warning dialog for automated tests
+	 * Set to skip warning dialog for automated tests.
 	 */
 	public void setSkipWarningDialog()
 	{

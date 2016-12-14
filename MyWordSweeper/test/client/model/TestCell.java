@@ -20,19 +20,6 @@ public class TestCell extends TestCase {
 		assertEquals(letter, cell.getLetter());
 	}
 	
-	/** Test the setLetter method. */
-	public void testSetLetter() {
-		Location location = new Location(1, 2);
-		Letter letter = new Letter("A");
-		Cell cell = new Cell(location, letter);
-		Letter newLetter = new Letter("B");
-		
-		cell.setLetter(newLetter);
-		
-		assertEquals(newLetter, cell.getLetter());
-		assertEquals(false, letter.equals(cell.getLetter()));
-	}
-	
 	/** Test the equals method. */
 	public void testEquals() {
 		Location location1 = new Location(1, 2);

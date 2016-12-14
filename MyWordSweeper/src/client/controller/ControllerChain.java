@@ -15,16 +15,16 @@ public abstract class ControllerChain implements IClientController {
 	IClientController next = null;
 	
 	/**
-	 * ControllerChain constructor
+	 * ControllerChain constructor.
 	 */
 	protected ControllerChain() {
 		
 	}
 	
 	/**
-	 * ControllerChain constructor for chaining next response controller
+	 * ControllerChain constructor for chaining next response controller.
 	 *
-	 * @param response  response from server in xml format
+	 * @param response  response from server in xml format.
 	 */
 	public abstract boolean process(Message response);
 }

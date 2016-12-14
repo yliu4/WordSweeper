@@ -7,21 +7,35 @@ import java.io.Serializable;
 
 import client.model.Cell;
 
+/**
+ * This class is responsible for drawing a cell onto the board. 
+ * 
+ * @author Team Pisces
+ *
+ */
 public class CellDrawer implements Serializable {
 	/** Serializable key. */
 	private static final long serialVersionUID = -8733988017461506064L;
 	
-	/** State modes. */
+	/** Bonus state. */
 	public static final int StateBonus = -1;
+	/** Normal state. */
 	public static final int StateNormal = 0;
+	/** Selected state. */
 	public static final int StateSelected = 1;
+	/** Overlapped state. */
 	public static final int StateOverlapped = 2;
 	
+	/** State. */
 	int mode = StateNormal;
 
+	/** Default background color. */
 	private Color background = new Color(250, 250, 250);
+	/** Foreground color. */
 	private Color foreground = Color.black;
+	/** Selected cell's background color. */
 	private Color selected   = Color.red;
+	/** Bonus cell's background color. */
 	private Color bonus = Color.yellow;
 	
 	/** 

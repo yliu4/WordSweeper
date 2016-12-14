@@ -11,7 +11,7 @@ import client.view.Application;
  * Note: This one does nothing more than dump the XML message into the client window. Nothing that special.
  */
 public class SampleClientMessageHandler implements IMessageHandler {
-
+	/** Reference <code>Application</code> for easy navigation. */
 	Application app;
 	
 	// by default is the empty handler...
@@ -25,6 +25,11 @@ public class SampleClientMessageHandler implements IMessageHandler {
 		chain = handler;
 	}
 		
+	/**
+	 * Constructor for SampleClientMessageHandler. 
+	 * 
+	 * @param app The Application.
+	 */
 	public SampleClientMessageHandler(Application app) {
 		this.app = app;
 	}
